@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
+import FromCreateTypeProduct from "./FromCreateTypeProduct";
+import "./CreateTypeProduct.css";
 
 const ScreenCreateTypeProduct = () => {
   return (
-    <div>ScreenCreateTypeProduct</div>
-  )
-}
+    <div className="mainCreateTypeProduct">
+      <div className="bodyCreateTypeProduct">
+        <FromCreateTypeProduct />
+      </div>
+    </div>
+  );
+};
 
-export default ScreenCreateTypeProduct
+export default ScreenCreateTypeProduct;

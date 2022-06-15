@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
+import FromListTypeProduct from "./FromListTypeProduct";
+import "./ListTypeProduct.css";
 
 const ScreenListTypeProduct = () => {
   return (
-    <div>ScreenListTypeProduct</div>
-  )
-}
+    <div className="mainListTypeProduct" style={{ background: "#ffff" }}>
+      <div className="BodyListTypeProduct">
+        <div className="contentListTypeProduct">
+          <FromListTypeProduct />
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default ScreenListTypeProduct
+export default ScreenListTypeProduct;
