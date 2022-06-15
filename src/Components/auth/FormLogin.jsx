@@ -33,7 +33,7 @@ const FormLogin = (props) => {
         />
 
         <Form.Item>
-          <a className="login-form-forgot" href="/shop_quen_mat_khau">
+          <a className="login-form-forgot" href="/nhom-19-quen-mat-khau">
             Quên mật khẩu
           </a>
         </Form.Item>
