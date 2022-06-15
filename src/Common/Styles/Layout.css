@@ -1,4 +1,4 @@
-body::-webkit-scrol lbar {
+body::-webkit-scrollbar {
   width: 0;
   height: 0;
 }
@@ -41,3 +41,5 @@ body::-webkit-scrol lbar {
 .ant-table-cell {
   background-color: #fff !important;
 }
+
+
