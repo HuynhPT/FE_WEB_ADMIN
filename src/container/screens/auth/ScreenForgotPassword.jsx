@@ -1,4 +1,7 @@
+import { LockOutlined } from "@ant-design/icons";
+import { Button, Input } from "antd";
 import React from "react";
+import "./ScreenForgotPassword.css";
 
 function ScreenForgotPassword() {
   return (
@@ -8,9 +11,7 @@ function ScreenForgotPassword() {
         <Input prefix={<LockOutlined />} className="_forgotInputnew" />
         <Input prefix={<LockOutlined />} className="_forgotInputnewres" />
       </div>
-      <div>
-        <Button className="_forgotbuttonnew">Xác Nhận</Button>
-      </div>
+      <Button className="_forgotbuttonnew">Xác Nhận</Button>
     </div>
   );
 }

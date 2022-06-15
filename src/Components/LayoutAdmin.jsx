@@ -21,6 +21,8 @@ import image7 from "../Common/image/image7.png";
 import image8 from "../Common/image/image8.png";
 import image9 from "../Common/image/image9.png";
 import imager10 from "../Common/image/imager10.png";
+import imagecos from "../Common/image/imagecos.png";
+import imageads from "../Common/image/imageads.png";
 
 import Checkout from "../Common/image/Checkout.png";
 import styles from "../Common/styles/Layout.module.css";
@@ -170,9 +172,41 @@ function LayoutAdmin() {
       "sub9",
       <img style={{ width: "10%" }} src={image9} alt="" />
     ),
+    getItem(
+      ["Thêm màu,size", <NavLink to="mau_size" />],
+      "sub10",
+      <img style={{ width: "10%" }} src={imagecos} alt="" />
+    ),
+    getItem(
+      "Banner quảng cáo",
+      "sub11",
+      <img style={{ width: "10%" }} src={imageads} alt="" />,
+      [
+        getItem(
+          ["Banner trang chủ", <NavLink to="banner_home" />],
+          "122",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Banner Nam", <NavLink to="banner_men" />],
+          "177",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Banner Nữ", <NavLink to="banner_women" />],
+          "178",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Splash", <NavLink to="banner_splash" />],
+          "179",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+      ]
+    ),
   ];
   return (
-    <Layout style={{ height: "100vh" }}>
+    <Layout style={{ height: "200vh" }}>
       <Sider trigger={null} collapsible collapsed={state}>
         <div className={styles.logo}>
           {state == false && (
@@ -211,7 +245,10 @@ function LayoutAdmin() {
           defaultSelectedKeys={1}
         />
       </Sider>
-      <Layout className="site-layout">
+      <Layout
+        className="site-layout"
+        style={{ height: "200vh", overflow: "hidden" }}
+      >
         <Header className={styles.site_layout_background}>
           <div className="left">
             <Input
@@ -240,16 +277,7 @@ function LayoutAdmin() {
             </Dropdown>
           </div>
         </Header>
-        <Content
-          className="site-layout-background"
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-          }}
-        >
-          <Outlet />
-        </Content>
+        <Outlet />
       </Layout>
     </Layout>
   );
