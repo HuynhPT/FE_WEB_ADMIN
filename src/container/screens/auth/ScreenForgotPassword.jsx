@@ -11,7 +11,11 @@ function ScreenForgotPassword() {
         <Input prefix={<LockOutlined />} className="_forgotInputnew" />
         <Input prefix={<LockOutlined />} className="_forgotInputnewres" />
       </div>
-      <Button className="_forgotbuttonnew">Xác Nhận</Button>
+      <div className="_forgotbuttonnew_container">
+        <Button className="_forgotbuttonnew" href="/">
+          <p className="_title_button">Xác Nhận</p>
+        </Button>
+      </div>
     </div>
   );
 }
