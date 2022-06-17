@@ -1,7 +1,7 @@
 import { Button, Input } from "antd";
 import React, { useState } from "react";
-import "./AddBannerMen.css";
-function EditBannerMen(props) {
+import "./AddBanner.css";
+function EditBanner(props) {
     const [nameLinkImage, setNameLinkImage] = useState([]);
     const upImage = (e) => {
         const namePhoto = document.getElementById("images").files[0].name;
@@ -74,13 +74,15 @@ function EditBannerMen(props) {
                     <Button className="__buttonClick_Product_Res">
                         <p className="_Title_button_product">Đặt lại</p>
                     </Button>
+
                     <Button className="__buttonClick_Product_add">
                         <p className="_Title_button_product">Sửa Banner</p>
                     </Button>
+
                 </div>
             </div>
         </div>
     );
 }
 
-export default EditBannerMen;
+export default EditBanner;

@@ -1,27 +1,31 @@
 import { Space, Table, Radio, Divider } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import * as qs from "qs";
+// import qs from "qs";
 const columns = [
   {
     title: "Id",
     dataIndex: "name",
-    // sorter: true,
-    // render: (name) => `${name.first} ${name.last}`,
+    sorter: true,
+    render: (name) => `${name.first} ${name.last}`,
   },
   {
     title: "Đối tượng",
     dataIndex: "gender",
-    // filters: [
-    //   {
-    //     text: "Nam",
-    //     value: "Nam",
-    //   },
-    //   {
-    //     text: "Nữ",
-    //     value: "Nữ",
-    //   },
-    // ],
+    filters: [
+      {
+        text: "Nam",
+        value: "Nam",
+      },
+      {
+        text: "Nữ",
+        value: "Nữ",
+      },
+      {
+        text: "Trẻ em",
+        value: "Trẻ em",
+      },
+    ],
   },
   {
     title: "Hoạt động",
@@ -112,7 +116,7 @@ const TableObjectProduct = () => {
         pagination={pagination}
         loading={loading}
         onChange={handleTableChange}
-        // style={{ width: "100%", height: "100%" }}
+        style={{ width: "100%", height: "100%" }}
         rowSelection={rowSelection}
       />
     </>

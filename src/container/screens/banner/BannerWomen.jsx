@@ -2,15 +2,15 @@ import { Button, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import "./Listproduct.css";
+import "../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 
-const ScreenListProductProfit = () => {
+const BannerWomen = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-img")
+    fetch("http://192.168.1.7:3000/img-first-images/get-img-girl")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
@@ -39,7 +39,9 @@ const ScreenListProductProfit = () => {
         {
           title: "Tên",
           dataIndex: "title_ads",
-          columnTitle: "red",
+          sorter: true,
+          render: (title_ads) => `${title_ads} ${title_ads}`,
+          width: "20%",
         },
         {
           title: "Ads",
@@ -75,16 +77,18 @@ const ScreenListProductProfit = () => {
         },
       ];
       return (
-        <Table
-          rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
-          }}
-          columns={columns}
-          dataSource={data}
-          rowKey={(item) => item._id}
-          className="table-list"
-        />
+        <>
+          <Table
+            rowSelection={{
+              type: "checkbox",
+              ...rowSelection,
+            }}
+            columns={columns}
+            dataSource={data}
+            rowKey={(item) => item._id}
+            className="table-list"
+          />
+        </>
       );
     }
   };
@@ -127,4 +131,4 @@ const ScreenListProductProfit = () => {
   );
 };
 
-export default ScreenListProductProfit;
+export default BannerWomen;
