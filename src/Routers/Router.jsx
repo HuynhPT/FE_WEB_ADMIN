@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import LayoutAdmin from "../components/LayoutAdmin";
+import LayouttAdmin1 from "../Components/LayouttAdmin1";
 
 //auth
 import ScreenLogin from "../container/screens/auth/ScreenLogin";
@@ -61,7 +61,7 @@ const Router = () => {
           element={<ScreenForgotPassword />}
         ></Route>
         <Route path="/edit_sanpham" element={<EditProduct />} />
-        <Route path="shop/" element={<LayoutAdmin />}>
+        <Route path="/shop/" element={<LayouttAdmin1 />}>
           <Route path="tong_quan" element={<ScreenOverview />} />
 
           <Route path="them_sanPham" element={<ScreenCreateProduct />} />

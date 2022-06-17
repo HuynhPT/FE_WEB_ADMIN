@@ -80,7 +80,7 @@ function FromProduct(props) {
               <span>{nameLinkImage}</span>
             ) : (
               <>
-                {nameLinkImage.map((item) => (
+                {nameLinkImage?.map((item) => (
                   <>
                     <span>{item}</span>
                     <br />

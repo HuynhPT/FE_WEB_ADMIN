@@ -28,15 +28,16 @@ import Checkout from "../Common/image/Checkout.png";
 import styles from "../Common/styles/Layout.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 const { Sider } = Layout;
-function getItem(label, icon, children, type) {
+function getItem(label, key, icon, children, type) {
   return {
+    key,
     icon,
     children,
     label,
     type,
   };
 }
-function LayoutAdmin() {
+function LayouttAdmin1() {
   const [state, setState] = useState(false);
   const onClick = (e) => {};
 
@@ -206,7 +207,7 @@ function LayoutAdmin() {
   ];
   return (
     <Layout style={{ height: "200vh" }}>
-      <Sider trigger={null} collapsible collapsed={state}>
+      <Sider collapsible collapsed={state}>
         <div className={styles.logo}>
           {state == false && (
             <div className="logo" style={{ width: "50%" }}>
@@ -282,4 +283,4 @@ function LayoutAdmin() {
   );
 }
 
-export default LayoutAdmin;
+export default LayouttAdmin1;
