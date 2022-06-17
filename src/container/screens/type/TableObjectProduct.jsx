@@ -1,7 +1,7 @@
 import { Space, Table, Radio, Divider } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import qs from "qs";
+import qs from "qs";
 const columns = [
   {
     title: "Id",

@@ -1,4 +1,4 @@
-import { Button, Table,Pagination   } from "antd";
+import { Button, Table, Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -8,9 +8,9 @@ import Search from "antd/lib/input/Search";
 const BannerSplash = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // const [loading, setLoading] = useState(false);
-  const [setData] = useState();
+  const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-first-splash")
+    fetch("https://huynhpt.github.io/splash.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
@@ -34,36 +34,37 @@ const BannerSplash = () => {
     },
   };
   const hasSelected = selectedRowKeys.length > 0;
-  const data = [
-    {
-      key: '1',
-      title_ads: 'Y',
-      title_data: 20,
-      description_ads: "From the search bar, you can now view what you searched for recently and explore popular searches",
-    },
-    {
-      key: '2',
-      title_ads: 'Nhu Y',
-      title_data: 21,
-      description_ads: "From the search bar, you can now view what you searched for recently and explore popular searches",
-    },
-  ];
+  // const data = [
+  //   {
+  //     key: "1",
+  //     title_ads: "Y",
+  //     title_data: 20,
+  //     description_ads:
+  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
+  //   },
+  //   {
+  //     key: "2",
+  //     title_ads: "Nhu Y",
+  //     title_data: 21,
+  //     description_ads:
+  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
+  //   },
+  // ];
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {
         console.log(id);
       };
       const columns = [
-        // {
-        //   title: "Tên",
-        //   dataIndex: "title_ads",
-        // },
-        // {
-        //   title: "Ads",
-        //   dataIndex: "title_data",
-        // },
         {
-
+          title: "Tên",
+          dataIndex: "title_ads",
+        },
+        {
+          title: "Ads",
+          dataIndex: "title_data",
+        },
+        {
           title: "Ảnh",
           dataIndex: "image_ads",
           render: (image_ads) => (
@@ -80,7 +81,7 @@ const BannerSplash = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/edit_banner">
+              <Link to="/edit_banner">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <Link to="/shop/edit_banner">
@@ -90,7 +91,6 @@ const BannerSplash = () => {
                   size={24}
                 />
               </Link>
-
             </div>
           ),
         },
@@ -111,7 +111,7 @@ const BannerSplash = () => {
       );
     }
   };
-    
+
   return (
     <div className="list-product">
       <div className="titlespb">
@@ -123,7 +123,7 @@ const BannerSplash = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Link to="/shop/add_banner">
+        <Link to="/add_banner">
           <button className="add_text">{" +  Thêm mới"}</button>
         </Link>
       </div>
@@ -150,7 +150,6 @@ const BannerSplash = () => {
       {listDataa()}
     </div>
   );
-  
 };
 
 export default BannerSplash;
