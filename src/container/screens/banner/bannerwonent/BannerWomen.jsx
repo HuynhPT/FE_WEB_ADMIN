@@ -2,7 +2,7 @@ import { Button, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import "../profit/Listproduct.css";
+import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 
 const BannerWomen = () => {
@@ -10,19 +10,10 @@ const BannerWomen = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-img-girl")
+    fetch("https://huynhpt.github.io/girl.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
-
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
-
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
@@ -39,9 +30,6 @@ const BannerWomen = () => {
         {
           title: "Tên",
           dataIndex: "title_ads",
-          sorter: true,
-          render: (title_ads) => `${title_ads} ${title_ads}`,
-          width: "20%",
         },
         {
           title: "Ads",
@@ -64,7 +52,7 @@ const BannerWomen = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
+              <Link to="/edit_banner_woment">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <DeleteOutlined
@@ -96,15 +84,17 @@ const BannerWomen = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách sản phẩm bán được</p>
+        <p className="text_titlespb">Danh sách banner nữ</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
           {
-            " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
+            " Danh sách banner nữ quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <button className="add_text">{" +  Thêm mới"}</button>
+        <Button href="/create_banner_woment" className="add_text">
+          <p className="_text_banner">+ Thêm mới</p>
+        </Button>
       </div>
       <div
         className="button-list"

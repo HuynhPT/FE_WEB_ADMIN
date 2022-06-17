@@ -28,9 +28,8 @@ import Checkout from "../Common/image/Checkout.png";
 import styles from "../Common/styles/Layout.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 const { Sider } = Layout;
-function getItem(label, key, icon, children, type) {
+function getItem(label, icon, children, type) {
   return {
-    key,
     icon,
     children,
     label,
@@ -106,7 +105,7 @@ function LayoutAdmin() {
         ),
         ,
         getItem(
-          ["Thêm loại sản phẩm", <NavLink to="them_LoaiSanPham" />],
+          ["Thêm thể loại sản phẩm", <NavLink to="them_LoaiSanPham" />],
           "12",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),

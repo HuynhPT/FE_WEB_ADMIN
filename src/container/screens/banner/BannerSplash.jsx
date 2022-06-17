@@ -10,7 +10,7 @@ const BannerSplash = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-first-splash")
+    fetch("https://huynhpt.github.io/splash.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
@@ -93,7 +93,7 @@ const BannerSplash = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách sản phẩm bán được</p>
+        <p className="text_titlespb">Danh sách BannerSplash</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
@@ -101,7 +101,9 @@ const BannerSplash = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <button className="add_text">{" +  Thêm mới"}</button>
+        <Button href="/create_banner_men" className="add_text">
+          <p className="_text_banner">+ Thêm mới</p>
+        </Button>
       </div>
       <div
         className="button-list"

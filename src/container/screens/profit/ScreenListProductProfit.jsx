@@ -10,7 +10,7 @@ const ScreenListProductProfit = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-img")
+    fetch("https://huynhpt.github.io/getall.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
@@ -100,7 +100,9 @@ const ScreenListProductProfit = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <button className="add_text">{" +  Thêm mới"}</button>
+        <Button href="/" className="add_text">
+          <p className="_text_banner">+ Thêm mới</p>
+        </Button>
       </div>
       <div
         className="button-list"
