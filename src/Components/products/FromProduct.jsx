@@ -4,6 +4,7 @@ import "./FromProduct.css";
 import SelectMenWomen from "./SelectMenWomen";
 import SelectOptionColor from "./SelectOptionColor";
 import SelectOptionProduct from "./SelectOptionProduct";
+import SelectOptionTypeProduct from "./SelectOptionTypeProduct";
 import SelectOtionSze from "./SelectOtionSze";
 import TinymceProduct from "./TinymceProduct";
 function FromProduct(props) {
@@ -122,14 +123,7 @@ function FromProduct(props) {
           {/* đơn giá */}
           <div className="_nameInputrow4">
             <p className="_text_product">Thể loại*</p>
-            <SelectOptionProduct
-              Option1={"Đầm"}
-              Option2={"Bra"}
-              Option3={"Quần"}
-              Option4={"Áo"}
-              Option5={"Trang sức"}
-              Option6={"Váy"}
-            />
+            <SelectOptionTypeProduct />
           </div>
         </div>
         {/* Hàng 5 */}

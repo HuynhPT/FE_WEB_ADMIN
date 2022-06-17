@@ -207,7 +207,7 @@ function LayouttAdmin1() {
   ];
   return (
     <Layout style={{ height: "200vh" }}>
-      <Sider collapsible collapsed={state}>
+      <Sider trigger={true} collapsible collapsed={state}>
         <div className={styles.logo}>
           {state == false && (
             <div className="logo" style={{ width: "50%" }}>
