@@ -1,7 +1,8 @@
 import { Button, Input } from "antd";
 import React, { useState } from "react";
-import "../../profit/Listproduct.css";
-function EditBannerMen(props) {
+import TynimceProduct from "../../../../Components/products/TinymceProduct";
+import "../bannerwonent/CreateBannerWoment.css";
+function EditbannerMen() {
   const [nameLinkImage, setNameLinkImage] = useState([]);
   const upImage = (e) => {
     const namePhoto = document.getElementById("images").files[0].name;
@@ -12,74 +13,96 @@ function EditBannerMen(props) {
     }
   };
   return (
-    <div className="_Mcontainer_Fro">
-      <div className="_Mcontainer_Frompr">
-        <h3 className="_title_addproduct">Sửa Banner</h3>
-        <hr />
-        <div className="_nameInputrow1">
-          <p className="_text_product">Tên*</p>
-          <Input placeholder="Sửa tên" />
-        </div>
+    <div className="_Container_banner_name">
+      <h3 className="_titile_add_wonent">Sửa banner nam</h3>
+      {/* tên */}
+      <div className="_input_banner_name">
+        <p className="_titile_add_">Tên*</p>
+        <Input
+          style={{
+            borderRadius: 3,
+          }}
+          placeholder="Sửa tên"
+        />
+      </div>
+      {/* thông tin */}
+      <div className="_input_banner_name">
+        <p className="_titile_add_">Thông tin chi tiết*</p>
+        <TynimceProduct />
+      </div>
+      {/* Ảnh */}
+      <div className="_input_banner_name">
+        <p className="_titile_add_">Chọn ảnh*</p>
+        {nameLinkImage.length == 0 ? (
+          <span>{nameLinkImage}</span>
+        ) : (
+          <>
+            {nameLinkImage.map((item) => (
+              <>
+                <span>{item}</span>
+                <br />
+              </>
+            ))}
+            <Button onClick={() => setNameLinkImage([])} style={{ margin: 25 }}>
+              Huỷ
+            </Button>
+          </>
+        )}
+        <br />
+        <label htmlFor="images">
+          <div
+            style={{
+              border: "1px solid rgba(0, 0, 0, 0.6)",
+              marginTop: -20,
+              height: 48,
+              textAlign: "center",
 
-        <div className="_nameInputrow1">
-          <p className="_text_product">Thông tin chi tiết*</p>
-          <Input placeholder="Sửa thông tin" />
-        </div>
-
-        {/* UP ảnh*/}
-        <div className="_nameInputrow">
-          <p className="_text_product">Hình ảnh*</p>
-          {nameLinkImage.length == 0 ? (
-            <span>{nameLinkImage}</span>
-          ) : (
-            <>
-              {nameLinkImage.map((item) => (
-                <>
-                  <span>{item}</span>
-                  <br />
-                </>
-              ))}
-              <Button
-                onClick={() => setNameLinkImage([])}
-                style={{ margin: 25 }}
-              >
-                Huỷ
-              </Button>
-            </>
-          )}
-          <br />
-          <label htmlFor="images">
-            <div
+              borderRadius: 3,
+              width: "40%",
+            }}
+          >
+            <p
               style={{
-                border: "1px solid #00000099",
-                marginTop: -20,
-                height: 30,
-                textAlign: "center",
+                marginTop: 10,
               }}
             >
-              Chọn hình ảnh
-            </div>
-          </label>
-          <input
-            id="images"
-            type="file"
-            style={{ display: "none" }}
-            onChange={(e) => upImage(e)}
-          />
-        </div>
-
-        {/* Nút ấn bắt sự kiện */}
-        <div className="_buttonClick_Product">
-          <Button className="__buttonClick_Product_Res">
-            <p className="_Title_button_product">Đặt lại</p>
-          </Button>
-          <Button className="__buttonClick_Product_add">
-            <p className="_Title_button_product">Sửa Banner</p>
-          </Button>
-        </div>
+              Chọn ảnh
+            </p>
+          </div>
+        </label>
+        <input
+          id="images"
+          type="file"
+          style={{ display: "none" }}
+          onChange={(e) => upImage(e)}
+        />
+      </div>
+      <div className="_Button_im">
+        <Button
+          htmlType="reset"
+          style={{
+            backgroundColor: "#DCDFE8",
+            width: "20%",
+            height: 48,
+            margin: "0 100px",
+          }}
+        >
+          <p style={{ padding: 10 }}>Đặt lại</p>
+        </Button>
+        <Button
+          htmlType="submit"
+          href="/shop/banner_men"
+          style={{
+            width: "20%",
+            height: 48,
+            backgroundColor: "#87CEEB99",
+          }}
+        >
+          <p style={{ padding: 10 }}>Sửa banner</p>
+        </Button>
       </div>
     </div>
   );
 }
 
-export default EditBannerMen;
+export default EditbannerMen;

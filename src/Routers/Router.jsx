@@ -13,7 +13,7 @@ import ScreenOverview from "../container/screens/overview/ScreenOverview";
 //Sản Phẩm
 import ScreenCreateProduct from "../container/screens/product/ScreenCreateProduct";
 import ScreenListProduct from "../container/screens/product/ScreenListProduct";
-
+import EditProduct from "../container/screens/product/EditProduct";
 //Thể loại sản phẩm
 import ScreenCreateTypeProduct from "../container/screens/type/ScreenCreateTypeProduct";
 import ScreenListTypeProduct from "../container/screens/type/ScreenListTypeProduct";
@@ -64,6 +64,8 @@ const Router = () => {
           path="/shop_quen_mat_khau"
           element={<ScreenForgotPassword />}
         ></Route>
+        {/* sủa sản phẩm */}
+        <Route path="/edit_product" element={<EditProduct />} />
         <Route path="shop/" element={<LayouttAdmin1 />}>
           <Route path="tong_quan" element={<ScreenOverview />} />
 

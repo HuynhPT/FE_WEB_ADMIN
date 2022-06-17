@@ -2,7 +2,9 @@ import { Button, Input } from "antd";
 import React, { useState } from "react";
 import "../../../Components/products/FromProduct.css";
 import SelectMenWomen from "../../../Components/products/SelectMenWomen";
-import SelectOptionProduct from "../../../Components/products/SelectOptionProduct";
+import SelectOptionColor from "../../../Components/products/SelectOptionColor";
+import SelectOptionTypeProduct from "../../../Components/products/SelectOptionTypeProduct";
+import SelectOtionSze from "../../../Components/products/SelectOtionSze";
 import TinymceProduct from "../../../Components/products/TinymceProduct";
 function EditProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
@@ -24,7 +26,7 @@ function EditProduct(props) {
           {/* tênSP */}
           <div className="_nameInputrow1">
             <p className="_text_product">Tên sản phẩm*</p>
-            <Input placeholder="Sửasản phẩm" />
+            <Input placeholder="Sửa tên sản phẩm" />
           </div>
           {/* nhãn hiệu */}
           <div className="_nameInputrow1">
@@ -51,26 +53,12 @@ function EditProduct(props) {
           {/* Chọn size*/}
           <div className="_nameInputrow4">
             <p className="_text_product">Size*</p>
-            <SelectOptionProduct
-              Option1={"S"}
-              Option2={"M"}
-              Option3={"L"}
-              Option4={"XL"}
-              Option5={"XXL"}
-              Option6={"XXXL"}
-            />
+            <SelectOtionSze />
           </div>
           {/* Chọn màu */}
           <div className="_nameInputrow4">
             <p className="_text_product">Màu*</p>
-            <SelectOptionProduct
-              Option1={"Trắng"}
-              Option2={"Đen"}
-              Option3={"Đỏ"}
-              Option4={"Vàng"}
-              Option5={"Xanh"}
-              Option6={"Be"}
-            />
+            <SelectOptionColor />
           </div>
           {/* giá bán */}
           <div className="_nameInputrow4">
@@ -92,7 +80,7 @@ function EditProduct(props) {
               <span>{nameLinkImage}</span>
             ) : (
               <>
-                {nameLinkImage?.map((item) => (
+                {nameLinkImage.map((item) => (
                   <>
                     <span>{item}</span>
                     <br />
@@ -127,21 +115,14 @@ function EditProduct(props) {
             />
           </div>
           {/* Đối tượng */}
-          <div className="_nameInputrow4">
+          <div className="_nameInputro">
             <p className="_text_product">Đối tượng*</p>
             <SelectMenWomen Option1={"Nam"} Option2={"Nữ"} />
           </div>
           {/* đơn giá */}
           <div className="_nameInputrow4">
             <p className="_text_product">Thể loại*</p>
-            <SelectOptionProduct
-              Option1={"Đầm"}
-              Option2={"Bra"}
-              Option3={"Quần"}
-              Option4={"Áo"}
-              Option5={"Trang sức"}
-              Option6={"Váy"}
-            />
+            <SelectOptionTypeProduct />
           </div>
         </div>
         {/* Hàng 5 */}
@@ -154,14 +135,10 @@ function EditProduct(props) {
         </div>
         {/* Nút ấn bắt sự kiện */}
         <div className="_buttonClick_Product">
-          <Button htmlType="reset" className="__buttonClick_Product_Res">
+          <Button className="__buttonClick_Product_Res">
             <p className="_Title_button_product">Đặt lại</p>
           </Button>
-          <Button
-            htmlType="submit"
-            href="/shop/danhSach_sanPham"
-            className="__buttonClick_Product_add"
-          >
+          <Button className="__buttonClick_Product_add">
             <p className="_Title_button_product">Sửa sản phẩm</p>
           </Button>
         </div>
