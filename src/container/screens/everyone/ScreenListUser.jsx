@@ -3,30 +3,34 @@ import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../profit/Listproduct.css";
-import Search from "antd/lib/input/Search";
 
 const ScreenListUser = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  // const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
-  useEffect(() => {
-    fetch("https://huynhpt.github.io/user.json")
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
+  // useEffect(() => {
+  //   fetch("http://192.168.1.4:3000/account-user/get-allUsers")
+  //     .then((response) => response.json())
+  //     .then((data) => setData(data));
+  // }, []);
 
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
+  const start = () => {
+    setLoading(true); // ajax request after empty completing
+
+    setTimeout(() => {
+      setSelectedRowKeys([]);
+      setLoading(false);
+    }, 1000);
+  };
+
+  const onSelectChange = (newSelectedRowKeys) => {
+    console.log("selectedRowKeys changed: ", selectedRowKeys);
+    setSelectedRowKeys(newSelectedRowKeys);
+  };
 
   const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowKeys(selectedRows);
-    },
+    selectedRowKeys,
+    onChange: onSelectChange,
   };
   const hasSelected = selectedRowKeys.length > 0;
 
@@ -37,24 +41,33 @@ const ScreenListUser = () => {
       };
       const columns = [
         {
-          title: "ID",
-          dataIndex: "_id",
-        },
-        {
           title: "Tên",
           dataIndex: "name",
         },
-
         {
-          title: "SĐT",
+          title: "Ảnh",
+          dataIndex: "photoUrl",
+          render: (photoUrl) => (
+            <img src={photoUrl} alt="" style={{ width: 100 }} srcset="" />
+          ),
+        },
+        {
+          title: "Số điện thoại",
           dataIndex: "phone",
+          // render: (description_ads) => {
+          //   <p style={{ width: 200, height: 30 }}>{description_ads}</p>;
+          // },
         },
         {
           title: "Email",
           dataIndex: "email",
+          // render: (description_ads) => {
+          //   <p style={{ width: 200, height: 30 }}>{description_ads}</p>;
+          // },
         },
+
         {
-          title: "Hoạt động",
+          title: "Action",
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
@@ -69,24 +82,12 @@ const ScreenListUser = () => {
             </div>
           ),
         },
-        // {
-        //   title: "Ảnh",
-        //   dataIndex: "image_ads",
-        //   render: (image_ads) => (
-        //     <img src={image_ads} alt="" style={{ width: 200 }} />
-        //   ),
-        // },
       ];
-
       return (
         <Table
-          rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
-          }}
+          rowSelection={rowSelection}
           columns={columns}
           dataSource={data}
-          rowKey={(item) => item._id}
           className="table-list"
         />
       );
@@ -95,17 +96,6 @@ const ScreenListUser = () => {
 
   return (
     <div className="list-product">
-      <div className="titlespb">
-        <p className="text_titlespb">Danh sách người dùng</p>
-      </div>
-      <div className="text_spb">
-        <p className="texttitlespb">
-          {
-            " Danh sách người dùng quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
-          }
-        </p>
-        <Button className="add_text">{" +  Thêm mới"}</Button>
-      </div>
       <div
         className="button-list"
         style={{
@@ -114,19 +104,22 @@ const ScreenListUser = () => {
       >
         <Button
           type="primary"
-          // onClick={start}
+          onClick={start}
           disabled={!hasSelected}
-          // loading={loading}
+          loading={loading}
           style={{ margin: "10px 30px" }}
         >
-          Delete
+          Reload
         </Button>
-        <div className="search_prd">
-          <p className="search_title">Tìm kiếm:</p>
-          <Search type="text" placeholder="Tìm kiếm" />
-        </div>
+        <span
+          style={{
+            marginLeft: 8,
+          }}
+        >
+          {hasSelected ? `Selected ${selectedRowKeys.length} items` : ""}
+        </span>
+        {listDataa()}
       </div>
-      {listDataa()}
     </div>
   );
 };

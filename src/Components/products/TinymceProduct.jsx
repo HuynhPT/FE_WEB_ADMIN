@@ -15,13 +15,13 @@ function TinymceProduct() {
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue=""
         init={{
-          height: 300,
+          height: 400,
           menubar: false,
           plugins: [
             "advlist",
             "autolink",
             "lists",
-            // "link",
+            "link",
             "image",
             "charmap",
             "preview",

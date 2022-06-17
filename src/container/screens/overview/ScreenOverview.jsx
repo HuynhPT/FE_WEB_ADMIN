@@ -23,8 +23,8 @@ const ScreenOverview = () => {
           <div className={styles.row}>
             <Row
               img_ic={img_tds}
-              title={"Tổng doanh thu bán"}
-              number={"$300.55"}
+              title={"Tổng doanh số bán"}
+              number={"$60.55"}
             />
           </div>
           <div className={styles.row}>

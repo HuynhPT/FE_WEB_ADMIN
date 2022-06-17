@@ -1,7 +1,7 @@
 import { Button, Input } from "antd";
 import React, { useState } from "react";
-import "./AddBannerMen.css";
-function EditBannerMen(props) {
+import "./AddBannerMen.css"
+function AddBannerMen(props) {
     const [nameLinkImage, setNameLinkImage] = useState([]);
     const upImage = (e) => {
         const namePhoto = document.getElementById("images").files[0].name;
@@ -14,16 +14,16 @@ function EditBannerMen(props) {
     return (
         <div className="_Mcontainer_Fro">
             <div className="_Mcontainer_Frompr">
-                <h3 className="_title_addproduct">Sửa Banner</h3>
+                <h3 className="_title_addproduct">Thêm Banner</h3>
                 <hr />
                 <div className="_nameInputrow1">
                     <p className="_text_product">Tên*</p>
-                    <Input placeholder="Sửa tên" />
+                    <Input placeholder="Nhập Tên" />
                 </div>
 
                 <div className="_nameInputrow1">
                     <p className="_text_product">Thông tin chi tiết*</p>
-                    <Input placeholder="Sửa thông tin" />
+                    <Input placeholder="Nhập thông tin" />
                 </div>
 
                 {/* UP ảnh*/}
@@ -75,7 +75,7 @@ function EditBannerMen(props) {
                         <p className="_Title_button_product">Đặt lại</p>
                     </Button>
                     <Button className="__buttonClick_Product_add">
-                        <p className="_Title_button_product">Sửa Banner</p>
+                        <p className="_Title_button_product">Thêm Banner</p>
                     </Button>
                 </div>
             </div>
@@ -83,4 +83,4 @@ function EditBannerMen(props) {
     );
 }
 
-export default EditBannerMen;
+export default AddBannerMen;

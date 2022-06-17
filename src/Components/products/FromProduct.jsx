@@ -2,7 +2,6 @@ import { Button, Input } from "antd";
 import React, { useState } from "react";
 import "./FromProduct.css";
 import SelectMenWomen from "./SelectMenWomen";
-import SelectOptionColor from "./SelectOptionColor";
 import SelectOptionProduct from "./SelectOptionProduct";
 import SelectOptionTypeProduct from "./SelectOptionTypeProduct";
 import SelectOtionSze from "./SelectOtionSze";
@@ -54,12 +53,26 @@ function FromProduct(props) {
           {/* Chọn size*/}
           <div className="_nameInputrow4">
             <p className="_text_product">Size*</p>
-            <SelectOtionSze />
+            <SelectOptionProduct
+              Option1={"S"}
+              Option2={"M"}
+              Option3={"L"}
+              Option4={"XL"}
+              Option5={"XXL"}
+              Option6={"XXXL"}
+            />
           </div>
           {/* Chọn màu */}
           <div className="_nameInputrow4">
             <p className="_text_product">Màu*</p>
-            <SelectOptionColor />
+            <SelectOptionProduct
+              Option1={"Trắng"}
+              Option2={"Đen"}
+              Option3={"Đỏ"}
+              Option4={"Vàng"}
+              Option5={"Xanh"}
+              Option6={"Be"}
+            />
           </div>
           {/* giá bán */}
           <div className="_nameInputrow4">
@@ -81,7 +94,7 @@ function FromProduct(props) {
               <span>{nameLinkImage}</span>
             ) : (
               <>
-                {nameLinkImage?.map((item) => (
+                {nameLinkImage.map((item) => (
                   <>
                     <span>{item}</span>
                     <br />
@@ -136,14 +149,10 @@ function FromProduct(props) {
         </div>
         {/* Nút ấn bắt sự kiện */}
         <div className="_buttonClick_Product">
-          <Button htmlType="reset" className="__buttonClick_Product_Res">
-            <p className="_Title_button_products">Đặt lại</p>
+          <Button className="__buttonClick_Product_Res">
+            <p className="_Title_button_product">Đặt lại</p>
           </Button>
-          <Button
-            htmlType="submit"
-            href="/shop/danhSach_sanPham"
-            className="__buttonClick_Product_add"
-          >
+          <Button className="__buttonClick_Product_add">
             <p className="_Title_button_product">Thêm sản phẩm</p>
           </Button>
         </div>

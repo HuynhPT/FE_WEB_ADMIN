@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import LayouttAdmin1 from "../Components/LayouttAdmin1";
+import LayoutAdmin from "../components/LayoutAdmin";
 
 //auth
 import ScreenLogin from "../container/screens/auth/ScreenLogin";
@@ -13,7 +13,6 @@ import ScreenOverview from "../container/screens/overview/ScreenOverview";
 //Sản Phẩm
 import ScreenCreateProduct from "../container/screens/product/ScreenCreateProduct";
 import ScreenListProduct from "../container/screens/product/ScreenListProduct";
-import EditProduct from "../container/screens/product/EditProduct";
 
 //Thể loại sản phẩm
 import ScreenCreateTypeProduct from "../container/screens/type/ScreenCreateTypeProduct";
@@ -41,15 +40,12 @@ import ColorSize from "../container/screens/colorsize/ColorSize";
 //banner
 import BannerSplash from "../container/screens/banner/BannerSplash";
 import BannerHome from "../container/screens/banner/BannerHome";
-// banner nam
-import BannerMen from "../container/screens/banner/bannermen/BannerMen";
-import CreateBannerMen from "../container/screens/banner/bannermen/CreateBannerMen";
-import EditbannerMen from "../container/screens/banner/bannermen/EditbannerMen";
-// banner nữ
-import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
-import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
-import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
-
+import BannerMen from "../container/screens/banner/BannerMen";
+import BannerWomen from "../container/screens/banner/BannerWomen";
+import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
+import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEditBanner";
+import ScreenAddBannerMen from "../container/screens/banner/BannerMen/ScreensAddBannerMen";
+import ScreenEditBannerMen from "../container/screens/banner/BannerMen/ScreenEditBanner";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -60,8 +56,7 @@ const Router = () => {
           path="/shop_quen_mat_khau"
           element={<ScreenForgotPassword />}
         ></Route>
-        <Route path="/edit_sanpham" element={<EditProduct />} />
-        <Route path="/shop/" element={<LayouttAdmin1 />}>
+        <Route path="shop/" element={<LayoutAdmin />}>
           <Route path="tong_quan" element={<ScreenOverview />} />
 
           <Route path="them_sanPham" element={<ScreenCreateProduct />} />
@@ -100,13 +95,11 @@ const Router = () => {
           <Route path="banner_men" element={<BannerMen />} />
           <Route path="banner_women" element={<BannerWomen />} />
           <Route path="banner_splash" element={<BannerSplash />} />
+          <Route path="add_banner" element={<ScreenAddBanner/>} />
+          <Route path="edit_banner" element={<ScreenEditBanner/>}/>
+          <Route path="add_banner_men" element={<ScreenAddBannerMen/>}/>
+          <Route path="edit_banner_men" element={<ScreenEditBannerMen/>}/>
         </Route>
-        {/* banner nam */}
-        <Route path="/create_banner_men" element={<CreateBannerMen />} />
-        <Route path="/edit_banner_men" element={<EditbannerMen />} />
-        {/* banner nữ */}
-        <Route path="/create_banner_woment" element={<CreateBannerWoment />} />
-        <Route path="/edit_banner_woment" element={<EditBannerWonent />} />
       </Routes>
     </BrowserRouter>
   );
