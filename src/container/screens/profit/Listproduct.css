@@ -37,19 +37,18 @@
   padding: 24px 0 0 48px !important;
 }
 .add_text {
-  width: 250px !important;
+  width: 231px !important;
   height: 48px !important;
   background-color: #87ceeb !important;
   border-radius: 3px !important;
   margin-right: 30px !important;
-  margin-left: 226px !important;
-}
-._text_banner {
-  margin-top: 10px;
+  margin-left: 380px !important;
   font-size: 16px;
   font-weight: 400;
   font-family: "Open Sans";
   line-height: 22px;
+  color: #ffffff;
+  border-color: #87ceeb;
 }
 .texttitlespb {
   width: 770px !important;
