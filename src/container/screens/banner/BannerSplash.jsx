@@ -115,7 +115,7 @@ const BannerSplash = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách sản phẩm bán được</p>
+        <p className="text_titlespb">Danh sách Banner Splash</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
@@ -123,9 +123,12 @@ const BannerSplash = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Link to="/add_banner">
+        {/* <Link to="">
           <button className="add_text">{" +  Thêm mới"}</button>
-        </Link>
+        </Link> */}
+        <Button href="/add_banner" className="add_text">
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
+        </Button>
       </div>
       <div
         className="button-list"
