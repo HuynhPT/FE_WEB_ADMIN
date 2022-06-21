@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Button, Table, Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -10,7 +10,7 @@ const BannerSplash = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-first-splash")
+    fetch("https://huynhpt.github.io/splash.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
@@ -22,14 +22,34 @@ const BannerSplash = () => {
   //     setLoading(false);
   //   }, 1000);
   // };
-
+  // interface DataType {
+  //   key: React.Key;
+  //   name: string;
+  //   age: number;
+  //   address: string;
+  // }
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
     },
   };
   const hasSelected = selectedRowKeys.length > 0;
-
+  // const data = [
+  //   {
+  //     key: "1",
+  //     title_ads: "Y",
+  //     title_data: 20,
+  //     description_ads:
+  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
+  //   },
+  //   {
+  //     key: "2",
+  //     title_ads: "Nhu Y",
+  //     title_data: 21,
+  //     description_ads:
+  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
+  //   },
+  // ];
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {
@@ -61,20 +81,22 @@ const BannerSplash = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
+              <Link to="/edit_banner">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
-              <DeleteOutlined
-                onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
-                size={24}
-              />
+              <Link to="/shop/edit_banner">
+                <DeleteOutlined
+                  onClick={() => deletee(_id)}
+                  style={{ width: 50, marginTop: 5 }}
+                  size={24}
+                />
+              </Link>
             </div>
           ),
         },
       ];
       return (
-        <>
+        <div>
           <Table
             rowSelection={{
               type: "checkbox",
@@ -85,7 +107,7 @@ const BannerSplash = () => {
             rowKey={(item) => item._id}
             className="table-list"
           />
-        </>
+        </div>
       );
     }
   };
@@ -101,7 +123,9 @@ const BannerSplash = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <button className="add_text">{" +  Thêm mới"}</button>
+        <Link to="/add_banner">
+          <button className="add_text">{" +  Thêm mới"}</button>
+        </Link>
       </div>
       <div
         className="button-list"

@@ -1,12 +1,12 @@
 import { Button, Input } from "antd";
 import React, { useState } from "react";
-import "./FromProduct.css";
-import SelectMenWomen from "./SelectMenWomen";
-import SelectOptionColor from "./SelectOptionColor";
-import SelectOptionTypeProduct from "./SelectOptionTypeProduct";
-import SelectOtionSze from "./SelectOtionSze";
-import TinymceProduct from "./TinymceProduct";
-function FromProduct(props) {
+import "../../../Components/products/FromProduct.css";
+import SelectMenWomen from "../../../Components/products/SelectMenWomen";
+import SelectOptionColor from "../../../Components/products/SelectOptionColor";
+import SelectOptionTypeProduct from "../../../Components/products/SelectOptionTypeProduct";
+import SelectOtionSze from "../../../Components/products/SelectOtionSze";
+import TinymceProduct from "../../../Components/products/TinymceProduct";
+function EditProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
   const upImage = (e) => {
     const namePhoto = document.getElementById("images").files[0].name;
@@ -19,19 +19,19 @@ function FromProduct(props) {
   return (
     <div className="_Mcontainer_Fro">
       <div className="_Mcontainer_Frompr">
-        <h3 className="_title_addproduct">Thêm sản phẩm</h3>
+        <h3 className="_title_addproduct">Sửa sản phẩm</h3>
         <hr />
         {/* hàng 1 */}
         <div className="_inputrow1From">
           {/* tênSP */}
           <div className="_nameInputrow1">
             <p className="_text_product">Tên sản phẩm*</p>
-            <Input placeholder="Tên sản phẩm" />
+            <Input placeholder="Sửa tên sản phẩm" />
           </div>
           {/* nhãn hiệu */}
           <div className="_nameInputrow1">
             <p className="_text_product">Nhãn hiệu*</p>
-            <Input placeholder="Nhãn hiệu sản phẩm" />
+            <Input placeholder="Sửa nhãn hiệu sản phẩm" />
           </div>
         </div>
         {/* hàng 2 */}
@@ -39,12 +39,12 @@ function FromProduct(props) {
           {/* mã số */}
           <div className="_nameInputrow1">
             <p className="_text_product">Mã số*</p>
-            <Input placeholder="Mã số" />
+            <Input placeholder="Sửa mã số" />
           </div>
           {/* chất liệu */}
           <div className="_nameInputrow1">
             <p className="_text_product">Chất liệu*</p>
-            <Input placeholder="Chất liệu" />
+            <Input placeholder="Sửa chất liệu" />
           </div>
         </div>
 
@@ -63,12 +63,12 @@ function FromProduct(props) {
           {/* giá bán */}
           <div className="_nameInputrow4">
             <p className="_text_product">Giá bán*</p>
-            <Input placeholder="Giá bán" />
+            <Input placeholder="Sửa giá bán" />
           </div>
           {/* đơn giá */}
           <div className="_nameInputrow4">
             <p className="_text_product">Đơn giá*</p>
-            <Input placeholder="Đơn giá" />
+            <Input placeholder="Sửa đơn giá" />
           </div>
         </div>
         {/* Hàng 4 */}
@@ -139,7 +139,7 @@ function FromProduct(props) {
             <p className="_Title_button_product">Đặt lại</p>
           </Button>
           <Button className="__buttonClick_Product_add">
-            <p className="_Title_button_product">Thêm sản phẩm</p>
+            <p className="_Title_button_product">Sửa sản phẩm</p>
           </Button>
         </div>
       </div>
@@ -147,4 +147,4 @@ function FromProduct(props) {
   );
 }
 
-export default FromProduct;
+export default EditProduct;

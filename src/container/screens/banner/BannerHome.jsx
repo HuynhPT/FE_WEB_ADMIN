@@ -10,7 +10,7 @@ const BannerHome = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-img-shop")
+    fetch("https://huynhpt.github.io/home.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
