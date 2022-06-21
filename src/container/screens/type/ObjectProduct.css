@@ -6,9 +6,9 @@ mainObjectProduct {
 .BodyObjectProduct {
   width: "100%";
   height: "100%";
-  background-color: "white";
 }
 
 .contentObjectProduct {
-  margin-left: 30px;
+  margin-left: 20px;
+  margin-top: 20px;
 }
