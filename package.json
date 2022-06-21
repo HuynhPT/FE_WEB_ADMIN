@@ -12,6 +12,7 @@
     "@ant-design/icons": "^4.7.0",
     "@tinymce/tinymce-react": "^4.1.0",
     "antd": "^4.20.6",
+    "qs": "^6.10.5",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0"

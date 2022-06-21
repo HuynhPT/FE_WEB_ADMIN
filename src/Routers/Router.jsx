@@ -18,6 +18,7 @@ import ScreenListProduct from "../container/screens/product/ScreenListProduct";
 import ScreenCreateTypeProduct from "../container/screens/type/ScreenCreateTypeProduct";
 import ScreenListTypeProduct from "../container/screens/type/ScreenListTypeProduct";
 import ScreenObjectProduct from "../container/screens/type/ScreenObjectProduct";
+import FromUpdateTypeProduct from "../container/screens/type/FromUpdateTypeProduct";
 
 //Danh sách sản phẩm order
 import ScreenListOrder from "../container/screens/order/ScreenListOrder";

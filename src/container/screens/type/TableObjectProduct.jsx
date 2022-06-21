@@ -1,7 +1,7 @@
 import { Space, Table, Radio, Divider } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-// import qs from "qs";
+import qs from "qs";
 const columns = [
   {
     title: "Id",
@@ -64,7 +64,8 @@ const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [pagination, setPagination] = useState({
     current: 2,
-    pageSize: 6,
+    pageSize: 8,
+    width: 1000,
   });
 
   const fetchData = (params = {}) => {
@@ -116,7 +117,12 @@ const TableObjectProduct = () => {
         pagination={pagination}
         loading={loading}
         onChange={handleTableChange}
-        style={{ width: "100%", height: "100%" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "white",
+          marginRight: 100,
+        }}
         rowSelection={rowSelection}
       />
     </>
