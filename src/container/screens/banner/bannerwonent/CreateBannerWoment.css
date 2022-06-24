@@ -1,6 +1,7 @@
 ._Container_banner_name {
+  overflow: scroll;
   background-color: white;
-  margin: 30px 70px 100px 70px !important;
+  margin: 70px 100px !important;
   border-radius: 10px;
 }
 ._titile_add_wonent {

@@ -10,8 +10,10 @@ const ScreenListProductProfit = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-img")
-      .then((response) => response.json())
+    fetch(
+      "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+    )
+      .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
   // const start = () => {
@@ -62,9 +64,9 @@ const ScreenListProductProfit = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
+              {/* <Link to="/shop/thongKe_loiNhuan">
                 <EditOutlined style={{ width: 50 }} size={24} />
-              </Link>
+              </Link> */}
               <DeleteOutlined
                 onClick={() => deletee(_id)}
                 style={{ width: 50, marginTop: 5 }}
@@ -81,7 +83,7 @@ const ScreenListProductProfit = () => {
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={data}
+          dataSource={data.data}
           rowKey={(item) => item._id}
           className="table-list"
         />
@@ -100,7 +102,6 @@ const ScreenListProductProfit = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <button className="add_text">{" +  Thêm mới"}</button>
       </div>
       <div
         className="button-list"

@@ -1,34 +1,44 @@
 import { Select, Tag } from "antd";
 const options = [
   {
-    value: "Trắng",
+    value: "white",
+    label: "Trắng",
   },
   {
-    value: "Đỏ",
+    value: "red",
+    label: "Đỏ",
   },
   {
-    value: "Đen",
+    value: "black",
+    label: "Đen",
   },
   {
-    value: "Vàng",
+    value: "yellow",
+    label: "Vàng",
   },
   {
-    value: "Lục",
+    value: "green",
+    label: "Xanh",
   },
   {
-    value: "Lam",
+    value: "blue",
+    label: "Lam",
   },
   {
-    value: "Tràm",
+    value: "orange",
+    label: "Cam",
   },
   {
-    value: "Be",
+    value: "beige ",
+    label: "Be",
   },
   {
-    value: "Xám",
+    value: "gray",
+    label: "Xám",
   },
   {
-    value: "Tím",
+    value: "purple ",
+    label: "Tím",
   },
 ];
 
@@ -42,7 +52,7 @@ const tagRender = (props) => {
 
   return (
     <Tag
-      color={"gray"}
+      color={value}
       onMouseDown={onPreventMouseDown}
       closable={closable}
       onClose={onClose}

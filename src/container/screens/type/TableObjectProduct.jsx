@@ -64,7 +64,8 @@ const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [pagination, setPagination] = useState({
     current: 2,
-    pageSize: 6,
+    pageSize: 8,
+    width: 1000,
   });
 
   const fetchData = (params = {}) => {
@@ -78,7 +79,7 @@ const TableObjectProduct = () => {
         setLoading(false);
         setPagination({
           ...params.pagination,
-          total: 200, // 200 is mock data, you should read it from server
+          total: 20, // 200 is mock data, you should read it from server
           // total: data.totalCount,
         });
       });
@@ -116,7 +117,12 @@ const TableObjectProduct = () => {
         pagination={pagination}
         loading={loading}
         onChange={handleTableChange}
-        style={{ width: "100%", height: "100%" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "white",
+          marginRight: 100,
+        }}
         rowSelection={rowSelection}
       />
     </>
