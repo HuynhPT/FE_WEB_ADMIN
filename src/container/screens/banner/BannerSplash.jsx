@@ -14,42 +14,14 @@ const BannerSplash = () => {
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
-
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
-  // interface DataType {
-  //   key: React.Key;
-  //   name: string;
-  //   age: number;
-  //   address: string;
-  // }
+ 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
     },
   };
   const hasSelected = selectedRowKeys.length > 0;
-  // const data = [
-  //   {
-  //     key: "1",
-  //     title_ads: "Y",
-  //     title_data: 20,
-  //     description_ads:
-  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
-  //   },
-  //   {
-  //     key: "2",
-  //     title_ads: "Nhu Y",
-  //     title_data: 21,
-  //     description_ads:
-  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
-  //   },
-  // ];
+ 
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {
@@ -84,7 +56,7 @@ const BannerSplash = () => {
               <Link to="/edit_banner">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
-              <Link to="/shop/edit_banner">
+              <Link to="/edit_banner">
                 <DeleteOutlined
                   onClick={() => deletee(_id)}
                   style={{ width: 50, marginTop: 5 }}
