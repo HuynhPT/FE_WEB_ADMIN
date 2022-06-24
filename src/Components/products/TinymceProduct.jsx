@@ -12,7 +12,7 @@ function TinymceProduct() {
     <div style={{ display: "inline" }}>
       <Editor
         apiKey="your-api-key"
-        onInit={(evt, editor) => (editorRef.current = editor)}
+        onEditorChange={(newText) => console.log(newText)}
         initialValue=""
         init={{
           height: 400,
