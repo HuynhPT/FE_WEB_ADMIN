@@ -2,7 +2,7 @@ import { Button, Input } from "antd";
 import React, { useState } from "react";
 import TynimceProduct from "../../../../Components/products/TinymceProduct";
 import "../bannerwonent/CreateBannerWoment.css";
-function CreateBannerMen() {
+function CreateBannerMen(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
   const upImage = (e) => {
     const namePhoto = document.getElementById("images").files[0].name;
@@ -23,6 +23,16 @@ function CreateBannerMen() {
             borderRadius: 3,
           }}
           placeholder="Nhập tên"
+        />
+      </div>
+      {/* Đối tượng */}
+      <div className="_input_banner_name">
+        <p className="_titile_add_">Đối tượng*</p>
+        <Input
+          style={{
+            borderRadius: 3,
+          }}
+          placeholder="Nhập đối tượng"
         />
       </div>
       {/* thông tin */}

@@ -10,7 +10,7 @@ const ScreenListProductProfit = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("http://192.168.1.7:3000/img-first-images/get-img")
+    fetch("https://huynhpt.github.io/getall.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
@@ -62,9 +62,9 @@ const ScreenListProductProfit = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
+              {/* <Link to="/shop/thongKe_loiNhuan">
                 <EditOutlined style={{ width: 50 }} size={24} />
-              </Link>
+              </Link> */}
               <DeleteOutlined
                 onClick={() => deletee(_id)}
                 style={{ width: 50, marginTop: 5 }}
@@ -100,7 +100,6 @@ const ScreenListProductProfit = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <button className="add_text">{" +  Thêm mới"}</button>
       </div>
       <div
         className="button-list"

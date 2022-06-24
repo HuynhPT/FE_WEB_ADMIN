@@ -12,12 +12,22 @@ const FromObjectProduct = () => {
           display: "flex",
         }}
       >
-        <Form.Item>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           <Input
             style={{ width: "750px", height: "48px" }}
             placeholder="Nhập : Nam, Nữ,........"
           />
-        </Form.Item>
+          <Button
+            style={{
+              width: 150,
+              height: 32,
+              backgroundColor: "#D9D9D9",
+              marginTop: 50,
+            }}
+          >
+            Xóa
+          </Button>
+        </div>
         <Form.Item style={{ marginLeft: "180px" }}>
           <Button
             type="primary"

@@ -94,8 +94,11 @@ const BannerMen = () => {
           }
         </p>
         <Button href="/create_banner_men" className="add_text">
-          <p className="_text_banner">+ Thêm mới</p>
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
         </Button>
+        {/* <Button href="/create_banner_men" className="add_text">
+          <p className="_text_banner">+ Thêm mới</p>
+        </Button> */}
       </div>
       <div
         className="button-list"

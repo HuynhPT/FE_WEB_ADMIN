@@ -2,7 +2,7 @@ import { Button, Input } from "antd";
 import React, { useState } from "react";
 import "./FromProduct.css";
 import SelectMenWomen from "./SelectMenWomen";
-import SelectOptionProduct from "./SelectOptionProduct";
+import SelectOptionColor from "./SelectOptionColor";
 import SelectOptionTypeProduct from "./SelectOptionTypeProduct";
 import SelectOtionSze from "./SelectOtionSze";
 import TinymceProduct from "./TinymceProduct";
@@ -53,26 +53,12 @@ function FromProduct(props) {
           {/* Chọn size*/}
           <div className="_nameInputrow4">
             <p className="_text_product">Size*</p>
-            <SelectOptionProduct
-              Option1={"S"}
-              Option2={"M"}
-              Option3={"L"}
-              Option4={"XL"}
-              Option5={"XXL"}
-              Option6={"XXXL"}
-            />
+            <SelectOtionSze />
           </div>
           {/* Chọn màu */}
           <div className="_nameInputrow4">
             <p className="_text_product">Màu*</p>
-            <SelectOptionProduct
-              Option1={"Trắng"}
-              Option2={"Đen"}
-              Option3={"Đỏ"}
-              Option4={"Vàng"}
-              Option5={"Xanh"}
-              Option6={"Be"}
-            />
+            <SelectOptionColor />
           </div>
           {/* giá bán */}
           <div className="_nameInputrow4">
@@ -129,7 +115,7 @@ function FromProduct(props) {
             />
           </div>
           {/* Đối tượng */}
-          <div className="_nameInputrow4">
+          <div className="_nameInputro">
             <p className="_text_product">Đối tượng*</p>
             <SelectMenWomen Option1={"Nam"} Option2={"Nữ"} />
           </div>

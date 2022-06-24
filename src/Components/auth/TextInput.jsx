@@ -1,10 +1,8 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
 
-
 function TextInput(props) {
   const [form] = Form.useForm();
-
 
   return (
     <>

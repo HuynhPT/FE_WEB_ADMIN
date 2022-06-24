@@ -43,12 +43,14 @@
   border-radius: 3px !important;
   margin-right: 30px !important;
   margin-left: 380px !important;
+}
+.text_buttonsss {
+  margin-top: 10px;
   font-size: 16px;
   font-weight: 400;
   font-family: "Open Sans";
   line-height: 22px;
-  color: #ffffff;
-  border-color: #87ceeb;
+  color: black;
 }
 .texttitlespb {
   width: 770px !important;

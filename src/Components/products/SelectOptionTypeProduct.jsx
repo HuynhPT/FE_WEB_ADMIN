@@ -1,71 +1,33 @@
-import { Select, Tag } from "antd";
-const options = [
-  {
-    value: "Trắng",
-  },
-  {
-    value: "Đỏ",
-  },
-  {
-    value: "Đen",
-  },
-  {
-    value: "Vàng",
-  },
-  {
-    value: "Lục",
-  },
-  {
-    value: "Lam",
-  },
-  {
-    value: "Tràm",
-  },
-  {
-    value: "Be",
-  },
-  {
-    value: "Xám",
-  },
-  {
-    value: "Tím",
-  },
+import { Select } from "antd";
+const option = [
+  { value: "Đầm" },
+  { value: "Váy" },
+  { value: "Áo" },
+  { value: "Quần" },
+  { value: "Trang sức" },
+  { value: "Phụ kiện" },
+  { value: "Bra" },
 ];
 
-// const tagRender = (props) => {
-//   const { label, value, closable, onClose } = props;
+const onChange = (value) => {
+  console.log(`selected ${value}`);
+};
 
-//   const onPreventMouseDown = (event) => {
-//     event.preventDefault();
-//     event.stopPropagation();
-//   };
-
-//   return (
-//     <Tag
-//       color={"gray"}
-//       onMouseDown={onPreventMouseDown}
-//       closable={closable}
-//       onClose={onClose}
-//       style={{
-//         marginRight: 3,
-//       }}
-//     >
-//       {label}
-//     </Tag>
-//   );
-// };
+const onSearch = (value) => {
+  console.log("search:", value);
+};
 
 const SelectOptionTypeProduct = () => (
   <Select
-    mode="multiple"
-    showArrow
-    // tagRender={tagRender}
-    defaultValue={["Trắng"]}
     style={{
       width: "100%",
     }}
-    options={options}
-  />
+    showSearch
+    defaultValue={"Đầm"}
+    onChange={onChange}
+    onSearch={onSearch}
+    options={option}
+  ></Select>
 );
 
 export default SelectOptionTypeProduct;
