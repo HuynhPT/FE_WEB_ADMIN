@@ -10,8 +10,10 @@ const ScreenListProductProfit = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/getall.json")
-      .then((response) => response.json())
+    fetch(
+      "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+    )
+      .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
   // const start = () => {
@@ -81,7 +83,7 @@ const ScreenListProductProfit = () => {
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={data}
+          dataSource={data.data}
           rowKey={(item) => item._id}
           className="table-list"
         />
