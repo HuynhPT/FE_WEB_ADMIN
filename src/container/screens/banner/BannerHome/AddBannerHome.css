@@ -1,8 +1,8 @@
 ._Mcontainer_Fro {
-  background-color: white;
-  margin: 10px 100px 100px 50px !important;
-  border-radius: 10px;
-  height: 530px !important;
+    margin: 40px 150px;
+    background-color: white;
+    border-radius: 3px;
+    box-shadow: 0px 4px 7px rgba(60, 58, 58, 0);
   }
   ._Mcontainer_Frompr {
     /* overflow: scroll; */
