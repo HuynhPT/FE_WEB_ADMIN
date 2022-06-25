@@ -2,7 +2,7 @@ import { Button, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import "../profit/Listproduct.css";
+import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 
 const BannerHome = () => {
@@ -61,7 +61,7 @@ const BannerHome = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
+              <Link to="/edit_banner_home">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <DeleteOutlined
@@ -101,7 +101,7 @@ const BannerHome = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Button href="/create_banner_men" className="add_text">
+        <Button href="/create_banner_home" className="add_text">
           <p className="_text_banner">+ Thêm mới</p>
         </Button>
       </div>
