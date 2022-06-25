@@ -1,56 +1,15 @@
-import { Space, Table, Radio, Divider } from "antd";
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import qs from "qs";
-const columns = [
-  {
-    title: "Id",
-    dataIndex: "name",
-    sorter: true,
-    render: (name) => `${name.first} ${name.last}`,
-  },
-  {
-    title: "Đối tượng",
-    dataIndex: "gender",
-    filters: [
-      {
-        text: "Nam",
-        value: "Nam",
-      },
-      {
-        text: "Nữ",
-        value: "Nữ",
-      },
-      {
-        text: "Trẻ em",
-        value: "Trẻ em",
-      },
-    ],
-  },
-  {
-    title: "Hoạt động",
-    dataIndex: "",
-    key: "x",
-    render: () => (
-      <Space>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/1860/1860115.png"
-          style={{ width: 20, height: 20 }}
-        />
-        <img
-          src="https://icons.veryicon.com/png/o/commerce-shopping/soft-designer-online-tools-icon/delete-77.png"
-          style={{ width: 30, height: 30 }}
-          onClick={imageClick}
-        />
-      </Space>
-    ),
-  },
-];
+import { Space, Table, Radio, Divider, Input } from "antd";
+import { useEffect, useState } from "react";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
-const imageClick = () => {
-  console.log("ngu");
-  <Link to={"../auth/ScreenLogin.jsx"} />;
-};
+import qs from "qs";
 
 const getRandomuserParams = (params) => ({
   results: params.pagination?.pageSize,
@@ -68,6 +27,62 @@ const TableObjectProduct = () => {
     width: 1000,
   });
 
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "name",
+      sorter: true,
+      render: (name) => `${name.first} ${name.last}`,
+    },
+    {
+      title: "Đối tượng",
+      dataIndex: "gender",
+      filters: [
+        {
+          text: "Nam",
+          value: "Nam",
+        },
+        {
+          text: "Nữ",
+          value: "Nữ",
+        },
+        {
+          text: "Trẻ em",
+          value: "Trẻ em",
+        },
+      ],
+    },
+    {
+      title: "Hoạt động",
+      dataIndex: "",
+      key: "x",
+      render: () => (
+        <Space>
+          <div style={{ display: "flex", flexDirection: "row" }}>
+            <EditOutlined
+              style={{ width: 50 }}
+              size={24}
+              onClick={handleClickOpen}
+            />
+            <DeleteOutlined
+              onClick={() => deletee(_id)}
+              style={{ width: 50, marginTop: 5 }}
+              size={24}
+            />
+          </div>
+        </Space>
+      ),
+    },
+  ];
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const fetchData = (params = {}) => {
     setLoading(true);
     fetch(
@@ -79,7 +94,7 @@ const TableObjectProduct = () => {
         setLoading(false);
         setPagination({
           ...params.pagination,
-          total: 200, // 200 is mock data, you should read it from server
+          total: 50, // 200 is mock data, you should read it from server
           // total: data.totalCount,
         });
       });
@@ -125,6 +140,21 @@ const TableObjectProduct = () => {
         }}
         rowSelection={rowSelection}
       />
+      <div style={{ width: 548, height: 497 }}>
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Sửa đối tượng sử dụng</DialogTitle>
+          <DialogContent>
+            <Input
+              placeholder="Nhập : Nam, Nữ, Trẻ em"
+              style={{ width: 300, height: 29 }}
+            />
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Hủy</Button>
+            <Button onClick={handleClose}>Sửa</Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     </>
   );
 };

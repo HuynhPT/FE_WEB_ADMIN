@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import TextInput from "./TextInput";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
+import axios from "axios";
 const FormLogin = (props) => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
+     
   };
 
   return (

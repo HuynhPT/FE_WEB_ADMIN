@@ -1,8 +1,8 @@
 import React from "react";
 import { Button, Form, Input, Modal } from "antd";
-import TableObjectProduct from "./TableObjectProduct";
+import TableListtypeProduct from "./TableListTypeProduct";
 import { SearchOutlined } from "@ant-design/icons";
-const FromListTypeProduct = () => {
+const FromListTypeProduct = (...props) => {
   return (
     <div style={{ flex: 1 }}>
       <h3 style={{ fontSize: "24px" }}>Danh sách thể loại</h3>
@@ -17,6 +17,7 @@ const FromListTypeProduct = () => {
             tổng thể của bạn từ danh sách được cung cấp.
             <br /> Bấm vào tên của danh mục mà bạn muốn thêm một mục danh sách
           </p>
+
           <Button
             style={{
               width: 150,
@@ -50,7 +51,7 @@ const FromListTypeProduct = () => {
         </Form.Item>
       </div>
       <div>
-        <TableObjectProduct />
+        <TableListtypeProduct />
       </div>
     </div>
   );

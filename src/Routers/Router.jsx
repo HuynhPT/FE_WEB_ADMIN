@@ -116,6 +116,8 @@ const Router = () => {
         {/* banner flsh */}
         <Route path="/add_banner" element={<ScreenAddBanner />} />
         <Route path="/edit_banner" element={<ScreenEditBanner />} />
+        {/* //UpdateObjectProduct */}
+        <Route path="/update_object" element={<FromUpdateTypeProduct />} />
       </Routes>
     </BrowserRouter>
   );
