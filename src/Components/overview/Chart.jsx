@@ -36,7 +36,7 @@ const Chart = () => {
           ],
         },
       };
-      return <Column {...config} style={{ width: 550, height: 200 }} />;
+      return <Column {...config} style={{ width: "100%", height: 200 }} />;
     }
   };
 

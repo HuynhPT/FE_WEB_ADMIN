@@ -61,14 +61,16 @@ const BannerHome = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
+              <Link to="/edit_banner_home">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
+              <Link to="/edit_banner_home">
               <DeleteOutlined
                 onClick={() => deletee(_id)}
                 style={{ width: 50, marginTop: 5 }}
                 size={24}
               />
+              </Link>
             </div>
           ),
         },
@@ -101,7 +103,11 @@ const BannerHome = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <button className="add_text">{" +  Thêm mới"}</button>
+
+        <Link to="/add_banner_home">
+          <button className="add_text">{" +  Thêm mới"}</button>
+        </Link>
+
       </div>
       <div
         className="button-list"

@@ -46,6 +46,8 @@ import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEdit
 
 //banner home
 import BannerHome from "../container/screens/banner/BannerHome";
+import ScreenEditBannerHome from "../container/screens/banner/BannerHome/ScreensEditBannerHome";
+import ScreenAddBannerHome from "../container/screens/banner/BannerHome/ScreensAddBannerHome";
 //banner men
 import BannerMen from "../container/screens/banner/bannermen/BannerMen";
 import CreactBannerMen from "../container/screens/banner/bannermen/CreateBannerMen";
@@ -113,11 +115,12 @@ const Router = () => {
         {/* banner nữ */}
         <Route path="/create_banner_woment" element={<CreateBannerWonen />} />
         <Route path="/edit_banner_woment" element={<EditBannerWoment />} />
-        {/* banner flsh */}
+        {/* banner flash */}
         <Route path="/add_banner" element={<ScreenAddBanner />} />
         <Route path="/edit_banner" element={<ScreenEditBanner />} />
-        {/* //UpdateObjectProduct */}
-        <Route path="/update_object" element={<FromUpdateTypeProduct />} />
+        {/* BannerHome */}
+        <Route path="/add_banner_home" element={<ScreenAddBannerHome />} />
+        <Route path="/edit_banner_home" element={<ScreenEditBannerHome />} />
       </Routes>
     </BrowserRouter>
   );

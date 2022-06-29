@@ -14,42 +14,14 @@ const BannerSplash = () => {
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
-
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
-  // interface DataType {
-  //   key: React.Key;
-  //   name: string;
-  //   age: number;
-  //   address: string;
-  // }
+ 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
     },
   };
   const hasSelected = selectedRowKeys.length > 0;
-  // const data = [
-  //   {
-  //     key: "1",
-  //     title_ads: "Y",
-  //     title_data: 20,
-  //     description_ads:
-  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
-  //   },
-  //   {
-  //     key: "2",
-  //     title_ads: "Nhu Y",
-  //     title_data: 21,
-  //     description_ads:
-  //       "From the search bar, you can now view what you searched for recently and explore popular searches",
-  //   },
-  // ];
+ 
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {
@@ -84,7 +56,7 @@ const BannerSplash = () => {
               <Link to="/edit_banner">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
-              <Link to="/shop/edit_banner">
+              <Link to="/edit_banner">
                 <DeleteOutlined
                   onClick={() => deletee(_id)}
                   style={{ width: 50, marginTop: 5 }}
@@ -115,7 +87,7 @@ const BannerSplash = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách sản phẩm bán được</p>
+        <p className="text_titlespb">Danh sách Banner Splash</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
@@ -123,9 +95,12 @@ const BannerSplash = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Link to="/add_banner">
+        {/* <Link to="">
           <button className="add_text">{" +  Thêm mới"}</button>
-        </Link>
+        </Link> */}
+        <Button href="/add_banner" className="add_text">
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
+        </Button>
       </div>
       <div
         className="button-list"
