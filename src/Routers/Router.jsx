@@ -38,27 +38,14 @@ import ScreenListPost from "../container/screens/posts/ScreenListPost";
 //màu size
 import ColorSize from "../container/screens/colorsize/ColorSize";
 
-//banner
-import BannerSplash from "../container/screens/banner/BannerSplash";
-//banner home
-import BannerHome from "../container/screens/banner/bannerhome/BannerHome";
-import CreactBannerHome from '../container/screens/banner/bannerhome/CreateBannerHome'
-import EditBannerHome from '../container/screens/banner/bannerhome/EditBannerHome'
-// banner nam
-import BannerMen from "../container/screens/banner/bannermen/BannerMen";
-import CreateBannerMen from "../container/screens/banner/bannermen/CreateBannerMen";
-import EditbannerMen from "../container/screens/banner/bannermen/EditbannerMen";
-// banner nữ
-import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
-import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
-import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
 
+// banner splash
 import BannerSplash from "../container/screens/banner/BannerSplash";
 import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
 import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEditBanner";
 
 //banner home
-import BannerHome from "../container/screens/banner/BannerHome";
+import BannerHome from "../container/screens/banner/bannerhome/BannerHome";
 import ScreenEditBannerHome from "../container/screens/banner/BannerHome/ScreensEditBannerHome";
 import ScreenAddBannerHome from "../container/screens/banner/BannerHome/ScreensAddBannerHome";
 //banner men
@@ -70,6 +57,9 @@ import EditbannerMen from "../container/screens/banner/bannermen/EditbannerMen";
 import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
 import CreateBannerWonen from "../container/screens/banner/bannerwonent/CreateBannerWoment";
 import EditBannerWoment from "../container/screens/banner/bannerwonent/EditBannerWonent";
+import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
+import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
+import EditBannerHome from "../container/screens/banner/BannerHome/EditBannerHome";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -129,8 +119,8 @@ const Router = () => {
         <Route path="/create_banner_woment" element={<CreateBannerWoment />} />
         <Route path="/edit_banner_woment" element={<EditBannerWonent />} />
         {/* banner home */}
-        <Route path="/create_banner_home" element={<CreactBannerHome />} />
-        <Route path="/edit_banner_home" element={<EditBannerHome />} />
+        <Route path="/create_banner_home" element={<ScreenAddBannerHome />} />
+        <Route path="/edit_banner_home" element={<ScreenEditBannerHome />} />
       </Routes>
     </BrowserRouter>
   );
