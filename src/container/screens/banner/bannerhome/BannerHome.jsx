@@ -89,7 +89,7 @@ const BannerHome = () => {
       );
     }
   };
-
+//ffd
   return (
     <div className="list-product">
       <div className="titlespb">
