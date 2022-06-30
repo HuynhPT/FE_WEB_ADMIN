@@ -38,7 +38,20 @@ import ScreenListPost from "../container/screens/posts/ScreenListPost";
 //màu size
 import ColorSize from "../container/screens/colorsize/ColorSize";
 
-//banner plash
+//banner
+import BannerSplash from "../container/screens/banner/BannerSplash";
+//banner home
+import BannerHome from "../container/screens/banner/bannerhome/BannerHome";
+import CreactBannerHome from '../container/screens/banner/bannerhome/CreateBannerHome'
+import EditBannerHome from '../container/screens/banner/bannerhome/EditBannerHome'
+// banner nam
+import BannerMen from "../container/screens/banner/bannermen/BannerMen";
+import CreateBannerMen from "../container/screens/banner/bannermen/CreateBannerMen";
+import EditbannerMen from "../container/screens/banner/bannermen/EditbannerMen";
+// banner nữ
+import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
+import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
+import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
 
 import BannerSplash from "../container/screens/banner/BannerSplash";
 import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
@@ -113,14 +126,11 @@ const Router = () => {
         <Route path="/create_banner_men" element={<CreactBannerMen />} />
         <Route path="/edit_banner_men" element={<EditbannerMen />} />
         {/* banner nữ */}
-        <Route path="/create_banner_woment" element={<CreateBannerWonen />} />
-        <Route path="/edit_banner_woment" element={<EditBannerWoment />} />
-        {/* banner flash */}
-        <Route path="/add_banner" element={<ScreenAddBanner />} />
-        <Route path="/edit_banner" element={<ScreenEditBanner />} />
-        {/* BannerHome */}
-        <Route path="/add_banner_home" element={<ScreenAddBannerHome />} />
-        <Route path="/edit_banner_home" element={<ScreenEditBannerHome />} />
+        <Route path="/create_banner_woment" element={<CreateBannerWoment />} />
+        <Route path="/edit_banner_woment" element={<EditBannerWonent />} />
+        {/* banner home */}
+        <Route path="/create_banner_home" element={<CreactBannerHome />} />
+        <Route path="/edit_banner_home" element={<EditBannerHome />} />
       </Routes>
     </BrowserRouter>
   );
