@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Button, Image, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -8,19 +8,16 @@ import { getAll } from "../../../../API/ImageAPI";
 
 const BannerMen = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
     fetch(
-      "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+      "http://ec2-13-250-14-151.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
     )
       .then((response) => response.json())
-      .then((data) => setData(data));
-    // const list = async () => {
-    //   const { data } = await getAll();
-    //   console.log(data.data);
-    // };
-    // list();
+      .then((data) => {
+        const newData = data.data.filter((item) => item.title_data);
+        setData(newData);
+      });
   }, []);
 
   const rowSelection = {
@@ -28,8 +25,6 @@ const BannerMen = () => {
       setSelectedRowKeys(selectedRows);
     },
   };
-  // const datalist = data.data;
-  // console.log(datalist(title_ads));
   const hasSelected = selectedRowKeys.length > 0;
   const listDataa = () => {
     if (data !== undefined) {
@@ -49,7 +44,7 @@ const BannerMen = () => {
           title: "Ảnh",
           dataIndex: "image_ads",
           render: (image_ads) => (
-            <img src={image_ads} alt="" style={{ width: 200 }} />
+            <Image src={image_ads} alt="" style={{ width: 200 }} />
           ),
         },
         {
@@ -82,7 +77,7 @@ const BannerMen = () => {
               ...rowSelection,
             }}
             columns={columns}
-            dataSource={data.data}
+            dataSource={data}
             rowKey={(item) => item._id}
             className="table-list"
           />
@@ -102,8 +97,10 @@ const BannerMen = () => {
             " Danh sách banner nam đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Button href="/create_banner_men" className="add_text">
-          <p className="text_buttonsss">{" +  Thêm mới"}</p>
+        <Button className="add_text">
+          <Link to="/create_banner_men" className="text_buttonsss">
+            {" +  Thêm mới"}
+          </Link>
         </Button>
         {/* <Button href="/create_banner_men" className="add_text">
           <p className="_text_banner">+ Thêm mới</p>

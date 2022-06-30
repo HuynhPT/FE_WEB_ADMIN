@@ -3,246 +3,236 @@ import React, { useState } from "react";
 import TynimceProduct from "../../../../Components/products/TinymceProduct";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
-import { add } from "../../../../API/ImageAPI";
 import axios from "axios";
+import qs from "qs";
 function CreateBannerMen(props) {
-  const [nameLinkImage, setNameLinkImage] = useState();
+  const [nameLinkImage, setNameLinkImage] = useState("");
+  const [nameImage, setNameImage] = useState("");
   const [valueText, setValueText] = useState();
-  const [data, setData] = useState({
-    croppedImage: nameLinkImage,
-    title_ads: "valueText",
-    description_ads: "values.title_data",
-    title_data: "nameLinkImage",
 
-  });
   const upImage = (e) => {
-    const namePhoto = document.getElementById("images").files[0].name;
-
-    setNameLinkImage(namePhoto);
+    setNameLinkImage(e.target.files);
+    setNameImage(e.target.files[0].name); // if (nameImage.length > 0) {
+    //   setNameImage([...nameLinkImage, namePhoto]);
+    // } else {
+    //   setNameImage([namePhoto]);
+    // }
   };
+  console.log(valueText);
   const onFinish = async (values) => {
-    const data2 = {
-      croppedImage: nameLinkImage,
-      title_ads: "valueText",
-      description_ads: "values.title_data",
-      title_data: "nameLinkImage",
-    };
-    // console.log(data);
-    // await add(data);
-    // alert("thêm thành công");
+    const formData = new FormData();
+    formData.append("croppedImage", nameLinkImage[0]);
+    formData.append("title_ads", values.title_ads);
+    formData.append("description_ads", valueText);
+    formData.append("title_data", values.title_data);
 
-    //setData(data2);
-  };
-
-  const submitFromData = () => {
     axios({
+      url: "http://192.168.1.6:3000/img-first-images/creact-img",
       method: "POST",
-      url: "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/creact-img",
-      body: data,
       headers: {
+        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmMyMGJhZDgxYjM0MTNjODVjYmM5MiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY0OTYzMTgsImV4cCI6MTY1OTA4ODMxOH0.v3ys0BSH4bCQAOe50Fe6ru9_cwYuNRfJPi1eevsRDNI`,
         "Content-Type": "multipart/form-data",
-        Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjA0N2IwZmJlNDc1YTQxM2VjMzEzNSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU4MDM4NjgsImV4cCI6MTY1ODM5NTg2OH0.zSPhrqq5Zkl2uZU56ED_7r15_yxvKyeMLepRAAPVbk4",
       },
-    })
-      .then((response) => alert(response.status))
-      .catch((error) => console.log(error));
+      // data: qs.stringify(formData),
+      data: formData,
+    }).then(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err.response);
+        // console.log(err.message);
+        // console.log(err.request);
+      }
+    );
+    console.log(values);
   };
 
   return (
-    <>
-      <div className="_Container_banner_name">
-        <h3 className="_titile_add_wonent">Thêm banner nam</h3>
+    <div className="_Container_banner_name">
+      <h3 className="_titile_add_wonent">Thêm banner nam</h3>
+      <Form
+        style={{ margin: "0 20px" }}
+        name="basic"
+        labelCol={{
+          span: 4,
+        }}
+        wrapperCol={{
+          span: 20,
+        }}
+        initialValues={{
+          remember: true,
+        }}
+        onFinish={onFinish}
+        autoComplete="off"
+      >
         {/* tên */}
-        <Form
-          style={{ margin: "0 20px" }}
-          name="basic"
-          labelCol={{
-            span: 4,
-          }}
-          wrapperCol={{
-            span: 20,
-          }}
-          initialValues={{
-            remember: true,
-          }}
-          onFinish={onFinish}
-          autoComplete="off"
+        <Form.Item
+          label="Tên"
+          name="title_ads"
+          rules={[
+            {
+              required: true,
+              message: "Vui lòng nhập tên !",
+            },
+          ]}
         >
-          <Form.Item
-            label="Tên"
-            name="title_data"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.Item
-            label="Đối tượng"
-            name="title_ads"
-            rules={[
-              {
-                required: true,
-                message: "Please input your username!",
-              },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          <div className="_input_banner_name">
-            <p className="_titile_add_">Thông tin chi tiết*</p>
-            <Editor
-              apiKey="your-api-key"
-              onEditorChange={(newText) => console.log(newText)}
-              initialValue=""
-              init={{
-                height: 400,
-                menubar: false,
-                plugins: [
-                  "advlist",
-                  "autolink",
-                  "lists",
-                  "link",
-                  "image",
-                  "charmap",
-                  "preview",
-                  "anchor",
-                  "searchreplace",
-                  "visualblocks",
-                  "code",
-                  "fullscreen",
-                  "insertdatetime",
-                  "media",
-                  "table",
-                  "code",
-                  "help",
-                  "wordcount",
-                ],
-                toolbar:
-                  "undo redo | blocks | " +
-                  "bold italic forecolor | alignleft aligncenter " +
-                  "alignright alignjustify | bullist numlist outdent indent | " +
-                  "removeformat | help",
-                content_style:
-                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          <Input style={{ borderRadius: 3 }} />
+        </Form.Item>
+        {/* Đối tượng */}
+        <Form.Item
+          label="Đối tượng"
+          name="title_data"
+          rules={[
+            {
+              required: true,
+              message: "Vui lòng nhập đối tượng !",
+            },
+          ]}
+        >
+          <Input style={{ borderRadius: 3 }} />
+        </Form.Item>
+        {/* Thông tin chi tiết */}
+        <Form.Item
+          label="Thông tin chi tiết"
+          name="description_ads"
+          rules={[
+            {
+              required: true,
+              message: "Vui lòng nhập thông tin chi tiết",
+            },
+          ]}
+        >
+          <Editor
+            apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
+            onEditorChange={(newText) => setValueText(newText)}
+            value={valueText}
+            init={{
+              selector: "textarea#default-editor",
+              height: 400,
+              menubar: false,
+              plugins: [
+                "advlist",
+                "autolink",
+                "lists",
+                "link",
+                "image",
+                "charmap",
+                "preview",
+                "anchor",
+                "searchreplace",
+                "visualblocks",
+                "code",
+                "fullscreen",
+                "insertdatetime",
+                "media",
+                "table",
+                "code",
+                "help",
+                "wordcount",
+              ],
+              toolbar:
+                "undo redo | blocks | " +
+                "bold italic forecolor | alignleft aligncenter " +
+                "alignright alignjustify | bullist numlist outdent indent | " +
+                "removeformat | help",
+              content_style:
+                "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+            }}
+          />
+        </Form.Item>
+        {/* Chọn ảnh */}
+        <Form.Item label="Chọn ảnh" name="croppedImage">
+          {nameImage !== undefined && (
+            <div style={{ display: "flex" }}>
+              <span style={{ margin: 5 }}>{nameImage}</span>
+              <br />
+              <Button onClick={() => setNameImage()} style={{ margin: 5 }}>
+                Huỷ
+              </Button>
+            </div>
+          )}
+          <br />
+          <label htmlFor="images">
+            <div
+              style={{
+                border: "1px solid #d9d9d9",
+                marginTop: -20,
+                textAlign: "center",
+                borderRadius: 3,
+                width: "40%",
               }}
-            />
-          </div>
-          <div className="_input_banner_name">
-            <p className="_titile_add_">Chọn ảnh*</p>
-            {nameLinkImage !== undefined && (
-              <>
-                <span>{nameLinkImage}</span>
-                <br />
-                <Button
-                  onClick={() => setNameLinkImage()}
-                  style={{ margin: 25 }}
-                >
-                  Huỷ
-                </Button>
-              </>
-            )}
-            <br />
-            <label htmlFor="images">
-              <div
+            >
+              <p
                 style={{
-                  border: "1px solid rgba(0, 0, 0, 0.6)",
-                  marginTop: -20,
-                  height: 48,
-                  textAlign: "center",
-
-                  borderRadius: 3,
-                  width: "40%",
+                  marginTop: 10,
                 }}
               >
-                <p
-                  style={{
-                    marginTop: 10,
-                  }}
-                >
-                  Chọn ảnh
-                </p>
-              </div>
-            </label>
-            <input
-              id="images"
-              type="file"
-              style={{ display: "none" }}
-              onChange={(e) => upImage(e)}
-            />
-          </div>
-          <Form.Item
-            wrapperCol={{
-              offset: 8,
-              span: 16,
-            }}
-          >
-            <Button onClick={submitFromData} type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </div>
-      {/* <div className="_Container_banner_name">
-        <h3 className="_titile_add_wonent">Thêm banner nam</h3>
-        {/* tên *
-        <div className="_input_banner_name">
-          <p className="_titile_add_">Tên*</p>
-          <Input
-            style={{
-              borderRadius: 3,
-            }}
-            placeholder="Nhập tên"
+                Chọn ảnh
+              </p>
+            </div>
+          </label>
+          <input
+            id="images"
+            type="file"
+            style={{ display: "none" }}
+            onChange={(e) => upImage(e)}
           />
-        </div>
-        {/* Đối tượng *
-        <div className="_input_banner_name">
-          <p className="_titile_add_">Đối tượng*</p>
-          <Input
-            style={{
-              borderRadius: 3,
-            }}
-            placeholder="Nhập đối tượng"
-          />
-        </div>
-        {/* thông tin *
-        <div className="_input_banner_name">
-          <p className="_titile_add_">Thông tin chi tiết*</p>
-          <TynimceProduct />
-        </div>
-        {/* Ảnh *
-        <div className="_Button_im">
+        </Form.Item>
+        {/* nút xử lý sự kiện */}
+        <Form.Item
+          wrapperCol={{
+            offset: 15,
+            span: 16,
+          }}
+        >
           <Button
+            type="primary"
             htmlType="reset"
             style={{
+              margin: 10,
+              width: 200,
               backgroundColor: "#DCDFE8",
-              width: "20%",
-              height: 48,
-              margin: "0 100px",
+              borderColor: "#DCDFE8",
+              textAlign: "center",
             }}
           >
-            <p style={{ padding: 10 }}>Đặt lại</p>
+            <p
+              style={{
+                fontSize: 16,
+                fontWeight: "400",
+                color: "#000000",
+                marginTop: -2,
+              }}
+            >
+              Đặt lại
+            </p>
           </Button>
           <Button
+            type="primary"
             htmlType="submit"
-            href="/shop/banner_men"
             style={{
-              width: "20%",
-              height: 48,
+              margin: 10,
+              width: 200,
               backgroundColor: "#87CEEB99",
+              borderColor: "#87CEEB99",
+              textAlign: "center",
             }}
           >
-            <p style={{ padding: 10 }}>Thêm banner</p>
+            <p
+              style={{
+                fontSize: 16,
+                fontWeight: "400",
+                color: "#000000",
+                marginTop: -2,
+              }}
+            >
+              Thêm banner
+            </p>
           </Button>
-        </div>
-      </div> */}
-    </>
+        </Form.Item>
+      </Form>
+    </div>
   );
 }
 

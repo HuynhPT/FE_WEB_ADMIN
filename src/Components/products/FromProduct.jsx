@@ -4,7 +4,7 @@ import "./FromProduct.css";
 import SelectMenWomen from "./SelectMenWomen";
 import SelectOptionColor from "./SelectOptionColor";
 import SelectOptionTypeProduct from "./SelectOptionTypeProduct";
-import SelectOtionSze from "./SelectOtionSze";
+import SelectOtionSze from "./SelectOptionSze";
 import TinymceProduct from "./TinymceProduct";
 function FromProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);

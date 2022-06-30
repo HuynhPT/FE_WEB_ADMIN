@@ -57,6 +57,7 @@ function LayouttAdmin1() {
           <div>+998766546778 </div> <div> Adomitosws</div>
           <div style={{ justifyContent: "center", textAlign: "center" }}>
             <Button
+            href="/"
               icon={<LogoutOutlined />}
               type="text"
               style={{

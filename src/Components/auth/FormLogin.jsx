@@ -2,11 +2,11 @@ import React from "react";
 import TextInput from "./TextInput";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-const FormLogin = (props) => {
+import axios from "axios";
+const FormLogin =(props) => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
-
   return (
     <>
       <h3>{props.title}</h3>
