@@ -4,12 +4,12 @@ import axios from "axios";
 import qs from "qs";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjA0N2IwZmJlNDc1YTQxM2VjMzEzNSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU4NjgyNzIsImV4cCI6MTY1ODQ2MDI3Mn0.FHlAcgS9XU0eVz8hn6Nq1TeI4qob_F_DjH5poEpEpY8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmFhOTk3ZjlhY2JmZDgyMmY2YTE5MCIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY0MDAyOTQsImV4cCI6MTY1ODk5MjI5NH0.nODFZ705Tyt4F6nrOK55VhKJXF1wPSESIkEBrP40P6";
 
 const ColorScr = () => {
   const onFinish = (values) => {
     axios({
-      url: "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-color",
+      url: "http://ec2-13-250-14-151.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-color",
       method: "POST",
       headers: {
         token: `Bearer ${token}`,
