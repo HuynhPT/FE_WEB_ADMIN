@@ -25,6 +25,16 @@ function CreateBannerWoment() {
           placeholder="Nhập tên"
         />
       </div>
+      {/* Đối tượng */}
+      <div className="_input_banner_name">
+        <p className="_titile_add_">Đối tượng*</p>
+        <Input
+          style={{
+            borderRadius: 3,
+          }}
+          placeholder="Nhập đối tượng"
+        />
+      </div>
       {/* thông tin */}
       <div className="_input_banner_name">
         <p className="_titile_add_">Thông tin chi tiết*</p>

@@ -62,7 +62,7 @@ const ScreenListProduct = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/edit_sanpham">
+              <Link to="/edit_product">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <DeleteOutlined
@@ -92,16 +92,16 @@ const ScreenListProduct = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách sản phẩm bán được</p>
+        <p className="text_titlespb">Danh sách sản phẩm </p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
           {
-            " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
+            " Danh sách sản phẩm được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
         <Button href="/shop/them_sanPham" className="add_text">
-          <p className="_text_banner">+ Thêm mới</p>
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
         </Button>
       </div>
       <div

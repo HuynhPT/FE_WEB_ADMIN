@@ -64,11 +64,13 @@ const BannerHome = () => {
               <Link to="/edit_banner_home">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
+              <Link to="/edit_banner_home">
               <DeleteOutlined
                 onClick={() => deletee(_id)}
                 style={{ width: 50, marginTop: 5 }}
                 size={24}
               />
+              </Link>
             </div>
           ),
         },
@@ -93,7 +95,7 @@ const BannerHome = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách BannerHome</p>
+        <p className="text_titlespb">Danh sách sản phẩm bán được</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">

@@ -14,11 +14,11 @@ import ScreenOverview from "../container/screens/overview/ScreenOverview";
 import ScreenCreateProduct from "../container/screens/product/ScreenCreateProduct";
 import ScreenListProduct from "../container/screens/product/ScreenListProduct";
 import EditProduct from "../container/screens/product/EditProduct";
-
 //Thể loại sản phẩm
 import ScreenCreateTypeProduct from "../container/screens/type/ScreenCreateTypeProduct";
 import ScreenListTypeProduct from "../container/screens/type/ScreenListTypeProduct";
 import ScreenObjectProduct from "../container/screens/type/ScreenObjectProduct";
+import FromUpdateTypeProduct from "../container/screens/type/FromUpdateTypeProduct";
 
 //Danh sách sản phẩm order
 import ScreenListOrder from "../container/screens/order/ScreenListOrder";
@@ -53,6 +53,23 @@ import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
 import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
 import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
 
+import BannerSplash from "../container/screens/banner/BannerSplash";
+import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
+import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEditBanner";
+
+//banner home
+import BannerHome from "../container/screens/banner/BannerHome";
+import ScreenEditBannerHome from "../container/screens/banner/BannerHome/ScreensEditBannerHome";
+import ScreenAddBannerHome from "../container/screens/banner/BannerHome/ScreensAddBannerHome";
+//banner men
+import BannerMen from "../container/screens/banner/bannermen/BannerMen";
+import CreactBannerMen from "../container/screens/banner/bannermen/CreateBannerMen";
+import EditbannerMen from "../container/screens/banner/bannermen/EditbannerMen";
+
+// banner women
+import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
+import CreateBannerWonen from "../container/screens/banner/bannerwonent/CreateBannerWoment";
+import EditBannerWoment from "../container/screens/banner/bannerwonent/EditBannerWonent";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -63,8 +80,9 @@ const Router = () => {
           path="/shop_quen_mat_khau"
           element={<ScreenForgotPassword />}
         ></Route>
-        <Route path="/edit_sanpham" element={<EditProduct />} />
-        <Route path="/shop/" element={<LayouttAdmin1 />}>
+        {/* sủa sản phẩm */}
+        <Route path="/edit_product" element={<EditProduct />} />
+        <Route path="shop/" element={<LayouttAdmin1 />}>
           <Route path="tong_quan" element={<ScreenOverview />} />
 
           <Route path="them_sanPham" element={<ScreenCreateProduct />} />
@@ -104,8 +122,8 @@ const Router = () => {
           <Route path="banner_women" element={<BannerWomen />} />
           <Route path="banner_splash" element={<BannerSplash />} />
         </Route>
-        {/* banner nam */}
-        <Route path="/create_banner_men" element={<CreateBannerMen />} />
+        {/* banner men */}
+        <Route path="/create_banner_men" element={<CreactBannerMen />} />
         <Route path="/edit_banner_men" element={<EditbannerMen />} />
         {/* banner nữ */}
         <Route path="/create_banner_woment" element={<CreateBannerWoment />} />

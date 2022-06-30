@@ -117,12 +117,12 @@ function LayouttAdmin1() {
         ),
       ]
     ),
-    getItem(
-      "Bán Hàng",
-      "sub4",
-      <img style={{ width: "10%" }} src={Checkout} alt="" />,
-      [getItem("Option 4", "4"), getItem("Option 6", "13")]
-    ),
+    // getItem(
+    //   "Bán Hàng",
+    //   "sub4",
+    //   <img style={{ width: "10%" }} src={Checkout} alt="" />,
+    //   [getItem("Option 4", "4"), getItem("Option 6", "13")]
+    // ),
     getItem(
       ["Khách hàng đặt hàng", <NavLink to="khachHang_DatHang" />],
       "sub5",
@@ -207,7 +207,7 @@ function LayouttAdmin1() {
   ];
   return (
     <Layout style={{ height: "200vh" }}>
-      <Sider collapsible collapsed={state}>
+      <Sider trigger={true} collapsible collapsed={state}>
         <div className={styles.logo}>
           {state == false && (
             <div className="logo" style={{ width: "50%" }}>

@@ -12,16 +12,16 @@ function TinymceProduct() {
     <div style={{ display: "inline" }}>
       <Editor
         apiKey="your-api-key"
-        onInit={(evt, editor) => (editorRef.current = editor)}
+        onEditorChange={(newText) => console.log(newText)}
         initialValue=""
         init={{
-          height: 300,
+          height: 400,
           menubar: false,
           plugins: [
             "advlist",
             "autolink",
             "lists",
-            // "link",
+            "link",
             "image",
             "charmap",
             "preview",

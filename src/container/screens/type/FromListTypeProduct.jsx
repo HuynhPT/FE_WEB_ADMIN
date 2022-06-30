@@ -4,18 +4,31 @@ import TableObjectProduct from "./TableObjectProduct";
 import { SearchOutlined } from "@ant-design/icons";
 const FromListTypeProduct = () => {
   return (
-    <div style={{ background: "white", flex: 1 }}>
+    <div style={{ flex: 1 }}>
       <h3 style={{ fontSize: "24px" }}>Danh sách thể loại</h3>
       <div
         style={{
           display: "flex",
         }}
       >
-        <p>
-          Sử dụng danh sách thể loại để mô tả hoạt động kinh doanh cốt lõi tổng
-          thể của bạn từ danh sách được cung cấp.
-          <br /> Bấm vào tên của danh mục mà bạn muốn thêm một mục danh sách
-        </p>
+        <div>
+          <p>
+            Sử dụng danh sách thể loại để mô tả hoạt động kinh doanh cốt lõi
+            tổng thể của bạn từ danh sách được cung cấp.
+            <br /> Bấm vào tên của danh mục mà bạn muốn thêm một mục danh sách
+          </p>
+          <Button
+            style={{
+              width: 150,
+              height: 32,
+              backgroundColor: "#D9D9D9",
+              marginTop: 50,
+              flex: 1,
+            }}
+          >
+            Xóa
+          </Button>
+        </div>
         <Form.Item style={{ marginLeft: "300px" }}>
           <Button
             type="primary"

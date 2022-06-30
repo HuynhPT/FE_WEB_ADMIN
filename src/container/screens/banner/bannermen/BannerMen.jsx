@@ -4,15 +4,23 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
+import { getAll } from "../../../../API/ImageAPI";
 
 const BannerMen = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/boy.json")
+    fetch(
+      "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+    )
       .then((response) => response.json())
       .then((data) => setData(data));
+    // const list = async () => {
+    //   const { data } = await getAll();
+    //   console.log(data.data);
+    // };
+    // list();
   }, []);
 
   const rowSelection = {
@@ -20,8 +28,9 @@ const BannerMen = () => {
       setSelectedRowKeys(selectedRows);
     },
   };
+  // const datalist = data.data;
+  // console.log(datalist(title_ads));
   const hasSelected = selectedRowKeys.length > 0;
-
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {
@@ -73,7 +82,7 @@ const BannerMen = () => {
               ...rowSelection,
             }}
             columns={columns}
-            dataSource={data}
+            dataSource={data.data}
             rowKey={(item) => item._id}
             className="table-list"
           />
@@ -94,8 +103,11 @@ const BannerMen = () => {
           }
         </p>
         <Button href="/create_banner_men" className="add_text">
-          <p className="_text_banner">+ Thêm mới</p>
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
         </Button>
+        {/* <Button href="/create_banner_men" className="add_text">
+          <p className="_text_banner">+ Thêm mới</p>
+        </Button> */}
       </div>
       <div
         className="button-list"

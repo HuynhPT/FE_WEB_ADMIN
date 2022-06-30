@@ -20,7 +20,7 @@
   color: black;
 }
 .table-list {
-  margin: 0 30px;
+  margin: 30px 30px !important;
 }
 .titlespb {
   padding: 24px 0 0 48px;
@@ -37,19 +37,20 @@
   padding: 24px 0 0 48px !important;
 }
 .add_text {
-  width: 250px !important;
+  width: 231px !important;
   height: 48px !important;
   background-color: #87ceeb !important;
   border-radius: 3px !important;
   margin-right: 30px !important;
-  margin-left: 226px !important;
+  margin-left: 380px !important;
 }
-._text_banner {
+.text_buttonsss {
   margin-top: 10px;
   font-size: 16px;
   font-weight: 400;
   font-family: "Open Sans";
   line-height: 22px;
+  color: black;
 }
 .texttitlespb {
   width: 770px !important;

@@ -10,7 +10,7 @@ const ScreenListOrder = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/getall.json")
+    fetch("https://huynhpt.github.io/user.json")
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
@@ -37,13 +37,16 @@ const ScreenListOrder = () => {
       };
       const columns = [
         {
-          title: "Tên",
-          dataIndex: "title_ads",
-          columnTitle: "red",
+          title: "Id",
+          dataIndex: "_id",
         },
         {
-          title: "Ads",
-          dataIndex: "title_data",
+          title: "Tên",
+          dataIndex: "name",
+        },
+        {
+          title: "SĐT",
+          dataIndex: "phone",
         },
         // {
         //   title: "Ảnh",
@@ -53,8 +56,8 @@ const ScreenListOrder = () => {
         //   ),
         // },
         {
-          title: "Chi tiết",
-          dataIndex: "description_ads",
+          title: "Email",
+          dataIndex: "email",
         },
 
         {
@@ -92,15 +95,17 @@ const ScreenListOrder = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách hoá đơn bán</p>
+        <p className="text_titlespb">Danh sách khách hàng đặt hàng</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
           {
-            " Danh sách hoá đơn bán đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
+            " Danh sách quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        {/* <Button className="add_text">{" +  Thêm mới"}</Button> */}
+        {/* <Button href="/shop/them_sanPham" className="add_text">
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
+        </Button> */}
       </div>
       <div
         className="button-list"

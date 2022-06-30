@@ -37,37 +37,16 @@ const ScreenListUser = () => {
       };
       const columns = [
         {
-          title: "ID",
+          title: "Id",
           dataIndex: "_id",
         },
         {
           title: "Tên",
           dataIndex: "name",
         },
-
         {
           title: "SĐT",
           dataIndex: "phone",
-        },
-        {
-          title: "Email",
-          dataIndex: "email",
-        },
-        {
-          title: "Hoạt động",
-          dataIndex: "_id",
-          render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
-                <EditOutlined style={{ width: 50 }} size={24} />
-              </Link>
-              <DeleteOutlined
-                onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
-                size={24}
-              />
-            </div>
-          ),
         },
         // {
         //   title: "Ảnh",
@@ -76,8 +55,28 @@ const ScreenListUser = () => {
         //     <img src={image_ads} alt="" style={{ width: 200 }} />
         //   ),
         // },
-      ];
+        {
+          title: "Email",
+          dataIndex: "email",
+        },
 
+        {
+          title: "Hoạt động",
+          dataIndex: "_id",
+          render: (_id) => (
+            <div style={{ display: "flex", flexDirection: "row" }}>
+              {/* <Link to="/shop/thongKe_loiNhuan">
+                <EditOutlined style={{ width: 50 }} size={24} />
+              </Link> */}
+              <DeleteOutlined
+                onClick={() => deletee(_id)}
+                style={{ width: 50, marginTop: 5 }}
+                size={24}
+              />
+            </div>
+          ),
+        },
+      ];
       return (
         <Table
           rowSelection={{
@@ -101,10 +100,12 @@ const ScreenListUser = () => {
       <div className="text_spb">
         <p className="texttitlespb">
           {
-            " Danh sách người dùng quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
+            " Danh sách quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Button className="add_text">{" +  Thêm mới"}</Button>
+        {/* <Button href="/shop/them_sanPham" className="add_text">
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
+        </Button> */}
       </div>
       <div
         className="button-list"

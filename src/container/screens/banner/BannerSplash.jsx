@@ -1,4 +1,4 @@
-import { Button, Table } from "antd";
+import { Button, Table, Pagination } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
@@ -14,22 +14,14 @@ const BannerSplash = () => {
       .then((response) => response.json())
       .then((data) => setData(data));
   }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
-
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
-
+ 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
     },
   };
   const hasSelected = selectedRowKeys.length > 0;
-
+ 
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {
@@ -61,20 +53,22 @@ const BannerSplash = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/shop/thongKe_loiNhuan">
+              <Link to="/edit_banner">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
-              <DeleteOutlined
-                onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
-                size={24}
-              />
+              <Link to="/edit_banner">
+                <DeleteOutlined
+                  onClick={() => deletee(_id)}
+                  style={{ width: 50, marginTop: 5 }}
+                  size={24}
+                />
+              </Link>
             </div>
           ),
         },
       ];
       return (
-        <>
+        <div>
           <Table
             rowSelection={{
               type: "checkbox",
@@ -85,7 +79,7 @@ const BannerSplash = () => {
             rowKey={(item) => item._id}
             className="table-list"
           />
-        </>
+        </div>
       );
     }
   };
@@ -93,7 +87,7 @@ const BannerSplash = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách BannerSplash</p>
+        <p className="text_titlespb">Danh sách Banner Splash</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
@@ -101,8 +95,11 @@ const BannerSplash = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Button href="/create_banner_men" className="add_text">
-          <p className="_text_banner">+ Thêm mới</p>
+        {/* <Link to="">
+          <button className="add_text">{" +  Thêm mới"}</button>
+        </Link> */}
+        <Button href="/add_banner" className="add_text">
+          <p className="text_buttonsss">{" +  Thêm mới"}</p>
         </Button>
       </div>
       <div

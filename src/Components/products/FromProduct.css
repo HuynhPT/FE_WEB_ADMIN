@@ -1,8 +1,5 @@
-.tox .tox-notification--warning {
-  display: none !important;
-}
 ._Mcontainer_Fro {
-  margin: 40px 150px;
+  margin: 40px 150px !important;
   background-color: white;
   border-radius: 3px;
   box-shadow: 0px 4px 7px rgba(60, 58, 58, 0);
@@ -25,7 +22,7 @@
   margin: 30px 0 0 0;
 }
 ._nameInputrow1 {
-  width: 45%;
+  width: 45% !important;
 }
 ._text_product {
   font-size: 18px;
@@ -52,6 +49,9 @@
 ._nameInputrow4 {
   width: 18%;
 }
+._nameInputro {
+  width: 18%;
+}
 ._nameInputrow {
   width: 45%;
 }
@@ -67,7 +67,6 @@
 .__buttonClick_Product_Res {
   margin: 30px 80px;
   width: 20%;
-
   border-radius: 3px !important;
   background-color: #dcdfe8 !important;
 }
@@ -78,17 +77,14 @@
   background-color: #87ceeb99 !important;
 }
 ._Title_button_product {
+  width: 100%;
+  margin-top: -3px;
   text-align: centers;
   font-size: 14px;
   font-weight: 400;
   font-family: "Open Sans";
   line-height: 29px;
 }
-._Title_button_products {
-  text-align: centers;
-  font-size: 14px;
-  font-weight: 400;
-  font-family: "Open Sans";
-  line-height: 29px;
-  margin-top: -3px;
+.tox-notifications-container {
+  display: none !important;
 }

@@ -1,27 +1,31 @@
 import { Space, Table, Radio, Divider } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import * as qs from "qs";
+import qs from "qs";
 const columns = [
   {
     title: "Id",
     dataIndex: "name",
-    // sorter: true,
-    // render: (name) => `${name.first} ${name.last}`,
+    sorter: true,
+    render: (name) => `${name.first} ${name.last}`,
   },
   {
     title: "Đối tượng",
     dataIndex: "gender",
-    // filters: [
-    //   {
-    //     text: "Nam",
-    //     value: "Nam",
-    //   },
-    //   {
-    //     text: "Nữ",
-    //     value: "Nữ",
-    //   },
-    // ],
+    filters: [
+      {
+        text: "Nam",
+        value: "Nam",
+      },
+      {
+        text: "Nữ",
+        value: "Nữ",
+      },
+      {
+        text: "Trẻ em",
+        value: "Trẻ em",
+      },
+    ],
   },
   {
     title: "Hoạt động",
@@ -60,7 +64,8 @@ const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [pagination, setPagination] = useState({
     current: 2,
-    pageSize: 6,
+    pageSize: 8,
+    width: 1000,
   });
 
   const fetchData = (params = {}) => {
@@ -74,7 +79,7 @@ const TableObjectProduct = () => {
         setLoading(false);
         setPagination({
           ...params.pagination,
-          total: 200, // 200 is mock data, you should read it from server
+          total: 20, // 200 is mock data, you should read it from server
           // total: data.totalCount,
         });
       });
@@ -112,7 +117,12 @@ const TableObjectProduct = () => {
         pagination={pagination}
         loading={loading}
         onChange={handleTableChange}
-        // style={{ width: "100%", height: "100%" }}
+        style={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "white",
+          marginRight: 100,
+        }}
         rowSelection={rowSelection}
       />
     </>
