@@ -27,10 +27,10 @@ function CreateBannerMen(props) {
     formData.append("title_data", values.title_data);
 
     axios({
-      url: "http://192.168.1.6:3000/img-first-images/creact-img",
+      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/creact-img",
       method: "POST",
       headers: {
-        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmMyMGJhZDgxYjM0MTNjODVjYmM5MiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY0OTYzMTgsImV4cCI6MTY1OTA4ODMxOH0.v3ys0BSH4bCQAOe50Fe6ru9_cwYuNRfJPi1eevsRDNI`,
+        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY`,
         "Content-Type": "multipart/form-data",
       },
       // data: qs.stringify(formData),
@@ -107,8 +107,8 @@ function CreateBannerMen(props) {
             apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
             onEditorChange={(newText) => setValueText(newText)}
             value={valueText}
+            // initialValue="<p>This is the initial content of the editor.</p>"
             init={{
-              selector: "textarea#default-editor",
               height: 400,
               menubar: false,
               plugins: [
@@ -141,6 +141,7 @@ function CreateBannerMen(props) {
             }}
           />
         </Form.Item>
+        {/* <div dangerouslySetInnerHTML={_ht}>{valueText}</div> */}
         {/* Chọn ảnh */}
         {/* thêm ảnh */}
         <Form.Item label="Chọn ảnh" name="croppedImage">

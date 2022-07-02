@@ -4,12 +4,12 @@ import axios from "axios";
 import qs from "qs";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmFhOTk3ZjlhY2JmZDgyMmY2YTE5MCIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY0MDAyOTQsImV4cCI6MTY1ODk5MjI5NH0.nODFZ705Tyt4F6nrOK55VhKJXF1wPSESIkEBrP40P6";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY";
 
 const SizeScr = () => {
   const onFinish = (values) => {
     axios({
-      url: "http://ec2-13-250-14-151.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-size",
+      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-size",
       method: "POST",
       headers: {
         token: `Bearer ${token}`,

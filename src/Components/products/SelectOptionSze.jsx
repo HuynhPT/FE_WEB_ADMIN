@@ -6,7 +6,7 @@ const SelectOtionSze = () => {
   console.log(data);
   useEffect(() => {
     fetch(
-      "http://ec2-13-250-14-151.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/get-size"
+      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/get-size"
     )
       .then((res) => res.json())
       .then((data) => {
@@ -42,15 +42,15 @@ const SelectOtionSze = () => {
   return (
     <>
       {/* {data !== undefined && ( */}
-        <Select
-          mode="multiple"
-          showArrow
-          tagRender={tagRender}
-          style={{
-            width: "100%",
-          }}
-          options={data}
-        />
+      <Select
+        mode="multiple"
+        showArrow
+        tagRender={tagRender}
+        style={{
+          width: "100%",
+        }}
+        options={data}
+      />
       {/* )} */}
     </>
   );
