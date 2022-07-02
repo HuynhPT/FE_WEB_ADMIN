@@ -142,6 +142,7 @@ function CreateBannerMen(props) {
           />
         </Form.Item>
         {/* Chọn ảnh */}
+        {/* thêm ảnh */}
         <Form.Item label="Chọn ảnh" name="croppedImage">
           {nameImage !== undefined && (
             <div style={{ display: "flex" }}>
