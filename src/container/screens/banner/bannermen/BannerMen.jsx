@@ -11,7 +11,7 @@ const BannerMen = () => {
   const [data, setData] = useState();
   useEffect(() => {
     fetch(
-      "http://ec2-13-250-14-151.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
     )
       .then((response) => response.json())
       .then((data) => {
@@ -50,6 +50,13 @@ const BannerMen = () => {
         {
           title: "Chi tiết",
           dataIndex: "description_ads",
+          render: (description_ads) => (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: description_ads,
+              }}
+            ></div>
+          ),
         },
 
         {
@@ -57,7 +64,7 @@ const BannerMen = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/edit_banner_men">
+              <Link to={`/edit_banner_men/${_id}`}>
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <DeleteOutlined

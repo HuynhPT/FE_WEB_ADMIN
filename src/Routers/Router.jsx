@@ -114,7 +114,7 @@ const Router = () => {
         </Route>
         {/* banner men */}
         <Route path="/create_banner_men" element={<CreactBannerMen />} />
-        <Route path="/edit_banner_men" element={<EditbannerMen />} />
+        <Route path="/edit_banner_men/:id" element={<EditbannerMen />} />
         {/* banner nữ */}
         <Route path="/create_banner_woment" element={<CreateBannerWoment />} />
         <Route path="/edit_banner_woment" element={<EditBannerWonent />} />
