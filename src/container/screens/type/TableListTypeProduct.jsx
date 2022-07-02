@@ -60,7 +60,7 @@ const TableObjectProduct = () => {
       render: () => (
         <Space>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <Link to="/edit_listtype">
+            <Link to="/edit_list_type">
               <EditOutlined style={{ width: 50 }} size={24} />
             </Link>
             <DeleteOutlined
@@ -93,7 +93,7 @@ const TableObjectProduct = () => {
         setLoading(false);
         setPagination({
           ...params.pagination,
-          total: 50, // 200 is mock data, you should read it from server
+          total: 10, // 200 is mock data, you should read it from server
           // total: data.totalCount,
         });
       });

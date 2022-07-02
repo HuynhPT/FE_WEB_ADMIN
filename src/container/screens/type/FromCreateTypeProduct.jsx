@@ -1,7 +1,9 @@
 import React from "react";
-import { Input, Button, Form } from "antd";
+import { Input, Button, Form, Select } from "antd";
+import SelectMenWomen from "../../../Components/products/SelectMenWomen";
+const { Option } = Select;
 
-export default function FromCreateTypeProduct() {
+export default function FromCreateTypeProduct(props) {
   return (
     <div style={{ backgroundColor: "white", height: 10000 }}>
       <h3 style={{ fontSize: "24px" }}>Thêm thể loại</h3>
@@ -40,6 +42,7 @@ export default function FromCreateTypeProduct() {
             <span>Chọn tệp</span>
           </Button>
         </div>
+
         <div style={{ display: "flex", justifyContent: "flex-end" }}>
           <Button
             style={{
