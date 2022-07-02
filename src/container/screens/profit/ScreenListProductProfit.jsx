@@ -11,7 +11,7 @@ const ScreenListProductProfit = () => {
   const [data, setData] = useState();
   useEffect(() => {
     fetch(
-      "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
     )
       .then((res) => res.json())
       .then((data) => setData(data));
