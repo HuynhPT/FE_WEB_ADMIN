@@ -55,7 +55,7 @@ const ColorScr = () => {
         <Input placeholder="Thêm màu" style={{ borderRadius: 3 }} />
       </Form.Item>
       <Form.Item name="colorCode" style={{ width: "40%" }}>
-        <Input placeholder="Thêm mã màu" style={{ borderRadius: 3 }} />
+        <Input placeholder="Thêm mã màu" style={{ borderRadius: 3 }} type='color' />
       </Form.Item>
 
       <Form.Item
