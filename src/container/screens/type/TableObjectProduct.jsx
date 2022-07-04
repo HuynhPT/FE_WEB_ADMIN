@@ -77,7 +77,7 @@ const TableObjectProduct = () => {
 
   const columns = [
     {
-      title: "Đối tượng",
+      title: "Đối tượng sử dụng ",
       dataIndex: "titleTypeProduct",
     },
     {

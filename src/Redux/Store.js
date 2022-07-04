@@ -5,5 +5,3 @@ export default configureStore({
     auth: Redux,
   },
 });
-
-console.log(Redux, "OOOOOOOOOOOOoo");
