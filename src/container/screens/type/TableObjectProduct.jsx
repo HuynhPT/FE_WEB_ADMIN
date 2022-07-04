@@ -79,7 +79,7 @@ const TableObjectProduct = () => {
         setLoading(false);
         setPagination({
           ...params.pagination,
-          total: 20, // 200 is mock data, you should read it from server
+          total: 1, // 200 is mock data, you should read it from server
           // total: data.totalCount,
         });
       });

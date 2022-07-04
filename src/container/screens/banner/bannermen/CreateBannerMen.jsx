@@ -18,7 +18,6 @@ function CreateBannerMen(props) {
     //   setNameImage([namePhoto]);
     // }
   };
-  console.log(valueText);
   const onFinish = async (values) => {
     const formData = new FormData();
     formData.append("croppedImage", nameLinkImage[0]);
@@ -49,7 +48,7 @@ function CreateBannerMen(props) {
   };
 
   return (
-    <div className="_Container_banner_name">
+    <div  className="_Container_banner_name">
       <h3 className="_titile_add_wonent">Thêm banner nam</h3>
       <Form
         style={{ margin: "0 20px" }}
@@ -141,8 +140,6 @@ function CreateBannerMen(props) {
             }}
           />
         </Form.Item>
-        {/* <div dangerouslySetInnerHTML={_ht}>{valueText}</div> */}
-        {/* Chọn ảnh */}
         {/* thêm ảnh */}
         <Form.Item label="Chọn ảnh" name="croppedImage">
           {nameImage !== undefined && (
