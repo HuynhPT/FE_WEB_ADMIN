@@ -57,6 +57,7 @@ function LayouttAdmin1() {
           <div>+998766546778 </div> <div> Adomitosws</div>
           <div style={{ justifyContent: "center", textAlign: "center" }}>
             <Button
+              href="/"
               icon={<LogoutOutlined />}
               type="text"
               style={{
@@ -76,23 +77,6 @@ function LayouttAdmin1() {
       ["Tổng Quan", <NavLink to="tong_quan" />],
       "1",
       <img style={{ width: "10%" }} src={image2} alt="" />
-    ),
-    getItem(
-      "Sản Phẩm",
-      "sub2",
-      <img style={{ width: "10%" }} src={image4} alt="" />,
-      [
-        getItem(
-          ["Danh sách sản phẩm", <NavLink to="danhSach_sanPham" />],
-          "2",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Thêm sản phẩm", <NavLink to="them_sanPham" />],
-          "11",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-      ]
     ),
     getItem(
       "Thể Loại",
@@ -117,6 +101,29 @@ function LayouttAdmin1() {
         ),
       ]
     ),
+    getItem(
+      "Sản Phẩm",
+      "sub2",
+      <img style={{ width: "10%" }} src={image4} alt="" />,
+      [
+        getItem(
+          ["Danh sách sản phẩm", <NavLink to="danhSach_sanPham" />],
+          "2",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Thêm sản phẩm", <NavLink to="them_sanPham" />],
+          "11",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Thuộc tính sản phẩm", <NavLink to="mau_size" />],
+          "sub10",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+      ]
+    ),
+
     // getItem(
     //   "Bán Hàng",
     //   "sub4",
@@ -124,12 +131,17 @@ function LayouttAdmin1() {
     //   [getItem("Option 4", "4"), getItem("Option 6", "13")]
     // ),
     getItem(
-      ["Khách hàng đặt hàng", <NavLink to="khachHang_DatHang" />],
+      ["Danh sách đặt hàng", <NavLink to="khachHang_DatHang" />],
       "sub5",
       <img style={{ width: "10%" }} src={image5} alt="" />
     ),
     getItem(
-      "Lợi Nhuận",
+      ["Người dùng", <NavLink to="danhSach_NguoiDung" />],
+      "sub7",
+      <img style={{ width: "10%" }} src={image7} alt="" />
+    ),
+    getItem(
+      "Thống kê",
       "sub6",
       <img style={{ width: "10%" }} src={image6} alt="" />,
       [
@@ -139,43 +151,11 @@ function LayouttAdmin1() {
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
         getItem(
-          ["Thống kê lợi nhuận", <NavLink to="thongKe_loiNhuan" />],
+          ["Thống kê", <NavLink to="thongKe_loiNhuan" />],
           "15",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
       ]
-    ),
-    getItem(
-      "Mạng xã hội",
-      "sub8",
-      <img style={{ width: "10%" }} src={image8} alt="" />,
-      [
-        getItem(
-          ["Đăng bài viết", <NavLink to="themBai_Viet" />],
-          "8",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Bài viết của bạn", <NavLink to="danhSach_baiViet" />],
-          "17",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-      ]
-    ),
-    getItem(
-      ["Người dùng", <NavLink to="danhSach_NguoiDung" />],
-      "sub7",
-      <img style={{ width: "10%" }} src={image7} alt="" />
-    ),
-    getItem(
-      ["Thông tin cá nhân", <NavLink to="thongTin_shop" />],
-      "sub9",
-      <img style={{ width: "10%" }} src={image9} alt="" />
-    ),
-    getItem(
-      ["Thêm màu,size", <NavLink to="mau_size" />],
-      "sub10",
-      <img style={{ width: "10%" }} src={imagecos} alt="" />
     ),
     getItem(
       "Banner quảng cáo",
@@ -200,6 +180,28 @@ function LayouttAdmin1() {
         getItem(
           ["Splash", <NavLink to="banner_splash" />],
           "179",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+      ]
+    ),
+    getItem(
+      ["Thông tin cá nhân", <NavLink to="thongTin_shop" />],
+      "sub9",
+      <img style={{ width: "10%" }} src={image9} alt="" />
+    ),
+    getItem(
+      "Mạng xã hội",
+      "sub8",
+      <img style={{ width: "10%" }} src={image8} alt="" />,
+      [
+        getItem(
+          ["Đăng bài viết", <NavLink to="themBai_Viet" />],
+          "8",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Bài viết của bạn", <NavLink to="danhSach_baiViet" />],
+          "17",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
       ]

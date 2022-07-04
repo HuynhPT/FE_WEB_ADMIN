@@ -4,7 +4,7 @@ import "../../../Components/products/FromProduct.css";
 import SelectMenWomen from "../../../Components/products/SelectMenWomen";
 import SelectOptionColor from "../../../Components/products/SelectOptionColor";
 import SelectOptionTypeProduct from "../../../Components/products/SelectOptionTypeProduct";
-import SelectOtionSze from "../../../Components/products/SelectOtionSze";
+import SelectOtionSze from "../../../Components/products/SelectOptionSze";
 import TinymceProduct from "../../../Components/products/TinymceProduct";
 function EditProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);

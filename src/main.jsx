@@ -3,10 +3,11 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "antd/dist/antd.css";
 import { Provider } from "react-redux";
-import Store from "./Redux/Store";
+import store from "./Redux/store";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <Provider store={Store}>
+  <Provider store={store}>
     <App />
   </Provider>
 );
+console.log(store, "KKKKKKKk");

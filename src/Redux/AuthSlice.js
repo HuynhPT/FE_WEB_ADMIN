@@ -25,6 +25,8 @@ const authSlice = createSlice({
   },
 });
 
+console.log(authSlice, "Ở đây");
+
 export const { loginStart, loginSuccess, loginFailed } = authSlice.actions;
 
 export default authSlice.reducer;

@@ -4,12 +4,12 @@ import axios from "axios";
 import qs from "qs";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjA0N2IwZmJlNDc1YTQxM2VjMzEzNSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU4NjgyNzIsImV4cCI6MTY1ODQ2MDI3Mn0.FHlAcgS9XU0eVz8hn6Nq1TeI4qob_F_DjH5poEpEpY8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY";
 
 const SizeScr = () => {
   const onFinish = (values) => {
     axios({
-      url: "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-size",
+      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-size",
       method: "POST",
       headers: {
         token: `Bearer ${token}`,
@@ -36,7 +36,7 @@ const SizeScr = () => {
   };
   return (
     <Form
-      style={{ display: "flex", margin: 100, justifyContent: "space-evenly" }}
+      style={{ display: "flex", margin: 100, justifyContent: "space-between" }}
       name="basic"
       labelCol={{
         span: 8,
@@ -54,7 +54,7 @@ const SizeScr = () => {
       <Form.Item name="titleSize" style={{ width: "100%" }}>
         <Input
           placeholder="Thêm size"
-          style={{ borderRadius: 3, width: "100%" }}
+          style={{ borderRadius: 3}}
         />
       </Form.Item>
 

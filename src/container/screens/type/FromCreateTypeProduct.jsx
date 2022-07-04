@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { Input, Button, Form, Select } from "antd";
 import SelectMenWomen from "../../../Components/products/SelectMenWomen";
-const { Option } = Select;
+import axios from "axios";
 
 export default function FromCreateTypeProduct(props) {
+  
   return (
     <div style={{ backgroundColor: "white", height: 10000 }}>
       <h3 style={{ fontSize: "24px" }}>Thêm thể loại</h3>
@@ -23,13 +24,20 @@ export default function FromCreateTypeProduct(props) {
             style={{ width: 1275, height: 48, marginTop: 10 }}
           />
         </Form.Item>
-        <div style={{ marginTop: "20px", flexDirection: "column" }}>
-          <p style={{ fontWeight: "bold" }}>Hình ảnh*</p>
-          <Input
-            style={{ width: "438px", height: "48px" }}
-            placeholder="Chọn hình ảnh"
-          />
+        <div style={{ display: "flex" }}>
+          <div style={{ marginTop: "20px", flexDirection: "column" }}>
+            <p style={{ fontWeight: "bold" }}>Hình ảnh*</p>
+            <Input
+              style={{ width: "438px", height: "48px" }}
+              placeholder="Chọn hình ảnh"
+            />
+          </div>
+
+          <div style={{ width: 100, marginTop: 60 }}>
+            <SelectMenWomen Option1="Nam" Option2="Nữ" />
+          </div>
         </div>
+
         <div>
           <Button
             style={{
