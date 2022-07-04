@@ -25,7 +25,9 @@ const BannerMen = () => {
       setSelectedRowKeys(selectedRows);
     },
   };
+
   const hasSelected = selectedRowKeys.length > 0;
+  
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {

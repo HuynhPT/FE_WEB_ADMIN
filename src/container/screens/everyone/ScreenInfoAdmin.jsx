@@ -11,7 +11,6 @@ const ScreenInfoAdmin = () => {
 
       <div className="infomation">
         <CardInfor />
-        <CardInfor />
       </div>
       {/* <h1>okaaaaaaaaa</h1> */}
     </div>

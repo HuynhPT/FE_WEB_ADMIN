@@ -121,6 +121,7 @@ const Router = () => {
         {/* banner home */}
         <Route path="/create_banner_home" element={<ScreenAddBannerHome />} />
         <Route path="/edit_banner_home" element={<ScreenEditBannerHome />} />
+        <Route path="/edit_list_type" element={<FromUpdateTypeProduct />} />
       </Routes>
     </BrowserRouter>
   );

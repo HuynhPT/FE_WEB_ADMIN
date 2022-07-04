@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import TextInput from "./TextInput";
 import { Form, Input, Button, Checkbox } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { Link } from "react-router-dom";
-const FormLogin =(props) => {
+const FormLogin = (props) => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
@@ -45,11 +45,8 @@ const FormLogin =(props) => {
             htmlType="submit"
             className="login-form-button"
             // href="/shop/tong_quan"
-            
           >
-            <Link to="/shop/tong_quan">
-            Đăng nhập
-            </Link>
+            <Link to="/shop/tong_quan">Đăng nhập</Link>
           </Button>
         </Form.Item>
       </Form>

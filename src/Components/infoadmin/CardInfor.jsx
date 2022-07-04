@@ -11,8 +11,8 @@ const CardInfor = () => (
       marginTop: -100,
     }}
   >
-    <div className="ava_container">
-      <img src={img_login} className="avatar" />
+    <div className="__ava_container">
+      <img src={img_login} className="__avatar" />
       <div>
         <p>{"Name"}</p>
         <p>{"UI/UX design"}</p>

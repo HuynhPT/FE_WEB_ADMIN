@@ -4,7 +4,7 @@ import "./ListTypeProduct.css";
 
 const ScreenListTypeProduct = () => {
   return (
-    <div className="mainListTypeProduct">
+    <div className="mainListTypeProduct" style={{ background: "#ffff" }}>
       <div className="BodyListTypeProduct">
         <div className="contentListTypeProduct">
           <FromListTypeProduct />

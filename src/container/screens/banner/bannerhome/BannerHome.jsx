@@ -65,11 +65,11 @@ const BannerHome = () => {
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <Link to="/edit_banner_home">
-              <DeleteOutlined
-                onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
-                size={24}
-              />
+                <DeleteOutlined
+                  onClick={() => deletee(_id)}
+                  style={{ width: 50, marginTop: 5 }}
+                  size={24}
+                />
               </Link>
             </div>
           ),
@@ -91,7 +91,7 @@ const BannerHome = () => {
       );
     }
   };
-//ffd
+  //ffd
   return (
     <div className="list-product">
       <div className="titlespb">
