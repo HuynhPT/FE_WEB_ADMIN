@@ -1,131 +1,86 @@
-import { Space, Table, Radio, Divider } from "antd";
+import { Button, Image, Table } from "antd";
 import React, { useEffect, useState } from "react";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
-import qs from "qs";
-const columns = [
-  {
-    title: "Id",
-    dataIndex: "name",
-    sorter: true,
-    render: (name) => `${name.first} ${name.last}`,
-  },
-  {
-    title: "Đối tượng",
-    dataIndex: "gender",
-    filters: [
-      {
-        text: "Nam",
-        value: "Nam",
-      },
-      {
-        text: "Nữ",
-        value: "Nữ",
-      },
-      {
-        text: "Trẻ em",
-        value: "Trẻ em",
-      },
-    ],
-  },
-  {
-    title: "Hoạt động",
-    dataIndex: "",
-    key: "x",
-    render: () => (
-      <Space>
-        <img
-          src="https://cdn-icons-png.flaticon.com/512/1860/1860115.png"
-          style={{ width: 20, height: 20 }}
-        />
-        <img
-          src="https://icons.veryicon.com/png/o/commerce-shopping/soft-designer-online-tools-icon/delete-77.png"
-          style={{ width: 30, height: 30 }}
-          onClick={imageClick}
-        />
-      </Space>
-    ),
-  },
-];
-
-const imageClick = () => {
-  console.log("ngu");
-  <Link to={"../auth/ScreenLogin.jsx"} />;
-};
-
-const getRandomuserParams = (params) => ({
-  results: params.pagination?.pageSize,
-  page: params.pagination?.current,
-  ...params,
-});
-
+import "../../screens/profit/Listproduct.css";
+import { getTypeProduct } from "../../../Redux/TypeProductSlice";
+import { useDispatch, useSelector } from "react-redux";
 const TableObjectProduct = () => {
-  const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [pagination, setPagination] = useState({
-    current: 2,
-    pageSize: 8,
-    width: 1000,
-  });
-
-  const fetchData = (params = {}) => {
-    setLoading(true);
-    fetch(
-      `https://randomuser.me/api?${qs.stringify(getRandomuserParams(params))}`
-    )
-      .then((res) => res.json())
-      .then(({ results }) => {
-        setData(results);
-        setLoading(false);
-        setPagination({
-          ...params.pagination,
-          total: 1, // 200 is mock data, you should read it from server
-          // total: data.totalCount,
-        });
-      });
-  };
-  const onSelectChange = (newSelectedRowKeys) => {
-    console.log("selectedRowKeys changed: ", selectedRowKeys);
-    setSelectedRowKeys(newSelectedRowKeys);
-  };
-
-  const rowSelection = {
-    selectedRowKeys,
-    onChange: onSelectChange,
-  };
+  const [data, setData] = useState();
+  const dispatch = useDispatch();
+  const typeproduct = useSelector((data) => data.typeproduct.value);
   useEffect(() => {
-    fetchData({
-      pagination,
-    });
+    dispatch(getTypeProduct());
   }, []);
+  console.log(data);
+  const rowSelection = {
+    onChange: (selectedRowKeys, selectedRows) => {
+      setSelectedRowKeys(selectedRows);
+    },
+  };
 
-  const handleTableChange = (newPagination, filters, sorter) => {
-    fetchData({
-      sortField: sorter.field,
-      sortOrder: sorter.order,
-      pagination: newPagination,
-      ...filters,
-    });
+  const hasSelected = selectedRowKeys.length > 0;
+
+  const listDataa = () => {
+    if (typeproduct !== undefined) {
+      const deletee = (id) => {
+        console.log(id);
+      };
+      const columns = [
+        {
+          title: "Đối tượng",
+          dataIndex: "titleTypeProduct",
+        },
+        {
+          title: "Hoạt động",
+          dataIndex: "_id",
+          render: (_id) => (
+            <div
+              style={{ display: "flex", flexDirection: "row", marginLeft: 450 }}
+            >
+              <Link to={`/edit_banner_men/${_id}`}>
+                <EditOutlined style={{ width: 50 }} size={24} />
+              </Link>
+              <DeleteOutlined
+                onClick={() => deletee(_id)}
+                style={{ width: 50, marginTop: 5 }}
+                size={24}
+              />
+            </div>
+          ),
+        },
+      ];
+      return (
+        <>
+          <Table
+            rowSelection={{
+              type: "checkbox",
+              ...rowSelection,
+            }}
+            columns={columns}
+            dataSource={typeproduct}
+            rowKey={(item) => item._id}
+            className="table-list"
+          />
+        </>
+      );
+    }
   };
 
   return (
-    <>
-      <Table
-        columns={columns}
-        rowKey={(record) => record.login.uuid}
-        dataSource={data}
-        pagination={pagination}
-        loading={loading}
-        onChange={handleTableChange}
-        style={{
-          width: "100%",
-          height: "100%",
-          backgroundColor: "white",
-          marginRight: 100,
-        }}
-        rowSelection={rowSelection}
-      />
-    </>
+    <div>
+      <Button
+        type="primary"
+        // onClick={start}
+        disabled={!hasSelected}
+        // loading={loading}
+        style={{ margin: "10px 30px" }}
+      >
+        Delete
+      </Button>
+      {listDataa()}
+    </div>
   );
 };
 

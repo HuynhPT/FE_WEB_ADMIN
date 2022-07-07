@@ -5,7 +5,7 @@ import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import qs from "qs";
-function CreateBannerMen(props) {
+function CreateBannerMen() {
   const [nameLinkImage, setNameLinkImage] = useState("");
   const [nameImage, setNameImage] = useState("");
   const [valueText, setValueText] = useState();

@@ -2,6 +2,7 @@ import { Button, Form, Input, Modal } from "antd";
 import axios from "axios";
 import QueryString from "qs";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ModalTypeProduct = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -18,7 +19,7 @@ const ModalTypeProduct = () => {
       method: "POST",
       headers: {
         token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY5NDU2NjcsImV4cCI6MTY1OTUzNzY2N30.fqXBpRDQCYzpR3VPlXpEWScuJWpv9Ckvssmy7xvQyMM`,
-        "Content-Type": "multipart/form-data",
+        "content-type": "application/x-www-form-urlencoded",
       },
       // mColor: QueryString.stringify(formData),
       data: QueryString.stringify(values),
@@ -32,8 +33,8 @@ const ModalTypeProduct = () => {
         // console.log(err.request);
       }
     );
-    console.log(values);
     setIsModalVisible(false);
+    setDataTL("");
   };
 
   const handleCancel = () => {
@@ -75,7 +76,11 @@ const ModalTypeProduct = () => {
               },
             ]}
           >
-            <Input style={{ borderRadius: 3 }} />
+            <Input
+              name="titleTypeProduct"
+              style={{ borderRadius: 3 }}
+              value={dataTL}
+            />
           </Form.Item>
 
           <Form.Item

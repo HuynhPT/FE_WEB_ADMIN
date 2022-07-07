@@ -15,9 +15,9 @@ function FromCreateTypeProduct(props) {
   // lấy dữ liệu id của đối tượng
   const [dataLable, setDataLable] = useState("");
   const handleChange = (checkedValues) => {
-    "checked = ", 
-    setDataLable(checkedValues);
+    "checked = ", setDataLable(checkedValues.target.value);
   };
+  console.log(dataLable);
   const upImage = (e) => {
     setNameLinkImage(e.target.files);
     setNameImage(e.target.files[0].name);
@@ -45,7 +45,6 @@ function FromCreateTypeProduct(props) {
     formData.append("titleCategoryProduct", values.titleCategoryProduct);
     formData.append("croppedImage", nameLinkImage[0]);
     formData.append("idTypeProduct", dataLable);
-    formData.append("categoryStatusProduct", values.categoryStatusProduct);
 
     axios({
       url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/category-product/create-category-product",
@@ -54,7 +53,6 @@ function FromCreateTypeProduct(props) {
         token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY4NjUwMjcsImV4cCI6MTY1OTQ1NzAyN30.BsLQT3BMm3yxxqcrSl3XRoS4NNrVe2e_edQk_EFnCRg`,
         "Content-Type": "multipart/form-data",
       },
-      // data: qs.stringify(formData),
       data: formData,
     }).then(
       (res) => {
@@ -62,11 +60,10 @@ function FromCreateTypeProduct(props) {
       },
       (err) => {
         console.log(err.response);
-        // console.log(err.message);
-        // console.log(err.request);
       }
     );
-    console.log(values);
+    alert("Thêm thành công");
+    setValueText("");
   };
 
   return (
@@ -106,16 +103,16 @@ function FromCreateTypeProduct(props) {
                 },
               ]}
             >
-              <Input style={{ borderRadius: 3 }} />
+              <Input style={{ borderRadius: 3 }} defaultValue={valueText} />
             </Form.Item>
             {/* Đối tượng */}
             <Form.Item
-              label="* Đối tượng"
+              label=" Đối tượng"
               name="idTypeProduct"
-              style={{ display: "flex"}}
+              style={{ display: "flex" }}
             >
               <SelectMenWoment dataOP={dataOp} onChange={handleChange} />
-              <ModalTypeProduct />
+              {/* <ModalTypeProduct /> */}
             </Form.Item>
           </div>
           <div style={{ width: "50%" }}>
