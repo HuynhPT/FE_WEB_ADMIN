@@ -52,26 +52,34 @@ const ScreenListProduct = () => {
           title: "Size",
           dataIndex: "size_product",
           render: (size_product) =>
-            size_product.map((item) => {
-              return <p> {item}</p>;
-            }),
+            <div style={{display:'flex'}}>
+              {
+                size_product.map((item) => {
+                  return <p style={{marginRight:10}}> {item}</p>;
+                })
+              }
+            </div>
         },
         {
           title: "Color",
           dataIndex: "color_product",
-          render: (color_product) =>
-            color_product.map((item) => {
-              return (
-                <div
-                  style={{
-                    backgroundColor: item,
-                    width: 20,
-                    height: 20,
-                    border: "1px solid black",
-                  }}
-                ></div>
-              );
-            }),
+          render: (color_product) => (
+            <div style={{display:'flex'}}>
+              {color_product.map((item) => {
+                return (
+                  <div
+                    style={{
+                      backgroundColor: item,
+                      width: 20,
+                      height: 20,
+                      border: "1px solid black",
+                      marginRight:5
+                    }}
+                  ></div>
+                );
+              })}
+            </div>
+          ),
         },
         {
           title: "Ảnh",
@@ -98,7 +106,7 @@ const ScreenListProduct = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/edit_product">
+              <Link to={`/edit_product/${_id}`}>
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <DeleteOutlined
@@ -106,11 +114,13 @@ const ScreenListProduct = () => {
                 style={{ width: 50, marginTop: 5 }}
                 size={24}
               />
-              <FileSearchOutlined
-                onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
-                size={24}
-              />
+              <Link to={`/infor_product/${_id}`}>
+                <FileSearchOutlined
+                  onClick={() => deletee(_id)}
+                  style={{ width: 50, marginTop: 5 }}
+                  size={24}
+                />
+              </Link>
             </div>
           ),
         },

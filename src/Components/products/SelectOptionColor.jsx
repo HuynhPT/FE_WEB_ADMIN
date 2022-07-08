@@ -30,6 +30,7 @@ const SelectOptionColor = (props) => {
       style={{
         width: "100%",
       }}
+      defaultValue={props.defaultValue}
       options={props.dataColor}
       onChange={props.onChange}
     />

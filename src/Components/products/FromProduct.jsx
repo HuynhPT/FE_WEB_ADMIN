@@ -149,6 +149,7 @@ function FromProduct(props) {
             <Input
               placeholder="Tên sản phẩm"
               onChange={(e) => setValueTenSP(e.target.value)}
+              required={true}
             />
           </div>
           {/* nhãn hiệu */}

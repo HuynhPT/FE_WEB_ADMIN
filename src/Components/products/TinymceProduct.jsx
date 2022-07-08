@@ -13,7 +13,7 @@ function TinymceProduct(props) {
       <Editor
         apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
         onEditorChange={props.onChangeText}
-        initialValue=""
+        initialValue={props.initialValue}
         init={{
           height: 400,
           menubar: false,
