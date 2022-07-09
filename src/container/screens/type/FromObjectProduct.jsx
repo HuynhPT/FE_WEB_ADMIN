@@ -4,38 +4,19 @@ import TableObjectProduct from "./TableObjectProduct";
 import { SearchOutlined } from "@ant-design/icons";
 import qs from "qs";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addTypeProduct } from "../../../Redux/TypeProductSlice";
 const FromObjectProduct = () => {
+  const dispatch = useDispatch();
   const onFinish = async (values) => {
-    const fromData = new FormData();
-
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY4NTMyMTAsImV4cCI6MTY1OTQ0NTIxMH0.oWPE-BhmRbYJ8abDqGbmVmDaVQ-_iDLQRV6Kin0VIiY";
-
-    fromData.append("titleTypeProduct", "ok");
-
-    axios({
-      url: "http://18.141.199.110:3000/api/type-product/create-type-product",
-      method: "POST",
-      headers: {
-        token: `Bearer ${mToken} `,
-        "content-type": "application/x-www-form-urlencoded",
-      },
-      data: qs.stringify(values),
-    }).then(
-      (res) => {
-        console.log(res, "Dit me may ");
-      },
-      (err) => {
-        console.log(err.response, "KKKKKKKKKKKKKKKKKKKKKKKKkk");
-      }
-    );
-    console.log(values);
+    dispatch(addTypeProduct(values));
   };
 
   return (
     <div>
-      <h3 style={{ fontSize: "24px" }}>Danh sách</h3>
-      <p>Đối tượng sử dụng*</p>
+      <h3 style={{ fontSize: "24px", marginTop: 30, marginLeft: 20 }}>
+        Danh sách
+      </h3>
       <Form
         onFinish={onFinish}
         autoComplete="off"
@@ -57,17 +38,18 @@ const FromObjectProduct = () => {
           }}
         >
           <Form.Item
+            label="Đối tượng sử dụng"
             name="titleTypeProduct"
             rules={[
               {
                 required: true,
-                message: "Vui lòng nhập tên !",
+                message: "Vui lòng nhập đối tượng sử dụng !",
               },
             ]}
           >
             <Input
               name="titleTypeProduct"
-              style={{ width: "750px", height: "48px" }}
+              style={{ width: "750px", height: "48px", marginLeft: 10 }}
               placeholder="Nhập : Nam, Nữ,........"
             />
           </Form.Item>
@@ -77,21 +59,13 @@ const FromObjectProduct = () => {
               type="primary"
               htmlType="submit"
               style={{
-                width: "250px",
+                width: "220px",
                 height: "48px",
-                marginLeft: "68px",
+                marginLeft: "-60px",
               }}
             >
               <span style={{ color: "black" }}>Thêm</span>
             </Button>
-
-            <Form.Item style={{ marginTop: "29px" }}>
-              <Input
-                placeholder="Tìm kiếm"
-                prefix={<SearchOutlined />}
-                style={{ width: "250px", height: "48px", marginLeft: "70px" }}
-              />
-            </Form.Item>
           </Form.Item>
         </div>
       </Form>

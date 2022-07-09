@@ -90,7 +90,7 @@ function LayouttAdmin1() {
         ),
         ,
         getItem(
-          ["Thêm thể loại sản phẩm", <NavLink to="them_LoaiSanPham" />],
+          ["Thêm thể loại SP", <NavLink to="them_LoaiSanPham" />],
           "12",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),

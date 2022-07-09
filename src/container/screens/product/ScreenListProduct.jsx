@@ -1,28 +1,28 @@
-import { Button, Table } from "antd";
+import { Button, Image, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  FileSearchOutlined,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
+import { getAll } from "../../../API/ProductAPI";
 
 const ScreenListProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  const [products, setProducts] = useState();
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/getall.json")
-      .then((response) => response.json())
-      .then((data) => setData(data));
+    const list = async () => {
+      const { data: products } = await getAll();
+      setProducts(products.data);
+    };
+    list();
   }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
-
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
-
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
@@ -31,30 +31,74 @@ const ScreenListProduct = () => {
   const hasSelected = selectedRowKeys.length > 0;
 
   const listDataa = () => {
-    if (data !== undefined) {
+    if (products !== undefined) {
       const deletee = (id) => {
         console.log(id);
       };
       const columns = [
         {
+          title: "Mã code",
+          dataIndex: "code",
+        },
+        {
           title: "Tên",
-          dataIndex: "title_ads",
-          columnTitle: "red",
+          dataIndex: "title_product",
         },
         {
-          title: "Ads",
-          dataIndex: "title_data",
+          title: "Thương hiệu",
+          dataIndex: "trademark",
         },
         {
-          title: "Ảnh",
-          dataIndex: "image_ads",
-          render: (image_ads) => (
-            <img src={image_ads} alt="" style={{ width: 200 }} />
+          title: "Size",
+          dataIndex: "size_product",
+          render: (size_product) =>
+            <div style={{display:'flex'}}>
+              {
+                size_product.map((item) => {
+                  return <p style={{marginRight:10}}> {item}</p>;
+                })
+              }
+            </div>
+        },
+        {
+          title: "Color",
+          dataIndex: "color_product",
+          render: (color_product) => (
+            <div style={{display:'flex'}}>
+              {color_product.map((item) => {
+                return (
+                  <div
+                    style={{
+                      backgroundColor: item,
+                      width: 20,
+                      height: 20,
+                      border: "1px solid black",
+                      marginRight:5
+                    }}
+                  ></div>
+                );
+              })}
+            </div>
           ),
         },
         {
+          title: "Ảnh",
+          dataIndex: "imageProduct",
+          render: (imageProduct) =>
+            imageProduct.map((item) => {
+              return <Image src={item} alt="" style={{ width: 50 }} />;
+            }),
+        },
+        {
           title: "Chi tiết",
-          dataIndex: "description_ads",
+          dataIndex: "descriptionProduct",
+          render: (descriptionProduct) => {
+            <div
+              dangerouslySetInnerHTML={{
+                _html: descriptionProduct,
+              }}
+            ></div>;
+          },
         },
 
         {
@@ -62,7 +106,7 @@ const ScreenListProduct = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/edit_product">
+              <Link to={`/edit_product/${_id}`}>
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <DeleteOutlined
@@ -70,6 +114,13 @@ const ScreenListProduct = () => {
                 style={{ width: 50, marginTop: 5 }}
                 size={24}
               />
+              <Link to={`/infor_product/${_id}`}>
+                <FileSearchOutlined
+                  onClick={() => deletee(_id)}
+                  style={{ width: 50, marginTop: 5 }}
+                  size={24}
+                />
+              </Link>
             </div>
           ),
         },
@@ -81,7 +132,7 @@ const ScreenListProduct = () => {
             ...rowSelection,
           }}
           columns={columns}
-          dataSource={data}
+          dataSource={products}
           rowKey={(item) => item._id}
           className="table-list"
         />

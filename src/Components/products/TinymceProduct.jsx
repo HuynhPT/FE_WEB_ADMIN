@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Editor } from "@tinymce/tinymce-react";
 import "./FromProduct.css";
-function TinymceProduct() {
+function TinymceProduct(props) {
   const editorRef = useRef(null);
   const log = () => {
     if (editorRef.current) {
@@ -11,9 +11,9 @@ function TinymceProduct() {
   return (
     <div style={{ display: "inline" }}>
       <Editor
-        apiKey="your-api-key"
-        onEditorChange={(newText) => console.log(newText)}
-        initialValue=""
+        apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
+        onEditorChange={props.onChangeText}
+        initialValue={props.initialValue}
         init={{
           height: 400,
           menubar: false,
