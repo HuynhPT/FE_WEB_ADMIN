@@ -1,10 +1,15 @@
-import { Button, Image, Table } from "antd";
+import { Button, Image, Input, Modal, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../../screens/profit/Listproduct.css";
-import { getTypeProduct } from "../../../Redux/TypeProductSlice";
+import {
+  delTypeProduct,
+  getTypeProduct,
+  upTypeProduct,
+} from "../../../Redux/TypeProductSlice";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState();
@@ -13,7 +18,6 @@ const TableObjectProduct = () => {
   useEffect(() => {
     dispatch(getTypeProduct());
   }, []);
-  console.log(data);
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
@@ -21,11 +25,34 @@ const TableObjectProduct = () => {
   };
 
   const hasSelected = selectedRowKeys.length > 0;
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [dataEdit, setDataEdit] = useState();
+  const [value, setValue] = useState();
+  const showModal = async (item) => {
+    console.log(item);
+    await setDataEdit(item);
+    setIsModalVisible(true);
+  };
 
+  const handleOk = () => {
+    const titleTypeProduct = document.getElementById("titleTypeProduct").value;
+    let formdata = new FormData();
+    formdata.append("titleTypeProduct", titleTypeProduct);
+    dispatch(upTypeProduct({ id: dataEdit._id, data: titleTypeProduct }));
+    setDataEdit();
+    setIsModalVisible(false);
+  };
+
+  const handleCancel = () => {
+    setDataEdit();
+    setIsModalVisible(false);
+  };
   const listDataa = () => {
     if (typeproduct !== undefined) {
-      const deletee = (id) => {
-        console.log(id);
+      const deletee = (_id) => {
+        console.log(_id);
+        dispatch(delTypeProduct(_id));
+        alert("Xoá thành công");
       };
       const columns = [
         {
@@ -35,13 +62,15 @@ const TableObjectProduct = () => {
         {
           title: "Hoạt động",
           dataIndex: "_id",
-          render: (_id) => (
+          render: (_id, data) => (
             <div
               style={{ display: "flex", flexDirection: "row", marginLeft: 450 }}
             >
-              <Link to={`/edit_banner_men/${_id}`}>
-                <EditOutlined style={{ width: 50 }} size={24} />
-              </Link>
+              <EditOutlined
+                style={{ width: 50 }}
+                size={24}
+                onClick={() => showModal(data)}
+              />
               <DeleteOutlined
                 onClick={() => deletee(_id)}
                 style={{ width: 50, marginTop: 5 }}
@@ -80,6 +109,22 @@ const TableObjectProduct = () => {
         Delete
       </Button>
       {listDataa()}
+      <Modal
+        title="Sửa đối tượng sử dụng"
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+      >
+        {/* <Input
+          defaultValue={dataEdit !== undefined && dataEdit.titleTypeProduct}
+        /> */}
+        <input
+          type="text"
+          onChange={(e) => setValue(e.target.value)}
+          id="titleTypeProduct"
+          value={value == undefined ? dataEdit?.titleTypeProduct : value}
+        />
+      </Modal>
     </div>
   );
 };
