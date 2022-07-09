@@ -1,28 +1,18 @@
 import { Space, Table, Radio, Divider, Input, Image } from "antd";
 import { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import { Link } from "react-router-dom";
-
-import qs from "qs";
-
-// const getRandomuserParams = (params) => ({
-//   results: params.pagination?.pageSize,
-//   page: params.pagination?.current,
-//   ...params,
-// });
+import { useDispatch, useSelector } from "react-redux";
+import { getOpject } from "../../../Redux/OjectProductslice";
 
 const TableObjectProduct = () => {
   const [data, setData] = useState();
   const [dataId, setDataId] = useState();
   const [loading, setLoading] = useState(false);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
+
+  const dispatch = useDispatch();
+  const opjectproduct = useSelector((data) => data.opjectproduct);
 
   useEffect(() => {
     fetch(
@@ -33,16 +23,9 @@ const TableObjectProduct = () => {
   }, []);
 
   useEffect(() => {
-    fetch(
-      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/category-product/get-category-product"
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        
-        setData(data.data);
-      });
+    dispatch(getOpject());
   }, []);
-
+console.log(opjectproduct);
   const columns = [
     {
       title: "Tên thể loại",
@@ -135,7 +118,7 @@ const TableObjectProduct = () => {
         dataSource={data}
         loading={loading}
         style={{
-          marginBottom:100
+          marginBottom: 100,
         }}
         rowSelection={rowSelection}
       />

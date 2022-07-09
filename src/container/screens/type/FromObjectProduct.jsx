@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Modal } from "antd";
 import TableObjectProduct from "./TableObjectProduct";
-import { SearchOutlined } from "@ant-design/icons";
+import { PlusOutlined, SearchOutlined } from "@ant-design/icons";
 import qs from "qs";
 import axios from "axios";
 import { useDispatch } from "react-redux";
@@ -10,12 +10,13 @@ const FromObjectProduct = () => {
   const dispatch = useDispatch();
   const onFinish = async (values) => {
     dispatch(addTypeProduct(values));
+    alert("Thêm đối tượng sử dụng thành công");
   };
 
   return (
     <div>
       <h3 style={{ fontSize: "24px", marginTop: 30, marginLeft: 20 }}>
-        Danh sách
+        Danh sách đối tượng
       </h3>
       <Form
         onFinish={onFinish}
@@ -35,6 +36,7 @@ const FromObjectProduct = () => {
         <div
           style={{
             display: "flex",
+            justifyContent: "space-between",
           }}
         >
           <Form.Item
@@ -46,30 +48,38 @@ const FromObjectProduct = () => {
                 message: "Vui lòng nhập đối tượng sử dụng !",
               },
             ]}
+            style={{ width: "70%" }}
           >
             <Input
               name="titleTypeProduct"
-              style={{ width: "750px", height: "48px", marginLeft: 10 }}
+              style={{ width: "100%x", height: "48px" }}
               placeholder="Nhập : Nam, Nữ,........"
             />
           </Form.Item>
 
-          <Form.Item style={{ marginLeft: "180px" }}>
+          <Form.Item style={{ width: "20%" }}>
             <Button
               type="primary"
               htmlType="submit"
               style={{
-                width: "220px",
+                width: "100%",
                 height: "48px",
-                marginLeft: "-60px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#87CEEB",
+                border: "1px sold #87CEEB ",
+                marginLeft: 20,
               }}
             >
-              <span style={{ color: "black" }}>Thêm</span>
+              <PlusOutlined />
+              <p style={{ color: "black", margin: 4 }}>Thêm</p>
             </Button>
           </Form.Item>
         </div>
       </Form>
       <TableObjectProduct />
+     
     </div>
   );
 };
