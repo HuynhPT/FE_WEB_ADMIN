@@ -1,24 +1,16 @@
 import React from "react";
-import { Select } from "antd";
-const { Option } = Select;
-const handleChange = (value) => {
-  console.log(value);
-};
+import { Radio } from "antd";
+
 function SelectMenWomen(props) {
   return (
-    <Select
-      labelInValue
-      defaultValue={{
-        value: "1",
-      }}
+    <Radio.Group
       style={{
         width: "100%",
+        marginTop: 7,
       }}
-      onChange={handleChange}
-    >
-      <Option value="1">{props.Option1}</Option>
-      <Option value="2">{props.Option2}</Option>
-    </Select>
+      onChange={props.onChange}
+      options={props.dataOP}
+    ></Radio.Group>
   );
 }
 

@@ -38,7 +38,6 @@ import ScreenListPost from "../container/screens/posts/ScreenListPost";
 //màu size
 import ColorSize from "../container/screens/colorsize/ColorSize";
 
-
 // banner splash
 import BannerSplash from "../container/screens/banner/BannerSplash";
 import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
@@ -60,6 +59,8 @@ import EditBannerWoment from "../container/screens/banner/bannerwonent/EditBanne
 import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
 import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
 import EditBannerHome from "../container/screens/banner/BannerHome/EditBannerHome";
+
+import InforProduct from "../container/screens/product/InforProduct";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -71,7 +72,8 @@ const Router = () => {
           element={<ScreenForgotPassword />}
         ></Route>
         {/* sủa sản phẩm */}
-        <Route path="/edit_product" element={<EditProduct />} />
+        <Route path="/edit_product/:id" element={<EditProduct />} />
+        <Route path="/infor_product/:id" element={<InforProduct />} />
         <Route path="shop/" element={<LayouttAdmin1 />}>
           <Route path="tong_quan" element={<ScreenOverview />} />
 

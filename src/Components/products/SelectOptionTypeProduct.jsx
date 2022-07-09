@@ -1,33 +1,18 @@
-import { Select } from "antd";
-const option = [
-  { value: "Đầm" },
-  { value: "Váy" },
-  { value: "Áo" },
-  { value: "Quần" },
-  { value: "Trang sức" },
-  { value: "Phụ kiện" },
-  { value: "Bra" },
-];
+import { Select, Tag } from "antd";
+import { useEffect, useState } from "react";
 
-const onChange = (value) => {
-  console.log(`selected ${value}`);
+const SelectOptionTypeProduct = (props) => {
+  
+  return (
+    <Select
+      showSearch
+      style={{
+        width: "100%",
+      }}
+      options={props.options}
+      onChange={props.onChange}
+      defaultValue={props.defaultValue}
+    />
+  );
 };
-
-const onSearch = (value) => {
-  console.log("search:", value);
-};
-
-const SelectOptionTypeProduct = () => (
-  <Select
-    style={{
-      width: "100%",
-    }}
-    showSearch
-    defaultValue={"Đầm"}
-    onChange={onChange}
-    onSearch={onSearch}
-    options={option}
-  ></Select>
-);
-
 export default SelectOptionTypeProduct;
