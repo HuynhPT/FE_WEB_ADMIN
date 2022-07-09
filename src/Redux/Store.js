@@ -9,5 +9,3 @@ export const store = configureStore({
     typeproduct: typeProductSlice,
   },
 });
-
-console.log(Redux, "OOOOOOOOOOOOoo");

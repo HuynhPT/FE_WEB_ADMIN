@@ -96,7 +96,6 @@ const TableObjectProduct = () => {
       );
     }
   };
-
   return (
     <div>
       <Button
