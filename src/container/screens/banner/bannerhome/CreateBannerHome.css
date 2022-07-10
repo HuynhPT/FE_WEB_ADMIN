@@ -1,0 +1,77 @@
+
+._createbanner_home_container{
+    width: 1728px;
+    height: 1117px;
+    display:  flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    font-family: Open sans-serif;
+}
+._createbanner_home_body{
+    width: 1350px;
+    height: 879px;
+    background-color: #ffffff;
+    margin-left: 189px;
+    /* border: 1px solid; */
+    border-radius: 3px;
+    box-shadow: 3px 3px 3px gray;
+    display: grid;
+    grid-template-rows: 87px 110px 114px 326px 108px auto;
+}
+._createbanner_home_title p{
+    font-size: 29px;
+    font-weight: 300;
+    padding: 15px 0 0 28px;
+}
+
+._createbanner_home_inputname p{
+    padding-left: 28px;
+    padding-bottom: 6px;
+    margin: 0px;
+    font-weight: 600;
+}
+._createbanner_home_inputname input{
+    margin-left: 28px;
+    margin-right: 28px;
+    width: 1275px;
+    height: 48px;
+}
+._createbanner_home_inputobject p{
+    padding-left: 28px;
+    padding-bottom: 6px;
+    margin: 0px;
+    font-weight: 600;
+}
+._createbanner_home_inputobject input{
+    margin-left: 28px;
+    margin-right: 28px;
+    width: 1275px;
+    height: 48px;
+}
+._createbanner_home_detail p{
+    padding-left: 28px;
+    padding-bottom: 6px;
+    margin: 0px;
+    font-weight: 600;
+}
+._createbanner_home_detail_inside{
+    height: 176px;
+    width: 1280px;
+    margin-left: 28px;
+}
+._createbanner_home_chooseimage{
+    padding-top: 31px;
+}
+._createbanner_home_chooseimage_title{
+    padding-left: 28px;
+    padding-bottom: 6px;
+    margin: 0px;
+    font-weight: 600;
+}
+._createbanner_home_btn{
+    padding-top: 20px;
+    padding-left: 705px;
+}
+
+
+

@@ -38,14 +38,13 @@ import ScreenListPost from "../container/screens/posts/ScreenListPost";
 //màu size
 import ColorSize from "../container/screens/colorsize/ColorSize";
 
-//banner plash
-
+// banner splash
 import BannerSplash from "../container/screens/banner/BannerSplash";
 import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
 import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEditBanner";
 
 //banner home
-import BannerHome from "../container/screens/banner/BannerHome";
+import BannerHome from "../container/screens/banner/bannerhome/BannerHome";
 import ScreenEditBannerHome from "../container/screens/banner/BannerHome/ScreensEditBannerHome";
 import ScreenAddBannerHome from "../container/screens/banner/BannerHome/ScreensAddBannerHome";
 //banner men
@@ -57,6 +56,11 @@ import EditbannerMen from "../container/screens/banner/bannermen/EditbannerMen";
 import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
 import CreateBannerWonen from "../container/screens/banner/bannerwonent/CreateBannerWoment";
 import EditBannerWoment from "../container/screens/banner/bannerwonent/EditBannerWonent";
+import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
+import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
+import EditBannerHome from "../container/screens/banner/BannerHome/EditBannerHome";
+
+import InforProduct from "../container/screens/product/InforProduct";
 const Router = () => {
   return (
     <BrowserRouter>
@@ -68,7 +72,8 @@ const Router = () => {
           element={<ScreenForgotPassword />}
         ></Route>
         {/* sủa sản phẩm */}
-        <Route path="/edit_product" element={<EditProduct />} />
+        <Route path="/edit_product/:id" element={<EditProduct />} />
+        <Route path="/infor_product/:id" element={<InforProduct />} />
         <Route path="shop/" element={<LayouttAdmin1 />}>
           <Route path="tong_quan" element={<ScreenOverview />} />
 
@@ -111,16 +116,14 @@ const Router = () => {
         </Route>
         {/* banner men */}
         <Route path="/create_banner_men" element={<CreactBannerMen />} />
-        <Route path="/edit_banner_men" element={<EditbannerMen />} />
+        <Route path="/edit_banner_men/:id" element={<EditbannerMen />} />
         {/* banner nữ */}
-        <Route path="/create_banner_woment" element={<CreateBannerWonen />} />
-        <Route path="/edit_banner_woment" element={<EditBannerWoment />} />
-        {/* banner flash */}
-        <Route path="/add_banner" element={<ScreenAddBanner />} />
-        <Route path="/edit_banner" element={<ScreenEditBanner />} />
-        {/* BannerHome */}
-        <Route path="/add_banner_home" element={<ScreenAddBannerHome />} />
+        <Route path="/create_banner_woment" element={<CreateBannerWoment />} />
+        <Route path="/edit_banner_woment" element={<EditBannerWonent />} />
+        {/* banner home */}
+        <Route path="/create_banner_home" element={<ScreenAddBannerHome />} />
         <Route path="/edit_banner_home" element={<ScreenEditBannerHome />} />
+        <Route path="/edit_list_type" element={<FromUpdateTypeProduct />} />
       </Routes>
     </BrowserRouter>
   );

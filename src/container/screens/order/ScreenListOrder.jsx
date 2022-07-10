@@ -10,18 +10,27 @@ const ScreenListOrder = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/user.json")
-      .then((response) => response.json())
-      .then((data) => setData(data));
-  }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "token",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTczNzMxODksImV4cCI6MTY1OTk2NTE4OX0.ReGLUCX8Pf0HFCTrQ8hChRG5TdKI_sXus3K-liwWMhw"
+    );
 
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch(
+      "http://18.141.199.110:3000/api/user-bill/get-bill-product",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => setData(result.bill))
+      .catch((error) => console.log("error", error));
+  }, []);
+  console.log(data);
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -29,7 +38,6 @@ const ScreenListOrder = () => {
     },
   };
   const hasSelected = selectedRowKeys.length > 0;
-
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (id) => {
@@ -37,37 +45,72 @@ const ScreenListOrder = () => {
       };
       const columns = [
         {
-          title: "Id",
-          dataIndex: "_id",
+          title: "Họ",
+          dataIndex: "lastName",
         },
         {
           title: "Tên",
-          dataIndex: "name",
+          dataIndex: "firstName",
         },
         {
           title: "SĐT",
-          dataIndex: "phone",
+          dataIndex: "numberPhone",
         },
-        // {
-        //   title: "Ảnh",
-        //   dataIndex: "image_ads",
-        //   render: (image_ads) => (
-        //     <img src={image_ads} alt="" style={{ width: 200 }} />
-        //   ),
-        // },
         {
-          title: "Email",
-          dataIndex: "email",
+          title: "Địa chỉ",
+          dataIndex: "fullAddress",
         },
-
+        {
+          title: "Thành phố",
+          dataIndex: "cityProvince",
+        },
+        {
+          title: "Mã code",
+          dataIndex: "codeZip",
+        },
+        {
+          title: "Trạng thái",
+          dataIndex: "status",
+          render: (status) =>
+            status.toString() == 0 ? (
+              <div
+                style={{
+                  border: "1px solid red ",
+                  color: "#fff",
+                  backgroundColor: "red",
+                  fontStyle: "italic",
+                  borderRadius: 20,
+                  opacity: 0.7,
+                }}
+              >
+                không hoàn thành
+              </div>
+            ) : (
+              <div
+                style={{
+                  border: "1px solid green ",
+                  color: "#fff",
+                  backgroundColor: "green",
+                  fontStyle: "italic",
+                  borderRadius: 20,
+                  opacity: 0.7,
+                }}
+              >
+                Hoàn thành
+              </div>
+            ),
+        },
         {
           title: "Hoạt động",
           dataIndex: "_id",
           render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row" }}>
-              {/* <Link to="/shop/thongKe_loiNhuan">
-                <EditOutlined style={{ width: 50 }} size={24} />
-              </Link> */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
               <DeleteOutlined
                 onClick={() => deletee(_id)}
                 style={{ width: 50, marginTop: 5 }}

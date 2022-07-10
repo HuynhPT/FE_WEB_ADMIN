@@ -19,6 +19,7 @@ function TextInput(props) {
           prefix={props.Outlined}
           placeholder={props.placeholder}
           type={props.type}
+          // onChange={props.onChange}
         />
       </Form.Item>
     </>

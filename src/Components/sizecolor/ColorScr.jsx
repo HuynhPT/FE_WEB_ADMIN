@@ -4,12 +4,12 @@ import axios from "axios";
 import qs from "qs";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjA0N2IwZmJlNDc1YTQxM2VjMzEzNSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU4NjgyNzIsImV4cCI6MTY1ODQ2MDI3Mn0.FHlAcgS9XU0eVz8hn6Nq1TeI4qob_F_DjH5poEpEpY8";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY";
 
 const ColorScr = () => {
   const onFinish = (values) => {
     axios({
-      url: "http://ec2-18-141-190-201.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-color",
+      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-color",
       method: "POST",
       headers: {
         token: `Bearer ${token}`,
@@ -55,7 +55,7 @@ const ColorScr = () => {
         <Input placeholder="Thêm màu" style={{ borderRadius: 3 }} />
       </Form.Item>
       <Form.Item name="colorCode" style={{ width: "40%" }}>
-        <Input placeholder="Thêm mã màu" style={{ borderRadius: 3 }} />
+        <Input placeholder="Thêm mã màu" style={{ borderRadius: 3 }} type='color' />
       </Form.Item>
 
       <Form.Item
