@@ -71,12 +71,13 @@ export const delTypeProduct = createAsyncThunk(
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
 
     await axios({
-      url: `http://18.141.199.110:3000/api/type-product/delete-type-product/findById/${id}`,
-      method: "DELETE",
+      url: `http://18.141.199.110:3000/api/type-product/delete-type-product/findById`,
+      method: "POST",
       headers: {
         token: `Bearer ${mToken} `,
-        "Content-Type": "application/json",
+        "content-type": "application/x-www-form-urlencoded",
       },
+      data: qs.stringify(id),
     }).then(
       async (res) => {
         const { data: product } = await getAll();
@@ -94,16 +95,16 @@ export const upTypeProduct = createAsyncThunk(
   async (data) => {
     let products = [];
     const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTcxNjM0MDYsImV4cCI6MTY1OTc1NTQwNn0.ZmLJVVf6UQvLqioCBrRTaBPYJkRlI5kFPkEWv2rZ4BI";
 
     await axios({
-      url: `http://18.141.199.110:3000/api/type-product/edit-type-product/findById/${data.id}`,
-      method: "PUT",
+      url: `http://18.141.199.110:3000/api/type-product/edit-type-product/findById`,
+      method: "POST",
       headers: {
         token: `Bearer ${mToken} `,
-        "Content-Type": "application/json",
+        "content-type": "application/x-www-form-urlencoded",
       },
-      data: qs.stringify(data.data),
+      data: qs.stringify(data),
     }).then(
       async (res) => {
         const { data: product } = await getAll();

@@ -37,7 +37,7 @@ const SelectOtionSze = (props) => {
         }}
         options={props.dataSize}
         onChange={props.onChange}
-        value={props.defaultValue}
+        defaultValue={props.defaultValue}
       />
       {/* )} */}
     </>

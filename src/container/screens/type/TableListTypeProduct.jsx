@@ -1,4 +1,14 @@
-import { Space, Table, Radio, Divider, Input, Image, Button, Popconfirm, Modal } from "antd";
+import {
+  Space,
+  Table,
+  Radio,
+  Divider,
+  Input,
+  Image,
+  Button,
+  Popconfirm,
+  Modal,
+} from "antd";
 import { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +17,7 @@ import {
   delallopjectCategori,
   delopjectCategori,
   getOpjectCategori,
+  searchopjectCategori,
 } from "../../../Redux/OjectCategoriSlice";
 const TableObjectProduct = () => {
   const [opject, setopject] = useState();
@@ -15,9 +26,14 @@ const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalDelALl, setisModalDelALl] = useState(false);
 
+  const { Search } = Input;
+
   const dispatch = useDispatch();
   const ListOpject = useSelector((data) => data.categoris.value);
-  console.log(ListOpject)
+  const onSearch = (value) => {
+    dispatch(searchopjectCategori({ titleCategoryProduct: value }));
+  };
+
   const onSelectChange = (newSelectedRowKeys) => {
     console.log("selectedRowKeys changed: ", selectedRowKeys);
     setSelectedRowKeys(newSelectedRowKeys);
@@ -60,7 +76,7 @@ const TableObjectProduct = () => {
   const lisdata = () => {
     if (ListOpject !== undefined) {
       const deletee = (data) => {
-        dispatch(delopjectCategori(data));
+        dispatch(delopjectCategori({ idCategoryProduct: data }));
         message.success({
           content: "Xoá thành công",
           className: "custom-class",
@@ -81,26 +97,26 @@ const TableObjectProduct = () => {
           title: "Tên thể loại",
           dataIndex: "titleCategoryProduct",
         },
-        {
-          title: "Đối tượng",
-          dataIndex: "idTypeProduct",
-        },
+        // {
+        //   title: "Đối tượng",
+        //   dataIndex: "idTypeProduct",
+        // },
         {
           title: "Ảnh",
           dataIndex: "categoryImgProduct",
           render: (categoryImgProduct) => (
-            <Image src={categoryImgProduct} alt="" style={{ width: 100 }} />
+            <Image src={categoryImgProduct} alt="" style={{ width: 50 }} />
           ),
         },
         {
           title: "Hoạt động",
           dataIndex: "_id",
-          render: (_id,data) => (
+          render: (_id, data) => (
             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
               <Link to={`/edit_list_type/${_id}`}>
                 <p style={{ color: "blue" }}>Sửa</p>
               </Link>
-     
+
               <Popconfirm
                 title="Bạn có chắc chắn muốn xoá không?"
                 onConfirm={() => deletee(data)}
@@ -126,7 +142,7 @@ const TableObjectProduct = () => {
             dataSource={ListOpject}
             loading={loading}
             style={{
-              marginBottom: 100,
+              height: "100%",
             }}
             rowSelection={rowSelection}
           />
@@ -136,15 +152,23 @@ const TableObjectProduct = () => {
   };
   return (
     <>
-      <Button
-        type="primary"
-        onClick={showmodaldell}
-        disabled={!hasSelected}
-        // loading={loading}
-        style={{ margin: "10px 0px" }}
-      >
-        Delete
-      </Button>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button
+          type="primary"
+          onClick={showmodaldell}
+          disabled={!hasSelected}
+          style={{ margin: "10px 0px" }}
+        >
+          Delete
+        </Button>
+
+        <Search
+          placeholder="Tìm kiếm theo tên"
+          onSearch={onSearch}
+          enterButton
+          style={{ width: "30%", borderRadius: 3, marginTop: 8 }}
+        />
+      </div>
       {lisdata()}
       <Modal title="Cảnh báo !" visible={isModalDelALl} footer={null}>
         <p>Bạn có chắc chắn muốn xoá hay không?</p>

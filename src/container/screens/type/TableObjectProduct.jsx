@@ -24,9 +24,9 @@ import {
 } from "../../../Redux/TypeProductSlice";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
+import QueryString from "qs";
 const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [data, setData] = useState();
   const dispatch = useDispatch();
   const typeproduct = useSelector((data) => data.typeproduct.value);
   useEffect(() => {
@@ -53,10 +53,22 @@ const TableObjectProduct = () => {
   };
   const handleOk = () => {
     const titleTypeProduct = document.getElementById("titleTypeProduct").value;
-    let formdata = new FormData();
-    formdata.append("titleTypeProduct", titleTypeProduct);
-    dispatch(upTypeProduct({ id: dataEdit._id, data: titleTypeProduct }));
-    setDataEdit();
+    dispatch(
+      upTypeProduct({
+        titleTypeProduct: titleTypeProduct,
+        idTypeProduct: dataEdit._id,
+      })
+    );
+    message.success({
+      content: "Sửa đối tượng thành công",
+      className: "custom-class",
+      style: {
+        color: "#52c41a",
+      },
+      icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+      duration: 2,
+    });
+    setValue();
     setIsModalVisible(false);
   };
 
@@ -84,7 +96,8 @@ const TableObjectProduct = () => {
   const listDataa = () => {
     if (typeproduct !== undefined) {
       const deletee = (_id) => {
-        dispatch(delTypeProduct(_id));
+        console.log(_id);
+        dispatch(delTypeProduct({ idTypeProduct: _id }));
         message.success({
           content: "Xoá thành công",
           className: "custom-class",

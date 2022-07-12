@@ -11,6 +11,7 @@ function SelectMenWomen(props) {
       onChange={props.onChange}
       options={props.dataOP}
       defaultValue={props.defaultValue}
+      
     ></Radio.Group>
   );
 }

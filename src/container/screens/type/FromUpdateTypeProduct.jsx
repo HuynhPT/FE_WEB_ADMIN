@@ -1,11 +1,11 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import "../banner/bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import SelectMenWoment from "../../../Components/products/SelectMenWomen";
 import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { upopjectCategori } from "../../../Redux/OjectCategoriSlice";
 // truyền prammas
 
@@ -33,7 +33,6 @@ function FromUpdateTypeProduct(props) {
   const handleChange = (checkedValues) => {
     "checked = ", setDataLable(checkedValues.target.value);
   };
-
   useEffect(() => {
     fetch(
       "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/type-product/get-type-product"
@@ -48,18 +47,59 @@ function FromUpdateTypeProduct(props) {
       });
   }, []);
   const upImage = (e) => {
-    const image = document.getElementById("images").files[0];
-    setNameImage(image);
+   setNameLinkImage(e.target.files)
+    setNameImage(e.target.files[0].name);
   };
   const onFinish = async (values) => {
     console.log(values);
     const formData = new FormData();
     formData.append("titleCategoryProduct", values.titleCategoryProduct);
-    formData.append("croppedImage", nameImage);
-    formData.append("idTypeProduct", values.idTypeProduct);
-    dispatch({ id: dataEdit._id, data: formData });
-  };
+    formData.append("croppedImage", nameLinkImage[0]);
+    formData.append("idTypeProduct", dataLable);
+    formData.append("idCategory", dataEdit._id);
 
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "token",
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A"
+    );
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: formData,
+      redirect: "follow",
+    };
+
+    fetch(
+      "http://18.141.199.110:3000/api/category-product/edit-category-product/findById",
+      requestOptions
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        result.code == 200
+          ? message.success({
+              content: "Sửa thành công",
+              className: "custom-class",
+              style: {
+                color: "#52c41a",
+              },
+              icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+              duration: 2,
+            })
+          : message.error({
+              content: "Sửa thất bại",
+              className: "custom-class",
+              style: {
+                color: "red",
+              },
+              icon: () => <CheckCircleTwoTone twoToneColor="red" />,
+              duration: 2,
+            });
+      })
+      .catch((error) => console.log("error", error));
+  };
+  console.log(nameImage);
   return (
     dataEdit !== undefined && (
       <>
@@ -118,7 +158,7 @@ function FromUpdateTypeProduct(props) {
                 >
                   <Input
                     style={{ borderRadius: 3 }}
-                    defaultValue={dataEdit?.titleCategoryProduct}
+                    defaultValue={`${dataEdit?.titleCategoryProduct}`}
                   />
                 </Form.Item>
                 {/* Đối tượng */}
@@ -130,7 +170,7 @@ function FromUpdateTypeProduct(props) {
                   <SelectMenWoment
                     dataOP={dataOp}
                     onChange={handleChange}
-                    defaultValue={dataEdit?.idTypeProduct}
+                    defaultValue={`${dataEdit?.idTypeProduct}`}
                   />
                   {/* <ModalTypeProduct /> */}
                 </Form.Item>
@@ -142,13 +182,17 @@ function FromUpdateTypeProduct(props) {
                   name="croppedImage"
                   style={{ marginLeft: 20 }}
                 >
-                  {nameImage !== undefined && (
+                  {(nameImage !== undefined || dataEdit.categoryImgProduct) && (
                     <div style={{ display: "flex" }}>
-                      <span style={{ margin: 5 }}>{nameImage.name}</span>
+                      <span style={{ margin: 10 }}>
+                        {nameImage !== undefined
+                          ? nameImage
+                          : dataEdit.categoryImgProduct}
+                      </span>
                       <br />
                       <Button
                         onClick={() => setNameImage()}
-                        style={{ margin: 5, marginBottom: 10 }}
+                        style={{ margin: 10 }}
                       >
                         Huỷ
                       </Button>
@@ -182,7 +226,6 @@ function FromUpdateTypeProduct(props) {
                     onChange={(e) => upImage(e)}
                   />
                 </Form.Item>
-                {dataEdit?.categoryImgProduct}
               </div>
             </div>
             {/* nút xử lý sự kiện */}
@@ -192,28 +235,30 @@ function FromUpdateTypeProduct(props) {
                 span: 16,
               }}
             >
-              <Button
-                type="primary"
-                htmlType="reset"
-                style={{
-                  margin: 10,
-                  width: 190,
-                  backgroundColor: "#DCDFE8",
-                  borderColor: "#DCDFE8",
-                  textAlign: "center",
-                }}
-              >
-                <p
+              <Link to="/shop/danhSach_LoaiSanPham">
+                <Button
+                  type="primary"
+                  htmlType="reset"
                   style={{
-                    fontSize: 16,
-                    fontWeight: "400",
-                    color: "#000000",
-                    marginTop: -2,
+                    margin: 10,
+                    width: 190,
+                    backgroundColor: "#DCDFE8",
+                    borderColor: "#DCDFE8",
+                    textAlign: "center",
                   }}
                 >
-                  Đặt lại
-                </p>
-              </Button>
+                  <p
+                    style={{
+                      fontSize: 16,
+                      fontWeight: "400",
+                      color: "#000000",
+                      marginTop: -2,
+                    }}
+                  >
+                    Quay lại
+                  </p>
+                </Button>
+              </Link>
               <Button
                 type="primary"
                 htmlType="submit"
