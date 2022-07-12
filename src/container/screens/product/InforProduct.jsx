@@ -15,13 +15,15 @@ const InforProduct = () => {
         setDataInfor(newData);
       });
   }, []);
+
   useMemo(() => {});
-  const cost = dataInfor?.cost
+  const sale = dataInfor?.priceSale;
+  const prices = dataInfor?.price
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  const price = dataInfor?.price
-    .toString()
-    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+
+  const pricesbuy = dataInfor?.price - dataInfor?.priceSale;
+
   return (
     <>
       <CarouselBanner />
@@ -115,7 +117,7 @@ const InforProduct = () => {
                 textDecorationLine: "line-through",
               }}
             >
-              {cost}đ
+              {prices}đ
             </p>
             {/* Giá bán */}
             <p
@@ -126,7 +128,7 @@ const InforProduct = () => {
                 marginLeft: 10,
               }}
             >
-              {price}đ
+              {pricesbuy.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}đ
             </p>
           </div>
           <hr style={{ border: "1px dashed #A9A9A9" }} />
@@ -167,6 +169,7 @@ const InforProduct = () => {
             Kích cỡ :
           </p>
           <div style={{ height: 30, display: "flex", alignItems: "center" }}>
+            {console.log(dataInfor?.size_product)}
             {dataInfor?.size_product?.map((item) => {
               return (
                 <div

@@ -1,9 +1,23 @@
-import { Button, Image, Input, Modal, Table } from "antd";
+import {
+  Alert,
+  Button,
+  Image,
+  Input,
+  message,
+  Modal,
+  Popconfirm,
+  Table,
+} from "antd";
 import React, { useEffect, useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  CheckCircleTwoTone,
+} from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../../screens/profit/Listproduct.css";
 import {
+  dellAllTypeProduct,
   delTypeProduct,
   getTypeProduct,
   upTypeProduct,
@@ -23,9 +37,9 @@ const TableObjectProduct = () => {
       setSelectedRowKeys(selectedRows);
     },
   };
-
   const hasSelected = selectedRowKeys.length > 0;
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalDelALl, setisModalDelALl] = useState(false);
   const [dataEdit, setDataEdit] = useState();
   const [value, setValue] = useState();
   const showModal = async (item) => {
@@ -34,6 +48,9 @@ const TableObjectProduct = () => {
     setIsModalVisible(true);
   };
 
+  const showmodaldell = () => {
+    setisModalDelALl(true);
+  };
   const handleOk = () => {
     const titleTypeProduct = document.getElementById("titleTypeProduct").value;
     let formdata = new FormData();
@@ -47,14 +64,43 @@ const TableObjectProduct = () => {
     setDataEdit();
     setIsModalVisible(false);
   };
+
+  const handleXoa = () => {
+    dispatch(dellAllTypeProduct());
+    setisModalDelALl(false);
+    message.success({
+      content: "Xoá thành công",
+      className: "custom-class",
+      style: {
+        color: "#52c41a",
+      },
+      icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+      duration: 2,
+    });
+  };
+  const handleHuy = () => {
+    setisModalDelALl(false);
+  };
   const listDataa = () => {
     if (typeproduct !== undefined) {
       const deletee = (_id) => {
-        console.log(_id);
         dispatch(delTypeProduct(_id));
-        alert("Xoá thành công");
+        message.success({
+          content: "Xoá thành công",
+          className: "custom-class",
+          style: {
+            color: "#52c41a",
+          },
+          icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+          duration: 2,
+        });
       };
       const columns = [
+        {
+          title: "STT",
+          dataIndex: "_id",
+          render: (_id, data, index) => index + 1,
+        },
         {
           title: "Đối tượng",
           dataIndex: "titleTypeProduct",
@@ -64,18 +110,33 @@ const TableObjectProduct = () => {
           dataIndex: "_id",
           render: (_id, data) => (
             <div
-              style={{ display: "flex", flexDirection: "row", marginLeft: 450 }}
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <EditOutlined
-                style={{ width: 50 }}
+              <p
+                style={{ width: 50, cursor: "pointer", color: "blue" }}
                 size={24}
                 onClick={() => showModal(data)}
-              />
-              <DeleteOutlined
-                onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
-                size={24}
-              />
+              >
+                Sửa
+              </p>
+
+              <Popconfirm
+                title="Bạn có chắc chắn muốn xoá không?"
+                onConfirm={() => deletee(_id)}
+                okText="Xoá"
+                cancelText="Huỷ"
+              >
+                <p
+                  style={{ width: 50, cursor: "pointer", color: "blue" }}
+                  size={24}
+                >
+                  Xoá
+                </p>
+              </Popconfirm>
             </div>
           ),
         },
@@ -101,10 +162,9 @@ const TableObjectProduct = () => {
     <div>
       <Button
         type="primary"
-        // onClick={start}
         disabled={!hasSelected}
-        // loading={loading}
         style={{ margin: "10px 30px" }}
+        onClick={showmodaldell}
       >
         Delete
       </Button>
@@ -115,15 +175,49 @@ const TableObjectProduct = () => {
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {/* <Input
-          defaultValue={dataEdit !== undefined && dataEdit.titleTypeProduct}
-        /> */}
         <input
           type="text"
           onChange={(e) => setValue(e.target.value)}
           id="titleTypeProduct"
           value={value == undefined ? dataEdit?.titleTypeProduct : value}
+          style={{ width: "90%" }}
         />
+      </Modal>
+      <Modal title="Cảnh báo !" visible={isModalDelALl} footer={null}>
+        <p>Bạn có chắc chắn muốn xoá hay không?</p>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+          }}
+        >
+          <button
+            style={{
+              backgroundColor: "#fff",
+              border: "1px solid #000",
+              margin: 10,
+              padding: " 8px 16px",
+              borderRadius: 3,
+            }}
+            onClick={handleHuy}
+          >
+            Huỷ
+          </button>
+          <button
+            style={{
+              backgroundColor: "red",
+              border: "1px solid #000",
+              margin: 10,
+              padding: " 8px 16px",
+              color: "#fff",
+              borderRadius: 3,
+            }}
+            onClick={handleXoa}
+          >
+            Xoá
+          </button>
+        </div>
       </Modal>
     </div>
   );
