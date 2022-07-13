@@ -190,8 +190,8 @@ function EditbannerHomee(props) {
               type="primary"
               htmlType="reset"
               style={{
-                margin: 10,
-                width: 200,
+                margin: 20,
+                width: 120,
                 backgroundColor: "#DCDFE8",
                 borderColor: "#DCDFE8",
                 textAlign: "center",

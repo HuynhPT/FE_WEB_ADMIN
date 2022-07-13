@@ -191,8 +191,8 @@ function CreateBannerMen() {
             type="primary"
             htmlType="reset"
             style={{
-              margin: 10,
-              width: 200,
+              margin: 20,
+              width: 120,
               backgroundColor: "#DCDFE8",
               borderColor: "#DCDFE8",
               textAlign: "center",
@@ -206,15 +206,15 @@ function CreateBannerMen() {
                 marginTop: -2,
               }}
             >
-              Đặt lại
+              Quay lại
             </p>
           </Button>
           <Button
             type="primary"
             htmlType="submit"
             style={{
-              margin: 10,
-              width: 200,
+              margin: 20,
+              width: 120,
               backgroundColor: "#87CEEB99",
               borderColor: "#87CEEB99",
               textAlign: "center",

@@ -97,7 +97,7 @@ function EditbannerFlast(props) {
               apiKey="your-api-key"
               onEditorChange={(newText) => setValueText(newText)}
               initialValue={`${dataEdit?.description_ads}`}
-              
+
               init={{
                 height: 400,
                 menubar: false,
@@ -189,8 +189,8 @@ function EditbannerFlast(props) {
               type="primary"
               htmlType="reset"
               style={{
-                margin: 10,
-                width: 200,
+                margin: 20,
+                width: 120,
                 backgroundColor: "#DCDFE8",
                 borderColor: "#DCDFE8",
                 textAlign: "center",
@@ -211,8 +211,8 @@ function EditbannerFlast(props) {
               type="primary"
               htmlType="submit"
               style={{
-                margin: 10,
-                width: 200,
+                margin: 20,
+                width: 120,
                 backgroundColor: "#87CEEB99",
                 borderColor: "#87CEEB99",
                 textAlign: "center",

@@ -50,7 +50,7 @@ function CreateBannerHomee() {
   };
 
   return (
-    <div  className="_Container_banner_name">
+    <div className="_Container_banner_name">
       <h3 className="_titile_add_wonent">Thêm banner home</h3>
       <Form
         style={{ margin: "0 20px" }}
@@ -187,13 +187,13 @@ function CreateBannerHomee() {
             span: 16,
           }}
         >
-        
+
           <Button
             type="primary"
             htmlType="reset"
             style={{
-              margin: 10,
-              width: 200,
+              margin: 20,
+              width: 120,
               backgroundColor: "#DCDFE8",
               borderColor: "#DCDFE8",
               textAlign: "center",
@@ -214,8 +214,8 @@ function CreateBannerHomee() {
             type="primary"
             htmlType="submit"
             style={{
-              margin: 10,
-              width: 200,
+              margin: 20,
+              width: 120,
               backgroundColor: "#87CEEB99",
               borderColor: "#87CEEB99",
               textAlign: "center",
