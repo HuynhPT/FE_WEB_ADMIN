@@ -1,116 +1,238 @@
-import { Button, Input } from "antd";
-import React, { useState } from "react";
+import { Button, Checkbox, Form, Input } from "antd";
+import React, { useState, useEffect } from "react";
 import TynimceProduct from "../../../../Components/products/TinymceProduct";
-import "./CreateBannerWoment.css";
-function EditBannerWonent() {
-  const [nameLinkImage, setNameLinkImage] = useState([]);
+import "../bannerwonent/CreateBannerWoment.css";
+import { Editor } from "@tinymce/tinymce-react";
+import { add } from "../../../../API/ImageAPI";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+function EditBannerWonent(props) {
+  const { id } = useParams();
+  const [nameLinkImage, setNameLinkImage] = useState();
+  const [valueText, setValueText] = useState();
+  const [dataEdit, setDataEdit] = useState();
+  useEffect(() => {
+    fetch(
+      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const newData = data.data.find((item) => item._id == id);
+        setDataEdit(newData);
+      });
+  }, []);
   const upImage = (e) => {
-    const namePhoto = document.getElementById("images").files[0].name;
-    if (nameLinkImage.length > 0) {
-      setNameLinkImage([...nameLinkImage, namePhoto]);
-    } else {
-      setNameLinkImage([namePhoto]);
-    }
+    setNameLinkImage(e.target.files[0].name);
   };
+  const onFinish = async (values) => {
+    console.log(values);
+
+  };
+  console.log(dataEdit?.title_ads);
+
   return (
     <div className="_Container_banner_name">
       <h3 className="_titile_add_wonent">Sửa banner nữ</h3>
-      {/* tên */}
-      <div className="_input_banner_name">
-        <p className="_titile_add_">Tên*</p>
-        <Input
-          style={{
-            borderRadius: 3,
+      {dataEdit !== undefined && (
+        <Form
+          style={{ margin: "0 20px" }}
+          name="basic"
+          labelCol={{
+            span: 4,
           }}
-          placeholder="Sửa tên"
-        />
-      </div>
-      {/* Đối tượng */}
-      <div className="_input_banner_name">
-        <p className="_titile_add_">Đối tượng*</p>
-        <Input
-          style={{
-            borderRadius: 3,
+          wrapperCol={{
+            span: 20,
           }}
-          placeholder="Nhập đối tượng"
-        />
-      </div>
-      {/* thông tin */}
-      <div className="_input_banner_name">
-        <p className="_titile_add_">Thông tin chi tiết*</p>
-        <TynimceProduct />
-      </div>
-      {/* Ảnh */}
-      <div className="_input_banner_name">
-        <p className="_titile_add_">Chọn ảnh*</p>
-        {nameLinkImage.length == 0 ? (
-          <span>{nameLinkImage}</span>
-        ) : (
-          <>
-            {nameLinkImage.map((item) => (
-              <>
-                <span>{item}</span>
-                <br />
-              </>
-            ))}
-            <Button onClick={() => setNameLinkImage([])} style={{ margin: 25 }}>
-              Huỷ
-            </Button>
-          </>
-        )}
-        <br />
-        <label htmlFor="images">
-          <div
-            style={{
-              border: "1px solid rgba(0, 0, 0, 0.6)",
-              marginTop: -20,
-              height: 48,
-              textAlign: "center",
+          initialValues={{
+            remember: true,
+          }}
+          onFinish={onFinish}
+          autoComplete="off"
+        >
+          {/* tên */}
+          <Form.Item
+            label="Sửa tên"
+            name="title_ads"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập tên !",
+              },
+            ]}
+          >
+            <Input
+              type="text"
+              style={{ borderRadius: 3 }}
+              placeholder="dasad"
+              defaultValue={dataEdit?.title_ads}
+            />
+          </Form.Item>
+          {/* Đối tượng */}
+          <Form.Item
+            label="Sửa đối tượng"
+            name="title_data"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập đối tượng !",
+              },
+            ]}
+          >
+            <Input
+              style={{ borderRadius: 3 }}
+              defaultValue={`${dataEdit?.title_data}`}
+            />
+          </Form.Item>
+          {/* Thông tin chi tiết */}
+          <Form.Item
+            label="Sửa thông tin chi tiết"
+            name="description_ads"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập thông tin chi tiết",
+              },
+            ]}
+          >
+            <Editor
+              apiKey="your-api-key"
+              onEditorChange={(newText) => setValueText(newText)}
+              initialValue={`${dataEdit?.description_ads}`}
+              
+              init={{
+                height: 400,
+                menubar: false,
+                plugins: [
+                  "advlist",
+                  "autolink",
+                  "lists",
+                  "link",
+                  "image",
+                  "charmap",
+                  "preview",
+                  "anchor",
+                  "searchreplace",
+                  "visualblocks",
+                  "code",
+                  "fullscreen",
+                  "insertdatetime",
+                  "media",
+                  "table",
+                  "code",
+                  "help",
+                  "wordcount",
+                ],
+                toolbar:
+                  "undo redo | blocks | " +
+                  "bold italic forecolor | alignleft aligncenter " +
+                  "alignright alignjustify | bullist numlist outdent indent | " +
+                  "removeformat | help",
+                content_style:
+                  "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              }}
+            />
+          </Form.Item>
+          {/* Chọn ảnh */}
 
-              borderRadius: 3,
-              width: "40%",
+          <Form.Item label="Chọn ảnh" name="croppedImage">
+            {(nameLinkImage !== undefined || dataEdit.image_ads) && (
+              <div style={{ display: "flex" }}>
+                <span style={{ margin: 10 }}>
+                  {nameLinkImage !== undefined
+                    ? nameLinkImage
+                    : dataEdit.image_ads}
+                </span>
+                <br />
+                <Button
+                  onClick={() => setNameLinkImage()}
+                  style={{ margin: 10 }}
+                >
+                  Huỷ
+                </Button>
+              </div>
+            )}
+
+            <br />
+            <label htmlFor="images">
+              <div
+                style={{
+                  border: "1px solid #d9d9d9",
+                  marginTop: -20,
+                  textAlign: "center",
+                  borderRadius: 3,
+                  width: "40%",
+                }}
+              >
+                <p
+                  style={{
+                    marginTop: 10,
+                  }}
+                >
+                  Chọn ảnh
+                </p>
+              </div>
+            </label>
+            <input
+              id="images"
+              type="file"
+              style={{ display: "none" }}
+              onChange={(e) => upImage(e)}
+            />
+          </Form.Item>
+          {/* nút xử lý sự kiện */}
+          <Form.Item
+            wrapperCol={{
+              offset: 15,
+              span: 16,
             }}
           >
-            <p
+            <Button
+              type="primary"
+              htmlType="reset"
               style={{
-                marginTop: 10,
+                margin: 10,
+                width: 200,
+                backgroundColor: "#DCDFE8",
+                borderColor: "#DCDFE8",
+                textAlign: "center",
               }}
             >
-              Chọn ảnh
-            </p>
-          </div>
-        </label>
-        <input
-          id="images"
-          type="file"
-          style={{ display: "none" }}
-          onChange={(e) => upImage(e)}
-        />
-      </div>
-      <div className="_Button_im">
-        <Button
-          htmlType="reset"
-          style={{
-            backgroundColor: "#DCDFE8",
-            width: "20%",
-            height: 48,
-            margin: "0 100px",
-          }}
-        >
-          <p style={{ padding: 10 }}>Đặt lại</p>
-        </Button>
-        <Button
-          htmlType="submit"
-          href="/shop/banner_women"
-          style={{
-            width: "20%",
-            height: 48,
-            backgroundColor: "#87CEEB99",
-          }}
-        >
-          <p style={{ padding: 10 }}>Sửa banner</p>
-        </Button>
-      </div>
+              <p
+                style={{
+                  fontSize: 16,
+                  fontWeight: "400",
+                  color: "#000000",
+                  marginTop: -2,
+                }}
+              >
+                Đặt lại
+              </p>
+            </Button>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{
+                margin: 10,
+                width: 200,
+                backgroundColor: "#87CEEB99",
+                borderColor: "#87CEEB99",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: 16,
+                  fontWeight: "400",
+                  color: "#000000",
+                  marginTop: -2,
+                }}
+              >
+                Thêm banner
+              </p>
+            </Button>
+          </Form.Item>
+        </Form>
+      )}
     </div>
   );
 }

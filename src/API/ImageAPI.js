@@ -9,3 +9,7 @@ export const add = (data) => {
   const url = "/img-first-images/creact-img";
   return axiosClient.post(url, data);
 };
+export const remove = async (id, data) => {
+  const url = `/img-first-images/delete-img/${id}`;
+  return await axiosClient.delete(url);
+};

@@ -5,17 +5,22 @@ import { Link } from "react-router-dom";
 import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 import { getAll } from "../../../../API/ImageAPI";
+import{
+  delImg
+}from "../../../../Redux/Bannner";
+import {useDispatch} from "react-redux";
 
 const BannerMen = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState();
+  const dispatch =useDispatch();
   useEffect(() => {
     fetch(
       "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
     )
       .then((response) => response.json())
       .then((data) => {
-        const newData = data.data.filter((item) => item.title_data);
+        const newData = data.data.filter((item) => item.title_data =="Nam");
         setData(newData);
       });
   }, []);
@@ -30,8 +35,11 @@ const BannerMen = () => {
   
   const listDataa = () => {
     if (data !== undefined) {
-      const deletee = (id) => {
-        console.log(id);
+      const deletee = (_id) => {
+        console.log(_id);
+        dispatch(delImg(_id));
+        alert("Xóa thành công");
+        location.reload()
       };
       const columns = [
         {

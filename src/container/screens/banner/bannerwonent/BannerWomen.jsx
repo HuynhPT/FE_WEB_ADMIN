@@ -1,30 +1,45 @@
-import { Button, Table } from "antd";
+import { Button, Image, Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
+import { getAll } from "../../../../API/ImageAPI";
+import{
+  delImg
+}from "../../../../Redux/Bannner";
+import {useDispatch} from "react-redux";
 
-const BannerWomen = () => {
+const BannerMen = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
+  const dispatch =useDispatch();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/girl.json")
+    fetch(
+      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+    )
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        const newData = data.data.filter((item) => item.title_data =="Nữ");
+        setData(newData);
+      });
   }, []);
+
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
     },
   };
-  const hasSelected = selectedRowKeys.length > 0;
 
+  const hasSelected = selectedRowKeys.length > 0;
+  
   const listDataa = () => {
     if (data !== undefined) {
-      const deletee = (id) => {
-        console.log(id);
+      const deletee = (_id) => {
+        console.log(_id);
+        dispatch(delImg(_id));
+        alert("Xóa thành công");
+        location.reload()
       };
       const columns = [
         {
@@ -39,12 +54,19 @@ const BannerWomen = () => {
           title: "Ảnh",
           dataIndex: "image_ads",
           render: (image_ads) => (
-            <img src={image_ads} alt="" style={{ width: 200 }} />
+            <Image src={image_ads} alt="" style={{ width: 200 }} />
           ),
         },
         {
           title: "Chi tiết",
           dataIndex: "description_ads",
+          render: (description_ads) => (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: description_ads,
+              }}
+            ></div>
+          ),
         },
 
         {
@@ -52,7 +74,7 @@ const BannerWomen = () => {
           dataIndex: "_id",
           render: (_id) => (
             <div style={{ display: "flex", flexDirection: "row" }}>
-              <Link to="/edit_banner_woment">
+              <Link to={`/edit_banner_woment/${_id}`}>
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link>
               <DeleteOutlined
@@ -89,13 +111,15 @@ const BannerWomen = () => {
       <div className="text_spb">
         <p className="texttitlespb">
           {
-            " Danh sách banner nữ quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
+            " Danh sách banner nữ đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Button href="/create_banner_woment" className="add_text">
-          <p className="text_buttonsss">{" +  Thêm mới"}</p>
+        <Button className="add_text">
+          <Link to="/create_banner_men" className="text_buttonsss">
+            {" +  Thêm mới"}
+          </Link>
         </Button>
-        {/* <Button href="/create_banner_woment" className="add_text">
+        {/* <Button href="/create_banner_men" className="add_text">
           <p className="_text_banner">+ Thêm mới</p>
         </Button> */}
       </div>
@@ -124,4 +148,4 @@ const BannerWomen = () => {
   );
 };
 
-export default BannerWomen;
+export default BannerMen;
