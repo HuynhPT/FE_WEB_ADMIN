@@ -45,6 +45,8 @@ function CreateBannerMen() {
       }
     );
     console.log(values);
+    alert("Thêm thành công");
+    history.back();
   };
 
   return (

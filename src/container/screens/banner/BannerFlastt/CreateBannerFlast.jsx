@@ -5,7 +5,7 @@ import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import qs from "qs";
-function CreateBannerWoment() {
+function CreateBannerFlast() {
   const [nameLinkImage, setNameLinkImage] = useState("");
   const [nameImage, setNameImage] = useState("");
   const [valueText, setValueText] = useState();
@@ -51,7 +51,7 @@ function CreateBannerWoment() {
 
   return (
     <div  className="_Container_banner_name">
-      <h3 className="_titile_add_wonent">Thêm banner nữ</h3>
+      <h3 className="_titile_add_wonent">Thêm banner flast</h3>
       <Form
         style={{ margin: "0 20px" }}
         name="basic"
@@ -237,4 +237,4 @@ function CreateBannerWoment() {
   );
 }
 
-export default CreateBannerWoment;
+export default CreateBannerFlast;

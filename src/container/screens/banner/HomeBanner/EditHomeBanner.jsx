@@ -6,7 +6,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { add } from "../../../../API/ImageAPI";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-function EditbannerMen(props) {
+function EditbannerHomee(props) {
   const { id } = useParams();
   const [nameLinkImage, setNameLinkImage] = useState();
   const [valueText, setValueText] = useState();
@@ -26,12 +26,13 @@ function EditbannerMen(props) {
   };
   const onFinish = async (values) => {
     console.log(values);
+    
   };
   console.log(dataEdit?.title_ads);
 
   return (
     <div className="_Container_banner_name">
-      <h3 className="_titile_add_wonent">Sửa banner nam</h3>
+      <h3 className="_titile_add_wonent">Sửa banner home</h3>
       {dataEdit !== undefined && (
         <Form
           style={{ margin: "0 20px" }}
@@ -236,4 +237,4 @@ function EditbannerMen(props) {
   );
 }
 
-export default EditbannerMen;
+export default EditbannerHomee;
