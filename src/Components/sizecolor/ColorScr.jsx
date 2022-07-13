@@ -28,7 +28,7 @@ const ColorScr = () => {
         console.log(err.request);
       }
     );
-    console.log(values);
+    alert('Thêm màu thành công')
   };
 
   const onFinishFailed = (errorInfo) => {

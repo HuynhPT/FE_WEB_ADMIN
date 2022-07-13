@@ -51,20 +51,19 @@ const ScreenListProduct = () => {
         {
           title: "Size",
           dataIndex: "size_product",
-          render: (size_product) =>
-            <div style={{display:'flex'}}>
-              {
-                size_product.map((item) => {
-                  return <p style={{marginRight:10}}> {item}</p>;
-                })
-              }
+          render: (size_product) => (
+            <div style={{ display: "flex" }}>
+              {size_product.map((item) => {
+                return <p style={{ marginRight: 10 }}> {item}</p>;
+              })}
             </div>
+          ),
         },
         {
           title: "Color",
           dataIndex: "color_product",
           render: (color_product) => (
-            <div style={{display:'flex'}}>
+            <div style={{ display: "flex" }}>
               {color_product.map((item) => {
                 return (
                   <div
@@ -73,7 +72,7 @@ const ScreenListProduct = () => {
                       width: 20,
                       height: 20,
                       border: "1px solid black",
-                      marginRight:5
+                      marginRight: 5,
                     }}
                   ></div>
                 );
@@ -92,39 +91,66 @@ const ScreenListProduct = () => {
         {
           title: "Chi tiết",
           dataIndex: "descriptionProduct",
-          render: (descriptionProduct) => {
-            <div
-              dangerouslySetInnerHTML={{
-                _html: descriptionProduct,
+          render: (descriptionProduct) => (
+            <p
+              style={{
+                textOverflow: "ellipsis",
+                overflow: "hidden",
+                width: 100,
+                height: 50,
               }}
-            ></div>;
-          },
+              dangerouslySetInnerHTML={{
+                __html: descriptionProduct,
+              }}
+            />
+          ),
         },
-
+        {
+          title: "Đơn giá",
+          dataIndex: "importPrice",
+        },
+        {
+          title: "Giá bán",
+          dataIndex: "price",
+        },
         {
           title: "Hoạt động",
           dataIndex: "_id",
           render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginLeft:10
+              }}
+            >
               <Link to={`/edit_product/${_id}`}>
-                <EditOutlined style={{ width: 50 }} size={24} />
+                <p style={{ color: "blue" }} size={24}>
+                  Sửa
+                </p>
               </Link>
-              <DeleteOutlined
+              <p
                 onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
+                style={{ width: 50, color: "blue", cursor: "pointer" }}
                 size={24}
-              />
+              >
+                Xoá
+              </p>
               <Link to={`/infor_product/${_id}`}>
-                <FileSearchOutlined
+                <p
                   onClick={() => deletee(_id)}
-                  style={{ width: 50, marginTop: 5 }}
+                  style={{ width: 50, color: "blue" }}
                   size={24}
-                />
+                >
+                  Chi tiết
+                </p>
               </Link>
             </div>
           ),
         },
       ];
+
       return (
         <Table
           rowSelection={{
@@ -135,6 +161,7 @@ const ScreenListProduct = () => {
           dataSource={products}
           rowKey={(item) => item._id}
           className="table-list"
+          style={{ width: "100%" }}
         />
       );
     }

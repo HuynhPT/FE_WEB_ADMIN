@@ -288,7 +288,7 @@ function EditProduct(props) {
               <Input
                 placeholder="Giá bán"
                 onChange={(e) => setValueGiaban(e.target.value)}
-                defaultValue={dataEdit?.price.toString()}
+                defaultValue={dataEdit?.price}
               />
             </div>
             {/* đơn giá */}
@@ -297,7 +297,7 @@ function EditProduct(props) {
               <Input
                 placeholder="Đơn giá"
                 onChange={(e) => setValueDongia(e.target.value)}
-                defaultValue={dataEdit?.cost.toString()}
+                defaultValue={dataEdit?.importPrice}
               />
             </div>
           </div>
@@ -315,7 +315,7 @@ function EditProduct(props) {
           {/* Nút ấn bắt sự kiện */}
           <div className="_buttonClick_Product">
             <Button className="__buttonClick_Product_Res">
-              <p className="_Title_button_product">Đặt lại</p>
+              <p className="_Title_button_product">Quay lại</p>
             </Button>
             <Button
               className="__buttonClick_Product_add"

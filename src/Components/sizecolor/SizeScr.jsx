@@ -28,7 +28,7 @@ const SizeScr = () => {
         console.log(err.request);
       }
     );
-    console.log(values);
+    alert("Thêm size thành công");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -52,10 +52,7 @@ const SizeScr = () => {
       autoComplete="off"
     >
       <Form.Item name="titleSize" style={{ width: "100%" }}>
-        <Input
-          placeholder="Thêm size"
-          style={{ borderRadius: 3}}
-        />
+        <Input placeholder="Thêm size" style={{ borderRadius: 3 }} />
       </Form.Item>
 
       <Form.Item

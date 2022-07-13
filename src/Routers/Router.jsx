@@ -125,12 +125,16 @@ const Router = () => {
         <Route path="/create_banner_woment" element={<CreateBannerWoment />} />
         <Route path="/edit_banner_woment/:id" element={<EditBannerWonent />} />
         {/* banner home */}
+
         <Route path="/create_banner_home" element={<CreateBannerHomee />} />
         <Route path="/edit_banner_home/:id" element={<EditbannerHomee />} />
-        {/* <Route path="/edit_list_type" element={<FromUpdateTypeProduct />} /> */}
+      
         {/* banner flast */}
         <Route path="/create_banner_flast" element={<CreateBannerFlast/>} />
         <Route path="/edit_banner_flast/:id" element={<EditbannerFlast/>} />
+
+        <Route path="/edit_list_type/:id" element={<FromUpdateTypeProduct />} />
+
       </Routes>
     </BrowserRouter>
   );
