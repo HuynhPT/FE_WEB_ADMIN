@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Progress } from "antd";
 import "./stylesrow.css";
 function Row(props) {
   return (
@@ -22,7 +22,12 @@ function Row(props) {
         </div>
       </div>
       <div>
-        <hr />
+        <Progress
+          percent={props.percent}
+          strokeColor={props.color}
+          size="small"
+          status="active"
+        />
       </div>
     </Card>
   );

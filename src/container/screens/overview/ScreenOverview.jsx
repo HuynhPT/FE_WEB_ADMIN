@@ -25,16 +25,26 @@ const ScreenOverview = () => {
               img_ic={img_tds}
               title={"Tổng doanh số bán"}
               number={"$60.55"}
+              color={"#87CEEB"}
+              percent={50}
             />
           </div>
           <div className={styles.row}>
-            <Row img_ic={img_tcp} title={"Tổng chi phí"} number={"$45.98"} />
+            <Row
+              img_ic={img_tcp}
+              title={"Tổng chi phí"}
+              number={"$45.98"}
+              color={"#FF69B4"}
+              percent={70}
+            />
           </div>
           <div>
             <Row
               img_ic={img_spbc}
               title={"Sản phẩm bán chạy"}
               number={"4589 triệu"}
+              color={"#DDA0DD"}
+              percent={55}
             />
           </div>
         </div>

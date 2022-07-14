@@ -22,20 +22,22 @@ const CarouselBanner = () => {
 
   return (
     state !== undefined && (
-      <Carousel autoplay autoplaySpeed={2000}>
-        <div>
-          <img src={state[1]} alt="" style={{ width: "100%", height: 150 }} />
-        </div>
-        <div>
-          <img src={state[2]} alt="" style={{ width: "100%", height: 150 }} />
-        </div>
-        <div>
-          <img src={state[3]} alt="" style={{ width: "100%", height: 150 }} />
-        </div>
-        <div>
-          <img src={state[4]} alt="" style={{ width: "100%", height: 150 }} />
-        </div>
-      </Carousel>
+      <div style={{ width: "100%" , background:'#fff', paddingLeft:200 , paddingRight:200}}>
+        <Carousel autoplay autoplaySpeed={2000} style={contentStyle}>
+          <div>
+            <img src={state[1]} alt="" style={{ width: "100%", height: 150 }} />
+          </div>
+          <div>
+            <img src={state[2]} alt="" style={{ width: "100%", height: 150 }} />
+          </div>
+          <div>
+            <img src={state[3]} alt="" style={{ width: "100%", height: 150 }} />
+          </div>
+          <div>
+            <img src={state[4]} alt="" style={{ width: "100%", height: 150 }} />
+          </div>
+        </Carousel>
+      </div>
     )
   );
 };

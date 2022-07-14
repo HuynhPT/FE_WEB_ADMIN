@@ -339,8 +339,6 @@ const InforProduct = () => {
           </div>
         </div>
       </div>
-
-      <CarouselBanner />
     </>
   );
 };
