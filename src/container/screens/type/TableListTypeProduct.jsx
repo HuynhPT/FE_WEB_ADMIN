@@ -25,7 +25,7 @@ const TableObjectProduct = () => {
   useEffect(() => {
     dispatch(getOpject());
   }, []);
-console.log(opjectproduct);
+  console.log(opjectproduct);
   const columns = [
     {
       title: "Tên thể loại",

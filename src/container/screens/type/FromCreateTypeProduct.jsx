@@ -21,11 +21,6 @@ function FromCreateTypeProduct(props) {
   const upImage = (e) => {
     setNameLinkImage(e.target.files);
     setNameImage(e.target.files[0].name);
-    // if (nameImage.length > 0) {
-    //   setNameImage([...nameLinkImage, namePhoto]);
-    // } else {
-    //   setNameImage([namePhoto]);
-    // }
   };
   useEffect(() => {
     fetch(
