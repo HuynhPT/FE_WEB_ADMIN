@@ -157,10 +157,6 @@ const TableObjectProduct = () => {
       return (
         <>
           <Table
-            rowSelection={{
-              type: "checkbox",
-              ...rowSelection,
-            }}
             columns={columns}
             dataSource={typeproduct}
             rowKey={(item) => item._id}
@@ -175,11 +171,14 @@ const TableObjectProduct = () => {
     <div>
       <Button
         type="primary"
-        disabled={!hasSelected}
-        style={{ margin: "10px 30px" }}
+        style={{
+          margin: "0 30px",
+          backgroundColor: "#D9D9D9",
+          border: "1px solid #D9D9D9 ",
+        }}
         onClick={showmodaldell}
       >
-        Delete
+        <p style={{ color: "#000" }}>Xoá tất cả</p>
       </Button>
       {listDataa()}
       <Modal

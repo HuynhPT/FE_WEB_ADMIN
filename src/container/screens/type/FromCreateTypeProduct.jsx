@@ -179,11 +179,12 @@ function FromCreateTypeProduct(props) {
             htmlType="reset"
             style={{
               margin: 10,
-              width: 190,
+              width: 150,
               backgroundColor: "#DCDFE8",
               borderColor: "#DCDFE8",
               textAlign: "center",
             }}
+            onClick={() => setNameImage()}
           >
             <p
               style={{
@@ -201,7 +202,7 @@ function FromCreateTypeProduct(props) {
             htmlType="submit"
             style={{
               margin: 10,
-              width: 190,
+              width: 150,
               backgroundColor: "#87CEEB99",
               borderColor: "#87CEEB99",
               textAlign: "center",

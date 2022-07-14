@@ -266,10 +266,7 @@ function FromProduct(props) {
         {/* Hàng 4 */}
         <div className="_inputrow5From">
           {/* UP ảnh*/}
-          <div
-            className="_nameInputrow"
-            style={{ justifyContent: "space-between" }}
-          >
+          <div className="_nameInputrow">
             <p className="_text_product">Chọn ảnh*</p>
             {nameImage.length == 0 ? (
               <span>{nameImage}</span>
@@ -284,7 +281,7 @@ function FromProduct(props) {
                 <Button
                   onClick={() => setNameImage([])}
                   style={{
-                    marginLeft: 270,
+                    marginLeft: 117,
                     marginBottom: 25,
                     height: 20,
                     borderRadius: 3,
@@ -310,12 +307,12 @@ function FromProduct(props) {
             <input
               id="images"
               type="file"
-              style={{ display: "none" }}
+              style={{ display: "none", width: "70%" }}
               onChange={(e) => upImage(e)}
             />
           </div>
           {/* Đơn giá */}
-          <div className="_nameInputrow4">
+          <div className="_nameInputrow4" >
             <p className="_text_product">Đơn giá*</p>
             <Input
               placeholder="Đơn giá"

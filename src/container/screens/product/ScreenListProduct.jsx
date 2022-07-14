@@ -37,6 +37,11 @@ const ScreenListProduct = () => {
       };
       const columns = [
         {
+          title: "STT",
+          dataIndex: "_id",
+          render: (_id, data, index) => index + 1,
+        },
+        {
           title: "Mã code",
           dataIndex: "code",
         },
@@ -96,22 +101,30 @@ const ScreenListProduct = () => {
               style={{
                 textOverflow: "ellipsis",
                 overflow: "hidden",
-                width: 100,
-                height: 50,
               }}
               dangerouslySetInnerHTML={{
                 __html: descriptionProduct,
               }}
             />
           ),
+          width: 200,
         },
         {
           title: "Đơn giá",
           dataIndex: "importPrice",
+          render: (importPrice) => (
+            <p>
+              {importPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}
+              đ
+            </p>
+          ),
         },
         {
           title: "Giá bán",
           dataIndex: "price",
+          render: (price) => (
+            <p>{price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}đ</p>
+          ),
         },
         {
           title: "Hoạt động",
@@ -122,7 +135,7 @@ const ScreenListProduct = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                marginLeft:10
+                marginLeft: 10,
               }}
             >
               <Link to={`/edit_product/${_id}`}>
@@ -153,10 +166,10 @@ const ScreenListProduct = () => {
 
       return (
         <Table
-          rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
-          }}
+          // rowSelection={{
+          //   type: "checkbox",
+          //   ...rowSelection,
+          // }}
           columns={columns}
           dataSource={products}
           rowKey={(item) => item._id}
@@ -182,22 +195,43 @@ const ScreenListProduct = () => {
           <p className="text_buttonsss">{" +  Thêm mới"}</p>
         </Button>
       </div>
-      <div
-        className="button-list"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button
-          type="primary"
-          // onClick={start}
-          disabled={!hasSelected}
-          // loading={loading}
-          style={{ margin: "10px 30px" }}
-        >
-          Delete
-        </Button>
-        <div className="search_prd">
+      <div className="button-list" style={{ marginBottom: -30 }}>
+        <div style={{ marginTop: 10 }}>
+          <Button
+            type="primary"
+            style={{
+              margin: "0 5px 0 30px   ",
+              backgroundColor: "#D9D9D9",
+              border: "1px solid #D9D9D9 ",
+            }}
+            // onClick={showmodaldell}
+          >
+            <p style={{ color: "#000" }}>Xoá tất cả</p>
+          </Button>
+          <Button
+            type="primary"
+            style={{
+              margin: "0 5px",
+              backgroundColor: "#D9D9D9",
+              border: "1px solid #D9D9D9 ",
+            }}
+            // onClick={showmodaldell}
+          >
+            <p style={{ color: "#000" }}>Lọc</p>
+          </Button>
+          <Button
+            type="primary"
+            style={{
+              margin: "0 5px",
+              backgroundColor: "#D9D9D9",
+              border: "1px solid #D9D9D9 ",
+            }}
+            // onClick={showmodaldell}
+          >
+            <p style={{ color: "#000" }}>Sắp xếp</p>
+          </Button>
+        </div>
+        <div className="search_prd" style={{ marginRight: -30 }}>
           <p className="search_title">Tìm kiếm:</p>
           <Search type="text" placeholder="Tìm kiếm" />
         </div>

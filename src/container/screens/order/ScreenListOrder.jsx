@@ -144,21 +144,19 @@ const ScreenListOrder = () => {
                 alignItems: "center",
               }}
             >
-              <DeleteOutlined
+              <p
                 onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
+                style={{ width: 50, marginTop: 5, color: "blue" , cursor:'pointer'}}
                 size={24}
-              />
+              >
+                Xoá
+              </p>
             </div>
           ),
         },
       ];
       return (
         <Table
-          rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
-          }}
           columns={columns}
           dataSource={data}
           rowKey={(item) => item._id}
@@ -183,22 +181,25 @@ const ScreenListOrder = () => {
           <p className="text_buttonsss">{" +  Thêm mới"}</p>
         </Button> */}
       </div>
-      <div
-        className="button-list"
-        style={{
-          marginBottom: 16,
-        }}
-      >
+      <div className="button-list" style={{}}>
         <Button
           type="primary"
-          // onClick={start}
-          disabled={!hasSelected}
-          // loading={loading}
-          style={{ margin: "10px 30px" }}
+          style={{
+            marginLeft: 30,
+            marginTop: 25,
+            backgroundColor: "#D9D9D9",
+            border: "1px solid #D9D9D9 ",
+          }}
+          // onClick={showmodaldell}
         >
-          Delete
+          <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
-        <div className="search_prd">
+        <div
+          className="search_prd"
+          style={{
+            marginTop: 15,
+          }}
+        >
           <p className="search_title">Tìm kiếm:</p>
           <Search type="text" placeholder="Tìm kiếm" />
         </div>

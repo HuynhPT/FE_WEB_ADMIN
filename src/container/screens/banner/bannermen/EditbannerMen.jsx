@@ -4,7 +4,7 @@ import TynimceProduct from "../../../../Components/products/TinymceProduct";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
 import { add } from "../../../../API/ImageAPI";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 function EditbannerMen(props) {
   const { id } = useParams();
@@ -97,7 +97,6 @@ function EditbannerMen(props) {
               apiKey="your-api-key"
               onEditorChange={(newText) => setValueText(newText)}
               initialValue={`${dataEdit?.description_ads}`}
-
               init={{
                 height: 400,
                 menubar: false,
@@ -185,28 +184,31 @@ function EditbannerMen(props) {
               span: 16,
             }}
           >
-            <Button
-              type="primary"
-              htmlType="reset"
-              style={{
-                margin: 20,
-                width: 120,
-                backgroundColor: "#DCDFE8",
-                borderColor: "#DCDFE8",
-                textAlign: "center",
-              }}
-            >
-              <p
+            <Link to="/shop/banner_men">
+              <Button
+                type="primary"
+                htmlType="reset"
                 style={{
-                  fontSize: 16,
-                  fontWeight: "400",
-                  color: "#000000",
-                  marginTop: -2,
+                  margin: 20,
+                  width: 120,
+                  backgroundColor: "#DCDFE8",
+                  borderColor: "#DCDFE8",
+                  textAlign: "center",
                 }}
               >
-                Đặt lại
-              </p>
-            </Button>
+                <p
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "400",
+                    color: "#000000",
+                    marginTop: -2,
+                  }}
+                >
+                  Quay lại
+                </p>
+              </Button>
+            </Link>
+
             <Button
               type="primary"
               htmlType="submit"
@@ -226,7 +228,7 @@ function EditbannerMen(props) {
                   marginTop: -2,
                 }}
               >
-                Thêm banner
+                Sửa banner
               </p>
             </Button>
           </Form.Item>

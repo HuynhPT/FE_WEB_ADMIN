@@ -38,12 +38,6 @@ const SizeScr = () => {
     <Form
       style={{ display: "flex", margin: 100, justifyContent: "space-between" }}
       name="basic"
-      labelCol={{
-        span: 8,
-      }}
-      wrapperCol={{
-        span: 16,
-      }}
       initialValues={{
         remember: true,
       }}
@@ -51,21 +45,27 @@ const SizeScr = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <Form.Item name="titleSize" style={{ width: "100%" }}>
-        <Input placeholder="Thêm size" style={{ borderRadius: 3 }} />
-      </Form.Item>
+      <div style={{ width: "65%" }}>
+        <p
+          style={{
+            color: "#000000",
+            fontSize: 16,
+            fontWeight: "700",
+            fontFamily: "Open Sans",
+          }}
+        >
+          Tên size
+        </p>
+        <Form.Item name="titleSize" style={{ width: "100%" }}>
+          <Input placeholder="Thêm size" style={{ borderRadius: 3 }} />
+        </Form.Item>
+      </div>
 
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
+      <Form.Item style={{ marginTop: 37 }}>
         <Button
           type="primary"
           htmlType="submit"
           style={{
-            marginLeft: 10,
             width: 250,
             backgroundColor: "#87CEEB",
             color: "#000000",

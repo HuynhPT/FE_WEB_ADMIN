@@ -28,11 +28,11 @@ const FromObjectProduct = () => {
   };
   return (
     <div>
-      <h3 style={{ fontSize: "24px", marginTop: 30, marginLeft: 20 }}>
+      <h3 style={{ fontSize: "24px", marginTop: 30, marginLeft: 30 }}>
         Danh sách đối tượng
       </h3>
 
-      <p style={{ fontSize: "14px", marginTop: 20, marginLeft: 20 }}>
+      <p style={{ fontSize: "14px", marginTop: 20, marginLeft: 30 }}>
         Thêm đối tượng sử dụng
       </p>
 
@@ -40,7 +40,7 @@ const FromObjectProduct = () => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          margin:20
+          margin:30
         }}
       >
         <Input

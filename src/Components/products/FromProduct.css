@@ -53,12 +53,12 @@
   width: 18%;
 }
 ._nameInputrow {
-  width: 45%;
+  width: 18%;
 }
 ._inputrow5From {
   display: flex;
-  justify-content: space-between;
-  margin: 30px 0 20px 0;
+  justify-content: space-between ;
+  margin: 30px 0 20px 0 ;
 }
 ._buttonClick_Product {
   display: flex;

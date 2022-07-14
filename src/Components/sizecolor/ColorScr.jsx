@@ -28,7 +28,7 @@ const ColorScr = () => {
         console.log(err.request);
       }
     );
-    alert('Thêm màu thành công')
+    alert("Thêm màu thành công");
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -36,7 +36,12 @@ const ColorScr = () => {
   };
   return (
     <Form
-      style={{ display: "flex", margin: 100, justifyContent: "space-between" }}
+      style={{
+        display: "flex",
+        margin: 100,
+        justifyContent: "space-between",
+        alignItems: "center",
+      }}
       name="basic"
       labelCol={{
         span: 8,
@@ -51,36 +56,61 @@ const ColorScr = () => {
       onFinishFailed={onFinishFailed}
       autoComplete="off"
     >
-      <Form.Item name="titleColors" style={{ width: "40%" }}>
-        <Input placeholder="Thêm màu" style={{ borderRadius: 3 }} />
-      </Form.Item>
-      <Form.Item name="colorCode" style={{ width: "40%" }}>
-        <Input placeholder="Thêm mã màu" style={{ borderRadius: 3 }} type='color' />
-      </Form.Item>
-
-      <Form.Item
-        wrapperCol={{
-          offset: 8,
-          span: 16,
-        }}
-      >
-        <Button
-          type="primary"
-          htmlType="submit"
+      <div style={{ width: "100%" }}>
+        <p
           style={{
-            // marginLeft: -200,
-            width: 250,
-            backgroundColor: "#87CEEB",
             color: "#000000",
             fontSize: 16,
             fontWeight: "700",
             fontFamily: "Open Sans",
-            borderRadius: 3,
           }}
         >
-          Thêm màu
-        </Button>
-      </Form.Item>
+          Tên màu
+        </p>
+        <Form.Item name="titleColors" style={{ width: "100%" }}>
+          <Input placeholder="Thêm màu" style={{ borderRadius: 3 }} />
+        </Form.Item>
+      </div>
+      <div style={{ width: "100%" }}>
+        <p
+          style={{
+            color: "#000000",
+            fontSize: 16,
+            fontWeight: "700",
+            fontFamily: "Open Sans",
+          }}
+        >
+          Mã màu
+        </p>
+        <Form.Item name="colorCode" style={{ width: "100%" }}>
+          <Input
+            placeholder="Thêm mã màu"
+            style={{ borderRadius: 3 }}
+            type="color"
+          />
+        </Form.Item>
+      </div>
+
+      <div>
+        <Form.Item style={{ marginTop: 40 }}>
+          <Button
+            type="primary"
+            htmlType="submit"
+            style={{
+              // marginLeft: -200,
+              width: 250,
+              backgroundColor: "#87CEEB",
+              color: "#000000",
+              fontSize: 16,
+              fontWeight: "700",
+              fontFamily: "Open Sans",
+              borderRadius: 3,
+            }}
+          >
+            Thêm màu
+          </Button>
+        </Form.Item>
+      </div>
     </Form>
   );
 };

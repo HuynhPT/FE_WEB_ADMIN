@@ -5,22 +5,20 @@ import { Link } from "react-router-dom";
 import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 import { getAll } from "../../../../API/ImageAPI";
-import{
-  delImg
-}from "../../../../Redux/Bannner";
-import {useDispatch} from "react-redux";
+import { delImg } from "../../../../Redux/Bannner";
+import { useDispatch } from "react-redux";
 
 const BannerMen = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState();
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   useEffect(() => {
     fetch(
       "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
     )
       .then((response) => response.json())
       .then((data) => {
-        const newData = data.data.filter((item) => item.title_data =="Nữ");
+        const newData = data.data.filter((item) => item.title_data == "Nữ");
         setData(newData);
       });
   }, []);
@@ -32,16 +30,21 @@ const BannerMen = () => {
   };
 
   const hasSelected = selectedRowKeys.length > 0;
-  
+
   const listDataa = () => {
     if (data !== undefined) {
       const deletee = (_id) => {
         console.log(_id);
         dispatch(delImg(_id));
         alert("Xóa thành công");
-        location.reload()
+        location.reload();
       };
       const columns = [
+        {
+          title: "STT",
+          dataIndex: "_id",
+          render: (_id, data, index) => index + 1,
+        },
         {
           title: "Tên",
           dataIndex: "title_ads",
@@ -61,27 +64,32 @@ const BannerMen = () => {
           title: "Chi tiết",
           dataIndex: "description_ads",
           render: (description_ads) => (
-            <div
+            <p
               dangerouslySetInnerHTML={{
                 __html: description_ads,
               }}
-            ></div>
+            ></p>
           ),
+          width: 200,
         },
 
         {
           title: "Hoạt động",
           dataIndex: "_id",
           render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            <div style={{ display: "flex", justifyContent: "center" }}>
               <Link to={`/edit_banner_woment/${_id}`}>
-                <EditOutlined style={{ width: 50 }} size={24} />
+                <p style={{ width: 50, color: "blue" }} size={24}>
+                  Sửa
+                </p>
               </Link>
-              <DeleteOutlined
+              <p
                 onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
+                style={{ width: 50, color: "blue", cursor: "pointer" }}
                 size={24}
-              />
+              >
+                Xoá
+              </p>
             </div>
           ),
         },
@@ -89,10 +97,6 @@ const BannerMen = () => {
       return (
         <>
           <Table
-            rowSelection={{
-              type: "checkbox",
-              ...rowSelection,
-            }}
             columns={columns}
             dataSource={data}
             rowKey={(item) => item._id}
@@ -131,12 +135,15 @@ const BannerMen = () => {
       >
         <Button
           type="primary"
-          // onClick={start}
-          disabled={!hasSelected}
-          // loading={loading}
-          style={{ margin: "10px 30px" }}
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            backgroundColor: "#D9D9D9",
+            border: "1px solid #D9D9D9 ",
+          }}
+          // onClick={showmodaldell}
         >
-          Delete
+          <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
         <div className="search_prd">
           <p className="search_title">Tìm kiếm:</p>

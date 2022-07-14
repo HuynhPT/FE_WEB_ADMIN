@@ -26,9 +26,7 @@ const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalDelALl, setisModalDelALl] = useState(false);
 
-
   const { Search } = Input;
-
 
   const dispatch = useDispatch();
   const ListOpject = useSelector((data) => data.categoris.value);
@@ -146,7 +144,6 @@ const TableObjectProduct = () => {
             style={{
               height: "100%",
             }}
-            rowSelection={rowSelection}
           />
         </>
       );
@@ -157,18 +154,20 @@ const TableObjectProduct = () => {
       <div style={{ display: "flex", justifyContent: "space-between" }}>
         <Button
           type="primary"
+          style={{
+            backgroundColor: "#D9D9D9",
+            border: "1px solid #D9D9D9 ",
+          }}
           onClick={showmodaldell}
-          disabled={!hasSelected}
-          style={{ margin: "10px 0px" }}
         >
-          Delete
+          <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
 
         <Search
           placeholder="Tìm kiếm theo tên"
           onSearch={onSearch}
           enterButton
-          style={{ width: "30%", borderRadius: 3, marginTop: 8 }}
+          style={{ width: "30%", borderRadius: 3, marginBottom:8 }}
         />
       </div>
       {lisdata()}

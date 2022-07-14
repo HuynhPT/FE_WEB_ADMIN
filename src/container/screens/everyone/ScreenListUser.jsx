@@ -64,25 +64,28 @@ const ScreenListUser = () => {
           title: "Hoạt động",
           dataIndex: "_id",
           render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            <div style={{ display: "flex", flexDirection: "row"  , justifyContent:'center'}}>
               {/* <Link to="/shop/thongKe_loiNhuan">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link> */}
-              <DeleteOutlined
+              <p
                 onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
+                style={{
+                  width: 50,
+                  marginTop: 5,
+                  color: "blue",
+                  cursor: "pointer",
+                }}
                 size={24}
-              />
+              >
+                Xoá
+              </p>
             </div>
           ),
         },
       ];
       return (
         <Table
-          rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
-          }}
           columns={columns}
           dataSource={data}
           rowKey={(item) => item._id}
@@ -115,12 +118,14 @@ const ScreenListUser = () => {
       >
         <Button
           type="primary"
-          // onClick={start}
-          disabled={!hasSelected}
-          // loading={loading}
-          style={{ margin: "10px 30px" }}
+          style={{
+            margin: "10px 30px",
+            backgroundColor: "#D9D9D9",
+            border: "1px solid #D9D9D9 ",
+          }}
+          // onClick={showmodaldell}
         >
-          Delete
+          <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
         <div className="search_prd">
           <p className="search_title">Tìm kiếm:</p>

@@ -1,6 +1,7 @@
 .list-product {
   overflow: scroll;
 }
+
 .button-list {
   display: flex;
   justify-content: space-between;

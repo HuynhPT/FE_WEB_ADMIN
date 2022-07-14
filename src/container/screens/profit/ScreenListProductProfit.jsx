@@ -57,31 +57,48 @@ const ScreenListProductProfit = () => {
         {
           title: "Chi tiết",
           dataIndex: "description_ads",
+          render: (description_ads) => (
+            <p
+              style={{
+                width: "100%",
+                textOverflow: "ellipsis",
+                whiteSpace: "initial",
+              }}
+              dangerouslySetInnerHTML={{
+                __html: description_ads,
+              }}
+            ></p>
+          ),
+          width: 300,
         },
 
         {
           title: "Hoạt động",
           dataIndex: "_id",
           render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row" }}>
+            <div style={{ display: "flex", flexDirection: "row",justifyContent:"center" }}>
               {/* <Link to="/shop/thongKe_loiNhuan">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link> */}
-              <DeleteOutlined
+              <p
                 onClick={() => deletee(_id)}
-                style={{ width: 50, marginTop: 5 }}
+                style={{
+                  marginTop: 5,
+                  color: "blue",
+                  cursor: "pointer",
+                  textAlign:'center'
+                }}
                 size={24}
-              />
+              >
+                Xoá
+              </p>
             </div>
           ),
         },
       ];
       return (
         <Table
-          rowSelection={{
-            type: "checkbox",
-            ...rowSelection,
-          }}
+          style={{ justifyContent: "center" }}
           columns={columns}
           dataSource={data.data}
           rowKey={(item) => item._id}
@@ -111,12 +128,15 @@ const ScreenListProductProfit = () => {
       >
         <Button
           type="primary"
-          // onClick={start}
-          disabled={!hasSelected}
-          // loading={loading}
-          style={{ margin: "10px 30px" }}
+          style={{
+            marginLeft: 30,
+            marginTop: 20,
+            backgroundColor: "#D9D9D9",
+            border: "1px solid #D9D9D9 ",
+          }}
+          // onClick={showmodaldell}
         >
-          Delete
+          <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
         <div className="search_prd">
           <p className="search_title">Tìm kiếm:</p>

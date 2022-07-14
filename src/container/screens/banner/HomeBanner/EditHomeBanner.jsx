@@ -4,7 +4,7 @@ import TynimceProduct from "../../../../Components/products/TinymceProduct";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
 import { add } from "../../../../API/ImageAPI";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 function EditbannerHomee(props) {
   const { id } = useParams();
@@ -186,6 +186,7 @@ function EditbannerHomee(props) {
               span: 16,
             }}
           >
+            <Link  to='/shop/banner_home'>
             <Button
               type="primary"
               htmlType="reset"
@@ -205,9 +206,11 @@ function EditbannerHomee(props) {
                   marginTop: -2,
                 }}
               >
-                Đặt lại
+                Quay lại
               </p>
             </Button>
+            </Link>
+            
             <Button
               type="primary"
               htmlType="submit"
@@ -227,7 +230,7 @@ function EditbannerHomee(props) {
                   marginTop: -2,
                 }}
               >
-                Thêm banner
+                Sửa banner
               </p>
             </Button>
           </Form.Item>
