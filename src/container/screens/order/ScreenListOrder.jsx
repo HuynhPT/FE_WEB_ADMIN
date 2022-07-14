@@ -71,21 +71,53 @@ const ScreenListOrder = () => {
         {
           title: "Trạng thái",
           dataIndex: "status",
-          render: (status) =>
-            status.toString() == 0 ? (
-              <div
-                style={{
-                  border: "1px solid red ",
-                  color: "#fff",
-                  backgroundColor: "red",
-                  fontStyle: "italic",
-                  borderRadius: 20,
-                  opacity: 0.7,
-                }}
-              >
-                không hoàn thành
-              </div>
-            ) : (
+          render: (status) => {
+            if (status.toString() == 0) {
+              return (
+                <div
+                  style={{
+                    border: "1px solid red ",
+                    color: "#fff",
+                    backgroundColor: "red",
+                    fontStyle: "italic",
+                    borderRadius: 20,
+                    opacity: 0.7,
+                  }}
+                >
+                  Chờ xác nhận
+                </div>
+              );
+            } else if (status.toString() == 1) {
+              return (
+                <div
+                  style={{
+                    border: "1px solid green ",
+                    color: "#fff",
+                    backgroundColor: "green",
+                    fontStyle: "italic",
+                    borderRadius: 20,
+                    opacity: 0.7,
+                  }}
+                >
+                  Xác nhận
+                </div>
+              );
+            } else if (status.toString() == 2) {
+              return (
+                <div
+                  style={{
+                    border: "1px solid green ",
+                    color: "#fff",
+                    backgroundColor: "green",
+                    fontStyle: "italic",
+                    borderRadius: 20,
+                    opacity: 0.7,
+                  }}
+                >
+                  Đang vận chuyển
+                </div>
+              );
+            } else {
               <div
                 style={{
                   border: "1px solid green ",
@@ -97,8 +129,9 @@ const ScreenListOrder = () => {
                 }}
               >
                 Hoàn thành
-              </div>
-            ),
+              </div>;
+            }
+          },
         },
         {
           title: "Hoạt động",

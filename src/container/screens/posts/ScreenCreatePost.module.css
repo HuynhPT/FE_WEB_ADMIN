@@ -63,8 +63,8 @@
 
 
 ._title_1 {
-
-
+    margin-top: 12px;
+    margin-left: 16px;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400 !important;
@@ -74,9 +74,8 @@
 }
 
 ._title_2 {
-
-
-
+    margin-top: 12px;
+    margin-left: 16px;
     font-family: 'Open Sans';
     font-style: normal;
     font-weight: 400 !important;

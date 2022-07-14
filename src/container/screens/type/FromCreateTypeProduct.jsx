@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import "../banner/bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
@@ -57,7 +57,15 @@ function FromCreateTypeProduct(props) {
         console.log(err.response);
       }
     );
-    alert("Thêm thành công");
+    message.success({
+      content: "Thêm thể loại thành công",
+      className: "custom-class",
+      style: {
+        color: "#52c41a",
+      },
+      icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+      duration: 2,
+    });
     setValueText("");
   };
 

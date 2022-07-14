@@ -38,15 +38,22 @@ import ScreenListPost from "../container/screens/posts/ScreenListPost";
 //màu size
 import ColorSize from "../container/screens/colorsize/ColorSize";
 
-// banner splash
-import BannerSplash from "../container/screens/banner/BannerSplash";
-import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
-import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEditBanner";
+// // banner splash
+// import BannerSplash from "../container/screens/banner/BannerSplash";
+// import ScreenAddBanner from "../container/screens/banner/BannerFlast/ScreenAddBanner";
+// import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEditBanner";
+//banner flast
+import BannerFlast from "../container/screens/banner/BannerFlastt/BannerFlast";
+import CreateBannerFlast from "../container/screens/banner/BannerFlastt/CreateBannerFlast";
+import EditbannerFlast from "../container/screens/banner/BannerFlastt/EditBannerFlast";
 
 //banner home
-import BannerHome from "../container/screens/banner/bannerhome/BannerHome";
-import ScreenEditBannerHome from "../container/screens/banner/BannerHome/ScreensEditBannerHome";
-import ScreenAddBannerHome from "../container/screens/banner/BannerHome/ScreensAddBannerHome";
+// import BannerHome from "../container/screens/banner/bannerhome/BannerHome";
+// import ScreenEditBannerHome from "../container/screens/banner/BannerHome/ScreensEditBannerHome";
+// import ScreenAddBannerHome from "../container/screens/banner/BannerHome/ScreensAddBannerHome";
+import BannerHomee from "../container/screens/banner/HomeBanner/HomeBanner";
+import CreateBannerHomee from "../container/screens/banner/HomeBanner/CreateHomeBanner";
+import EditbannerHomee from "../container/screens/banner/HomeBanner/EditHomeBanner";
 //banner men
 import BannerMen from "../container/screens/banner/bannermen/BannerMen";
 import CreactBannerMen from "../container/screens/banner/bannermen/CreateBannerMen";
@@ -54,11 +61,8 @@ import EditbannerMen from "../container/screens/banner/bannermen/EditbannerMen";
 
 // banner women
 import BannerWomen from "../container/screens/banner/bannerwonent/BannerWomen";
-import CreateBannerWonen from "../container/screens/banner/bannerwonent/CreateBannerWoment";
-import EditBannerWoment from "../container/screens/banner/bannerwonent/EditBannerWonent";
 import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateBannerWoment";
 import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
-import EditBannerHome from "../container/screens/banner/BannerHome/EditBannerHome";
 
 import InforProduct from "../container/screens/product/InforProduct";
 const Router = () => {
@@ -109,21 +113,28 @@ const Router = () => {
 
           <Route path="mau_size" element={<ColorSize />} />
 
-          <Route path="banner_home" element={<BannerHome />} />
+          <Route path="banner_home" element={<BannerHomee />} />
           <Route path="banner_men" element={<BannerMen />} />
           <Route path="banner_women" element={<BannerWomen />} />
-          <Route path="banner_splash" element={<BannerSplash />} />
+          <Route path="banner_splash" element={<BannerFlast />} />
         </Route>
         {/* banner men */}
         <Route path="/create_banner_men" element={<CreactBannerMen />} />
         <Route path="/edit_banner_men/:id" element={<EditbannerMen />} />
         {/* banner nữ */}
         <Route path="/create_banner_woment" element={<CreateBannerWoment />} />
-        <Route path="/edit_banner_woment" element={<EditBannerWonent />} />
+        <Route path="/edit_banner_woment/:id" element={<EditBannerWonent />} />
         {/* banner home */}
-        <Route path="/create_banner_home" element={<ScreenAddBannerHome />} />
-        <Route path="/edit_banner_home" element={<ScreenEditBannerHome />} />
-        <Route path="/edit_list_type" element={<FromUpdateTypeProduct />} />
+
+        <Route path="/create_banner_home" element={<CreateBannerHomee />} />
+        <Route path="/edit_banner_home/:id" element={<EditbannerHomee />} />
+      
+        {/* banner flast */}
+        <Route path="/create_banner_flast" element={<CreateBannerFlast/>} />
+        <Route path="/edit_banner_flast/:id" element={<EditbannerFlast/>} />
+
+        <Route path="/edit_list_type/:id" element={<FromUpdateTypeProduct />} />
+
       </Routes>
     </BrowserRouter>
   );

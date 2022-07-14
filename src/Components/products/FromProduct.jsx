@@ -28,6 +28,8 @@ function FromProduct(props) {
 
   const [valueDongia, setValueDongia] = useState();
 
+  const [valueSale, setValueSale] = useState();
+
   const [valueMota, setValueMota] = useState();
 
   const [valueSoluong, setValueSoluong] = useState();
@@ -41,15 +43,40 @@ function FromProduct(props) {
   const [dataType, setDatatype] = useState();
   const [dataValueType, setDataValuetype] = useState();
   const dispatch = useDispatch();
+
+  const handleResert = () => {
+    setNameLinkImage([]);
+    setNameImage([]);
+    setValueTenSP("");
+    setValueThuonghieu("");
+    setValueMaso("");
+    setValueChatlieu("");
+    setValueChatlieu("");
+    setValueChatlieu("");
+    setValueGiaban("");
+    setValueDongia("");
+    setValueSale("");
+    setValueMota("");
+    setValueSoluong("");
+    setDatavaluesize("");
+    setDataValueColor("");
+    setDataValuetype("");
+  };
+
   // lấy ảnh
   const upImage = (e) => {
     const namePhoto = document.getElementById("images").files[0].name;
+    const namePhotoLink = document.getElementById("images").files[0];
     if (nameImage.length > 0) {
       setNameImage([...nameImage, namePhoto]);
     } else {
       setNameImage([namePhoto]);
     }
-    setNameLinkImage(e.target.files);
+    if (nameLinkImage.length == 0) {
+      setNameLinkImage([namePhotoLink]);
+    } else if (nameLinkImage.length > 0) {
+      setNameLinkImage([...nameLinkImage, namePhotoLink]);
+    }
   };
 
   // lấy data size
@@ -108,15 +135,22 @@ function FromProduct(props) {
     fromdata.append("trademark", valueThuonghieu);
     fromdata.append("descriptionProduct", valueMota);
     fromdata.append("code", valueMaso);
-    fromdata.append("cost", Number(valueDongia));
+    fromdata.append("flashSale", valueSale);
+    fromdata.append("importPrice", Number(valueDongia));
     fromdata.append("price", Number(valueGiaban));
     fromdata.append("quantity_product", Number(valueSoluong));
     fromdata.append("material_product", valueChatlieu);
     for (let i = 0; i < nameLinkImage.length; i++) {
       fromdata.append("croppedImage", nameLinkImage[i]);
     }
-    fromdata.append("size_product", dataValueSize);
-    fromdata.append("color_product", dataValueColor);
+    for (let i = 0; i < dataValueSize.length; i++) {
+      console.log(`size_product[${i}]`, dataValueSize[i]);
+      fromdata.append(`size_product[${i}]`, dataValueSize[i]);
+    }
+    for (let i = 0; i < dataValueColor.length; i++) {
+      console.log(`color_product[${i}]`, dataValueColor[i]);
+      fromdata.append(`color_product[${i}]`, dataValueColor[i]);
+    }
     fromdata.append("idCategoryProduct", dataValueType);
     axios({
       url: "http://18.141.199.110:3000/api/product/create-product",
@@ -128,6 +162,11 @@ function FromProduct(props) {
       data: fromdata,
     }).then(
       (res) => {
+        // if (res.code !== 200) {
+        //   alert("Thêm sản phẩm thành công");
+        // } else {
+        //   alert("Thêm sản phẩm thất bại");
+        // }
         console.log(res);
       },
       (err) => {
@@ -150,6 +189,7 @@ function FromProduct(props) {
               placeholder="Tên sản phẩm"
               onChange={(e) => setValueTenSP(e.target.value)}
               required={true}
+              value={valueTensp}
             />
           </div>
           {/* nhãn hiệu */}
@@ -158,6 +198,7 @@ function FromProduct(props) {
             <Input
               placeholder="Nhãn hiệu sản phẩm"
               onChange={(e) => setValueThuonghieu(e.target.value)}
+              value={valueThuonghieu}
             />
           </div>
         </div>
@@ -169,6 +210,7 @@ function FromProduct(props) {
             <Input
               placeholder="Mã số"
               onChange={(e) => setValueMaso(e.target.value)}
+              value={valueMaso}
             />
           </div>
           {/* chất liệu */}
@@ -177,6 +219,7 @@ function FromProduct(props) {
             <Input
               placeholder="Chất liệu"
               onChange={(e) => setValueChatlieu(e.target.value)}
+              value={valueChatlieu}
             />
           </div>
         </div>
@@ -189,12 +232,17 @@ function FromProduct(props) {
             <SelectOptionTypeProduct
               options={dataType}
               onChange={handleChangetype}
+              defaultValue={dataValueType}
             />
           </div>
           {/* Chọn size*/}
           <div className="_nameInputrow4">
             <p className="_text_product">Size*</p>
-            <SelectOtionSze dataSize={dataSize} onChange={onChangeSize} />
+            <SelectOtionSze
+              dataSize={dataSize}
+              onChange={onChangeSize}
+              defaultValue={dataValueSize}
+            />
           </div>
           {/* Chọn màu */}
           <div className="_nameInputrow4">
@@ -202,6 +250,7 @@ function FromProduct(props) {
             <SelectOptionColor
               dataColor={dataColor}
               onChange={handleChangeColor}
+              defaultValue={dataValueColor}
             />
           </div>
           {/* số lượng */}
@@ -210,13 +259,17 @@ function FromProduct(props) {
             <Input
               placeholder="Số lượng"
               onChange={(e) => setValueSoluong(e.target.value)}
+              value={valueSoluong}
             />
           </div>
         </div>
         {/* Hàng 4 */}
         <div className="_inputrow5From">
           {/* UP ảnh*/}
-          <div className="_nameInputrow" style={{ width: "45%" }}>
+          <div
+            className="_nameInputrow"
+            style={{ justifyContent: "space-between" }}
+          >
             <p className="_text_product">Chọn ảnh*</p>
             {nameImage.length == 0 ? (
               <span>{nameImage}</span>
@@ -261,20 +314,31 @@ function FromProduct(props) {
               onChange={(e) => upImage(e)}
             />
           </div>
+          {/* Đơn giá */}
+          <div className="_nameInputrow4">
+            <p className="_text_product">Đơn giá*</p>
+            <Input
+              placeholder="Đơn giá"
+              onChange={(e) => setValueDongia(e.target.value)}
+              value={valueDongia}
+            />
+          </div>
           {/* giá bán */}
           <div className="_nameInputrow4">
             <p className="_text_product">Giá bán*</p>
             <Input
               placeholder="Giá bán"
               onChange={(e) => setValueGiaban(e.target.value)}
+              value={valueGiaban}
             />
           </div>
-          {/* đơn giá */}
+          {/* Sale*/}
           <div className="_nameInputrow4">
-            <p className="_text_product">Đơn giá*</p>
+            <p className="_text_product">Sale*</p>
             <Input
-              placeholder="Đơn giá"
-              onChange={(e) => setValueDongia(e.target.value)}
+              placeholder="Sale"
+              onChange={(e) => setValueSale(e.target.value)}
+              value={valueSale}
             />
           </div>
         </div>
@@ -283,12 +347,15 @@ function FromProduct(props) {
           {/* mô tả */}
           <div className="_nameInputrow2">
             <p className="_text_product">Mô tả sản phẩm*</p>
-            <TinymceProduct onChangeText={(e) => setValueMota(e)} />
+            <TinymceProduct
+              onChangeText={(e) => setValueMota(e)}
+              initialValue={valueMota}
+            />
           </div>
         </div>
         {/* Nút ấn bắt sự kiện */}
         <div className="_buttonClick_Product">
-          <Button className="__buttonClick_Product_Res">
+          <Button className="__buttonClick_Product_Res" onClick={handleResert}>
             <p className="_Title_button_product">Đặt lại</p>
           </Button>
           <Button
