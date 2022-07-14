@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox } from "antd";
+import { Form, Input, Button, Checkbox, Alert } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -10,15 +11,17 @@ const FormLogin = (props) => {
   const [password, setPassword] = useState("");
   const dispacth = useDispatch();
   const navigation = useNavigate();
-  const onClickHandler = (values) => {
+
+  const onClickHandler = () => {
     const newUser = {
       email: email,
       password: password,
     };
     loginUser(newUser, dispacth, navigation);
+    console.log(newUser.token, "Dit cu may");
   };
   return (
-    <>
+    <div>
       <h3>{props.title}</h3>
       <Form
         name="normal_login"
@@ -27,47 +30,41 @@ const FormLogin = (props) => {
           remember: true,
         }}
         onFinish={onClickHandler}
+        autoComplete="off"
       >
         <Form.Item
-          label="Email"
+          name="email"
           rules={[
             {
               required: true,
-              message: "Vui lòng nhập email !",
+              message: "Vui lòng nhập email......",
             },
           ]}
         >
           <Input
             style={{ width: 340, height: 40 }}
             onChange={(e) => setEmail(e.target.value)}
-            name="username"
-            message="Nhập tên đăng nhập"
             placeholder="Email..."
             Outlined={<UserOutlined className="site-form-item-icon" />}
           />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          type="password"
+          name="password"
           rules={[
             {
               required: true,
-              message: "Vui lòng nhập password !",
+              message: "Vui lòng nhập password......",
             },
           ]}
         >
-          <Input
+          <Input.Password
             style={{ width: 340, height: 40 }}
             onChange={(e) => setPassword(e.target.value)}
-            name="password"
-            message="Nhập mật khẩu"
             placeholder="Mật khẩu..."
-            type="password"
-            Outlined={
-              <LockOutlined
-                className="site-form-item-icon"
-                style={{ height: 50, width: 50 }}
-              />
+            iconRender={(visible) =>
+              visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
           />
         </Form.Item>
@@ -85,11 +82,11 @@ const FormLogin = (props) => {
             className="login-form-button"
             // href="/shop/tong_quan"
           >
-            <p>Đăng nhập</p>
+            <p>Đăng nhập</p>~
           </Button>
         </Form.Item>
       </Form>
-    </>
+    </div>
   );
 };
 

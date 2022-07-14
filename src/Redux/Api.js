@@ -9,6 +9,7 @@ export const loginUser = async (user, dispacth, navigation) => {
       user
     );
     dispacth(loginSuccess(res.data));
+
     navigation("/shop/tong_quan");
   } catch (err) {
     dispacth(loginFailed());
