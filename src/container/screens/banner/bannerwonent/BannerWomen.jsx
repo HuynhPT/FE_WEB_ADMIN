@@ -115,7 +115,7 @@ const BannerMen = () => {
           }
         </p>
         <Button className="add_text">
-          <Link to="/create_banner_men" className="text_buttonsss">
+          <Link to="/create_banner_woment" className="text_buttonsss">
             {" +  Thêm mới"}
           </Link>
         </Button>
