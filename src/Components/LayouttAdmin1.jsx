@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Avatar, Button, Dropdown, Input, Layout, Menu } from "antd";
 import {
   MenuOutlined,
@@ -39,7 +41,17 @@ function getItem(label, key, icon, children, type) {
 }
 function LayouttAdmin1() {
   const [state, setState] = useState(false);
-  const onClick = (e) => {};
+  const onClick = () => {};
+  const user = useSelector((state) => state.auth.login.currentUser);
+
+  const navigation = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      navigation("/");
+    }
+    console.log(user, "Mày bị ngu à?");
+  }, []);
 
   const menu = (
     <Menu className={styles.dropdown}>
@@ -53,8 +65,8 @@ function LayouttAdmin1() {
           />
         </div>
         <div className={styles.view_tt}>
-          <div className="tt">NewYork Mỹ</div>
-          <div>+998766546778 </div> <div> Adomitosws</div>
+          <div className="tt">Tran huu thang</div>
+          <div>huuthang@gmail.com</div> <div>012345678</div>
           <div style={{ justifyContent: "center", textAlign: "center" }}>
             <Button
               href="/"
@@ -63,6 +75,7 @@ function LayouttAdmin1() {
               style={{
                 border: "1px solid rgb(226, 226, 226)",
                 marginLeft: 10,
+                marginTop: 5,
               }}
             >
               Đăng xuất

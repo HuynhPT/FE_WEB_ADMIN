@@ -26,32 +26,6 @@ function EditbannerMen(props) {
   };
   const onFinish = async (values) => {
     console.log(values);
-    // const formData = new FormData();
-    // formData.append("croppedImage", `${nameLinkImage}`);
-    // formData.append("title_ads", values.title_ads);
-    // formData.append("description_ads", valueText);
-    // formData.append("title_data", values.title_data);
-
-    // axios({
-    //   url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/creact-img",
-    //   method: "POST",
-    //   headers: {
-    //     token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY`,
-    //     "Content-Type": "application/form-data",
-    //   },
-    //   // data: qs.stringify(formData),
-    //   data: formData,
-    // }).then(
-    //   (res) => {
-    //     console.log(res);
-    //   },
-    //   (err) => {
-    //     console.log(err.response);
-    //     // console.log(err.message);
-    //     // console.log(err.request);
-    //   }
-    // );
-    // console.log(values);
   };
   console.log(dataEdit?.title_ads);
 
@@ -123,7 +97,7 @@ function EditbannerMen(props) {
               apiKey="your-api-key"
               onEditorChange={(newText) => setValueText(newText)}
               initialValue={`${dataEdit?.description_ads}`}
-              
+
               init={{
                 height: 400,
                 menubar: false,
@@ -215,8 +189,8 @@ function EditbannerMen(props) {
               type="primary"
               htmlType="reset"
               style={{
-                margin: 10,
-                width: 200,
+                margin: 20,
+                width: 120,
                 backgroundColor: "#DCDFE8",
                 borderColor: "#DCDFE8",
                 textAlign: "center",
@@ -237,8 +211,8 @@ function EditbannerMen(props) {
               type="primary"
               htmlType="submit"
               style={{
-                margin: 10,
-                width: 200,
+                margin: 20,
+                width: 120,
                 backgroundColor: "#87CEEB99",
                 borderColor: "#87CEEB99",
                 textAlign: "center",

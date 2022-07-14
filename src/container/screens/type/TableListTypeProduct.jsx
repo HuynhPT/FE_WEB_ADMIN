@@ -26,7 +26,9 @@ const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [isModalDelALl, setisModalDelALl] = useState(false);
 
+
   const { Search } = Input;
+
 
   const dispatch = useDispatch();
   const ListOpject = useSelector((data) => data.categoris.value);

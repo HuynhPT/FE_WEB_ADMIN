@@ -5,6 +5,7 @@ import img_tcp from "../../../Common/Image/img_tcp.png";
 import img_spbc from "../../../Common/Image/img_spbc.png";
 import styles from "./stylesrow.module.css";
 import CardChart from "../../../Components/overview/CardChart";
+
 const ScreenOverview = () => {
   return (
     <div className={styles.mContainer_ovew}>

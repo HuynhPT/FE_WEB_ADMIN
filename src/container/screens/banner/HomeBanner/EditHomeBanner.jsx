@@ -6,7 +6,7 @@ import { Editor } from "@tinymce/tinymce-react";
 import { add } from "../../../../API/ImageAPI";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-function EditBannerWonent(props) {
+function EditbannerHomee(props) {
   const { id } = useParams();
   const [nameLinkImage, setNameLinkImage] = useState();
   const [valueText, setValueText] = useState();
@@ -26,13 +26,13 @@ function EditBannerWonent(props) {
   };
   const onFinish = async (values) => {
     console.log(values);
-
+    
   };
   console.log(dataEdit?.title_ads);
 
   return (
     <div className="_Container_banner_name">
-      <h3 className="_titile_add_wonent">Sửa banner nữ</h3>
+      <h3 className="_titile_add_wonent">Sửa banner home</h3>
       {dataEdit !== undefined && (
         <Form
           style={{ margin: "0 20px" }}
@@ -98,7 +98,7 @@ function EditBannerWonent(props) {
               apiKey="your-api-key"
               onEditorChange={(newText) => setValueText(newText)}
               initialValue={`${dataEdit?.description_ads}`}
-
+              
               init={{
                 height: 400,
                 menubar: false,
@@ -212,8 +212,8 @@ function EditBannerWonent(props) {
               type="primary"
               htmlType="submit"
               style={{
-                margin: 20,
-                width: 120,
+                margin: 10,
+                width: 200,
                 backgroundColor: "#87CEEB99",
                 borderColor: "#87CEEB99",
                 textAlign: "center",
@@ -237,4 +237,4 @@ function EditBannerWonent(props) {
   );
 }
 
-export default EditBannerWonent;
+export default EditbannerHomee;
