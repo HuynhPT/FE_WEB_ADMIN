@@ -84,7 +84,7 @@ function FromProduct(props) {
     const list = async () => {
       const { data: dataSize } = await getSize();
       const dataNew = [];
-      dataSize.data.map((item) => {
+      dataSize.result.map((item) => {
         dataNew.push({
           value: item.titleSize,
         });
@@ -102,7 +102,7 @@ function FromProduct(props) {
     const listcolor = async () => {
       const { data: dataColor } = await getColor();
       const dataNewColor = [];
-      dataColor.data.map((item) => {
+      dataColor.result.map((item) => {
         dataNewColor.push({ value: item.colorCode, label: item.titleColors });
       });
       setDataColor(dataNewColor);
@@ -312,7 +312,7 @@ function FromProduct(props) {
             />
           </div>
           {/* Đơn giá */}
-          <div className="_nameInputrow4" >
+          <div className="_nameInputrow4">
             <p className="_text_product">Đơn giá*</p>
             <Input
               placeholder="Đơn giá"

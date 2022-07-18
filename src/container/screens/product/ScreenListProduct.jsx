@@ -19,7 +19,7 @@ const ScreenListProduct = () => {
   useEffect(() => {
     const list = async () => {
       const { data: products } = await getAll();
-      setProducts(products.data);
+      setProducts(products.result);
     };
     list();
   }, []);

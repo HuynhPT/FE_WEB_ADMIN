@@ -50,7 +50,6 @@ function LayouttAdmin1() {
     if (!user) {
       navigation("/");
     }
-    console.log(user, "Mày bị ngu à?");
   }, []);
 
   const menu = (

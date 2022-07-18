@@ -7,7 +7,7 @@ export const getTypeProduct = createAsyncThunk(
   async () => {
     const { data: product } = await getAll();
     console.log(product);
-    return product.data;
+    return product.result;
   }
 );
 export const dellAllTypeProduct = createAsyncThunk(
@@ -27,7 +27,7 @@ export const dellAllTypeProduct = createAsyncThunk(
     }).then(
       async (res) => {
         const { data: product } = await getAll();
-        products = product.data;
+        products = product.result;
       },
       (err) => {
         console.log(err.response, "?");
@@ -81,7 +81,7 @@ export const delTypeProduct = createAsyncThunk(
     }).then(
       async (res) => {
         const { data: product } = await getAll();
-        products = product.data;
+        products = product.result;
       },
       (err) => {
         console.log(err.response, "?");
@@ -108,7 +108,7 @@ export const upTypeProduct = createAsyncThunk(
     }).then(
       async (res) => {
         const { data: product } = await getAll();
-        products = product.data;
+        products = product.result;
       },
       (err) => {
         console.log(err.response, "?");

@@ -25,6 +25,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import QueryString from "qs";
+import Search from "antd/lib/input/Search";
 const TableObjectProduct = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const dispatch = useDispatch();
@@ -169,17 +170,21 @@ const TableObjectProduct = () => {
 
   return (
     <div>
-      <Button
-        type="primary"
-        style={{
-          margin: "0 30px",
-          backgroundColor: "#D9D9D9",
-          border: "1px solid #D9D9D9 ",
-        }}
-        onClick={showmodaldell}
-      >
-        <p style={{ color: "#000" }}>Xoá tất cả</p>
-      </Button>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <Button
+          type="primary"
+          style={{
+            margin: "0 30px",
+            backgroundColor: "#D9D9D9",
+            border: "1px solid #D9D9D9 ",
+          }}
+          onClick={showmodaldell}
+        >
+          <p style={{ color: "#000" }}>Xoá tất cả</p>
+        </Button>
+        <Search style={{ width: "21%", marginRight: 30 }} />
+      </div>
+
       {listDataa()}
       <Modal
         title="Sửa đối tượng sử dụng"

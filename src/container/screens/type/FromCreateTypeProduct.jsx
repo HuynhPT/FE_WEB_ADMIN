@@ -29,7 +29,7 @@ function FromCreateTypeProduct(props) {
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
-        dataOp.data.map((item) => {
+        dataOp.result.map((item) => {
           otpn.push({ label: item.titleTypeProduct, value: item._id });
         });
         setDataOp(otpn);

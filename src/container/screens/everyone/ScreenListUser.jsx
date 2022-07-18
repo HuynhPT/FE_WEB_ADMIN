@@ -1,28 +1,33 @@
 import { Button, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { Link } from "react-router-dom";
+
 import "../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
+import axios from "axios";
 
 const ScreenListUser = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/user.json")
-      .then((response) => response.json())
-      .then((data) => setData(data));
+    const mToken =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTc4MTMyMTEsImV4cCI6MTY2MDQwNTIxMX0.g8hsX21tAggQf5niesMc3AJ-DQLmnptO2jMvF0LWuCQ";
+
+    axios({
+      url: `http://18.141.199.110:3000/account-user/get-allUsers`,
+      method: "GET",
+      headers: {
+        token: `Bearer ${mToken} `,
+      },
+    }).then(
+      (res) => {
+        setData(res.data.result);
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
   }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
-
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
-
+  console.log(data);
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
       setSelectedRowKeys(selectedRows);
@@ -37,9 +42,18 @@ const ScreenListUser = () => {
       };
       const columns = [
         {
-          title: "Id",
+          title: "STT",
           dataIndex: "_id",
+          render: (_id, data, index) => index + 1,
         },
+        {
+          title: "Ảnh",
+          dataIndex: "photoUrl",
+          render: (photoUrl) => (
+            <img src={photoUrl} alt="" style={{ width: 80, height: 80 }} />
+          ),
+        },
+
         {
           title: "Tên",
           dataIndex: "name",
@@ -48,40 +62,10 @@ const ScreenListUser = () => {
           title: "SĐT",
           dataIndex: "phone",
         },
-        // {
-        //   title: "Ảnh",
-        //   dataIndex: "image_ads",
-        //   render: (image_ads) => (
-        //     <img src={image_ads} alt="" style={{ width: 200 }} />
-        //   ),
-        // },
+
         {
           title: "Email",
           dataIndex: "email",
-        },
-
-        {
-          title: "Hoạt động",
-          dataIndex: "_id",
-          render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row"  , justifyContent:'center'}}>
-              {/* <Link to="/shop/thongKe_loiNhuan">
-                <EditOutlined style={{ width: 50 }} size={24} />
-              </Link> */}
-              <p
-                onClick={() => deletee(_id)}
-                style={{
-                  width: 50,
-                  marginTop: 5,
-                  color: "blue",
-                  cursor: "pointer",
-                }}
-                size={24}
-              >
-                Xoá
-              </p>
-            </div>
-          ),
         },
       ];
       return (
@@ -106,9 +90,6 @@ const ScreenListUser = () => {
             " Danh sách quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        {/* <Button href="/shop/them_sanPham" className="add_text">
-          <p className="text_buttonsss">{" +  Thêm mới"}</p>
-        </Button> */}
       </div>
       <div
         className="button-list"
@@ -123,14 +104,9 @@ const ScreenListUser = () => {
             backgroundColor: "#D9D9D9",
             border: "1px solid #D9D9D9 ",
           }}
-          // onClick={showmodaldell}
         >
           <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
-        <div className="search_prd">
-          <p className="search_title">Tìm kiếm:</p>
-          <Search type="text" placeholder="Tìm kiếm" />
-        </div>
       </div>
       {listDataa()}
     </div>

@@ -51,26 +51,26 @@ const ScreenListProductProfit = () => {
           title: "Ảnh",
           dataIndex: "image_ads",
           render: (image_ads) => (
-            <img src={image_ads} alt="" style={{ width: 200 }} />
+            <img src={image_ads} alt="" style={{ width: 100 }} />
           ),
         },
-        {
-          title: "Chi tiết",
-          dataIndex: "description_ads",
-          render: (description_ads) => (
-            <p
-              style={{
-                width: "100%",
-                textOverflow: "ellipsis",
-                whiteSpace: "initial",
-              }}
-              dangerouslySetInnerHTML={{
-                __html: description_ads,
-              }}
-            ></p>
-          ),
-          width: 300,
-        },
+        // {
+        //   title: "Chi tiết",
+        //   dataIndex: "description_ads",
+        //   render: (description_ads) => (
+        //     <p
+        //       style={{
+        //         width: "100%",
+        //         textOverflow: "ellipsis",
+        //         whiteSpace: "initial",
+        //       }}
+        //       dangerouslySetInnerHTML={{
+        //         __html: description_ads,
+        //       }}
+        //     ></p>
+        //   ),
+        //   width: 300,
+        // },
 
         {
           title: "Hoạt động",
