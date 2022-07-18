@@ -42,16 +42,13 @@ function getItem(label, key, icon, children, type) {
 function LayouttAdmin1() {
   const [state, setState] = useState(false);
   const onClick = () => {};
-  const user = useSelector((state) => state.auth.login.currentUser);
 
+  const user = useSelector((state) => state.auth.login.currentUser);
   const navigation = useNavigate();
 
-  useEffect(() => {
-    if (!user) {
-      navigation("/");
-    }
-    console.log(user, "Mày bị ngu à?");
-  }, []);
+  if (!user) {
+    navigation("/");
+  }
 
   const menu = (
     <Menu className={styles.dropdown}>
@@ -65,8 +62,6 @@ function LayouttAdmin1() {
           />
         </div>
         <div className={styles.view_tt}>
-          <div className="tt">Tran huu thang</div>
-          <div>huuthang@gmail.com</div> <div>012345678</div>
           <div style={{ justifyContent: "center", textAlign: "center" }}>
             <Button
               href="/"

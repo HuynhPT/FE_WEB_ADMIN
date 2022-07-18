@@ -1,25 +1,38 @@
 import React, { useState } from "react";
-import { Form, Input, Button, Checkbox, Alert } from "antd";
+import { Form, Input, Button, message, Alert } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import axios from "axios";
+import {
+  CheckCircleTwoTone,
+  UserOutlined,
+  LockOutlined,
+} from "@ant-design/icons";
+import Validate from "./Validate";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../Redux/Api";
+import { color } from "@mui/system";
 const FormLogin = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState({});
+
+  const [values, setValues] = useState({
+    email: "",
+    password: "",
+  });
   const dispacth = useDispatch();
   const navigation = useNavigate();
 
-  const onClickHandler = () => {
-    const newUser = {
-      email: email,
-      password: password,
-    };
-    loginUser(newUser, dispacth, navigation);
-    console.log(newUser.token, "Dit cu may");
+  const onClickHandler = async () => {
+    setErrors(Validate(values));
+    loginUser(values, dispacth, navigation);
   };
+  const handleChange = (event) => {
+    setValues({
+      ...values,
+      [event.target.name]: event.target.value,
+    });
+  };
+  console.log(values);
+
   return (
     <div>
       <h3>{props.title}</h3>
@@ -32,47 +45,46 @@ const FormLogin = (props) => {
         onFinish={onClickHandler}
         autoComplete="off"
       >
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập email......",
-            },
-          ]}
-        >
+        <Form.Item>
           <Input
-            style={{ width: 340, height: 40 }}
-            onChange={(e) => setEmail(e.target.value)}
+            prefix={<UserOutlined />}
+            name="email"
+            style={{
+              width: 340,
+              height: 40,
+              borderColor: errors.email ? "red" : "#DCDCDC",
+            }}
+            onChange={handleChange}
             placeholder="Email..."
+            value={values.email}
             Outlined={<UserOutlined className="site-form-item-icon" />}
           />
+          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
         </Form.Item>
 
-        <Form.Item
-          type="password"
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập password......",
-            },
-          ]}
-        >
+        <Form.Item>
           <Input.Password
-            style={{ width: 340, height: 40 }}
-            onChange={(e) => setPassword(e.target.value)}
+            prefix={<LockOutlined />}
+            name="password"
+            style={{
+              width: 340,
+              height: 40,
+              borderColor: errors.password ? "red" : "	#DCDCDC",
+            }}
+            onChange={handleChange}
+            value={values.password}
             placeholder="Mật khẩu..."
             iconRender={(visible) =>
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
           />
+          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
         </Form.Item>
 
         <div style={{ marginTop: 15 }}>
-          <a className="login-form-forgot" href="/shop_quen_mat_khau">
+          <p className="login-form-forgot" href="/shop_quen_mat_khau">
             Quên mật khẩu
-          </a>
+          </p>
         </div>
 
         <Form.Item style={{ marginTop: 15 }}>
