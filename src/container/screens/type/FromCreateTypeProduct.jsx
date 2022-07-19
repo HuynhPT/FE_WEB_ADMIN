@@ -1,31 +1,28 @@
 import { Button, Checkbox, Form, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import "../banner/bannerwonent/CreateBannerWoment.css";
-import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
 import SelectMenWoment from "../../../Components/products/SelectMenWomen";
-import qs from "qs";
-import ModalTypeProduct from "../../../Components/type/ModalTypeProduct";
+import { mToken } from "../../../../token/TokenLogin";
 function FromCreateTypeProduct(props) {
+  // khai báo state
   const [nameLinkImage, setNameLinkImage] = useState("");
   const [nameImage, setNameImage] = useState();
   const [valueText, setValueText] = useState("");
   const [dataOp, setDataOp] = useState("");
+
+  // tham chiếu redux
+  const dispatch = useDispatch();
 
   // lấy dữ liệu id của đối tượng
   const [dataLable, setDataLable] = useState("");
   const handleChange = (checkedValues) => {
     "checked = ", setDataLable(checkedValues.target.value);
   };
-  console.log(dataLable);
-  const upImage = (e) => {
-    setNameLinkImage(e.target.files);
-    setNameImage(e.target.files[0].name);
-  };
+
   useEffect(() => {
-    fetch(
-      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/type-product/get-type-product"
-    )
+    fetch("http://18.141.199.110:3000/api/type-product/get-type-product")
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
@@ -35,6 +32,14 @@ function FromCreateTypeProduct(props) {
         setDataOp(otpn);
       });
   }, []);
+
+  // lấy file
+  const upImage = (e) => {
+    setNameLinkImage(e.target.files);
+    setNameImage(e.target.files[0].name);
+  };
+
+  // thực hiện truy vấn
   const onFinish = async (values) => {
     const formData = new FormData();
     formData.append("titleCategoryProduct", values.titleCategoryProduct);
@@ -42,10 +47,10 @@ function FromCreateTypeProduct(props) {
     formData.append("idTypeProduct", dataLable);
 
     axios({
-      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/category-product/create-category-product",
+      url: "http://18.141.199.110:3000/api/category-product/create-category-product",
       method: "POST",
       headers: {
-        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY4NjUwMjcsImV4cCI6MTY1OTQ1NzAyN30.BsLQT3BMm3yxxqcrSl3XRoS4NNrVe2e_edQk_EFnCRg`,
+        token: mToken,
         "Content-Type": "multipart/form-data",
       },
       data: formData,
@@ -63,7 +68,6 @@ function FromCreateTypeProduct(props) {
       style: {
         color: "#52c41a",
       },
-      icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
       duration: 2,
     });
     setValueText("");
@@ -115,7 +119,6 @@ function FromCreateTypeProduct(props) {
               style={{ display: "flex" }}
             >
               <SelectMenWoment dataOP={dataOp} onChange={handleChange} />
-              {/* <ModalTypeProduct /> */}
             </Form.Item>
           </div>
           <div style={{ width: "50%" }}>

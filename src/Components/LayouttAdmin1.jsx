@@ -42,15 +42,15 @@ function getItem(label, key, icon, children, type) {
 function LayouttAdmin1() {
   const [state, setState] = useState(false);
   const onClick = () => {};
-  const user = useSelector((state) => state.auth.login.currentUser);
 
+  const user = useSelector((state) => state.auth.login.currentUser);
   const navigation = useNavigate();
 
-  useEffect(() => {
-    if (!user) {
-      navigation("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigation("/");
+  //   }
+  // }, []);
 
   const menu = (
     <Menu className={styles.dropdown}>
@@ -64,8 +64,6 @@ function LayouttAdmin1() {
           />
         </div>
         <div className={styles.view_tt}>
-          <div className="tt">Tran huu thang</div>
-          <div>huuthang@gmail.com</div> <div>012345678</div>
           <div style={{ justifyContent: "center", textAlign: "center" }}>
             <Button
               href="/"
@@ -119,8 +117,8 @@ function LayouttAdmin1() {
       <img style={{ width: "10%" }} src={image4} alt="" />,
       [
         getItem(
-          ["Danh sách sản phẩm", <NavLink to="danhSach_sanPham" />],
-          "2",
+          ["Thuộc tính sản phẩm", <NavLink to="mau_size" />],
+          "sub10",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
         getItem(
@@ -129,8 +127,8 @@ function LayouttAdmin1() {
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
         getItem(
-          ["Thuộc tính sản phẩm", <NavLink to="mau_size" />],
-          "sub10",
+          ["Danh sách sản phẩm", <NavLink to="danhSach_sanPham" />],
+          "2",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
       ]

@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { Button, Form, Input, message, Modal } from "antd";
 import TableObjectProduct from "./TableObjectProduct";
-import {
-  CheckCircleTwoTone,
-  PlusOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
-import qs from "qs";
-import axios from "axios";
+import { CheckCircleTwoTone, PlusOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { addTypeProduct } from "../../../Redux/TypeProductSlice";
 const FromObjectProduct = () => {
@@ -40,7 +34,7 @@ const FromObjectProduct = () => {
         style={{
           display: "flex",
           justifyContent: "space-between",
-          margin:30
+          margin: 30,
         }}
       >
         <Input
@@ -63,7 +57,7 @@ const FromObjectProduct = () => {
             backgroundColor: "#87CEEB",
             border: "1px sold #87CEEB ",
             marginLeft: 100,
-            marginRight:10
+            marginRight: 10,
           }}
           onClick={() => onFinish()}
         >

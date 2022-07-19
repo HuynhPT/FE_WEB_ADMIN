@@ -1,20 +1,15 @@
-import { Button, Image, Table } from "antd";
+import { AutoComplete, Button, Image, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import {
-  EditOutlined,
-  DeleteOutlined,
-  FileSearchOutlined,
-} from "@ant-design/icons";
+
 import { Link } from "react-router-dom";
 import "../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 import { getAll } from "../../../API/ProductAPI";
+import { ReloadOutlined } from "@ant-design/icons";
+import SelectFilter from "../../../Components/type/SelectFilter";
 
 const ScreenListProduct = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-
   const [products, setProducts] = useState();
-  // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
     const list = async () => {
@@ -23,12 +18,6 @@ const ScreenListProduct = () => {
     };
     list();
   }, []);
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowKeys(selectedRows);
-    },
-  };
-  const hasSelected = selectedRowKeys.length > 0;
 
   const listDataa = () => {
     if (products !== undefined) {
@@ -40,6 +29,15 @@ const ScreenListProduct = () => {
           title: "STT",
           dataIndex: "_id",
           render: (_id, data, index) => index + 1,
+        },
+        {
+          title: "Ảnh",
+          dataIndex: "imageProduct",
+          render: (imageProduct) =>
+            imageProduct.map((item) => {
+              return <Image src={item} alt="" style={{ width: 50 }} />;
+            }),
+          width: 200,
         },
         {
           title: "Mã code",
@@ -85,30 +83,7 @@ const ScreenListProduct = () => {
             </div>
           ),
         },
-        {
-          title: "Ảnh",
-          dataIndex: "imageProduct",
-          render: (imageProduct) =>
-            imageProduct.map((item) => {
-              return <Image src={item} alt="" style={{ width: 50 }} />;
-            }),
-        },
-        {
-          title: "Chi tiết",
-          dataIndex: "descriptionProduct",
-          render: (descriptionProduct) => (
-            <p
-              style={{
-                textOverflow: "ellipsis",
-                overflow: "hidden",
-              }}
-              dangerouslySetInnerHTML={{
-                __html: descriptionProduct,
-              }}
-            />
-          ),
-          width: 200,
-        },
+
         {
           title: "Đơn giá",
           dataIndex: "importPrice",
@@ -166,15 +141,10 @@ const ScreenListProduct = () => {
 
       return (
         <Table
-          // rowSelection={{
-          //   type: "checkbox",
-          //   ...rowSelection,
-          // }}
           columns={columns}
           dataSource={products}
           rowKey={(item) => item._id}
           className="table-list"
-          style={{ width: "100%" }}
         />
       );
     }
@@ -191,16 +161,34 @@ const ScreenListProduct = () => {
             " Danh sách sản phẩm được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        <Button href="/shop/them_sanPham" className="add_text">
-          <p className="text_buttonsss">{" +  Thêm mới"}</p>
-        </Button>
       </div>
-      <div className="button-list" style={{ marginBottom: -30 }}>
-        <div style={{ marginTop: 10 }}>
+      <div
+        className="button-list"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}
+      >
+        <div style={{ display: "flex" }}>
           <Button
             type="primary"
             style={{
-              margin: "0 5px 0 30px   ",
+              margin: "0 0 0 30px",
+              backgroundColor: "#D9D9D9",
+              border: "1px solid #D9D9D9 ",
+            }}
+            // onClick={() => {
+            //   dispatch(getTypeProduct());
+            //   setSearchtitle("");
+            // }}
+          >
+            <ReloadOutlined />
+          </Button>
+          <Button
+            type="primary"
+            style={{
+              margin: "0 0 0 5px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
@@ -208,33 +196,17 @@ const ScreenListProduct = () => {
           >
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button>
-          <Button
-            type="primary"
-            style={{
-              margin: "0 5px",
-              backgroundColor: "#D9D9D9",
-              border: "1px solid #D9D9D9 ",
-            }}
-            // onClick={showmodaldell}
-          >
-            <p style={{ color: "#000" }}>Lọc</p>
-          </Button>
-          <Button
-            type="primary"
-            style={{
-              margin: "0 5px",
-              backgroundColor: "#D9D9D9",
-              border: "1px solid #D9D9D9 ",
-            }}
-            // onClick={showmodaldell}
-          >
-            <p style={{ color: "#000" }}>Sắp xếp</p>
-          </Button>
+          <div style={{ width: "50%", margin: "0 0 0 5px" }}>
+            <SelectFilter
+              options={data}
+              // onChange={handleChange}
+              // value={dataLable}
+            />
+          </div>
         </div>
-        <div className="search_prd" style={{ marginRight: -30 }}>
-          <p className="search_title">Tìm kiếm:</p>
-          <Search type="text" placeholder="Tìm kiếm" />
-        </div>
+        <AutoComplete className="search_prd">
+          <Search type="text" placeholder="Tìm kiếm sản phẩm" />
+        </AutoComplete>
       </div>
       {listDataa()}
     </div>

@@ -6,12 +6,10 @@ function SelectMenWomen(props) {
     <Radio.Group
       style={{
         width: "100%",
-        marginTop: 7,
       }}
       onChange={props.onChange}
       options={props.dataOP}
       defaultValue={props.defaultValue}
-      
     ></Radio.Group>
   );
 }

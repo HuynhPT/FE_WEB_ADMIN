@@ -1,23 +1,26 @@
 import React, { useEffect } from "react";
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Table } from "antd";
 import axios from "axios";
 import qs from "qs";
-
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY";
+import { mToken } from "../../../token/TokenLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { getColorsize } from "../../Redux/ColorSlice";
 
 const ColorScr = () => {
+  const dispash = useDispatch();
+  const selector = useSelector((data) => data.colorsize.value);
+  useEffect(() => {
+    dispash(getColorsize());
+  }, []);
   const onFinish = (values) => {
     axios({
-      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/size-color/create-color",
+      url: "http://18.141.199.110:3000/api/size-color/create-color",
       method: "POST",
       headers: {
-        token: `Bearer ${token}`,
-        // "Content-Type": "multipart/form-data",
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(values),
-      // data: "ok",
     }).then(
       (res) => {
         console.log(res);
@@ -30,10 +33,26 @@ const ColorScr = () => {
     );
     alert("Thêm màu thành công");
   };
+  const columns = [
+    {
+      title: "STT",
+      dataIndex: "_id",
+      render: (_id, data, index) => index + 1,
+    },
+    {
+      title: "Tên màu",
+      dataIndex: "titleColors",
+    },
+    {
+      title: "Mã màu",
+      dataIndex: "colorCode",
+    },
+  ];
 
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   return (
     <Form
       style={{
@@ -110,6 +129,12 @@ const ColorScr = () => {
             Thêm màu
           </Button>
         </Form.Item>
+
+        <Table
+          columns={columns}
+          dataSource={selector}
+          rowKey={(item) => `${item._id}`}
+        />
       </div>
     </Form>
   );

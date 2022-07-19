@@ -5,11 +5,11 @@
 .button-list {
   display: flex;
   justify-content: space-between;
-  margin: 0 30px 0 0;
 }
 .search_prd {
-  display: flex;
-  align-items: center;
+  /* display: flex;
+  align-items: center; */
+  margin-right: 30px !important;
 }
 .search_title {
   margin-top: 15px;
@@ -21,7 +21,7 @@
   color: black;
 }
 .table-list {
-  margin: 30px 30px !important;
+  margin: 7px 30px !important;
 }
 .titlespb {
   padding: 24px 0 0 48px;
@@ -69,6 +69,6 @@ table > thead {
   background: none !important;
   text-align: center !important;
 }
-.ant-table-thead > tr > th{
+.ant-table-thead > tr > th {
   text-align: center !important;
 }

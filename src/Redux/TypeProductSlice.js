@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
 import { delAll, getAll } from "../API/TypeProductAPI";
+import { mToken } from "../../token/TokenLogin";
 export const getTypeProduct = createAsyncThunk(
   "typeProduct/getTypeProduct",
   async () => {
@@ -14,14 +15,12 @@ export const dellAllTypeProduct = createAsyncThunk(
   "typeProduct/dellAllTypeProduct",
   async (id) => {
     let products = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
 
     await axios({
       url: "http://18.141.199.110:3000/api/type-product/destroy-type-product",
       method: "DELETE",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "Content-Type": "application/json",
       },
     }).then(
@@ -40,21 +39,19 @@ export const addTypeProduct = createAsyncThunk(
   "typeProduct/addTypeProduct",
   async (data) => {
     let products = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTcxNjM0MDYsImV4cCI6MTY1OTc1NTQwNn0.ZmLJVVf6UQvLqioCBrRTaBPYJkRlI5kFPkEWv2rZ4BI";
 
     await axios({
       url: "http://18.141.199.110:3000/api/type-product/create-type-product",
       method: "POST",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(data),
     }).then(
       async (res) => {
         const { data: product } = await getAll();
-        products = product.data;
+        products = product.result;
       },
       (err) => {
         console.log(err.response, "?");
@@ -67,14 +64,12 @@ export const delTypeProduct = createAsyncThunk(
   "typeProduct/delTypeProduct",
   async (id) => {
     let products = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
 
     await axios({
       url: `http://18.141.199.110:3000/api/type-product/delete-type-product/findById`,
       method: "POST",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(id),
@@ -94,14 +89,12 @@ export const upTypeProduct = createAsyncThunk(
   "typeProduct/upTypeProduct",
   async (data) => {
     let products = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTcxNjM0MDYsImV4cCI6MTY1OTc1NTQwNn0.ZmLJVVf6UQvLqioCBrRTaBPYJkRlI5kFPkEWv2rZ4BI";
 
     await axios({
       url: `http://18.141.199.110:3000/api/type-product/edit-type-product/findById`,
       method: "POST",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(data),
@@ -117,7 +110,31 @@ export const upTypeProduct = createAsyncThunk(
     return products;
   }
 );
+export const searchTypeproduct = createAsyncThunk(
+  "opjectcategori/searchTypeproduct",
+  async (data) => {
+    let categoriss = [];
 
+    await axios({
+      url: `http://18.141.199.110:3000/api/type-product/search-type-product`,
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        console.log(res);
+        categoriss = res.data.result;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return categoriss;
+  }
+);
 const typeProductSlice = createSlice({
   name: "auth",
   initialState: {
@@ -145,6 +162,10 @@ const typeProductSlice = createSlice({
       state.value = action.payload;
     });
     builder.addCase(upTypeProduct.fulfilled, (state, action) => {
+      console.log(action.payload, "fdfff");
+      state.value = action.payload;
+    });
+    builder.addCase(searchTypeproduct.fulfilled, (state, action) => {
       console.log(action.payload, "fdfff");
       state.value = action.payload;
     });
