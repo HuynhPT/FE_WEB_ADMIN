@@ -6,7 +6,7 @@ export const getTypeProduct = createAsyncThunk(
   "typeProduct/getTypeProduct",
   async () => {
     const { data: product } = await getAll();
-    console.log(product);
+    console.log("Ở đây", product);
     return product.data;
   }
 );
@@ -114,6 +114,7 @@ export const upTypeProduct = createAsyncThunk(
         console.log(err.response, "?");
       }
     );
+
     return products;
   }
 );

@@ -43,12 +43,12 @@ function LayouttAdmin1() {
   const [state, setState] = useState(false);
   const onClick = () => {};
 
-  const user = useSelector((state) => state.auth.login.currentUser);
-  const navigation = useNavigate();
+  // const user = useSelector((state) => state.auth.login.currentUser);
+  // const navigation = useNavigate();
 
-  if (!user) {
-    navigation("/");
-  }
+  // if (!user) {
+  //   navigation("/");
+  // }
 
   const menu = (
     <Menu className={styles.dropdown}>

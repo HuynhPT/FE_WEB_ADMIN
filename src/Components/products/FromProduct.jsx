@@ -312,7 +312,7 @@ function FromProduct(props) {
             />
           </div>
           {/* Đơn giá */}
-          <div className="_nameInputrow4" >
+          <div className="_nameInputrow4">
             <p className="_text_product">Đơn giá*</p>
             <Input
               placeholder="Đơn giá"

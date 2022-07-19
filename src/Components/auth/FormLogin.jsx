@@ -45,7 +45,9 @@ const FormLogin = (props) => {
         onFinish={onClickHandler}
         autoComplete="off"
       >
-        <Form.Item>
+        <Form.Item
+          rules={[{ required: true, message: "Please input your username!" }]}
+        >
           <Input
             prefix={<UserOutlined />}
             name="email"

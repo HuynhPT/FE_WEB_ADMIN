@@ -57,6 +57,9 @@ function FromCreateTypeProduct(props) {
         console.log(err.response);
       }
     );
+    if (!values) {
+      console.log("Mời nhập đối tượng");
+    }
     message.success({
       content: "Thêm thể loại thành công",
       className: "custom-class",
