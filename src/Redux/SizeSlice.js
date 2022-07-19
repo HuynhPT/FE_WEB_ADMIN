@@ -1,24 +1,24 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
-import { getColor } from "../API/ColorSize";
+import { getSize } from "../API/ColorSize";
 import { mToken } from "../../token/TokenLogin";
-export const getColorsize = createAsyncThunk(
-  "colorsize/getColorsize",
+export const getSizecolor = createAsyncThunk(
+  "sizecolor/getSizecolor",
   async () => {
-    const { data: colors } = await getColor();
-    console.log(colors);
-    return colors.result;
+    const { data: sizes } = await getSize();
+    console.log(sizes);
+    return sizes.result;
   }
 );
-export const addColorsize = createAsyncThunk(
-  "colorsize/addColorsize",
+export const addSizecolor = createAsyncThunk(
+  "sizecolor/addSizecolor",
   async (data) => {
     console.log(data);
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/create-color",
+      url: "http://18.141.199.110:3000/api/size-color/create-size",
       method: "POST",
       headers: {
         token: mToken,
@@ -27,8 +27,8 @@ export const addColorsize = createAsyncThunk(
       data: qs.stringify(data),
     }).then(
       async (res) => {
-        const { data: colors } = await getColor();
-        col = colors.result;
+        const { data: sizes } = await getSize();
+        col = sizes.result;
       },
       (err) => {
         console.log(err.response, "?");
@@ -37,14 +37,14 @@ export const addColorsize = createAsyncThunk(
     return col;
   }
 );
-export const delAllColorsize = createAsyncThunk(
-  "colorsize/delAllColorsize",
+export const delAllSizecolor = createAsyncThunk(
+  "sizecolor/delAllSizecolor",
   async (data) => {
     console.log(data);
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/destroy-color",
+      url: "http://18.141.199.110:3000/api/size-color/destroy-size",
       method: "DELETE",
       headers: {
         token: mToken,
@@ -53,8 +53,8 @@ export const delAllColorsize = createAsyncThunk(
       data: qs.stringify(data),
     }).then(
       async (res) => {
-        const { data: colors } = await getColor();
-        col = colors.result;
+        const { data: sizes } = await getSize();
+        col = sizes.result;
       },
       (err) => {
         console.log(err.response, "?");
@@ -63,14 +63,14 @@ export const delAllColorsize = createAsyncThunk(
     return col;
   }
 );
-export const removeColorsize = createAsyncThunk(
-  "colorsize/removeColorsize",
+export const removeSizecolor = createAsyncThunk(
+  "sizecolor/removeSizecolor",
   async (data) => {
     console.log(data);
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/destroy-colorById",
+      url: "http://18.141.199.110:3000/api/size-color/destroy-sizeById",
       method: "POST",
       headers: {
         token: mToken,
@@ -79,8 +79,8 @@ export const removeColorsize = createAsyncThunk(
       data: qs.stringify(data),
     }).then(
       async (res) => {
-        const { data: colors } = await getColor();
-        col = colors.result;
+        const { data: sizes } = await getSize();
+        col = sizes.result;
       },
       (err) => {
         console.log(err.response, "?");
@@ -89,14 +89,40 @@ export const removeColorsize = createAsyncThunk(
     return col;
   }
 );
-export const searchColorsize = createAsyncThunk(
-  "colorsize/searchColorsize",
+// export const searchColorsize = createAsyncThunk(
+//   "sizecolor/searchColorsize",
+//   async (data) => {
+//     console.log(data);
+//     let col = [];
+
+//     await axios({
+//       url: "http://18.141.199.110:3000/api/size-color/search-color",
+//       method: "POST",
+//       headers: {
+//         token: mToken,
+//         "content-type": "application/x-www-form-urlencoded",
+//       },
+//       data: qs.stringify(data),
+//     }).then(
+//       async (res) => {
+//         const { data: colors } = await getSize();
+//         col = res.data.result;
+//       },
+//       (err) => {
+//         console.log(err.response, "?");
+//       }
+//     );
+//     return col;
+//   }
+// );
+export const upSizecolor = createAsyncThunk(
+  "sizecolor/upSizecolor",
   async (data) => {
     console.log(data);
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/search-color",
+      url: "http://18.141.199.110:3000/api/size-color/edit-sizeById",
       method: "POST",
       headers: {
         token: mToken,
@@ -105,8 +131,8 @@ export const searchColorsize = createAsyncThunk(
       data: qs.stringify(data),
     }).then(
       async (res) => {
-        const { data: colors } = await getColor();
-        col = res.data.result;
+        const { data: sizes } = await getSize();
+        col = sizes.result;
       },
       (err) => {
         console.log(err.response, "?");
@@ -115,65 +141,39 @@ export const searchColorsize = createAsyncThunk(
     return col;
   }
 );
-export const upColorsize = createAsyncThunk(
-  "colorsize/upColorsize",
-  async (data) => {
-    console.log(data);
-    let col = [];
-
-    await axios({
-      url: "http://18.141.199.110:3000/api/size-color/edit-colorById",
-      method: "POST",
-      headers: {
-        token: mToken,
-        "content-type": "application/x-www-form-urlencoded",
-      },
-      data: qs.stringify(data),
-    }).then(
-      async (res) => {
-        const { data: colors } = await getColor();
-        col = colors.result;
-      },
-      (err) => {
-        console.log(err.response, "?");
-      }
-    );
-    return col;
-  }
-);
-const colorSlice = createSlice({
+const sizeslice = createSlice({
   name: "auth",
   initialState: {
     value: [],
   },
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getColorsize.fulfilled, (state, action) => {
+    builder.addCase(getSizecolor.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });
-    builder.addCase(addColorsize.fulfilled, (state, action) => {
+    builder.addCase(addSizecolor.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });
-    builder.addCase(delAllColorsize.fulfilled, (state, action) => {
+    builder.addCase(delAllSizecolor.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });
-    builder.addCase(removeColorsize.fulfilled, (state, action) => {
+    builder.addCase(removeSizecolor.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });
-    builder.addCase(searchColorsize.fulfilled, (state, action) => {
-      console.log(action.payload);
-      state.value = action.payload;
-      // action is inferred correctly here if using TS
-    });
-    builder.addCase(upColorsize.fulfilled, (state, action) => {
+    // builder.addCase(searchColorsize.fulfilled, (state, action) => {
+    //   console.log(action.payload);
+    //   state.value = action.payload;
+    //   // action is inferred correctly here if using TS
+    // });
+    builder.addCase(upSizecolor.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
@@ -181,6 +181,6 @@ const colorSlice = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailed } = colorSlice.actions;
+export const { loginStart, loginSuccess, loginFailed } = sizeslice.actions;
 
-export default colorSlice.reducer;
+export default sizeslice.reducer;

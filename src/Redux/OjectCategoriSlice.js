@@ -21,7 +21,7 @@ export const addopjectCategori = createAsyncThunk(
         token: mToken,
         "Content-Type": "application/form-data",
       },
-      data: sq.stringify(data),
+      data: qs.stringify(data),
     }).then(
       async (res) => {
         const { data: categoris } = await getAll();

@@ -30,6 +30,11 @@ const ScreenListProduct = () => {
           dataIndex: "_id",
           render: (_id, data, index) => index + 1,
         },
+
+        {
+          title: "Mã code",
+          dataIndex: "code",
+        },
         {
           title: "Ảnh",
           dataIndex: "imageProduct",
@@ -37,11 +42,6 @@ const ScreenListProduct = () => {
             imageProduct.map((item) => {
               return <Image src={item} alt="" style={{ width: 50 }} />;
             }),
-          width: 200,
-        },
-        {
-          title: "Mã code",
-          dataIndex: "code",
         },
         {
           title: "Tên",
@@ -145,6 +145,7 @@ const ScreenListProduct = () => {
           dataSource={products}
           rowKey={(item) => item._id}
           className="table-list"
+          style={{ width: "100%" }}
         />
       );
     }
