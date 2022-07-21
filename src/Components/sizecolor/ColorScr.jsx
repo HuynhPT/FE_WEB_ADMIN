@@ -42,10 +42,6 @@ const ColorScr = () => {
         colorCode: values.colorCode,
       })
     );
-    message.success({
-      content: "Thêm thành công",
-      style: { color: "green" },
-    });
   };
   const deletee = (_id) => {
     console.log(_id);

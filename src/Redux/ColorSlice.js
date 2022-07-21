@@ -3,6 +3,7 @@ import qs from "qs";
 import axios from "axios";
 import { getColor } from "../API/ColorSize";
 import { mToken } from "../../token/TokenLogin";
+import { message } from "antd";
 export const getColorsize = createAsyncThunk(
   "colorsize/getColorsize",
   async () => {
@@ -29,6 +30,19 @@ export const addColorsize = createAsyncThunk(
       async (res) => {
         const { data: colors } = await getColor();
         col = colors.result;
+        if (res.data.code === 200) {
+          const { data: colors } = await getColor();
+          col = colors.result;
+          message.success({
+            content: "Thêm thành công",
+            style: { color: "green" },
+          });
+        } else {
+          message.error({
+            content: "Thêm thất bại",
+            style: { color: "red" },
+          });
+        }
       },
       (err) => {
         console.log(err.response, "?");

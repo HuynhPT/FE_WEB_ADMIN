@@ -222,7 +222,12 @@ const TableObjectProduct = () => {
           onChange={(e) => setValue(e.target.value)}
           id="titleTypeProduct"
           value={value == undefined ? dataEdit?.titleTypeProduct : value}
-          style={{ width: "90%" }}
+          style={{
+            width: "90%",
+            border: "1px solid gray",
+            borderRadius: 3,
+            padding: 5,
+          }}
         />
       </Modal>
       <Modal title="Cảnh báo !" visible={isModalDelALl} footer={null}>

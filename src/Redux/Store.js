@@ -5,6 +5,8 @@ import typeProductSlice from "./TypeProductSlice";
 import ojectCategoriSlice from "./OjectCategoriSlice";
 import colorSlice from "./ColorSlice";
 import sizeSlice from "./SizeSlice";
+import billSlice from "./BillSlice";
+import postSlice from "./PostSlice";
 export const store = configureStore({
   reducer: {
     auth: Redux,
@@ -13,5 +15,7 @@ export const store = configureStore({
     categoris: ojectCategoriSlice,
     colorsize: colorSlice,
     sizecolor: sizeSlice,
+    bills: billSlice,
+    posts: postSlice,
   },
 });

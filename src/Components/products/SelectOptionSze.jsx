@@ -2,8 +2,6 @@ import { Select, Tag } from "antd";
 import React, { useEffect, useState } from "react";
 
 const SelectOtionSze = (props) => {
-  
-
   const tagRender = (props) => {
     const { label, value, closable, onClose } = props;
 
@@ -37,7 +35,7 @@ const SelectOtionSze = (props) => {
         }}
         options={props.dataSize}
         onChange={props.onChange}
-        defaultValue={props.defaultValue}
+        value={props.value}
       />
       {/* )} */}
     </>

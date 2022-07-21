@@ -149,7 +149,7 @@ export const getListIdopjectCategori = createAsyncThunk(
       async (res) => {
         const { data: categoris } = await getAll();
         console.log(res);
-        categoriss = res.data.category;
+        categoriss = res.data.result;
       },
       (err) => {
         console.log(err.response, "?");

@@ -22,7 +22,9 @@ const InforProduct = () => {
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 
-  const pricesbuy = dataInfor?.price - dataInfor?.priceSale;
+  const pricesbuy = dataInfor?.priceSale
+    .toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 
   return (
     <>
@@ -117,7 +119,7 @@ const InforProduct = () => {
                 textDecorationLine: "line-through",
               }}
             >
-              {prices}đ
+              {prices}vnđ
             </p>
             {/* Giá bán */}
             <p
@@ -128,7 +130,7 @@ const InforProduct = () => {
                 marginLeft: 10,
               }}
             >
-              {pricesbuy.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}đ
+              {pricesbuy}vnđ
             </p>
           </div>
           <hr style={{ border: "1px dashed #A9A9A9" }} />

@@ -65,12 +65,13 @@ import CreateBannerWoment from "../container/screens/banner/bannerwonent/CreateB
 import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBannerWonent";
 
 import InforProduct from "../container/screens/product/InforProduct";
+import InforBillOder from "../container/screens/order/InforBillOder";
 const Router = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<ScreenLogin />} />
-        {/* <Route path="/shop_dang_nhap" element={<ScreenLogin />}></Route> */}
+        <Route path="/chitietBill/:id" element={<InforBillOder />}></Route>
         <Route
           path="/shop_quen_mat_khau"
           element={<ScreenForgotPassword />}
