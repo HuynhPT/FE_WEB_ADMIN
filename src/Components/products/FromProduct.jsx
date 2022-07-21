@@ -9,6 +9,7 @@ import TinymceProduct from "./TinymceProduct";
 import SelectOptionOpject from "./SelectOptionOpject";
 import { getColor, getSize, getTheloai } from "../../API/ColorSize";
 import { addAll } from "../../API/ProductAPI";
+import { mToken } from "../../../token/TokenLogin";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 function FromProduct(props) {
@@ -125,17 +126,16 @@ function FromProduct(props) {
     };
     listcolor();
   }, []);
-
   const handleChangetype = (value) => {
     setDataValuetype(value);
   };
   const onHandleChnageSubmit = async () => {
     const fromdata = new FormData();
-    fromdata.append("title_product", valueTensp);
+    fromdata.append("titleProduct", valueTensp);
     fromdata.append("trademark", valueThuonghieu);
     fromdata.append("descriptionProduct", valueMota);
     fromdata.append("code", valueMaso);
-    fromdata.append("flashSale", valueSale);
+    // fromdata.append("flashSale", valueSale);
     fromdata.append("importPrice", Number(valueDongia));
     fromdata.append("price", Number(valueGiaban));
     fromdata.append("quantity_product", Number(valueSoluong));
@@ -156,17 +156,23 @@ function FromProduct(props) {
       url: "http://18.141.199.110:3000/api/product/create-product",
       method: "POST",
       headers: {
-        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY`,
+        token: mToken,
         "Content-Type": "multipart/form-data",
       },
       data: fromdata,
     }).then(
       (res) => {
-        // if (res.code !== 200) {
-        //   alert("Thêm sản phẩm thành công");
-        // } else {
-        //   alert("Thêm sản phẩm thất bại");
-        // }
+        if (res.data.code === 200) {
+          message.success({
+            content: "Thêm sản phẩm thành công",
+            style: { color: "green" },
+          });
+        } else {
+          message.error({
+            content: "Thêm sản phẩm thất bại",
+            style: { color: "red" },
+          });
+        }
         console.log(res);
       },
       (err) => {
@@ -338,132 +344,198 @@ function FromProduct(props) {
               </Form.Item>
             </div>
           </div>
-          {/* Hàng 4 */}
-          <div className="_inputrow5From">
-            {/* UP ảnh*/}
-            <div className="_nameInputrow">
-              <p className="_text_product">Chọn ảnh*</p>
-              {nameImage.length == 0 ? (
-                <span>{nameImage}</span>
-              ) : (
-                <>
+          {/* Chọn size*/}
+          <div className="_nameInputrow4">
+            <p className="_text_product">Size*</p>
+            <SelectOtionSze
+              dataSize={dataSize}
+              onChange={onChangeSize}
+              defaultValue={dataValueSize}
+            />
+          </div>
+          {/* Chọn màu */}
+          <div className="_nameInputrow4">
+            <p className="_text_product">Màu*</p>
+            <SelectOptionColor
+              dataColor={dataColor}
+              onChange={handleChangeColor}
+              defaultValue={dataValueColor}
+            />
+          </div>
+          {/* số lượng */}
+          <div className="_nameInputrow4">
+            <p className="_text_product">Số lượng*</p>
+            <Input
+              placeholder="Số lượng"
+              onChange={(e) => setValueSoluong(e.target.value)}
+              value={valueSoluong}
+            />
+          </div>
+        </div>
+        {/* Hàng 4 */}
+        <div className="_inputrow5From">
+          {/* UP ảnh*/}
+          <div className="_nameInputrow">
+            <p className="_text_product">Chọn ảnh*</p>
+            {nameImage.length == 0 ? (
+              <span>{nameImage}</span>
+            ) : (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div>
                   {nameImage.map((item) => (
                     <>
                       <span>{item}</span>
                       <br />
                     </>
                   ))}
+                </div>
+
+                <div>
                   <Button
                     onClick={() => setNameImage([])}
                     style={{
-                      marginLeft: 117,
-                      marginBottom: 25,
+                      marginTop: 85,
                       height: 20,
                       borderRadius: 3,
                     }}
                   >
                     <p style={{ marginTop: -8 }}>Huỷ</p>
                   </Button>
-                </>
-              )}
-              <br />
-              <label htmlFor="images">
-                <div
-                  style={{
-                    border: "1px solid #DCDFE8",
-                    marginTop: -20,
-                    height: 30,
-                    textAlign: "center",
-                  }}
-                >
-                  Chọn ảnh
                 </div>
-              </label>
-              <Form.Item
-                name="image"
-                rules={[{ required: true, message: "Vui lòng chọn ảnh!" }]}
+              </div>
+            )}
+            <br />
+            <label htmlFor="images">
+              <div
+                style={{
+                  border: "1px solid #DCDFE8",
+                  marginTop: -20,
+                  height: 30,
+                  textAlign: "center",
+                }}
               >
-                <input
-                  name="image"
-                  id="images"
-                  type="file"
-                  style={{ display: "none", width: "70%" }}
-                  onChange={(e) => upImage(e)}
-                />
-              </Form.Item>
-            </div>
-            {/* Đơn giá */}
-            <div className="_nameInputrow4">
-              <p className="_text_product">Đơn giá*</p>
-              <Form.Item
-                name="dongia"
-                rules={[
-                  { required: true, message: "Vui lòng nhập đơn giá!" },
-                  { pattern: /^[0-9]*$/, message: "Đơn giá yêu cầu nhập số!" },
-                ]}
-              >
-                <Input
-                  name="dongia"
-                  placeholder="Đơn giá"
-                  onChange={(e) => setValueDongia(e.target.value)}
-                  value={valueDongia}
-                />
-              </Form.Item>
-            </div>
-            {/* giá bán */}
-            <div className="_nameInputrow4">
-              <p className="_text_product">Giá bán*</p>
-              <Form.Item
-                name="giaban"
-                rules={[
-                  { required: true, message: "Vui lòng nhập đơn giá!" },
-                  { pattern: /^[0-9]*$/, message: "Đơn giá yêu cầu nhập số!" },
-                ]}
-              >
-                <Input
-                  name="giaban"
-                  placeholder="Giá bán"
-                  onChange={(e) => setValueGiaban(e.target.value)}
-                  value={valueGiaban}
-                />
-              </Form.Item>
-            </div>
-            {/* Sale*/}
-            <div className="_nameInputrow4">
-              <p className="_text_product">Sale*</p>
-
-              <Input
-                placeholder="Sale"
-                onChange={(e) => setValueSale(e.target.value)}
-                value={valueSale}
-              />
-            </div>
-          </div>
-          {/* Hàng 5 */}
-          <div className="_inputrow3From">
-            {/* mô tả */}
-            <div className="_nameInputrow2">
-              <p className="_text_product">Mô tả sản phẩm*</p>
-              <TinymceProduct
-                name="motasanpham"
-                onChangeText={(e) => setValueMota(e)}
-                initialValue={valueMota}
-              />
-            </div>
-          </div>
-          {/* Nút ấn bắt sự kiện */}
-          <div className="_buttonClick_Product">
-            <Button
-              className="__buttonClick_Product_Res"
-              onClick={handleResert}
+                Chọn ảnh
+              </div>
+            </label>
+            <Form.Item
+              name="image"
+              rules={[{ required: true, message: "Vui lòng chọn ảnh!" }]}
             >
-              <p className="_Title_button_product">Đặt lại</p>
-            </Button>
-            <Button className="__buttonClick_Product_add" htmlType="submit">
-              <p className="_Title_button_product">Thêm sản phẩm</p>
-            </Button>
+              <input
+                name="image"
+                id="images"
+                type="file"
+                style={{ display: "none", width: "70%" }}
+                onChange={(e) => upImage(e)}
+              />
+            </Form.Item>
+          </div>
+          {/* Đơn giá */}
+          <div className="_nameInputrow4">
+            <p className="_text_product">Đơn giá*</p>
+            <Form.Item
+              name="dongia"
+              rules={[
+                { required: true, message: "Vui lòng nhập đơn giá!" },
+                { pattern: /^[0-9]*$/, message: "Đơn giá yêu cầu nhập số!" },
+              ]}
+            >
+              <Input
+                name="dongia"
+                placeholder="Đơn giá"
+                onChange={(e) => setValueDongia(e.target.value)}
+                value={valueDongia}
+              />
+            </Form.Item>
+          </div>
+          {/* giá bán */}
+          <div className="_nameInputrow4">
+            <p className="_text_product">Giá bán*</p>
+            <Form.Item
+              name="giaban"
+              rules={[
+                { required: true, message: "Vui lòng nhập đơn giá!" },
+                { pattern: /^[0-9]*$/, message: "Đơn giá yêu cầu nhập số!" },
+              ]}
+            >
+              <Input
+                name="giaban"
+                placeholder="Giá bán"
+                onChange={(e) => setValueGiaban(e.target.value)}
+                value={valueGiaban}
+              />
+            </Form.Item>
+          </div>
+          {/* Sale*/}
+          <div className="_nameInputrow4">
+            <p className="_text_product">Sale*</p>
+
+            <Input
+              placeholder="Sale"
+              onChange={(e) => setValueSale(e.target.value)}
+              value={valueSale}
+            />
           </div>
         </div>
+        {/* Hàng 5 */}
+        <div className="_inputrow3From">
+          {/* mô tả */}
+          <div className="_nameInputrow2">
+            <p className="_text_product">Mô tả sản phẩm*</p>
+            <TinymceProduct
+              name="motasanpham"
+              onChangeText={(e) => setValueMota(e)}
+              initialValue={valueMota}
+            />
+          </div>
+        </div>
+        {/* Nút ấn bắt sự kiện */}
+        <div className="_buttonClick_Product">
+          <Button className="__buttonClick_Product_Res" onClick={handleResert}>
+            <p className="_Title_button_product">Đặt lại</p>
+          </Button>
+          <Button className="__buttonClick_Product_add" htmlType="submit">
+            <p className="_Title_button_product">Thêm sản phẩm</p>
+          </Button>
+        </div>
+        {/* Sale*/}
+        {/* <div className="_nameInputrow4">
+            <p className="_text_product">Sale*</p>
+            <Input
+              placeholder="Sale"
+              onChange={(e) => setValueSale(e.target.value)}
+              value={valueSale}
+            />
+          </div> */}
+      </div>
+      {/* Hàng 5 */}
+      <div className="_inputrow3From">
+        {/* mô tả */}
+        <div className="_nameInputrow2">
+          <p className="_text_product">Mô tả sản phẩm*</p>
+          <TinymceProduct
+            onChangeText={(e) => setValueMota(e)}
+            initialValue={valueMota}
+          />
+        </div>
+      </div>
+      {/* Nút ấn bắt sự kiện */}
+      <div className="_buttonClick_Product">
+        <Button className="__buttonClick_Product_Res" onClick={handleResert}>
+          <p className="_Title_button_product">Đặt lại</p>
+        </Button>
+        <Button
+          className="__buttonClick_Product_add"
+          onClick={onHandleChnageSubmit}
+        >
+          <p className="_Title_button_product">Thêm sản phẩm</p>
+        </Button>
       </div>
     </Form>
   );

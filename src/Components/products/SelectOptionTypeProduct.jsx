@@ -10,7 +10,7 @@ const SelectOptionTypeProduct = (props) => {
       }}
       options={props.options}
       onChange={props.onChange}
-      defaultValue={props.defaultValue}
+      value={props.value}
     />
   );
 };

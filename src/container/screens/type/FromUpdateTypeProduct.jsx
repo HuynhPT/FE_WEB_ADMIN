@@ -7,6 +7,7 @@ import SelectMenWoment from "../../../Components/products/SelectMenWomen";
 import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { upopjectCategori } from "../../../Redux/OjectCategoriSlice";
+import { mToken } from "../../../../token/TokenLogin";
 // truyền prammas
 
 function FromUpdateTypeProduct(props) {
@@ -34,9 +35,7 @@ function FromUpdateTypeProduct(props) {
     "checked = ", setDataLable(checkedValues.target.value);
   };
   useEffect(() => {
-    fetch(
-      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/type-product/get-type-product"
-    )
+    fetch("http://18.141.199.110:3000/api/type-product/get-type-product")
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
@@ -53,31 +52,36 @@ function FromUpdateTypeProduct(props) {
   const onFinish = async (values) => {
     console.log(values);
     const formData = new FormData();
-    formData.append("titleCategoryProduct", values.titleCategoryProduct);
-    formData.append("croppedImage", nameLinkImage[0]);
-    formData.append("idTypeProduct", dataLable);
-    formData.append("idCategory", dataEdit._id);
-
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "token",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A"
+    formData.append(
+      "titleCategoryProduct",
+      values.titleCategoryProduct == undefined
+        ? dataEdit.titleCategoryProduct
+        : values.titleCategoryProduct
     );
-
-    var requestOptions = {
+    formData.append(
+      "croppedImage",
+      nameLinkImage[0] == undefined
+        ? dataEdit.categoryImgProduct
+        : nameLinkImage[0]
+    );
+    formData.append(
+      "idTypeProduct",
+      values.idTypeProduct == undefined
+        ? dataEdit.idTypeProduct
+        : values.idTypeProduct
+    );
+    formData.append("idCategory", dataEdit._id);
+    await axios({
+      url: `http://18.141.199.110:3000/api/category-product/edit-category-product/findById`,
       method: "POST",
-      headers: myHeaders,
-      body: formData,
-      redirect: "follow",
-    };
-
-    fetch(
-      "http://18.141.199.110:3000/api/category-product/edit-category-product/findById",
-      requestOptions
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        result.code == 200
+      headers: {
+        token: mToken,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    }).then(
+      async (res) => {
+        res.data.code === 200
           ? message.success({
               content: "Sửa thành công",
               className: "custom-class",
@@ -96,8 +100,11 @@ function FromUpdateTypeProduct(props) {
               icon: () => <CheckCircleTwoTone twoToneColor="red" />,
               duration: 2,
             });
-      })
-      .catch((error) => console.log("error", error));
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
   };
   console.log(nameImage);
   return (
@@ -146,16 +153,7 @@ function FromUpdateTypeProduct(props) {
             >
               <div style={{ width: "70%" }}>
                 {/* tên */}
-                <Form.Item
-                  label="Tên"
-                  name="titleCategoryProduct"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Vui lòng nhập tên !",
-                    },
-                  ]}
-                >
+                <Form.Item label="Tên" name="titleCategoryProduct">
                   <Input
                     style={{ borderRadius: 3 }}
                     defaultValue={`${dataEdit?.titleCategoryProduct}`}

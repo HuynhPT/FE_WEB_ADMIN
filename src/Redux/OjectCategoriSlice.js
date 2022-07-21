@@ -21,7 +21,7 @@ export const addopjectCategori = createAsyncThunk(
         token: mToken,
         "Content-Type": "application/form-data",
       },
-      data: sq.stringify(data),
+      data: qs.stringify(data),
     }).then(
       async (res) => {
         const { data: categoris } = await getAll();
@@ -149,7 +149,7 @@ export const getListIdopjectCategori = createAsyncThunk(
       async (res) => {
         const { data: categoris } = await getAll();
         console.log(res);
-        categoriss = res.data.category;
+        categoriss = res.data.result;
       },
       (err) => {
         console.log(err.response, "?");

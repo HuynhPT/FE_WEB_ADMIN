@@ -150,23 +150,23 @@ function LayouttAdmin1() {
       "sub7",
       <img style={{ width: "10%" }} src={image7} alt="" />
     ),
+    // getItem(
+    //   "Thống kê",
+    //   "sub6",
+    //   <img style={{ width: "10%" }} src={image6} alt="" />,
+    //   [
+    // getItem(
+    //   ["Sản phẩm đã bán", <NavLink to="sanPham_DaBan" />],
+    //   "6",
+    //   <img style={{ width: "10%" }} src={imager10} alt="" />
+    // ),
     getItem(
-      "Thống kê",
-      "sub6",
-      <img style={{ width: "10%" }} src={image6} alt="" />,
-      [
-        getItem(
-          ["Sản phẩm đã bán", <NavLink to="sanPham_DaBan" />],
-          "6",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Thống kê", <NavLink to="thongKe_loiNhuan" />],
-          "15",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-      ]
+      ["Thống kê", <NavLink to="thongKe_loiNhuan" />],
+      "15",
+      <img style={{ width: "10%" }} src={image6} alt="" />
     ),
+    // ]
+    // ),
     getItem(
       "Banner quảng cáo",
       "sub11",
@@ -199,23 +199,23 @@ function LayouttAdmin1() {
       "sub9",
       <img style={{ width: "10%" }} src={image9} alt="" />
     ),
+    // getItem(
+    //   "Mạng xã hội",
+    //   "sub8",
+    //   <img style={{ width: "10%" }} src={image8} alt="" />,
+    //   [
+    // getItem(
+    //   ["Đăng bài viết", <NavLink to="themBai_Viet" />],
+    //   "8",
+    //   <img style={{ width: "10%" }} src={imager10} alt="" />
+    // ),
     getItem(
-      "Mạng xã hội",
-      "sub8",
-      <img style={{ width: "10%" }} src={image8} alt="" />,
-      [
-        getItem(
-          ["Đăng bài viết", <NavLink to="themBai_Viet" />],
-          "8",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Bài viết của bạn", <NavLink to="danhSach_baiViet" />],
-          "17",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-      ]
+      ["Mạng xã hội", <NavLink to="danhSach_baiViet" />],
+      "17",
+      <img style={{ width: "10%" }} src={image8} alt="" />
     ),
+    //   ]
+    // ),
   ];
   return (
     <Layout style={{ height: "200vh" }}>

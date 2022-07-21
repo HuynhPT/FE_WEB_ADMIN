@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
 import { getColor } from "../API/ColorSize";
+import { mToken } from "../../token/TokenLogin";
+import { message } from "antd";
 export const getColorsize = createAsyncThunk(
   "colorsize/getColorsize",
   async () => {
@@ -10,35 +12,149 @@ export const getColorsize = createAsyncThunk(
     return colors.result;
   }
 );
-// export const addProduct = createAsyncThunk(
-//   "product/addProduct",
-//   async (data) => {
-//     console.log(data);
-//     let products = [];
-//     const mToken =
-//       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTcxNjM0MDYsImV4cCI6MTY1OTc1NTQwNn0.ZmLJVVf6UQvLqioCBrRTaBPYJkRlI5kFPkEWv2rZ4BI";
+export const addColorsize = createAsyncThunk(
+  "colorsize/addColorsize",
+  async (data) => {
+    console.log(data);
+    let col = [];
 
-//     await axios({
-//       url: "http://18.141.199.110:3000/api/product/create-product",
-//       method: "POST",
-//       headers: {
-//         token: `Bearer ${mToken} `,
-//         "content-type": "multipart/form-data",
-//       },
-//       data: qs.stringify(data),
-//     }).then(
-//       async (res) => {
-//         const { data: product } = await getAll();
-//         console.log(product);
-//         products = product.data;
-//       },
-//       (err) => {
-//         console.log(err.response, "?");
-//       }
-//     );
-//     return products;
-//   }
-// );
+    await axios({
+      url: "http://18.141.199.110:3000/api/size-color/create-color",
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: colors } = await getColor();
+        col = colors.result;
+        if (res.data.code === 200) {
+          const { data: colors } = await getColor();
+          col = colors.result;
+          message.success({
+            content: "Thêm thành công",
+            style: { color: "green" },
+          });
+        } else {
+          message.error({
+            content: "Thêm thất bại",
+            style: { color: "red" },
+          });
+        }
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return col;
+  }
+);
+export const delAllColorsize = createAsyncThunk(
+  "colorsize/delAllColorsize",
+  async (data) => {
+    console.log(data);
+    let col = [];
+
+    await axios({
+      url: "http://18.141.199.110:3000/api/size-color/destroy-color",
+      method: "DELETE",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: colors } = await getColor();
+        col = colors.result;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return col;
+  }
+);
+export const removeColorsize = createAsyncThunk(
+  "colorsize/removeColorsize",
+  async (data) => {
+    console.log(data);
+    let col = [];
+
+    await axios({
+      url: "http://18.141.199.110:3000/api/size-color/destroy-colorById",
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: colors } = await getColor();
+        col = colors.result;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return col;
+  }
+);
+export const searchColorsize = createAsyncThunk(
+  "colorsize/searchColorsize",
+  async (data) => {
+    console.log(data);
+    let col = [];
+
+    await axios({
+      url: "http://18.141.199.110:3000/api/size-color/search-color",
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: colors } = await getColor();
+        col = res.data.result;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return col;
+  }
+);
+export const upColorsize = createAsyncThunk(
+  "colorsize/upColorsize",
+  async (data) => {
+    console.log(data);
+    let col = [];
+
+    await axios({
+      url: "http://18.141.199.110:3000/api/size-color/edit-colorById",
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: colors } = await getColor();
+        col = colors.result;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return col;
+  }
+);
 const colorSlice = createSlice({
   name: "auth",
   initialState: {
@@ -46,12 +162,32 @@ const colorSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
-    // builder.addCase(addProduct.fulfilled, (state, action) => {
-    //   console.log(action.payload);
-    //   state.value = action.payload;
-    //   // action is inferred correctly here if using TS
-    // });
     builder.addCase(getColorsize.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(addColorsize.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(delAllColorsize.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(removeColorsize.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(searchColorsize.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(upColorsize.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS

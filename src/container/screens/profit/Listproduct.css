@@ -1,7 +1,9 @@
 .list-product {
   overflow: scroll;
 }
-
+.ant-table table {
+  width: 100% !important;
+}
 .button-list {
   display: flex;
   justify-content: space-between;

@@ -7,11 +7,11 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 
 const CardInfor = () => {
-  const [data, setDataId] = useState("");
   const dispatch = useDispatch();
-  const { user } = useSelector((data) => data.auth.login.currentUser);
-  console.log(user.token, "Dit me may");
-
+  const user = useSelector((data) => console.log(data.auth.login, "info"));
+  // useEffect(() => {
+  //   dispatch();
+  // }, []);
   return (
     <Card
       style={{
@@ -21,11 +21,11 @@ const CardInfor = () => {
       }}
     >
       <div className="__ava_container">
-        <img src={user.image} className="__avatar" />
+        <img src={user?.image} className="__avatar" />
         <div style={{ marginLeft: 50 }}>
-          <p>{user.userName}</p>
-          <p>{user.phone}</p>
-          <p>{user.email}</p>
+          <p>{user?.userName}</p>
+          <p>{user?.phone}</p>
+          <p>{user?.email}</p>
         </div>
       </div>
     </Card>

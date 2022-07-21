@@ -1,4 +1,4 @@
-import { Button, Input } from "antd";
+import { Button, Input, message } from "antd";
 import React, { useEffect, useState } from "react";
 import "../../../Components/products//FromProduct.css";
 import SelectOptionColor from "../../../Components/products/SelectOptionColor";
@@ -10,6 +10,8 @@ import axios from "axios";
 import { Link, useParams } from "react-router-dom";
 
 import { useDispatch } from "react-redux";
+import { borderRadius } from "@mui/system";
+import { mToken } from "../../../../token/TokenLogin";
 function EditProduct(props) {
   //khai báo state
   const [nameLinkImage, setNameLinkImage] = useState([]);
@@ -53,27 +55,8 @@ function EditProduct(props) {
         setDataEdit(newData);
       });
   }, []);
-
+  console.log(dataEdit);
   const dispatch = useDispatch();
-
-  const handleResert = () => {
-    setNameLinkImage([]);
-    setNameImage([]);
-    setValueTenSP("");
-    setValueThuonghieu("");
-    setValueMaso("");
-    setValueChatlieu("");
-    setValueChatlieu("");
-    setValueChatlieu("");
-    setValueGiaban("");
-    setValueDongia("");
-    setValueSale("");
-    setValueMota("");
-    setValueSoluong("");
-    setDatavaluesize("");
-    setDataValueColor("");
-    setDataValuetype("");
-  };
 
   // lấy ảnh
   const upImage = (e) => {
@@ -143,46 +126,85 @@ function EditProduct(props) {
   };
   const onHandleChnageSubmit = async () => {
     const fromdata = new FormData();
-    fromdata.append("title_product", valueTensp);
-    fromdata.append("trademark", valueThuonghieu);
-    fromdata.append("descriptionProduct", valueMota);
-    fromdata.append("code", valueMaso);
-    fromdata.append("flashSale", valueSale);
-    fromdata.append("importPrice", Number(valueDongia));
-    fromdata.append("price", Number(valueGiaban));
-    fromdata.append("quantity_product", Number(valueSoluong));
+    fromdata.append(
+      "titleproduct",
+      valueTensp == undefined ? dataEdit.title_product : valueTensp
+    );
+    fromdata.append(
+      "trademark",
+      valueThuonghieu == undefined ? dataEdit.trademark : valueThuonghieu
+    );
+    fromdata.append(
+      "descriptionProduct",
+      valueMota == undefined ? dataEdit.descriptionProduct : valueMota
+    );
+    fromdata.append("code", valueMaso == undefined ? dataEdit.code : valueMaso);
+    // fromdata.append("flashSale", valueSale);
+    fromdata.append(
+      "importPrice",
+      valueDongia == undefined ? dataEdit.importPrice : Number(valueDongia)
+    );
+    fromdata.append(
+      "price",
+      valueGiaban == undefined ? dataEdit.price : Number(valueGiaban)
+    );
+    fromdata.append(
+      "quantity_product",
+      valueSoluong == undefined
+        ? dataEdit.quantity_product
+        : Number(valueSoluong)
+    );
     fromdata.append("material_product", valueChatlieu);
     for (let i = 0; i < nameLinkImage.length; i++) {
       fromdata.append("croppedImage", nameLinkImage[i]);
     }
-    for (let i = 0; i < dataValueSize.length; i++) {
+    for (let i = 0; i < dataValueSize?.length; i++) {
       console.log(`size_product[${i}]`, dataValueSize[i]);
-      fromdata.append(`size_product[${i}]`, dataValueSize[i]);
+      fromdata.append(
+        `size_product[${i}]`,
+        dataValueSize[i] == undefined
+          ? dataEdit?.size_product
+          : dataValueSize[i]
+      );
     }
-    for (let i = 0; i < dataValueColor.length; i++) {
+    for (let i = 0; i < dataValueColor?.length; i++) {
       console.log(`color_product[${i}]`, dataValueColor[i]);
-      fromdata.append(`color_product[${i}]`, dataValueColor[i]);
+      fromdata.append(
+        `color_product[${i}]`,
+        dataValueColor[i] == undefined
+          ? dataEdit?.color_product
+          : dataValueColor[i]
+      );
     }
-    fromdata.append("idCategoryProduct", dataValueType);
-    axios({
-      url: "http://18.141.199.110:3000/api/product/create-product",
+    fromdata.append(
+      "idCategoryProduct",
+      dataValueType == undefined ? dataEdit.idCategoryProduct : dataValueType
+    );
+    fromdata.append("mIdProduct", dataEdit._id);
+    await axios({
+      url: "http://18.141.199.110:3000/api/product/update-product-ById",
       method: "POST",
       headers: {
-        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY`,
-        "Content-Type": "multipart/form-data",
+        token: mToken,
+        "content-type": "multipart/form-data",
       },
       data: fromdata,
     }).then(
-      (res) => {
-        // if (res.code !== 200) {
-        //   alert("Thêm sản phẩm thành công");
-        // } else {
-        //   alert("Thêm sản phẩm thất bại");
-        // }
-        console.log(res);
+      async (res) => {
+        if (res.data.code === 200) {
+          message.success({
+            content: "Sửa thành công",
+            style: { color: "green" },
+          });
+        } else {
+          message.error({
+            content: "Sửa thất bại",
+            style: { color: "red" },
+          });
+        }
       },
       (err) => {
-        console.log(err.response);
+        console.log(err.response, "?");
       }
     );
   };
@@ -201,7 +223,9 @@ function EditProduct(props) {
               placeholder="Tên sản phẩm"
               onChange={(e) => setValueTenSP(e.target.value)}
               required={true}
-              value={valueTensp}
+              value={
+                valueTensp == undefined ? dataEdit?.titleProduct : valueTensp
+              }
             />
           </div>
           {/* nhãn hiệu */}
@@ -210,7 +234,11 @@ function EditProduct(props) {
             <Input
               placeholder="Nhãn hiệu sản phẩm"
               onChange={(e) => setValueThuonghieu(e.target.value)}
-              value={valueThuonghieu}
+              value={
+                valueThuonghieu == undefined
+                  ? dataEdit?.trademark
+                  : valueThuonghieu
+              }
             />
           </div>
         </div>
@@ -222,7 +250,7 @@ function EditProduct(props) {
             <Input
               placeholder="Mã số"
               onChange={(e) => setValueMaso(e.target.value)}
-              value={valueMaso}
+              value={valueMaso == undefined ? dataEdit?.code : valueMaso}
             />
           </div>
           {/* chất liệu */}
@@ -231,7 +259,11 @@ function EditProduct(props) {
             <Input
               placeholder="Chất liệu"
               onChange={(e) => setValueChatlieu(e.target.value)}
-              value={valueChatlieu}
+              value={
+                valueChatlieu == undefined
+                  ? dataEdit?.material_product
+                  : valueChatlieu
+              }
             />
           </div>
         </div>
@@ -244,7 +276,11 @@ function EditProduct(props) {
             <SelectOptionTypeProduct
               options={dataType}
               onChange={handleChangetype}
-              defaultValue={dataValueType}
+              value={
+                dataValueType == undefined
+                  ? dataEdit?.idCategoryProduct
+                  : dataValueType
+              }
             />
           </div>
           {/* Chọn size*/}
@@ -253,7 +289,11 @@ function EditProduct(props) {
             <SelectOtionSze
               dataSize={dataSize}
               onChange={onChangeSize}
-              defaultValue={dataValueSize}
+              value={
+                dataValueSize == undefined
+                  ? dataEdit?.size_product?.map((item) => item)
+                  : dataValueSize
+              }
             />
           </div>
           {/* Chọn màu */}
@@ -262,7 +302,11 @@ function EditProduct(props) {
             <SelectOptionColor
               dataColor={dataColor}
               onChange={handleChangeColor}
-              defaultValue={dataValueColor}
+              value={
+                dataValueColor == undefined
+                  ? dataEdit?.color_product?.map((item) => item)
+                  : dataValueColor
+              }
             />
           </div>
           {/* số lượng */}
@@ -271,7 +315,7 @@ function EditProduct(props) {
             <Input
               placeholder="Số lượng"
               onChange={(e) => setValueSoluong(e.target.value)}
-              value={valueSoluong}
+              value={dataEdit?.quantity_product}
             />
           </div>
         </div>
@@ -283,32 +327,67 @@ function EditProduct(props) {
             {nameImage.length == 0 ? (
               <span>{nameImage}</span>
             ) : (
-              <>
-                {nameImage.map((item) => (
-                  <>
-                    <span>{item}</span>
-                    <br />
-                  </>
-                ))}
-                <Button
-                  onClick={() => setNameImage([])}
-                  style={{
-                    marginLeft: 117,
-                    marginBottom: 25,
-                    height: 20,
-                    borderRadius: 3,
-                  }}
-                >
-                  <p style={{ marginTop: -8 }}>Huỷ</p>
-                </Button>
-              </>
+              // <>
+              //   {nameImage.map((item) => (
+              //     <>
+              //       <span>{item}</span>
+              //       <br />
+              //     </>
+              //   ))}
+              //   <Button
+              //     onClick={() => setNameImage([])}
+              //     style={{
+              //       marginLeft: 117,
+              //       marginBottom: 25,
+              //       height: 20,
+              //       borderRadius: 3,
+              //     }}
+              //   >
+              //     <p style={{ marginTop: -8 }}>Huỷ</p>
+              //   </Button>
+              // </>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                }}
+              >
+                <div>
+                  {nameImage.map((item) => (
+                    <>
+                      <span>{item}</span>
+                      <br />
+                    </>
+                  ))}
+                </div>
+
+                <div>
+                  <Button
+                    onClick={() => setNameImage([])}
+                    style={{
+                      marginTop: 85,
+                      height: 20,
+                      borderRadius: 3,
+                    }}
+                  >
+                    <p style={{ marginTop: -8 }}>Huỷ</p>
+                  </Button>
+                </div>
+              </div>
             )}
+            {dataEdit?.imageProduct?.map((item) => {
+              return (
+                <>
+                  <img src={item} style={{ width: 30, margin: 10 }} />
+                </>
+              );
+            })}
             <br />
             <label htmlFor="images">
               <div
                 style={{
                   border: "1px solid #DCDFE8",
-                  marginTop: -20,
                   height: 30,
                   textAlign: "center",
                 }}
@@ -329,7 +408,9 @@ function EditProduct(props) {
             <Input
               placeholder="Đơn giá"
               onChange={(e) => setValueDongia(e.target.value)}
-              value={valueDongia}
+              value={
+                valueDongia == undefined ? dataEdit?.importPrice : valueDongia
+              }
             />
           </div>
           {/* giá bán */}
@@ -338,18 +419,18 @@ function EditProduct(props) {
             <Input
               placeholder="Giá bán"
               onChange={(e) => setValueGiaban(e.target.value)}
-              value={valueGiaban}
+              value={valueGiaban == undefined ? dataEdit?.price : valueGiaban}
             />
           </div>
           {/* Sale*/}
-          <div className="_nameInputrow4">
+          {/* <div className="_nameInputrow4">
             <p className="_text_product">Sale*</p>
             <Input
               placeholder="Sale"
               onChange={(e) => setValueSale(e.target.value)}
               value={valueSale}
             />
-          </div>
+          </div> */}
         </div>
         {/* Hàng 5 */}
         <div className="_inputrow3From">
@@ -358,20 +439,34 @@ function EditProduct(props) {
             <p className="_text_product">Mô tả sản phẩm*</p>
             <TinymceProduct
               onChangeText={(e) => setValueMota(e)}
-              initialValue={valueMota}
+              initialValue={
+                valueMota == undefined
+                  ? dataEdit?.descriptionProduct
+                  : valueMota
+              }
             />
           </div>
         </div>
         {/* Nút ấn bắt sự kiện */}
         <div className="_buttonClick_Product">
-          <Button className="__buttonClick_Product_Res" onClick={handleResert}>
-            <p className="_Title_button_product">Đặt lại</p>
-          </Button>
+          <Link to={"/shop/danhSach_sanPham"} style={{ margin: "0 100px 0 0" }}>
+            <Button
+              style={{
+                width: "100%",
+                margin: "30px 80px",
+                borderRadius: 3,
+                backgroundColor: "#dcdfe8",
+              }}
+            >
+              <p className="_Title_button_product">Quay lại</p>
+            </Button>
+          </Link>
+
           <Button
             className="__buttonClick_Product_add"
             onClick={onHandleChnageSubmit}
           >
-            <p className="_Title_button_product">Thêm sản phẩm</p>
+            <p className="_Title_button_product">Sửa sản phẩm</p>
           </Button>
         </div>
       </div>
