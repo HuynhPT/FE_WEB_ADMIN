@@ -40,14 +40,14 @@ function FromUpdateTypeProduct(props) {
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
-        dataOp.data.map((item) => {
+        dataOp.result.map((item) => {
           otpn.push({ label: item.titleTypeProduct, value: item._id });
         });
         setDataOp(otpn);
       });
   }, []);
   const upImage = (e) => {
-   setNameLinkImage(e.target.files)
+    setNameLinkImage(e.target.files);
     setNameImage(e.target.files[0].name);
   };
   const onFinish = async (values) => {

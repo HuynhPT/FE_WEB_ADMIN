@@ -1,5 +1,3 @@
-import AuthSlice from "../../Redux/AuthSlice";
-import { useState } from "react";
 const Validate = (values) => {
   let errors = {};
   if (!values.email) {
@@ -11,6 +9,9 @@ const Validate = (values) => {
     errors.password = "Xin mời nhập mật khẩu!";
   } else if (values.password.length < 5) {
     errors.password = "Mật khẩu không được nhỏ hơn 5!";
+  }
+  if (!values.titleTypeProduct) {
+    errors.titleTypeProduct = "Xin mời nhập đối tượng!";
   }
 
   return errors;

@@ -11,7 +11,7 @@ const InforProduct = () => {
     fetch("http://18.141.199.110:3000/api/product/get-product")
       .then((res) => res.json())
       .then((data) => {
-        const newData = data.data.find((item) => item._id == id);
+        const newData = data.result.find((item) => item._id == id);
         setDataInfor(newData);
       });
   }, []);

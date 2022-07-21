@@ -18,7 +18,7 @@ export const delImg = createAsyncThunk("imgFirstImages/delImg", async (id) => {
   }).then(
     async (res) => {
       const { data: flast } = await getAll();
-      flast = flast.data;
+      return flast.data;
     },
     (err) => {
       console.log(err.response, "?");

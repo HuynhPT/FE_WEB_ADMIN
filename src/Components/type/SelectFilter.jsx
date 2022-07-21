@@ -1,17 +1,18 @@
 import { Select, Tag } from "antd";
-
-const SelectOptionTypeProduct = (props) => {
+import "./css.css";
+const SelectFilter = (props) => {
   return (
     <Select
       placeholder={props.placeholder}
-      showSearch
       style={{
         width: "100%",
+        backgroundColor: "#D9D9D9",
+        borderRadius: 3,
       }}
       options={props.options}
       onChange={props.onChange}
-      defaultValue={props.defaultValue}
+      value={props.value}
     />
   );
 };
-export default SelectOptionTypeProduct;
+export default SelectFilter;

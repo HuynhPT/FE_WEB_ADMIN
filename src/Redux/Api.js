@@ -19,9 +19,6 @@ export const loginUser = async (user, dispacth, navigation) => {
         }
         dispacth(loginSuccess(reponse.data));
         navigation("/shop/tong_quan");
-
-        console.log("NÓ Ở ĐÂY", reponse.data.token);
-
         return reponse.data;
       });
   } catch (err) {

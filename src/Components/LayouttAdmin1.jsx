@@ -43,12 +43,14 @@ function LayouttAdmin1() {
   const [state, setState] = useState(false);
   const onClick = () => {};
 
-  // const user = useSelector((state) => state.auth.login.currentUser);
-  // const navigation = useNavigate();
+  const user = useSelector((state) => state.auth.login.currentUser);
+  const navigation = useNavigate();
 
-  // if (!user) {
-  //   navigation("/");
-  // }
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigation("/");
+  //   }
+  // }, []);
 
   const menu = (
     <Menu className={styles.dropdown}>
@@ -115,8 +117,8 @@ function LayouttAdmin1() {
       <img style={{ width: "10%" }} src={image4} alt="" />,
       [
         getItem(
-          ["Danh sách sản phẩm", <NavLink to="danhSach_sanPham" />],
-          "2",
+          ["Thuộc tính sản phẩm", <NavLink to="mau_size" />],
+          "sub10",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
         getItem(
@@ -125,8 +127,8 @@ function LayouttAdmin1() {
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
         getItem(
-          ["Thuộc tính sản phẩm", <NavLink to="mau_size" />],
-          "sub10",
+          ["Danh sách sản phẩm", <NavLink to="danhSach_sanPham" />],
+          "2",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
       ]

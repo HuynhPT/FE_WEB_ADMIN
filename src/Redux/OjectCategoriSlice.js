@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
 import { getAll } from "../API/OpjectProductApi";
+import { mToken } from "../../token/TokenLogin";
 export const getOpjectCategori = createAsyncThunk(
   "opjectcategori/getOpjectCategori",
   async () => {
@@ -9,18 +10,40 @@ export const getOpjectCategori = createAsyncThunk(
     return categoris.data;
   }
 );
+export const addopjectCategori = createAsyncThunk(
+  "opjectcategori/addopjectCategori",
+  async (data) => {
+    let categoriss = [];
+    await axios({
+      url: "http://18.141.199.110:3000/api/category-product/create-category-product",
+      method: "POST",
+      headers: {
+        token: mToken,
+        "Content-Type": "application/form-data",
+      },
+      data: sq.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: categoris } = await getAll();
+        categoriss = categoris.data;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return categoriss;
+  }
+);
 export const delopjectCategori = createAsyncThunk(
   "opjectcategori/delopjectCategori",
   async (data) => {
     let newCategoris = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
 
     await axios({
       url: `http://18.141.199.110:3000/api/category-product/delete-category-product/findById`,
       method: "POST",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(data),
@@ -40,14 +63,12 @@ export const delallopjectCategori = createAsyncThunk(
   "opjectcategori/delallopjectCategori",
   async (data) => {
     let newCategoris = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
 
     await axios({
       url: "http://18.141.199.110:3000/api/category-product/destroy-category-product",
       method: "DELETE",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "Content-Type": "application/json",
       },
     }).then(
@@ -66,14 +87,12 @@ export const upopjectCategori = createAsyncThunk(
   "opjectcategori/upopjectCategori",
   async (data) => {
     let categoriss = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTc1OTM5NzEsImV4cCI6MTY2MDE4NTk3MX0.GcgUDezf7NeUUseSlZ3ma8PWFbLnidQaTqpXy-85mFk";
 
     await axios({
       url: `http://18.141.199.110:3000/api/category-product/edit-category-product/findById`,
       method: "POST",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "Content-Type": "multipart/form-data",
       },
       data: qs.stringify(data),
@@ -93,22 +112,44 @@ export const searchopjectCategori = createAsyncThunk(
   "opjectcategori/searchopjectCategori",
   async (data) => {
     let categoriss = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTc1OTM5NzEsImV4cCI6MTY2MDE4NTk3MX0.GcgUDezf7NeUUseSlZ3ma8PWFbLnidQaTqpXy-85mFk";
-
     await axios({
       url: `http://18.141.199.110:3000/api/category-product/search-category-product`,
       method: "POST",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(data),
     }).then(
       async (res) => {
         const { data: categoris } = await getAll();
-        console.log(res)
-        categoriss = categoris.data;
+        console.log(res);
+        categoriss = res.data.data;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return categoriss;
+  }
+);
+export const getListIdopjectCategori = createAsyncThunk(
+  "opjectcategori/getListIdopjectCategori",
+  async (data) => {
+    let categoriss = [];
+    await axios({
+      url: `http://18.141.199.110:3000/api/category-product/get-category-product/findById`,
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: categoris } = await getAll();
+        console.log(res);
+        categoriss = res.data.category;
       },
       (err) => {
         console.log(err.response, "?");
@@ -124,6 +165,10 @@ const OjectCategoriSlice = createSlice({
   },
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(addopjectCategori.fulfilled, (state, action) => {
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
     builder.addCase(getOpjectCategori.fulfilled, (state, action) => {
       state.value = action.payload;
       // action is inferred correctly here if using TS
@@ -143,7 +188,12 @@ const OjectCategoriSlice = createSlice({
     });
     builder.addCase(searchopjectCategori.fulfilled, (state, action) => {
       state.value = action.payload;
-      console.log( action.payload,'ảo')
+      console.log(action.payload, "ảo");
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(getListIdopjectCategori.fulfilled, (state, action) => {
+      state.value = action.payload;
+      console.log(action.payload, "ảo");
       // action is inferred correctly here if using TS
     });
   },

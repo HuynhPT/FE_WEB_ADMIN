@@ -1,21 +1,18 @@
 import React, { useState } from "react";
 import { Button, Form, Input, message, Modal } from "antd";
 import TableObjectProduct from "./TableObjectProduct";
-import {
-  CheckCircleTwoTone,
-  PlusOutlined,
-  SearchOutlined,
-} from "@ant-design/icons";
-import qs from "qs";
-import axios from "axios";
+import { CheckCircleTwoTone, PlusOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { addTypeProduct } from "../../../Redux/TypeProductSlice";
+import { useForm } from "react-hook-form";
+import Validate from "../../../Components/auth/Validate";
 const FromObjectProduct = () => {
-  const [edtex, setedtex] = useState();
-  const [errors, setErrors] = useState(true);
+  const [edtex, setedtex] = useState({ titleTypeProduct: "" });
+
   const dispatch = useDispatch();
-  const onFinish = async () => {
-    dispatch(addTypeProduct({ titleTypeProduct: edtex }));
+
+  const onFinish = async (data) => {
+    dispatch(addTypeProduct(edtex));
     message.success({
       content: "Thêm thành công",
       className: "custom-class",
@@ -25,8 +22,13 @@ const FromObjectProduct = () => {
       icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
       duration: 2,
     });
-    setedtex();
-    setErrors(edtex);
+  };
+  const handleChange = (event) => {
+    setedtex({
+      ...edtex,
+      [event.target.name]: event.target.value,
+    });
+    console.log(edtex);
   };
 
   return (
@@ -51,24 +53,34 @@ const FromObjectProduct = () => {
           style={{
             width: "100%",
             height: "48px",
-            borderColor: !errors ? "red" : "	#DCDCDC",
           }}
         >
-          <Input
-            value={edtex}
-            onChange={(e) => setedtex(e.target.value)}
+          <Form.Item
             name="titleTypeProduct"
-            style={{
-              width: "100%",
-              height: "48px",
-              borderColor: !errors ? "red" : "	#DCDCDC",
-            }}
-            placeholder="Nhập : Nam, Nữ,........"
-          />
-          <p style={{ color: !errors ? "red" : "	#f0f2f5" }}>
-            Mời nhập đối tượng!
-          </p>
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập đối tượng!",
+              },
+              {
+                min: 3,
+                message: "Nhập tối thiểu 3 ký tự!",
+              },
+            ]}
+          >
+            <Input
+              value={edtex.titleTypeProduct}
+              onChange={handleChange}
+              name="titleTypeProduct"
+              style={{
+                width: "100%",
+                height: "48px",
+              }}
+              placeholder="Nhập : Nam, Nữ,........"
+            />
+          </Form.Item>
         </div>
+
         <Button
           type="primary"
           htmlType="submit"
