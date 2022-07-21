@@ -4,7 +4,9 @@ import axios from "axios";
 import { getAll } from "../API/ImageAPI";
 
 export const delImg = createAsyncThunk("imgFirstImages/delImg", async (id) => {
-  let flast = [];
+
+  let flasts = [];
+
   const mToken =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTc2MDg4OTksImV4cCI6MTY2MDIwMDg5OX0.ttQqEcG4mRYt4MrRPr5lZaOkbTFzdJqoVp9039aR3LU";
 
@@ -18,13 +20,17 @@ export const delImg = createAsyncThunk("imgFirstImages/delImg", async (id) => {
   }).then(
     async (res) => {
       const { data: flast } = await getAll();
-      return flast.data;
+
+      flasts = flast.data;
+
     },
     (err) => {
       console.log(err.response, "?");
     }
   );
-  return flast;
+
+  return flasts;
+
 });
 const Bannner = createSlice({
   name: "flast",
