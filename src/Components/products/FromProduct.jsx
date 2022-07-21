@@ -335,6 +335,7 @@ function FromProduct(props) {
               value={valueDongia}
             />
           </div>
+          {/* ok */}
           {/* giá bán */}
           <div className="_nameInputrow4">
             <p className="_text_product">Giá bán*</p>
