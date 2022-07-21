@@ -22,7 +22,7 @@ const FormLogin = (props) => {
   const navigation = useNavigate();
 
   const onClickHandler = async () => {
-    setErrors(Validate(values));
+    // setErrors(Validate(values));
     loginUser(values, dispacth, navigation);
   };
   const handleChange = (event) => {
@@ -45,31 +45,50 @@ const FormLogin = (props) => {
         onFinish={onClickHandler}
         autoComplete="off"
       >
-        <Form.Item>
+        <Form.Item
+          name="email"
+          rules={[
+            {
+              required: true,
+              message: "Xin mời nhập Email!",
+            },
+            {
+              message: "Email sai định dạng",
+              pattern:
+                /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/,
+            },
+          ]}
+        >
           <Input
             prefix={<UserOutlined />}
             name="email"
             style={{
               width: 340,
               height: 40,
-              borderColor: errors.email ? "red" : "#DCDCDC",
+              // borderColor: errors.email ? "red" : "#DCDCDC",
             }}
             onChange={handleChange}
             placeholder="Email..."
             value={values.email}
             Outlined={<UserOutlined className="site-form-item-icon" />}
           />
-          {errors.email && <p style={{ color: "red" }}>{errors.email}</p>}
+          {/* {errors.email && <p style={{ color: "red" }}>{errors.email}</p>} */}
         </Form.Item>
 
-        <Form.Item>
+        <Form.Item
+          name="password"
+          rules={[
+            { required: true, message: "Xin mời nhập mật khẩu!" },
+            { min: 5, message: "Mật khẩu tối thiếu 5 ký tự!" },
+          ]}
+        >
           <Input.Password
             prefix={<LockOutlined />}
             name="password"
             style={{
               width: 340,
               height: 40,
-              borderColor: errors.password ? "red" : "	#DCDCDC",
+              // borderColor: errors.password ? "red" : "	#DCDCDC",
             }}
             onChange={handleChange}
             value={values.password}
@@ -78,7 +97,7 @@ const FormLogin = (props) => {
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
           />
-          {errors.password && <p style={{ color: "red" }}>{errors.password}</p>}
+          {/* {errors.password && <p style={{ color: "red" }}>{errors.password}</p>} */}
         </Form.Item>
 
         <div style={{ marginTop: 15 }}>

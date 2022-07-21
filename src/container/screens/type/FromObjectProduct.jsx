@@ -4,11 +4,15 @@ import TableObjectProduct from "./TableObjectProduct";
 import { CheckCircleTwoTone, PlusOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { addTypeProduct } from "../../../Redux/TypeProductSlice";
+import { useForm } from "react-hook-form";
+import Validate from "../../../Components/auth/Validate";
 const FromObjectProduct = () => {
-  const [edtex, setedtex] = useState();
+  const [edtex, setedtex] = useState({ titleTypeProduct: "" });
+
   const dispatch = useDispatch();
-  const onFinish = async (values) => {
-    dispatch(addTypeProduct({ titleTypeProduct: edtex }));
+
+  const onFinish = async (data) => {
+    dispatch(addTypeProduct(edtex));
     message.success({
       content: "Thêm thành công",
       className: "custom-class",
@@ -18,8 +22,15 @@ const FromObjectProduct = () => {
       icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
       duration: 2,
     });
-    setedtex();
   };
+  const handleChange = (event) => {
+    setedtex({
+      ...edtex,
+      [event.target.name]: event.target.value,
+    });
+    console.log(edtex);
+  };
+
   return (
     <div>
       <h3 style={{ fontSize: "24px", marginTop: 30, marginLeft: 30 }}>
@@ -30,20 +41,45 @@ const FromObjectProduct = () => {
         Thêm đối tượng sử dụng
       </p>
 
-      <div
+      <Form
         style={{
           display: "flex",
           justifyContent: "space-between",
           margin: 30,
         }}
+        onFinish={onFinish}
       >
-        <Input
-          value={edtex}
-          onChange={(e) => setedtex(e.target.value)}
-          name="titleTypeProduct"
-          style={{ width: "100%", height: "48px" }}
-          placeholder="Nhập : Nam, Nữ,........"
-        />
+        <div
+          style={{
+            width: "100%",
+            height: "48px",
+          }}
+        >
+          <Form.Item
+            name="titleTypeProduct"
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập đối tượng!",
+              },
+              {
+                min: 3,
+                message: "Nhập tối thiểu 3 ký tự!",
+              },
+            ]}
+          >
+            <Input
+              value={edtex.titleTypeProduct}
+              onChange={handleChange}
+              name="titleTypeProduct"
+              style={{
+                width: "100%",
+                height: "48px",
+              }}
+              placeholder="Nhập : Nam, Nữ,........"
+            />
+          </Form.Item>
+        </div>
 
         <Button
           type="primary"
@@ -59,12 +95,11 @@ const FromObjectProduct = () => {
             marginLeft: 100,
             marginRight: 10,
           }}
-          onClick={() => onFinish()}
         >
           <PlusOutlined />
           <p style={{ color: "black", margin: 4 }}>Thêm</p>
         </Button>
-      </div>
+      </Form>
       <TableObjectProduct />
     </div>
   );

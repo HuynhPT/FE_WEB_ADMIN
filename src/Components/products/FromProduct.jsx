@@ -1,4 +1,4 @@
-import { Button, Input, message } from "antd";
+import { Button, Form, Input, message, Modal } from "antd";
 import React, { useEffect, useState } from "react";
 import "./FromProduct.css";
 import SelectMenWomen from "./SelectMenWomen";
@@ -182,63 +182,167 @@ function FromProduct(props) {
   };
 
   return (
-    <div className="_Mcontainer_Fro">
-      <div className="_Mcontainer_Frompr">
-        <h3 className="_title_addproduct">Thêm sản phẩm</h3>
-        <hr />
-        {/* hàng 1 */}
-        <div className="_inputrow1From">
-          {/* tênSP */}
-          <div className="_nameInputrow1">
-            <p className="_text_product">Tên sản phẩm*</p>
-            <Input
-              placeholder="Tên sản phẩm"
-              onChange={(e) => setValueTenSP(e.target.value)}
-              value={valueTensp}
-            />
+    <Form onFinish={onHandleChnageSubmit}>
+      <div className="_Mcontainer_Fro">
+        <div className="_Mcontainer_Frompr">
+          <h3 className="_title_addproduct">Thêm sản phẩm</h3>
+          <hr />
+          {/* hàng 1 */}
+          <div className="_inputrow1From">
+            {/* tênSP */}
+            <div className="_nameInputrow1">
+              <p className="_text_product">Tên sản phẩm*</p>
+              <Form.Item
+                name="titleTypeProduct"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng nhập tên sản phẩm!",
+                  },
+                ]}
+              >
+                <Input
+                  name="titleTypeProduct"
+                  placeholder="Tên sản phẩm"
+                  onChange={(e) => setValueTenSP(e.target.value)}
+                  value={valueTensp}
+                />
+              </Form.Item>
+            </div>
+            {/* nhãn hiệu */}
+            <div className="_nameInputrow1">
+              <p className="_text_product">Thương hiệu*</p>
+              <Form.Item
+                name="nhanhieu"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng nhập nhãn hiệu!",
+                  },
+                ]}
+              >
+                <Input
+                  name="nhanhieu"
+                  placeholder="Nhãn hiệu sản phẩm"
+                  onChange={(e) => setValueThuonghieu(e.target.value)}
+                  value={valueThuonghieu}
+                />
+              </Form.Item>
+            </div>
           </div>
-          {/* nhãn hiệu */}
-          <div className="_nameInputrow1">
-            <p className="_text_product">Thương hiệu*</p>
-            <Input
-              placeholder="Nhãn hiệu sản phẩm"
-              onChange={(e) => setValueThuonghieu(e.target.value)}
-              value={valueThuonghieu}
-            />
+          {/* hàng 2 */}
+          <div className="_inputrow1From">
+            {/* mã số */}
+            <div className="_nameInputrow1">
+              <p className="_text_product">Mã số*</p>
+              <Form.Item
+                name="maso"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng nhập mã số!",
+                  },
+                  {
+                    pattern: /^[0-9]*$/,
+                    message: "Mã số yêu cầu phải nhập số ",
+                  },
+                ]}
+              >
+                <Input
+                  name="maso"
+                  placeholder="Mã số"
+                  onChange={(e) => setValueMaso(e.target.value)}
+                  value={valueMaso}
+                />
+              </Form.Item>
+            </div>
+            {/* chất liệu */}
+            <div className="_nameInputrow1">
+              <p className="_text_product">Chất liệu*</p>
+              <Form.Item
+                name="chatlieu"
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng nhập Chất liệu!",
+                  },
+                ]}
+              >
+                <Input
+                  name="chatlieu"
+                  placeholder="Chất liệu"
+                  onChange={(e) => setValueChatlieu(e.target.value)}
+                  value={valueChatlieu}
+                />
+              </Form.Item>
+            </div>
           </div>
-        </div>
-        {/* hàng 2 */}
-        <div className="_inputrow1From">
-          {/* mã số */}
-          <div className="_nameInputrow1">
-            <p className="_text_product">Mã số*</p>
-            <Input
-              placeholder="Mã số"
-              onChange={(e) => setValueMaso(e.target.value)}
-              value={valueMaso}
-            />
-          </div>
-          {/* chất liệu */}
-          <div className="_nameInputrow1">
-            <p className="_text_product">Chất liệu*</p>
-            <Input
-              placeholder="Chất liệu"
-              onChange={(e) => setValueChatlieu(e.target.value)}
-              value={valueChatlieu}
-            />
-          </div>
-        </div>
 
-        {/* Hàng 3 */}
-        <div className="_inputrow4From">
-          {/* thể loại */}
-          <div className="_nameInputrow4">
-            <p className="_text_product">Thể loại*</p>
-            <SelectOptionTypeProduct
-              options={dataType}
-              onChange={handleChangetype}
-              defaultValue={dataValueType}
-            />
+          {/* Hàng 3 */}
+          <div className="_inputrow4From">
+            {/* thể loại */}
+            <div className="_nameInputrow4">
+              <p className="_text_product">Thể loại*</p>
+              <Form.Item
+                name="theloai"
+                rules={[{ required: true, message: "Vui lòng chọn thể loại!" }]}
+              >
+                <SelectOptionTypeProduct
+                  name="theloai"
+                  options={dataType}
+                  onChange={handleChangetype}
+                  defaultValue={dataValueType}
+                />
+              </Form.Item>
+            </div>
+            {/* Chọn size*/}
+            <div className="_nameInputrow4">
+              <p className="_text_product">Size*</p>
+              <Form.Item
+                name="Size"
+                rules={[{ required: true, message: "Mời chọn size!" }]}
+              >
+                <SelectOtionSze
+                  name="Size"
+                  dataSize={dataSize}
+                  onChange={onChangeSize}
+                  defaultValue={dataValueSize}
+                />
+              </Form.Item>
+            </div>
+            {/* Chọn màu */}
+            <div className="_nameInputrow4">
+              <p className="_text_product">Màu*</p>
+              <Form.Item
+                name="color"
+                rules={[{ required: true, message: "Vui lòng chọn màu!" }]}
+              >
+                <SelectOptionColor
+                  name="color"
+                  dataColor={dataColor}
+                  onChange={handleChangeColor}
+                  defaultValue={dataValueColor}
+                />
+              </Form.Item>
+            </div>
+            {/* số lượng */}
+            <div className="_nameInputrow4">
+              <p className="_text_product">Số lượng*</p>
+              <Form.Item
+                name="soluong"
+                rules={[
+                  { required: true, message: "Vui lòng nhập số lượng!" },
+                  { pattern: /^[0-9]*$/, message: "Số lượng yêu cầu nhập số!" },
+                ]}
+              >
+                <Input
+                  name="soluong"
+                  placeholder="Số lượng"
+                  onChange={(e) => setValueSoluong(e.target.value)}
+                  value={valueSoluong}
+                />
+              </Form.Item>
+            </div>
           </div>
           {/* Chọn size*/}
           <div className="_nameInputrow4">
@@ -319,40 +423,65 @@ function FromProduct(props) {
                 Chọn ảnh
               </div>
             </label>
-            <input
-              id="images"
-              type="file"
-              style={{ display: "none", width: "70%" }}
-              onChange={(e) => upImage(e)}
-            />
+            <Form.Item
+              name="image"
+              rules={[{ required: true, message: "Vui lòng chọn ảnh!" }]}
+            >
+              <input
+                name="image"
+                id="images"
+                type="file"
+                style={{ display: "none", width: "70%" }}
+                onChange={(e) => upImage(e)}
+              />
+            </Form.Item>
           </div>
           {/* Đơn giá */}
           <div className="_nameInputrow4">
             <p className="_text_product">Đơn giá*</p>
-            <Input
-              placeholder="Đơn giá"
-              onChange={(e) => setValueDongia(e.target.value)}
-              value={valueDongia}
-            />
+            <Form.Item
+              name="dongia"
+              rules={[
+                { required: true, message: "Vui lòng nhập đơn giá!" },
+                { pattern: /^[0-9]*$/, message: "Đơn giá yêu cầu nhập số!" },
+              ]}
+            >
+              <Input
+                name="dongia"
+                placeholder="Đơn giá"
+                onChange={(e) => setValueDongia(e.target.value)}
+                value={valueDongia}
+              />
+            </Form.Item>
           </div>
           {/* giá bán */}
           <div className="_nameInputrow4">
             <p className="_text_product">Giá bán*</p>
-            <Input
-              placeholder="Giá bán"
-              onChange={(e) => setValueGiaban(e.target.value)}
-              value={valueGiaban}
-            />
+            <Form.Item
+              name="giaban"
+              rules={[
+                { required: true, message: "Vui lòng nhập đơn giá!" },
+                { pattern: /^[0-9]*$/, message: "Đơn giá yêu cầu nhập số!" },
+              ]}
+            >
+              <Input
+                name="giaban"
+                placeholder="Giá bán"
+                onChange={(e) => setValueGiaban(e.target.value)}
+                value={valueGiaban}
+              />
+            </Form.Item>
           </div>
           {/* Sale*/}
-          {/* <div className="_nameInputrow4">
+          <div className="_nameInputrow4">
             <p className="_text_product">Sale*</p>
+
             <Input
               placeholder="Sale"
               onChange={(e) => setValueSale(e.target.value)}
               value={valueSale}
             />
-          </div> */}
+          </div>
         </div>
         {/* Hàng 5 */}
         <div className="_inputrow3From">
@@ -360,6 +489,7 @@ function FromProduct(props) {
           <div className="_nameInputrow2">
             <p className="_text_product">Mô tả sản phẩm*</p>
             <TinymceProduct
+              name="motasanpham"
               onChangeText={(e) => setValueMota(e)}
               initialValue={valueMota}
             />
@@ -370,15 +500,44 @@ function FromProduct(props) {
           <Button className="__buttonClick_Product_Res" onClick={handleResert}>
             <p className="_Title_button_product">Đặt lại</p>
           </Button>
-          <Button
-            className="__buttonClick_Product_add"
-            onClick={onHandleChnageSubmit}
-          >
+          <Button className="__buttonClick_Product_add" htmlType="submit">
             <p className="_Title_button_product">Thêm sản phẩm</p>
           </Button>
         </div>
+        {/* Sale*/}
+        {/* <div className="_nameInputrow4">
+            <p className="_text_product">Sale*</p>
+            <Input
+              placeholder="Sale"
+              onChange={(e) => setValueSale(e.target.value)}
+              value={valueSale}
+            />
+          </div> */}
       </div>
-    </div>
+      {/* Hàng 5 */}
+      <div className="_inputrow3From">
+        {/* mô tả */}
+        <div className="_nameInputrow2">
+          <p className="_text_product">Mô tả sản phẩm*</p>
+          <TinymceProduct
+            onChangeText={(e) => setValueMota(e)}
+            initialValue={valueMota}
+          />
+        </div>
+      </div>
+      {/* Nút ấn bắt sự kiện */}
+      <div className="_buttonClick_Product">
+        <Button className="__buttonClick_Product_Res" onClick={handleResert}>
+          <p className="_Title_button_product">Đặt lại</p>
+        </Button>
+        <Button
+          className="__buttonClick_Product_add"
+          onClick={onHandleChnageSubmit}
+        >
+          <p className="_Title_button_product">Thêm sản phẩm</p>
+        </Button>
+      </div>
+    </Form>
   );
 }
 

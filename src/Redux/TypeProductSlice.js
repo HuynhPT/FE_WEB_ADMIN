@@ -107,6 +107,7 @@ export const upTypeProduct = createAsyncThunk(
         console.log(err.response, "?");
       }
     );
+
     return products;
   }
 );
