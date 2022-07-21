@@ -215,11 +215,7 @@ const ScreenListProduct = () => {
             </p>
           </Popconfirm>
           <Link to={`/infor_product/${_id}`}>
-            <p
-              onClick={() => deletee(_id)}
-              style={{ width: 50, color: "blue" }}
-              size={24}
-            >
+            <p style={{ width: 50, color: "blue" }} size={24}>
               Chi tiết
             </p>
           </Link>
