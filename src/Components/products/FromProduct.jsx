@@ -454,6 +454,7 @@ function FromProduct(props) {
               />
             </Form.Item>
           </div>
+          {/* ok */}
           {/* giá bán */}
           <div className="_nameInputrow4">
             <p className="_text_product">Giá bán*</p>
