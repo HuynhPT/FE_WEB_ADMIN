@@ -124,7 +124,13 @@ const TableObjectProduct = () => {
       title: "Hoạt động",
       dataIndex: "_id",
       render: (_id, data) => (
-        <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            marginTop: 20,
+          }}
+        >
           <Link to={`/edit_list_type/${_id}`}>
             <p style={{ color: "blue" }}>Sửa</p>
           </Link>

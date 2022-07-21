@@ -33,6 +33,7 @@ const SelectOptionColor = (props) => {
       value={props.value}
       options={props.dataColor}
       onChange={props.onChange}
+      placeholder={props.placeholder}
     />
   );
 };
