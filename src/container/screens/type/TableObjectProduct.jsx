@@ -70,13 +70,13 @@ const TableObjectProduct = () => {
     setIsModalVisible(true);
   };
   const handleOk = () => {
-    const titleTypeProduct = document.getElementById("titleTypeProduct").value;
     dispatch(
       upTypeProduct({
-        titleTypeProduct: titleTypeProduct,
-        idTypeProduct: dataEdit._id,
+        titleTypeProduct: value,
+        idTypeProduct: dataEdit?._id,
       })
     );
+
     message.success({
       content: "Sửa đối tượng thành công",
       className: "custom-class",

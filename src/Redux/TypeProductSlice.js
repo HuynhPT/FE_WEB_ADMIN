@@ -91,7 +91,7 @@ export const upTypeProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: `http://18.141.199.110:3000/api/type-product/edit-type-product/findById`,
+      url: "http://18.141.199.110:3000/api/type-product/edit-type-product/findById",
       method: "POST",
       headers: {
         token: mToken,
