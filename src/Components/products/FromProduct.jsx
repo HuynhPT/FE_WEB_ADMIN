@@ -12,6 +12,8 @@ import { addAll } from "../../API/ProductAPI";
 import { mToken } from "../../../token/TokenLogin";
 import axios from "axios";
 import { useDispatch } from "react-redux";
+import { Editor } from "@tinymce/tinymce-react";
+import { Link } from "react-router-dom";
 function FromProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
 
@@ -29,7 +31,7 @@ function FromProduct(props) {
 
   const [valueDongia, setValueDongia] = useState();
 
-  const [valueSale, setValueSale] = useState();
+  const [valueSale, setValueSale] = useState("");
 
   const [valueMota, setValueMota] = useState();
 
@@ -48,20 +50,20 @@ function FromProduct(props) {
   const handleResert = () => {
     setNameLinkImage([]);
     setNameImage([]);
-    setValueTenSP("");
-    setValueThuonghieu("");
-    setValueMaso("");
-    setValueChatlieu("");
-    setValueChatlieu("");
-    setValueChatlieu("");
-    setValueGiaban("");
-    setValueDongia("");
-    setValueSale("");
-    setValueMota("");
-    setValueSoluong("");
-    setDatavaluesize("");
-    setDataValueColor("");
-    setDataValuetype("");
+    setValueTenSP(null);
+    setValueThuonghieu(null);
+    setValueMaso(null);
+    setValueChatlieu(null);
+    setValueChatlieu(null);
+    setValueChatlieu(null);
+    setValueGiaban(null);
+    setValueDongia(null);
+    setValueSale(null);
+    setValueMota(null);
+    setValueSoluong(null);
+    setDatavaluesize(null);
+    setDataValueColor(null);
+    setDataValuetype(null);
   };
 
   // lấy ảnh
@@ -179,8 +181,24 @@ function FromProduct(props) {
         console.log(err.response);
       }
     );
+    setNameLinkImage([]);
+    setNameImage([]);
+    setValueTenSP(null);
+    setValueThuonghieu(null);
+    setValueMaso(null);
+    setValueChatlieu(null);
+    setValueChatlieu(null);
+    setValueChatlieu(null);
+    setValueGiaban(null);
+    setValueDongia(null);
+    setValueSale(null);
+    setValueMota(null);
+    setValueSoluong(null);
+    setDatavaluesize(null);
+    setDataValueColor(null);
+    setDataValuetype(null);
   };
-
+  const dataNo = [];
   return (
     <Form onFinish={onHandleChnageSubmit}>
       <div className="_Mcontainer_Fro">
@@ -242,10 +260,10 @@ function FromProduct(props) {
                     required: true,
                     message: "Vui lòng nhập mã số!",
                   },
-                  {
-                    pattern: /^[0-9]*$/,
-                    message: "Mã số yêu cầu phải nhập số ",
-                  },
+                  // {
+                  //   pattern: /^[0-9]*$/,
+                  //   message: "Mã số yêu cầu phải nhập số ",
+                  // },
                 ]}
               >
                 <Input
@@ -288,10 +306,11 @@ function FromProduct(props) {
                 rules={[{ required: true, message: "Vui lòng chọn thể loại!" }]}
               >
                 <SelectOptionTypeProduct
+                  placeholder={"Chọn thể loại"}
                   name="theloai"
                   options={dataType}
                   onChange={handleChangetype}
-                  defaultValue={dataValueType}
+                  value={dataValueType}
                 />
               </Form.Item>
             </div>
@@ -303,10 +322,11 @@ function FromProduct(props) {
                 rules={[{ required: true, message: "Mời chọn size!" }]}
               >
                 <SelectOtionSze
+                  placeholder={"Chọn size"}
                   name="Size"
                   dataSize={dataSize}
                   onChange={onChangeSize}
-                  defaultValue={dataValueSize}
+                  value={dataValueSize}
                 />
               </Form.Item>
             </div>
@@ -318,10 +338,11 @@ function FromProduct(props) {
                 rules={[{ required: true, message: "Vui lòng chọn màu!" }]}
               >
                 <SelectOptionColor
+                  placeholder={"Chọn màu"}
                   name="color"
                   dataColor={dataColor}
                   onChange={handleChangeColor}
-                  defaultValue={dataValueColor}
+                  value={dataValueColor}
                 />
               </Form.Item>
             </div>
@@ -343,33 +364,6 @@ function FromProduct(props) {
                 />
               </Form.Item>
             </div>
-          </div>
-          {/* Chọn size*/}
-          <div className="_nameInputrow4">
-            <p className="_text_product">Size*</p>
-            <SelectOtionSze
-              dataSize={dataSize}
-              onChange={onChangeSize}
-              defaultValue={dataValueSize}
-            />
-          </div>
-          {/* Chọn màu */}
-          <div className="_nameInputrow4">
-            <p className="_text_product">Màu*</p>
-            <SelectOptionColor
-              dataColor={dataColor}
-              onChange={handleChangeColor}
-              defaultValue={dataValueColor}
-            />
-          </div>
-          {/* số lượng */}
-          <div className="_nameInputrow4">
-            <p className="_text_product">Số lượng*</p>
-            <Input
-              placeholder="Số lượng"
-              onChange={(e) => setValueSoluong(e.target.value)}
-              value={valueSoluong}
-            />
           </div>
         </div>
         {/* Hàng 4 */}
@@ -454,7 +448,7 @@ function FromProduct(props) {
               />
             </Form.Item>
           </div>
-          {/* ok */}
+
           {/* giá bán */}
           <div className="_nameInputrow4">
             <p className="_text_product">Giá bán*</p>
@@ -473,70 +467,68 @@ function FromProduct(props) {
               />
             </Form.Item>
           </div>
-          {/* Sale*/}
-          <div className="_nameInputrow4">
-            <p className="_text_product">Sale*</p>
+        </div>
 
-            <Input
-              placeholder="Sale"
-              onChange={(e) => setValueSale(e.target.value)}
-              value={valueSale}
-            />
-          </div>
+        {/* mô tả */}
+        <div className="_nameInputrow2">
+          <p className="_text_product">Mô tả sản phẩm*</p>
+          <Form.Item name="motasanpham">
+            <div name="motasanpham" style={{ display: "inline" }}>
+              <Editor
+                apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
+                name="motasanpham"
+                onChangeText={(e) => setValueMota(e)}
+                value={valueMota}
+                init={{
+                  height: 400,
+                  menubar: false,
+                  plugins: [
+                    "advlist",
+                    "autolink",
+                    "lists",
+                    "link",
+                    "image",
+                    "charmap",
+                    "preview",
+                    "anchor",
+                    "searchreplace",
+                    "visualblocks",
+                    "code",
+                    "fullscreen",
+                    "insertdatetime",
+                    "media",
+                    "table",
+                    "code",
+                    "help",
+                    "wordcount",
+                  ],
+                  toolbar:
+                    "undo redo | blocks | " +
+                    "bold italic forecolor | alignleft aligncenter " +
+                    "alignright alignjustify | bullist numlist outdent indent | " +
+                    "removeformat | help",
+                  content_style:
+                    "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                }}
+              />
+            </div>
+          </Form.Item>
         </div>
-        {/* Hàng 5 */}
-        <div className="_inputrow3From">
-          {/* mô tả */}
-          <div className="_nameInputrow2">
-            <p className="_text_product">Mô tả sản phẩm*</p>
-            <TinymceProduct
-              name="motasanpham"
-              onChangeText={(e) => setValueMota(e)}
-              initialValue={valueMota}
-            />
-          </div>
-        </div>
+
         {/* Nút ấn bắt sự kiện */}
         <div className="_buttonClick_Product">
-          <Button className="__buttonClick_Product_Res" onClick={handleResert}>
-            <p className="_Title_button_product">Đặt lại</p>
+          <Button
+            className="__buttonClick_Product_Res"
+            onClick={handleResert}
+            htmlType="reset"
+          >
+            <p className="_Title_button_product_r">Đặt lại</p>
           </Button>
+
           <Button className="__buttonClick_Product_add" htmlType="submit">
             <p className="_Title_button_product">Thêm sản phẩm</p>
           </Button>
         </div>
-        {/* Sale*/}
-        {/* <div className="_nameInputrow4">
-            <p className="_text_product">Sale*</p>
-            <Input
-              placeholder="Sale"
-              onChange={(e) => setValueSale(e.target.value)}
-              value={valueSale}
-            />
-          </div> */}
-      </div>
-      {/* Hàng 5 */}
-      <div className="_inputrow3From">
-        {/* mô tả */}
-        <div className="_nameInputrow2">
-          <p className="_text_product">Mô tả sản phẩm*</p>
-          <TinymceProduct
-            onChangeText={(e) => setValueMota(e)}
-            initialValue={valueMota}
-          />
-        </div>
-      </div>
-      {/* Nút ấn bắt sự kiện */}
-      <div className="_buttonClick_Product">
-        <Button className="__buttonClick_Product_Res" onClick={handleResert}>
-          <p className="_Title_button_product">Đặt lại</p>
-        </Button>
-        <Button
-          className="__buttonClick_Product_add"
-          onClick={onHandleChnageSubmit}
-        >
-          <p className="_Title_button_product">Thêm sản phẩm</p>
-        </Button>
       </div>
     </Form>
   );
