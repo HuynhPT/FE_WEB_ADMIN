@@ -13,7 +13,7 @@ import {
 } from "@ant-design/icons";
 import { Content, Header } from "antd/lib/layout/layout";
 import "../Common/Styles/Layout.css";
-// import logo from "../Common//image/Logo.png";
+import logo from "../Common//image/Logo.png";
 import image2 from "../Common/image/image2.png";
 import image4 from "../Common/image/image4.png";
 import Vector from "../Common/image/Vector.png";
@@ -225,7 +225,7 @@ function LayouttAdmin1() {
             <div className="logo" style={{ width: "50%" }}>
               <img
                 style={{ width: "100%", height: "100%" }}
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/1667px-Apple_logo_black.svg.png"
+                src={logo}
                 alt=""
               />
             </div>
