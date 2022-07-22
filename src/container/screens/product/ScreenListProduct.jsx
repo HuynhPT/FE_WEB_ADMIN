@@ -141,7 +141,7 @@ const ScreenListProduct = () => {
       render: (size_product) => (
         <div style={{ display: "flex" }}>
           {size_product.map((item) => {
-            return <p style={{ marginRight: 10 }}> {item}</p>;
+            return <p style={{ marginRight: 10, marginTop: 10 }}> {item}</p>;
           })}
         </div>
       ),
@@ -172,7 +172,7 @@ const ScreenListProduct = () => {
       title: "Đơn giá",
       dataIndex: "importPrice",
       render: (importPrice) => (
-        <p>
+        <p style={{ marginTop: 5 }}>
           {importPrice.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}đ
         </p>
       ),
@@ -181,7 +181,9 @@ const ScreenListProduct = () => {
       title: "Giá bán",
       dataIndex: "price",
       render: (price) => (
-        <p>{price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}đ</p>
+        <p style={{ marginTop: 5 }}>
+          {price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}đ
+        </p>
       ),
     },
     {
@@ -194,6 +196,7 @@ const ScreenListProduct = () => {
             justifyContent: "center",
             alignItems: "center",
             marginLeft: 10,
+            marginTop: 5,
           }}
         >
           <Link to={`/edit_product/${_id}`}>
