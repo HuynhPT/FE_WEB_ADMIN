@@ -38,7 +38,7 @@ function FromCreateTypeProduct(props) {
     setNameLinkImage(e.target.files);
     setNameImage(e.target.files[0].name);
   };
-
+  console.log(nameLinkImage);
   // thực hiện truy vấn
   const onFinish = async (values) => {
     const formData = new FormData();

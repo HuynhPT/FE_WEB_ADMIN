@@ -94,18 +94,18 @@ function LayouttAdmin1() {
       <img style={{ width: "10%" }} src={Vector} alt="" />,
       [
         getItem(
-          ["Đối tượng sử dụng", <NavLink to="doiTuong_SuDung" />],
+          ["Thể loại SP", <NavLink to="doiTuong_SuDung" />],
           "3",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
         ,
         getItem(
-          ["Thêm thể loại SP", <NavLink to="them_LoaiSanPham" />],
+          ["Thêm loại SP", <NavLink to="them_LoaiSanPham" />],
           "12",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
         getItem(
-          ["Danh sách thể loại", <NavLink to="danhSach_LoaiSanPham" />],
+          ["Danh sách loại SP", <NavLink to="danhSach_LoaiSanPham" />],
           "333",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),

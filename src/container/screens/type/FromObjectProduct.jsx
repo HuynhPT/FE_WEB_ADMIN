@@ -34,11 +34,11 @@ const FromObjectProduct = () => {
   return (
     <div>
       <h3 style={{ fontSize: "24px", marginTop: 30, marginLeft: 30 }}>
-        Danh sách đối tượng
+        Danh sách thể loại sản phẩm
       </h3>
 
       <p style={{ fontSize: "14px", marginTop: 20, marginLeft: 30 }}>
-        Thêm đối tượng sử dụng
+        Thêm thể loại sản phẩm
       </p>
 
       <Form
@@ -63,8 +63,8 @@ const FromObjectProduct = () => {
                 message: "Vui lòng nhập đối tượng!",
               },
               {
-                min: 3,
-                message: "Nhập tối thiểu 3 ký tự!",
+                min: 2,
+                message: "Nhập tối thiểu 2 ký tự!",
               },
             ]}
           >
