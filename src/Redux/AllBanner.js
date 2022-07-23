@@ -2,23 +2,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
 import { getAll } from "../API/ImageAPI";
-
+import { mToken } from '../../token/TokenLogin'
 export const getBanner = createAsyncThunk(
-  "imgFirstImages/getBanner",
+  "banners/getBanner",
   async () => {
     const { data: banner } = await getAll();
     console.log(banner);
-    return banner.result;
+    return banner.data;
   }
 );
-export const addBanner = createAsyncThunk(
-  "imgFirstImages/addBanner",
+
+export const getBannertitle = createAsyncThunk(
+  "banners/getBannertitle",
   async (data) => {
-    console.log(data);
+
     let bannners = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/img-first-images/creact-img",
+      url: "http://18.141.199.110:3000/img-first-images/get-img/title/data",
       method: "POST",
       headers: {
         token: mToken,
@@ -27,8 +28,8 @@ export const addBanner = createAsyncThunk(
       data: qs.stringify(data),
     }).then(
       async (res) => {
-        const { data: banner } = await getColor();
-        bannners = banner.result;
+        const { data: banner } = await getAll();
+        bannners = res.data.data;
       },
       (err) => {
         console.log(err.response, "?");
@@ -37,22 +38,46 @@ export const addBanner = createAsyncThunk(
     return bannners;
   }
 );
-export const delBanner = createAsyncThunk(
-  "imgFirstImages/delBanner",
-  async (data) => {
-    console.log(data);
-    let banners= [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
 
+// export const addBanner = createAsyncThunk(
+//   "imgFirstImages/addBanner",
+//   async (data) => {
+//     console.log(data);
+//     let bannners = [];
+
+//     await axios({
+//       url: "http://18.141.199.110:3000/img-first-images/creact-img",
+//       method: "POST",
+//       headers: {
+//         token: mToken,
+//         "content-type": "application/x-www-form-urlencoded",
+//       },
+//       data: qs.stringify(data),
+//     }).then(
+//       async (res) => {
+//         const { data: banner } = await getColor();
+//         bannners = banner.result;
+//       },
+//       (err) => {
+//         console.log(err.response, "?");
+//       }
+//     );
+//     return bannners;
+//   }
+// );
+export const delBanner = createAsyncThunk(
+  "banners/delBanner",
+  async (id) => {
+    console.log(data);
+    let banners = [];
+ 
     await axios({
       url: `http://18.141.199.110:3000/img-first-images/delete-img/${id}`,
-      method: "POST",
+      method: "DELETE",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
-      data: qs.stringify(data),
     }).then(
       async (res) => {
         const { data: banner } = await getAll();
@@ -66,25 +91,23 @@ export const delBanner = createAsyncThunk(
   }
 );
 export const delallBanner = createAsyncThunk(
-  "imgFirstImages/delallBanner",
+  "banners/delallBanner",
   async (data) => {
     console.log(data);
     let banners = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYjMzYzU5MDA4ODE0NDQ2YjUwYzljYSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTU5MTM1NjUsImV4cCI6MTY1ODUwNTU2NX0.wCKaicbjW6rjyelXZk7hv3yil8kkoSQkHM1DKGiBL4A";
 
     await axios({
-      url: "http://18.141.199.110:3000//img-first-images/delete-img-all",
+      url: "http://18.141.199.110:3000/img-first-images/delete-img-all",
       method: "DELETE",
       headers: {
-        token: `Bearer ${mToken} `,
-        "Content-Type": "application/json",
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(data),
     }).then(
       async (res) => {
         const { data: banner } = await getAll();
-        banners = banner.result;
+        banners = banner.data;
       },
       (err) => {
         console.log(err.response, "?");
@@ -94,7 +117,7 @@ export const delallBanner = createAsyncThunk(
   }
 );
 export const upBanner = createAsyncThunk(
-  "imgFirstImages/upBanner",
+  "banners/upBanner",
   async (data) => {
     console.log(data);
     let banners = [];
@@ -103,7 +126,7 @@ export const upBanner = createAsyncThunk(
 
     await axios({
       url: `http://18.141.199.110:3000/img-first-images/update-img`,
-      method: "POST",
+      method: "PUT",
       headers: {
         token: `Bearer ${mToken} `,
         "Content-Type": "multipart/form-data",
@@ -112,7 +135,7 @@ export const upBanner = createAsyncThunk(
     }).then(
       async (res) => {
         const { data: banner } = await getAll();
-        banners = banner.result;
+        banners = res.data.data;
       },
       (err) => {
         console.log(err.response, "?");
@@ -161,7 +184,7 @@ const bannerSlice = createSlice({
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });
-    builder.addCase(addBanner.fulfilled, (state, action) => {
+    builder.addCase(getBannertitle.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
@@ -176,20 +199,20 @@ const bannerSlice = createSlice({
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });
-    builder.addCase(searchBanner.fulfilled, (state, action) => {
-      console.log(action.payload);
-      state.value = action.payload;
-      // action is inferred correctly here if using TS
-    });
-    builder.addCase(upBanner.fulfilled, (state, action) => {
-      console.log(action.payload);
-      state.value = action.payload;
-      // action is inferred correctly here if using TS
-    });
+    // builder.addCase(searchBanner.fulfilled, (state, action) => {
+    //   console.log(action.payload);
+    //   state.value = action.payload;
+    //   // action is inferred correctly here if using TS
+    // });
+    // builder.addCase(upBanner.fulfilled, (state, action) => {
+    //   console.log(action.payload);
+    //   state.value = action.payload;
+    //   // action is inferred correctly here if using TS
+    // });
   },
 });
 
 export const { loginStart, loginSuccess, loginFailed } =
-bannerSlice.actions;
+  bannerSlice.actions;
 
 export default bannerSlice.reducer;

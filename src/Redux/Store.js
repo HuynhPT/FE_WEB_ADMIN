@@ -7,6 +7,7 @@ import colorSlice from "./ColorSlice";
 import sizeSlice from "./SizeSlice";
 import billSlice from "./BillSlice";
 import postSlice from "./PostSlice";
+import bannerSlice from './AllBanner'
 export const store = configureStore({
   reducer: {
     auth: Redux,
@@ -17,5 +18,6 @@ export const store = configureStore({
     sizecolor: sizeSlice,
     bills: billSlice,
     posts: postSlice,
+    banners: bannerSlice
   },
 });
