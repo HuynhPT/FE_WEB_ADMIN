@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import TynimceProduct from "../../../../Components/products/TinymceProduct";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
-import { add } from "../../../../API/ImageAPI";
+
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-function EditbannerMen(props) {
+function EditBannerMen(props) {
   const { id } = useParams();
   const [nameLinkImage, setNameLinkImage] = useState();
   const [valueText, setValueText] = useState();
@@ -184,7 +184,7 @@ function EditbannerMen(props) {
               span: 16,
             }}
           >
-            <Link to="/shop/banner_men">
+            <Link to={"/shop/banner_men"}>
               <Button
                 type="primary"
                 htmlType="reset"
@@ -238,4 +238,4 @@ function EditbannerMen(props) {
   );
 }
 
-export default EditbannerMen;
+export default EditBannerMen;

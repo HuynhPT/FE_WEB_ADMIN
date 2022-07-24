@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import TynimceProduct from "../../../../Components/products/TinymceProduct";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
-import { add } from "../../../../API/ImageAPI";
+
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-function EditbannerHomee(props) {
+function EditBannerHome(props) {
   const { id } = useParams();
   const [nameLinkImage, setNameLinkImage] = useState();
   const [valueText, setValueText] = useState();
@@ -26,7 +26,6 @@ function EditbannerHomee(props) {
   };
   const onFinish = async (values) => {
     console.log(values);
-    
   };
   console.log(dataEdit?.title_ads);
 
@@ -98,7 +97,6 @@ function EditbannerHomee(props) {
               apiKey="your-api-key"
               onEditorChange={(newText) => setValueText(newText)}
               initialValue={`${dataEdit?.description_ads}`}
-              
               init={{
                 height: 400,
                 menubar: false,
@@ -186,37 +184,37 @@ function EditbannerHomee(props) {
               span: 16,
             }}
           >
-            <Link  to='/shop/banner_home'>
-            <Button
-              type="primary"
-              htmlType="reset"
-              style={{
-                margin: 20,
-                width: 120,
-                backgroundColor: "#DCDFE8",
-                borderColor: "#DCDFE8",
-                textAlign: "center",
-              }}
-            >
-              <p
+            <Link to={"/shop/banner_home"}>
+              <Button
+                type="primary"
+                htmlType="reset"
                 style={{
-                  fontSize: 16,
-                  fontWeight: "400",
-                  color: "#000000",
-                  marginTop: -2,
+                  margin: 20,
+                  width: 120,
+                  backgroundColor: "#DCDFE8",
+                  borderColor: "#DCDFE8",
+                  textAlign: "center",
                 }}
               >
-                Quay lại
-              </p>
-            </Button>
+                <p
+                  style={{
+                    fontSize: 16,
+                    fontWeight: "400",
+                    color: "#000000",
+                    marginTop: -2,
+                  }}
+                >
+                  Quay lại
+                </p>
+              </Button>
             </Link>
-            
+
             <Button
               type="primary"
               htmlType="submit"
               style={{
-                margin: 10,
-                width: 200,
+                margin: 20,
+                width: 120,
                 backgroundColor: "#87CEEB99",
                 borderColor: "#87CEEB99",
                 textAlign: "center",
@@ -240,4 +238,4 @@ function EditbannerHomee(props) {
   );
 }
 
-export default EditbannerHomee;
+export default EditBannerHome;

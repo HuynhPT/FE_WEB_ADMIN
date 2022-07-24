@@ -7,6 +7,9 @@ import colorSlice from "./ColorSlice";
 import sizeSlice from "./SizeSlice";
 import billSlice from "./BillSlice";
 import postSlice from "./PostSlice";
+
+import bannerSlice from './AllBanner'
+
 import {
   persistStore,
   persistReducer,
@@ -32,6 +35,7 @@ const rootReducer = combineReducers({
   sizecolor: sizeSlice,
   bills: billSlice,
   posts: postSlice,
+      banners: bannerSlice
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
@@ -42,6 +46,7 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
+
 });
 
 export let persistor = persistStore(store);
