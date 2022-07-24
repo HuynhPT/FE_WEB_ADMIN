@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Button, Dropdown, Input, Layout, Menu } from "antd";
+import { Avatar, Button, Dropdown, Input, Layout, Menu, message } from "antd";
 import {
   MenuOutlined,
   SearchOutlined,
@@ -39,6 +39,10 @@ function getItem(label, key, icon, children, type) {
     type,
   };
 }
+export const Logout = () => {
+  localStorage.removeItem("persist:root", "Token");
+};
+console.log("Đăng xuất", Logout);
 function LayouttAdmin1() {
   const [state, setState] = useState(false);
   const onClick = () => {};
@@ -46,11 +50,11 @@ function LayouttAdmin1() {
   const user = useSelector((state) => state.auth.login.currentUser);
   const navigation = useNavigate();
 
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigation("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!user) {
+      navigation("/");
+    }
+  });
 
   const menu = (
     <Menu className={styles.dropdown}>
@@ -63,9 +67,11 @@ function LayouttAdmin1() {
             }
           />
         </div>
+
         <div className={styles.view_tt}>
           <div style={{ justifyContent: "center", textAlign: "center" }}>
             <Button
+              onClick={Logout}
               href="/"
               icon={<LogoutOutlined />}
               type="text"
