@@ -472,12 +472,11 @@ function FromProduct(props) {
         {/* mô tả */}
         <div className="_nameInputrow2">
           <p className="_text_product">Mô tả sản phẩm*</p>
-          <Form.Item name="motasanpham">
-            <div name="motasanpham" style={{ display: "inline" }}>
+          <Form.Item>
+            <div style={{ display: "inline" }}>
               <Editor
                 apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
-                name="motasanpham"
-                onChangeText={(e) => setValueMota(e)}
+                onEditorChange={(e) => setValueMota(e)}
                 value={valueMota}
                 init={{
                   height: 400,

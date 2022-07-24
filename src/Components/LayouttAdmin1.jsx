@@ -141,7 +141,7 @@ function LayouttAdmin1() {
     //   [getItem("Option 4", "4"), getItem("Option 6", "13")]
     // ),
     getItem(
-      ["Danh sách đặt hàng", <NavLink to="khachHang_DatHang" />],
+      ["Khách hàng đặt hàng", <NavLink to="khachHang_DatHang" />],
       "sub5",
       <img style={{ width: "10%" }} src={image5} alt="" />
     ),

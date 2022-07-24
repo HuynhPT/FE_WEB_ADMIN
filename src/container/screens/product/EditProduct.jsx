@@ -55,7 +55,7 @@ function EditProduct(props) {
         setDataEdit(newData);
       });
   }, []);
-  console.log(dataEdit);
+
   const dispatch = useDispatch();
 
   // lấy ảnh
@@ -128,30 +128,30 @@ function EditProduct(props) {
     const fromdata = new FormData();
     fromdata.append(
       "titleproduct",
-      valueTensp == undefined ? dataEdit.title_product : valueTensp
+      valueTensp == undefined ? dataEdit?.title_product : valueTensp
     );
     fromdata.append(
       "trademark",
-      valueThuonghieu == undefined ? dataEdit.trademark : valueThuonghieu
+      valueThuonghieu == undefined ? dataEdit?.trademark : valueThuonghieu
     );
     fromdata.append(
       "descriptionProduct",
-      valueMota == undefined ? dataEdit.descriptionProduct : valueMota
+      valueMota == undefined ? dataEdit?.descriptionProduct : valueMota
     );
     fromdata.append("code", valueMaso == undefined ? dataEdit.code : valueMaso);
     // fromdata.append("flashSale", valueSale);
     fromdata.append(
       "importPrice",
-      valueDongia == undefined ? dataEdit.importPrice : Number(valueDongia)
+      valueDongia == undefined ? dataEdit?.importPrice : Number(valueDongia)
     );
     fromdata.append(
       "price",
-      valueGiaban == undefined ? dataEdit.price : Number(valueGiaban)
+      valueGiaban == undefined ? dataEdit?.price : Number(valueGiaban)
     );
     fromdata.append(
       "quantity_product",
       valueSoluong == undefined
-        ? dataEdit.quantity_product
+        ? dataEdit?.quantity_product
         : Number(valueSoluong)
     );
     fromdata.append(
@@ -162,7 +162,7 @@ function EditProduct(props) {
       fromdata.append(
         "croppedImage",
         nameLinkImage[i] == undefined
-          ? dataEdit?.imageProduct
+          ? dataEdit?.imageProductmap
           : nameLinkImage[i]
       );
     }
@@ -186,7 +186,7 @@ function EditProduct(props) {
     }
     fromdata.append(
       "idCategoryProduct",
-      dataValueType == undefined ? dataEdit.idCategoryProduct : dataValueType
+      dataValueType == undefined ? dataEdit?.idCategoryProduct : dataValueType
     );
     fromdata.append("mIdProduct", dataEdit._id);
     await axios({
@@ -216,6 +216,7 @@ function EditProduct(props) {
       }
     );
   };
+  console.log(dataEdit?.imageProduct.map((item) => item.slice(68)));
 
   return (
     <div className="_Mcontainer_Fro">
@@ -323,7 +324,11 @@ function EditProduct(props) {
             <Input
               placeholder="Số lượng"
               onChange={(e) => setValueSoluong(e.target.value)}
-              value={dataEdit?.quantity_product}
+              value={
+                valueSoluong == undefined
+                  ? dataEdit?.quantity_product
+                  : valueSoluong
+              }
             />
           </div>
         </div>
@@ -411,15 +416,6 @@ function EditProduct(props) {
               value={valueGiaban == undefined ? dataEdit?.price : valueGiaban}
             />
           </div>
-          {/* Sale*/}
-          {/* <div className="_nameInputrow4">
-            <p className="_text_product">Sale*</p>
-            <Input
-              placeholder="Sale"
-              onChange={(e) => setValueSale(e.target.value)}
-              value={valueSale}
-            />
-          </div> */}
         </div>
         {/* Hàng 5 */}
         <div className="_inputrow3From">
