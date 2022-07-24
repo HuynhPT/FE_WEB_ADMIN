@@ -4,14 +4,10 @@ import img_login from "../../Common/Image/img_login.png";
 import "./stylesInfro.css";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 
 const CardInfor = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((data) => console.log(data.auth.login, "info"));
-  // useEffect(() => {
-  //   dispatch();
-  // }, []);
+  const user = useSelector((state) => state.auth.login?.currentUser.user);
+  console.log("Ở đây", user);
   return (
     <Card
       style={{
@@ -21,11 +17,13 @@ const CardInfor = () => {
       }}
     >
       <div className="__ava_container">
-        <img src={user?.image} className="__avatar" />
+        <Image src={user.image} style={{ width: 100, height: 100 }} />
         <div style={{ marginLeft: 50 }}>
-          <p>{user?.userName}</p>
-          <p>{user?.phone}</p>
-          <p>{user?.email}</p>
+          <p>
+            <span>{user.userName}</span>
+          </p>
+          <p>{user.phone}</p>
+          <p>{user.email}</p>
         </div>
       </div>
     </Card>

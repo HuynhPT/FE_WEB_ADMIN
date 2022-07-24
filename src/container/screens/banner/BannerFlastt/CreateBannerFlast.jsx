@@ -1,14 +1,16 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import React, { useState } from "react";
-import TynimceProduct from "../../../../Components/products/TinymceProduct";
+import React, { useState, useEffect } from "react";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
-import qs from "qs";
+import { mToken } from "../../../../../token/TokenLogin";
+import SelectFilter from "../../../../Components/type/SelectFilter";
 function CreateBannerFlast() {
-  const [nameLinkImage, setNameLinkImage] = useState("");
-  const [nameImage, setNameImage] = useState("");
+  const [nameLinkImage, setNameLinkImage] = useState();
+  const [nameImage, setNameImage] = useState();
   const [valueText, setValueText] = useState();
+  const [data, setData] = useState();
+  const [dataLable, setDataLable] = useState();
 
   const upImage = (e) => {
     setNameLinkImage(e.target.files);
@@ -26,10 +28,10 @@ function CreateBannerFlast() {
     formData.append("title_data", values.title_data);
 
     axios({
-      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/creact-img",
+      url: "http://18.141.199.110:3000/img-first-images/creact-img",
       method: "POST",
       headers: {
-        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY2NjAxMjYsImV4cCI6MTY1OTI1MjEyNn0.PqKUaIH9CmbGKrbHE8ka0sIH7smSh249vGCALhRJSEY`,
+        token: mToken,
         "Content-Type": "multipart/form-data",
       },
       // data: qs.stringify(formData),
@@ -49,9 +51,26 @@ function CreateBannerFlast() {
     history.back();
   };
 
+  useEffect(() => {
+    fetch("http://18.141.199.110:3000/api/type-product/get-type-product")
+      .then((res) => res.json())
+      .then((dataOp) => {
+        const otpn = [];
+        dataOp.result.map((item) => {
+          otpn.push({ value: item.titleTypeProduct });
+        });
+        setData(otpn);
+      });
+  }, []);
+
+  const handleChange = (values) => {
+    console.log(values)
+    setDataLable(values);
+   
+  };
   return (
-    <div  className="_Container_banner_name">
-      <h3 className="_titile_add_wonent">Thêm banner flast</h3>
+    <div className="_Container_banner_name">
+      <h3 className="_titile_add_wonent">Thêm banner flash</h3>
       <Form
         style={{ margin: "0 20px" }}
         name="basic"
@@ -91,7 +110,13 @@ function CreateBannerFlast() {
             },
           ]}
         >
-          <Input style={{ borderRadius: 3 }} />
+          <SelectFilter
+            options={data}
+            onChange={handleChange}
+            value={dataLable}
+          />
+
+
         </Form.Item>
         {/* Thông tin chi tiết */}
         <Form.Item
@@ -187,6 +212,7 @@ function CreateBannerFlast() {
             span: 16,
           }}
         >
+
           <Button
             type="primary"
             htmlType="reset"
@@ -206,7 +232,7 @@ function CreateBannerFlast() {
                 marginTop: -2,
               }}
             >
-              Đặt lại
+              Quay lại
             </p>
           </Button>
           <Button

@@ -1,111 +1,119 @@
-import { Button, Image, Table } from "antd";
+import { AutoComplete, Button, Image, message, Modal, Popconfirm, Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
-import { getAll } from "../../../../API/ImageAPI";
-import { delImg } from "../../../../Redux/Bannner";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { delallBanner, delBanner, getBanner, getBannertitle } from "../../../../Redux/AllBanner";
+import { ReloadOutlined } from "@ant-design/icons";
 
-const BannerMen = () => {
-  const [selectedRowKeys, setSelectedRowKeys] = useState([]);
-  const [data, setData] = useState();
+const BannerWoment = () => {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isModalDelALl, setisModalDelALl] = useState(false);
+
+
   const dispatch = useDispatch();
+  const databanner = useSelector(data => data.banners.value)
+
+
   useEffect(() => {
-    fetch(
-      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const newData = data.data.filter((item) => item.title_data == "Nữ");
-        setData(newData);
-      });
+    dispatch(getBannertitle({
+      title_data: 'Nữ'
+    }))
   }, []);
 
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowKeys(selectedRows);
+  const showmodaldell = () => {
+    setisModalDelALl(true);
+  };
+  const handleXoa = () => {
+    dispatch(delallBanner());
+    setisModalDelALl(false);
+    message.success({
+      content: "Xoá thành công",
+      className: "custom-class",
+      style: {
+        color: "#52c41a",
+      },
+      duration: 2,
+    });
+  };
+  const handleHuy = () => {
+    setisModalDelALl(false);
+  };
+
+  const deletee = (_id) => {
+    console.log(_id);
+    dispatch(delBanner({ id: _id }));
+    alert("Xóa thành công");
+  };
+  const columns = [
+    {
+      title: "STT",
+      dataIndex: "_id",
+      render: (_id, data, index) => index + 1,
     },
-  };
+    {
+      title: "Tên",
+      dataIndex: "title_ads",
+    },
+    {
+      title: "Ảnh",
+      dataIndex: "image_ads",
+      render: (image_ads) => (
+        <Image src={image_ads} alt="" style={{ width: 200 }} />
+      ),
+    },
+    {
+      title: "Chi tiết",
+      dataIndex: "description_ads",
+      render: (description_ads) => (
+        <p
+          dangerouslySetInnerHTML={{
+            __html: description_ads,
+          }}
+        ></p>
+      ),
+      width: 200,
+    },
 
-  const hasSelected = selectedRowKeys.length > 0;
+    {
+      title: "Hoạt động",
+      dataIndex: "_id",
+      render: (_id) => (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Link to={`/edit_banner_woment/${_id}`}>
+            <p style={{ width: 50, color: "blue" }} size={24}>
+              Sửa
+            </p>
+          </Link>
 
-  const listDataa = () => {
-    if (data !== undefined) {
-      const deletee = (_id) => {
-        console.log(_id);
-        dispatch(delImg(_id));
-        alert("Xóa thành công");
-        location.reload();
-      };
-      const columns = [
-        {
-          title: "STT",
-          dataIndex: "_id",
-          render: (_id, data, index) => index + 1,
-        },
-        {
-          title: "Tên",
-          dataIndex: "title_ads",
-        },
-        {
-          title: "Ads",
-          dataIndex: "title_data",
-        },
-        {
-          title: "Ảnh",
-          dataIndex: "image_ads",
-          render: (image_ads) => (
-            <Image src={image_ads} alt="" style={{ width: 200 }} />
-          ),
-        },
-        {
-          title: "Chi tiết",
-          dataIndex: "description_ads",
-          render: (description_ads) => (
+          <Popconfirm
+            title="Bạn có chắc chắn muốn xoá không?"
+            onConfirm={() => deletee(_id)}
+            okText="Xoá"
+            cancelText="Huỷ"
+          >
             <p
-              dangerouslySetInnerHTML={{
-                __html: description_ads,
-              }}
-            ></p>
-          ),
-          width: 200,
-        },
+              style={{ width: 50, cursor: "pointer", color: "blue" }}
+              size={24}
+            >
+              Xoá
+            </p>
+          </Popconfirm>
+        </div>
+      ),
+    },
+  ];
 
-        {
-          title: "Hoạt động",
-          dataIndex: "_id",
-          render: (_id) => (
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Link to={`/edit_banner_woment/${_id}`}>
-                <p style={{ width: 50, color: "blue" }} size={24}>
-                  Sửa
-                </p>
-              </Link>
-              <p
-                onClick={() => deletee(_id)}
-                style={{ width: 50, color: "blue", cursor: "pointer" }}
-                size={24}
-              >
-                Xoá
-              </p>
-            </div>
-          ),
-        },
-      ];
-      return (
-        <>
-          <Table
-            columns={columns}
-            dataSource={data}
-            rowKey={(item) => item._id}
-            className="table-list"
-          />
-        </>
-      );
-    }
-  };
+
+
 
   return (
     <div className="list-product">
@@ -113,12 +121,12 @@ const BannerMen = () => {
         <p className="text_titlespb">Danh sách banner nữ</p>
       </div>
       <div className="text_spb">
-        <p className="texttitlespb">
+        {/* <p className="texttitlespb">
           {
-            " Danh sách banner nữ đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
+            " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
-        </p>
-        <Button className="add_text">
+        </p> */}
+        <Button className="add_text" >
           <Link to="/create_banner_woment" className="text_buttonsss">
             {" +  Thêm mới"}
           </Link>
@@ -127,32 +135,92 @@ const BannerMen = () => {
           <p className="_text_banner">+ Thêm mới</p>
         </Button> */}
       </div>
-      <div
-        className="button-list"
-        style={{
-          marginBottom: 16,
-        }}
-      >
-        <Button
-          type="primary"
-          style={{
-            marginLeft: 30,
-            marginTop: 20,
-            backgroundColor: "#D9D9D9",
-            border: "1px solid #D9D9D9 ",
-          }}
-          // onClick={showmodaldell}
-        >
-          <p style={{ color: "#000" }}>Xoá tất cả</p>
-        </Button>
-        <div className="search_prd">
-          <p className="search_title">Tìm kiếm:</p>
-          <Search type="text" placeholder="Tìm kiếm" />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div>
+          <Button
+            type="primary"
+            style={{
+              margin: "0 0 0 30px",
+              backgroundColor: "#D9D9D9",
+              border: "1px solid #D9D9D9 ",
+            }}
+            onClick={() => {
+              dispatch(getBannertitle({
+                title_data: 'Nữ'
+              }));
+              // setSearchtitle("");
+            }}
+          >
+            <ReloadOutlined />
+          </Button>
+
+          <Button
+            type="primary"
+            style={{
+              margin: "0 10px",
+              backgroundColor: "#D9D9D9",
+              border: "1px solid #D9D9D9 ",
+            }}
+            onClick={showmodaldell}
+          >
+            <p style={{ color: "#000" }}>Xoá tất cả</p>
+          </Button>
         </div>
+        <AutoComplete
+          // onSearch={onsearchtype}
+          style={{ width: "21%", marginRight: 30 }}
+        >
+          <Search
+            // onChange={(e) => setSearchtitle(e.target.value)}
+            placeholder="Tìm kiếm theo tên"
+          // value={searchtitle}
+          />
+        </AutoComplete>
       </div>
-      {listDataa()}
+      <Table
+        columns={columns}
+        dataSource={databanner}
+        rowKey={(item) => item._id}
+        className="table-list"
+      />
+      <Modal title="Cảnh báo !" visible={isModalDelALl} footer={null}>
+        <p>Bạn có chắc chắn muốn xoá hay không?</p>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+          }}
+        >
+          <button
+            style={{
+              backgroundColor: "#fff",
+              border: "1px solid #000",
+              margin: 10,
+              padding: " 8px 16px",
+              borderRadius: 3,
+            }}
+            onClick={handleHuy}
+          >
+            Huỷ
+          </button>
+          <button
+            style={{
+              backgroundColor: "red",
+              border: "1px solid #000",
+              margin: 10,
+              padding: " 8px 16px",
+              color: "#fff",
+              borderRadius: 3,
+            }}
+            onClick={handleXoa}
+          >
+            Xoá
+          </button>
+        </div>
+      </Modal>
     </div>
   );
 };
 
-export default BannerMen;
+export default BannerWoment;

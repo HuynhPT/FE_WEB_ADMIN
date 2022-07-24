@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Input, Button, message, Alert } from "antd";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { loginFailed } from "../../Redux/AuthSlice";
 import {
   CheckCircleTwoTone,
   UserOutlined,
@@ -8,21 +9,19 @@ import {
 } from "@ant-design/icons";
 import Validate from "./Validate";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { loginUser } from "../../Redux/Api";
-import { color } from "@mui/system";
-const FormLogin = (props) => {
-  const [errors, setErrors] = useState({});
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser } from "../../Redux/LoginAdmin";
 
+const FormLogin = (props) => {
   const [values, setValues] = useState({
     email: "",
     password: "",
   });
+
   const dispacth = useDispatch();
   const navigation = useNavigate();
 
   const onClickHandler = async () => {
-    // setErrors(Validate(values));
     loginUser(values, dispacth, navigation);
   };
   const handleChange = (event) => {
@@ -65,14 +64,12 @@ const FormLogin = (props) => {
             style={{
               width: 340,
               height: 40,
-              // borderColor: errors.email ? "red" : "#DCDCDC",
             }}
             onChange={handleChange}
             placeholder="Email..."
             value={values.email}
             Outlined={<UserOutlined className="site-form-item-icon" />}
           />
-          {/* {errors.email && <p style={{ color: "red" }}>{errors.email}</p>} */}
         </Form.Item>
 
         <Form.Item
@@ -88,7 +85,6 @@ const FormLogin = (props) => {
             style={{
               width: 340,
               height: 40,
-              // borderColor: errors.password ? "red" : "	#DCDCDC",
             }}
             onChange={handleChange}
             value={values.password}
@@ -97,7 +93,6 @@ const FormLogin = (props) => {
               visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
             }
           />
-          {/* {errors.password && <p style={{ color: "red" }}>{errors.password}</p>} */}
         </Form.Item>
 
         <div style={{ marginTop: 15 }}>
@@ -111,9 +106,8 @@ const FormLogin = (props) => {
             type="primary"
             htmlType="submit"
             className="login-form-button"
-            // href="/shop/tong_quan"
           >
-            <p>Đăng nhập</p>~
+            <p>Đăng nhập</p>
           </Button>
         </Form.Item>
       </Form>

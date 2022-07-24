@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import TynimceProduct from "../../../../Components/products/TinymceProduct";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
-import { add } from "../../../../API/ImageAPI";
+
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 function EditBannerWonent(props) {
