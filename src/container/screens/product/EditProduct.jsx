@@ -154,9 +154,17 @@ function EditProduct(props) {
         ? dataEdit.quantity_product
         : Number(valueSoluong)
     );
-    fromdata.append("material_product", valueChatlieu);
+    fromdata.append(
+      "material_product",
+      valueChatlieu == undefined ? dataEdit?.material_product : valueChatlieu
+    );
     for (let i = 0; i < nameLinkImage.length; i++) {
-      fromdata.append("croppedImage", nameLinkImage[i]);
+      fromdata.append(
+        "croppedImage",
+        nameLinkImage[i] == undefined
+          ? dataEdit?.imageProduct
+          : nameLinkImage[i]
+      );
     }
     for (let i = 0; i < dataValueSize?.length; i++) {
       console.log(`size_product[${i}]`, dataValueSize[i]);
@@ -327,25 +335,6 @@ function EditProduct(props) {
             {nameImage.length == 0 ? (
               <span>{nameImage}</span>
             ) : (
-              // <>
-              //   {nameImage.map((item) => (
-              //     <>
-              //       <span>{item}</span>
-              //       <br />
-              //     </>
-              //   ))}
-              //   <Button
-              //     onClick={() => setNameImage([])}
-              //     style={{
-              //       marginLeft: 117,
-              //       marginBottom: 25,
-              //       height: 20,
-              //       borderRadius: 3,
-              //     }}
-              //   >
-              //     <p style={{ marginTop: -8 }}>Huỷ</p>
-              //   </Button>
-              // </>
               <div
                 style={{
                   display: "flex",
@@ -453,7 +442,7 @@ function EditProduct(props) {
             <Button
               style={{
                 width: "100%",
-                margin: "30px 80px",
+                margin: "0 30px 0 80px",
                 borderRadius: 3,
                 backgroundColor: "#dcdfe8",
               }}
