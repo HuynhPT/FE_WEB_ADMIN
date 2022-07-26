@@ -15,9 +15,9 @@
   padding: 0 10px !important;
 }
 .logo_user {
-  text-align: center;
-  background-color: darksalmon;
-  line-height: 100px;
+  text-align: center !important;
+  background-color: powderblue !important;
+  /* line-height: 100px !important; */
 }
 .view_tt {
   padding: 10px;

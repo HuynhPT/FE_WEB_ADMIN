@@ -42,7 +42,7 @@ const InforProduct = () => {
           {dataInfor?.imageProduct?.map((item) => {
             return (
               <div onClick={() => setImage(item)} style={{ margin: 20 }}>
-                <img src={item} style={{ width: 100 }} />
+                <img src={item} style={{ width: 45 }} />
               </div>
             );
           })}

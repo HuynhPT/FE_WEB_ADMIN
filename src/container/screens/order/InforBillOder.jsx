@@ -1,4 +1,4 @@
-import { Steps } from "antd";
+import { Modal, Steps } from "antd";
 import axios from "axios";
 import QueryString from "qs";
 import React, { useEffect, useState } from "react";
@@ -10,7 +10,10 @@ function InforBillOder() {
   const [data, setData] = useState();
   const [dataall, setDataAll] = useState();
   const [currentStep, setCurrentStep] = useState();
+  const [curent, setCurrent] = useState(0);
+  const [isModal, setisModal] = useState(false);
   const { Step } = Steps;
+
   useEffect(() => {
     axios({
       url: "http://18.141.199.110:3000/api/user-bill/get-bill-product",
@@ -36,7 +39,55 @@ function InforBillOder() {
       setDataAll(resl.data.billDetails);
     });
   }, []);
+  const Showmodal = (index) => {
+    setCurrentStep(index);
+    setisModal(true);
+  };
+  const handleHuy = () => {
+    if (currentStep === 0) {
+      setCurrent(0);
+      setisModal(false);
+    } else if (currentStep === 1) {
+      setCurrent(0);
+      setisModal(false);
+    } else if (currentStep === 2) {
+      setCurrent(1);
+      setisModal(false);
+    } else if (currentStep === 3) {
+      setCurrent(2);
+      setisModal(false);
+    } else if (currentStep === 4) {
+      setCurrent(3);
+      setisModal(false);
+    } else if (currentStep === 5) {
+      setCurrent(4);
+      setisModal(false);
+    }
+  };
+  const handleXacnhan = () => {
+    // setisModal(false);
 
+    if (currentStep === 0) {
+      setCurrent(0);
+      setisModal(false);
+    } else if (currentStep === 1) {
+      setCurrent(1);
+      setisModal(false);
+    } else if (currentStep === 2) {
+      setCurrent(2);
+      setisModal(false);
+    } else if (currentStep === 3) {
+      setCurrent(3);
+      setisModal(false);
+    } else if (currentStep === 4) {
+      setCurrent(4);
+      setisModal(false);
+    } else if (currentStep === 5) {
+      setCurrent(5);
+      setisModal(false);
+    }
+  };
+  console.log(curent);
   const onStepsChange = (newCurrentStep) => {
     console.log("onChange:", newCurrentStep);
     setCurrentStep(newCurrentStep);
@@ -54,18 +105,75 @@ function InforBillOder() {
         <div style={{ paddingTop: 10 }}>
           <p className="_title_m">Trạng thái đơn hàng:</p>
           <Steps
-            current={currentStep == undefined ? data?.status : currentStep}
-            onChange={onStepsChange}
+            current={curent == undefined ? data?.status : curent}
+            // onChange={onStepsChange}
             size="small"
             type="default"
           >
-            <Step title="Đơn hàng" description="Chờ xác nhận" />
-            <Step title="Đơn hàng" description="Chờ lấy hàng" />
-            <Step title="Đơn hàng" description="Đang vận chuyển" />
-            <Step title="Đơn hàng" description="Đang giao" />
-            <Step title="Đơn hàng" description="Hoàn thành" />
+            <Step
+              title="Đơn hàng"
+              description="Đang xử lý"
+              onStepClick={Showmodal}
+            />
+            <Step
+              title="Đơn hàng"
+              description="Đã xử lý"
+              onStepClick={Showmodal}
+            />
+            <Step
+              title="Đơn hàng"
+              description="Xác nhận"
+              onStepClick={Showmodal}
+            />
+            <Step
+              title="Đơn hàng"
+              description="Đang vận chuyển"
+              onStepClick={Showmodal}
+            />
+            <Step
+              title="Đơn hàng"
+              description="Hoàn thành"
+              onStepClick={Showmodal}
+            />
           </Steps>
         </div>
+
+        <Modal title="Cảnh báo !" visible={isModal} footer={null}>
+          <p>Bạn có chắc chắn muốn xác nhận đơn hàng này</p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-end",
+              justifyContent: "flex-end",
+            }}
+          >
+            <button
+              style={{
+                backgroundColor: "#fff",
+                border: "1px solid #000",
+                margin: 10,
+                padding: " 8px 16px",
+                borderRadius: 3,
+              }}
+              onClick={handleHuy}
+            >
+              Huỷ
+            </button>
+            <button
+              style={{
+                backgroundColor: "red",
+                border: "1px solid #000",
+                margin: 10,
+                padding: " 8px 16px",
+                color: "#fff",
+                borderRadius: 3,
+              }}
+              onClick={handleXacnhan}
+            >
+              Đồng ý
+            </button>
+          </div>
+        </Modal>
         <hr />
         <div style={{}}>
           <p className="_title_m">Thông tin khách hàng</p>
@@ -105,7 +213,7 @@ function InforBillOder() {
                     style={{ width: 50, height: 70 }}
                   />
 
-                  <div style={{ marginTop: 15 }}>
+                  <div style={{ marginTop: 15, width: 300 }}>
                     <p className="_title_l">{item?.titleProduct}</p>
                     <p className="_title_l">{item?.sizeProduct}</p>
                     <p className="_title_l">{item?.colorProduct}</p>

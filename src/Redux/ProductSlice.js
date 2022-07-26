@@ -5,7 +5,6 @@ import { getAll, getHight, getLow, getNew, getOld } from "../API/ProductAPI";
 import { mToken } from "../../token/TokenLogin";
 export const getProduct = createAsyncThunk("product/getProduct", async () => {
   const { data: products } = await getAll();
-  console.log(products);
   return products.result;
 });
 export const getNewProduct = createAsyncThunk(
@@ -149,6 +148,32 @@ export const searchProduct = createAsyncThunk(
     return products;
   }
 );
+export const StatusProduct = createAsyncThunk(
+  "product/StatusProduct",
+  async (data) => {
+    console.log(data);
+    let products = [];
+
+    await axios({
+      url: "http://18.141.199.110:3000/api/product/change-product/ByID",
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data: qs.stringify(data),
+    }).then(
+      async (res) => {
+        const { data: product } = await getAll();
+        products = product.result;
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return products;
+  }
+);
 const productSlice = createSlice({
   name: "auth",
   initialState: {
@@ -199,6 +224,11 @@ const productSlice = createSlice({
       // action is inferred correctly here if using TS
     });
     builder.addCase(searchProduct.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(StatusProduct.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS

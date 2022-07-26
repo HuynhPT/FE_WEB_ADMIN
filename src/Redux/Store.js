@@ -8,7 +8,7 @@ import sizeSlice from "./SizeSlice";
 import billSlice from "./BillSlice";
 import postSlice from "./PostSlice";
 
-import bannerSlice from './AllBanner'
+import bannerSlice from "./AllBanner";
 
 import {
   persistStore,
@@ -21,6 +21,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import userSlice from "./UserSlice";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -35,7 +36,8 @@ const rootReducer = combineReducers({
   sizecolor: sizeSlice,
   bills: billSlice,
   posts: postSlice,
-      banners: bannerSlice
+  banners: bannerSlice,
+  users: userSlice,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
@@ -46,7 +48,6 @@ export const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-
 });
 
 export let persistor = persistStore(store);

@@ -11,6 +11,7 @@ import Validate from "./Validate";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Redux/LoginAdmin";
+import { stringify } from "qs";
 
 const FormLogin = (props) => {
   const [values, setValues] = useState({
@@ -30,7 +31,6 @@ const FormLogin = (props) => {
       [event.target.name]: event.target.value,
     });
   };
-  console.log(values);
 
   return (
     <div>

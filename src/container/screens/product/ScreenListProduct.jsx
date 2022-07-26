@@ -6,6 +6,7 @@ import {
   Modal,
   Popconfirm,
   Select,
+  Switch,
   Table,
 } from "antd";
 import React, { useEffect, useState } from "react";
@@ -27,6 +28,7 @@ import {
   getOldProduct,
   getProduct,
   searchProduct,
+  StatusProduct,
 } from "../../../Redux/ProductSlice";
 const ScreenListProduct = () => {
   const { Option } = Select;
@@ -34,7 +36,7 @@ const ScreenListProduct = () => {
   const [isModalDelALl, setisModalDelALl] = useState();
   const [data, setData] = useState();
   const [dataLable, setDataLable] = useState("Lọc");
-
+  const [switchs, setSwitchs] = useState();
   const dispatch = useDispatch();
   const dataProduct = useSelector((data) => data.product.value);
   useEffect(() => {
@@ -43,7 +45,6 @@ const ScreenListProduct = () => {
   const showmodaldell = () => {
     setisModalDelALl(true);
   };
-
   useEffect(() => {
     fetch(
       "http://18.141.199.110:3000/api/category-product/get-category-product"
@@ -57,7 +58,14 @@ const ScreenListProduct = () => {
         setData(otpn);
       });
   }, []);
-
+  useEffect(() => {
+    if (dataProduct?.map((item) => item?.statust_product == 0)) {
+      setSwitchs(true);
+    } else {
+      setSwitchs(false);
+    }
+    console.log(switchs);
+  }, []);
   const handleChangefiter = (values) => {
     setDataLable(values);
     dispatch(filterProduct({ titleCategoryProduct: values }));
@@ -108,6 +116,24 @@ const ScreenListProduct = () => {
       style: { color: "green" },
     });
   };
+
+  const onChange = (checked, id) => {
+    if (checked === true) {
+      dispatch(
+        StatusProduct({
+          idProduct: id,
+          statust_product: 0,
+        })
+      );
+    } else {
+      dispatch(
+        StatusProduct({
+          idProduct: id,
+          statust_product: 1,
+        })
+      );
+    }
+  };
   const columns = [
     {
       title: "STT",
@@ -132,16 +158,20 @@ const ScreenListProduct = () => {
     {
       title: "Tên",
       dataIndex: "titleProduct",
+      width: 200,
     },
-    {
-      title: "Thương hiệu",
-      dataIndex: "trademark",
-    },
+
     {
       title: "Size",
       dataIndex: "size_product",
       render: (size_product) => (
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {size_product.map((item) => {
             return <p style={{ marginRight: 10, marginTop: 10 }}> {item}</p>;
           })}
@@ -152,7 +182,13 @@ const ScreenListProduct = () => {
       title: "Color",
       dataIndex: "color_product",
       render: (color_product) => (
-        <div style={{ display: "flex" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
           {color_product.map((item) => {
             return (
               <div
@@ -187,6 +223,68 @@ const ScreenListProduct = () => {
           {price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}đ
         </p>
       ),
+    },
+    {
+      title: "Trạng thái",
+      dataIndex: "statust_product",
+      render: (statust_product, data) => {
+        if (statust_product == 1) {
+          return (
+            <div
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: -20,
+              }}
+            >
+              <Switch
+                // checkedChildren={"0"}
+                // unCheckedChildren={"1"}
+                size="small"
+                checked={statust_product == 0 ? true : false}
+                // defaultChecked={switchs}
+                onChange={(e) => onChange(e, data._id)}
+              />
+              <p
+                style={{
+                  color: "#FF0000",
+                  fontWeight: "600",
+                  fontStyle: "italic",
+                }}
+              >
+                Hết hàng
+              </p>
+            </div>
+          );
+        } else {
+          return (
+            <div
+              style={{
+                alignItems: "center",
+                justifyContent: "center",
+                marginTop: -20,
+              }}
+            >
+              <Switch
+                // checkedChildren={"0"}
+                // unCheckedChildren={"1"}
+                size="small"
+                checked={statust_product == 0 ? true : false}
+                onChange={(e) => onChange(e, data._id)}
+              />
+              <p
+                style={{
+                  color: "#00FF00",
+                  fontWeight: "600",
+                  fontStyle: "italic",
+                }}
+              >
+                Còn hàng
+              </p>
+            </div>
+          );
+        }
+      },
     },
     {
       title: "Hoạt động",
@@ -303,16 +401,17 @@ const ScreenListProduct = () => {
           <Search
             type="text"
             placeholder="Tìm kiếm sản phẩm"
-            style={{ marginLeft: 30 }}
+            // style={{ marginLeft: 30 }}
           />
         </AutoComplete>
       </div>
       <Table
+        // scroll={{ x: 1000 }}
         columns={columns}
         dataSource={dataProduct}
-        rowKey={(item) => item._id}
+        rowKey={(item) => item?._id}
         className="table-list"
-        style={{ width: "100%" }}
+        // style={{ width: "100%" }}
       />
       <Modal title="Cảnh báo !" visible={isModalDelALl} footer={null}>
         <p>Bạn có chắc chắn muốn xoá hay không?</p>

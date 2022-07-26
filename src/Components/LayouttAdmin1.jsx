@@ -1,7 +1,17 @@
 import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { Avatar, Button, Dropdown, Input, Layout, Menu, message } from "antd";
+import {
+  Avatar,
+  Button,
+  Dropdown,
+  Image,
+  Input,
+  Layout,
+  Menu,
+  message,
+  Modal,
+} from "antd";
 import {
   MenuOutlined,
   SearchOutlined,
@@ -10,6 +20,7 @@ import {
   MailOutlined,
   LogoutOutlined,
   UserSwitchOutlined,
+  ReloadOutlined,
 } from "@ant-design/icons";
 import { Content, Header } from "antd/lib/layout/layout";
 import "../Common/Styles/Layout.css";
@@ -29,6 +40,8 @@ import imageads from "../Common/image/imageads.png";
 import Checkout from "../Common/image/Checkout.png";
 import styles from "../Common/styles/Layout.module.css";
 import { NavLink, Outlet } from "react-router-dom";
+import { upBanner } from "../Redux/AllBanner";
+import { upUser } from "../Redux/UserSlice";
 const { Sider } = Layout;
 function getItem(label, key, icon, children, type) {
   return {
@@ -45,48 +58,211 @@ export const Logout = () => {
 console.log("Đăng xuất", Logout);
 function LayouttAdmin1() {
   const [state, setState] = useState(false);
+  const [ishow, setIshow] = useState(false);
+
+  const [passold, setPassold] = useState();
+  const [passnew, setPassnew] = useState();
+  const [resetpass, setRessetpass] = useState();
+
   const onClick = () => {};
 
   const user = useSelector((state) => state.auth.login.currentUser);
+  const dispatch = useDispatch();
   const navigation = useNavigate();
-
   useEffect(() => {
     if (!user) {
       navigation("/");
     }
   });
+  const dataus = user.user;
+  // console.log(localStorage.getItem("login"));
+  const xacnhan = () => {
+    if (
+      passold == undefined ||
+      passnew == undefined ||
+      resetpass == undefined
+    ) {
+      // if (passold !== dataus?.password)
+      // message.error({
+      //   content: "Không được để trống",
+      // });
+      alert("Không được để trống mật khẩu");
+    } else {
+      if (passnew !== resetpass || passnew.length < 6 || resetpass.length < 6) {
+        alert(
+          "Mật khẩu nhập lại không khớp , Mật khẩu mới phải lớn hơn 6 ký tự"
+        );
+      } else {
+        dispatch(
+          upUser({
+            idAdmin: dataus?._id,
+            password: passold,
+            passwordNew: passnew,
+            passwordNewConfirm: resetpass,
+          })
+        );
+        setIshow(false);
+        setPassnew("");
+        setPassold("");
+        setRessetpass("");
+      }
+    }
+  };
+  const huy = () => {
+    setPassnew("");
+    setPassold("");
+    setRessetpass("");
+    setIshow(false);
+  };
 
+  console.log(passnew, passold, resetpass);
   const menu = (
-    <Menu className={styles.dropdown}>
-      <div className="menu_chi">
-        <div className={styles.logo_user}>
-          <Avatar
-            size={44}
-            src={
-              "https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg"
-            }
-          />
-        </div>
-
-        <div className={styles.view_tt}>
-          <div style={{ justifyContent: "center", textAlign: "center" }}>
-            <Button
-              onClick={Logout}
-              href="/"
-              icon={<LogoutOutlined />}
-              type="text"
+    <>
+      <Menu className={styles.dropdown}>
+        <div className="menu_chi">
+          <div className={styles.logo_user}>
+            <Image
+              src={dataus?.image}
               style={{
-                border: "1px solid rgb(226, 226, 226)",
-                marginLeft: 10,
-                marginTop: 5,
+                width: "100%",
+                height: 100,
+                padding: 5,
               }}
             >
-              Đăng xuất
-            </Button>
+              {/* <Avatar size={44} src={dataus?.image} /> */}
+            </Image>
+          </div>
+
+          <div className={styles.view_tt}>
+            <div
+              style={{
+                alignItems: "center",
+                textAlign: "center",
+              }}
+            >
+              <p
+                style={{
+                  color: "#000",
+                  fontSize: 15,
+                  fontWeight: "bold",
+                  fontStyle: "italic",
+                }}
+              >
+                {dataus?.userName}
+              </p>
+              <p>{dataus?.phone}</p>
+              <p>{dataus?.email}</p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                textAlign: "center",
+                margin: 5,
+              }}
+            >
+              <Button
+                onClick={() => {
+                  setIshow(true);
+                }}
+                // href="/"
+                icon={<ReloadOutlined />}
+                type="text"
+                style={{
+                  border: "1px solid rgb(226, 226, 226)",
+                  fontSize: 11,
+                }}
+              >
+                Đổi mật khẩu
+              </Button>
+              <Button
+                onClick={Logout}
+                href="/"
+                icon={<LogoutOutlined />}
+                type="text"
+                style={{
+                  border: "1px solid rgb(226, 226, 226)",
+                  fontSize: 11,
+                }}
+              >
+                Đăng xuất
+              </Button>
+            </div>
           </div>
         </div>
-      </div>
-    </Menu>
+      </Menu>
+      {/* modal */}
+      <Modal
+        title="Đổi mật khẩu"
+        visible={ishow}
+        footer={false}
+        closable={false}
+      >
+        <div style={{}}>
+          <div style={{ marginBottom: 20 }}>
+            <div style={{ margin: 5 }}>
+              <Input
+                placeholder="Mật khẩu cũ"
+                onChange={(e) => setPassold(e.target.value)}
+                value={passold}
+              />
+            </div>
+            <div style={{ margin: 5 }}>
+              <Input
+                placeholder="Mật khẩu mới"
+                onChange={(e) => setPassnew(e.target.value)}
+                value={passnew}
+              />
+            </div>
+            <div style={{ margin: 5 }}>
+              <Input
+                placeholder="Nhập lại mật khẩu mới"
+                onChange={(e) => setRessetpass(e.target.value)}
+                value={resetpass}
+              />
+            </div>
+          </div>
+          <div style={{ width: "100%" }}>
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-evenly",
+              }}
+            >
+              <div>
+                <Button
+                  htmlType="button"
+                  style={{
+                    border: "1px solid rgb(226, 226, 226)",
+                    fontSize: 11,
+                    backgroundColor: "gray",
+                    color: "#fff",
+                  }}
+                  onClick={huy}
+                >
+                  Huỷ
+                </Button>
+              </div>
+              <div>
+                <Button
+                  htmlType="button"
+                  style={{
+                    border: "1px solid rgb(226, 226, 226)",
+                    fontSize: 11,
+                    backgroundColor: "red",
+                    color: "#fff",
+                  }}
+                  onClick={xacnhan}
+                >
+                  Xác nhận
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Modal>
+    </>
   );
   const items = [
     getItem(
@@ -166,11 +342,11 @@ function LayouttAdmin1() {
     //   "6",
     //   <img style={{ width: "10%" }} src={imager10} alt="" />
     // ),
-    getItem(
-      ["Thống kê", <NavLink to="thongKe_loiNhuan" />],
-      "15",
-      <img style={{ width: "10%" }} src={image6} alt="" />
-    ),
+    // getItem(
+    //   ["Thống kê", <NavLink to="thongKe_loiNhuan" />],
+    //   "15",
+    //   <img style={{ width: "10%" }} src={image6} alt="" />
+    // ),
     // ]
     // ),
     getItem(
@@ -200,11 +376,11 @@ function LayouttAdmin1() {
         ),
       ]
     ),
-    getItem(
-      ["Thông tin cá nhân", <NavLink to="thongTin_shop" />],
-      "sub9",
-      <img style={{ width: "10%" }} src={image9} alt="" />
-    ),
+    // getItem(
+    //   ["Thông tin cá nhân", <NavLink to="thongTin_shop" />],
+    //   "sub9",
+    //   <img style={{ width: "10%" }} src={image9} alt="" />
+    // ),
     // getItem(
     //   "Mạng xã hội",
     //   "sub8",
@@ -286,12 +462,7 @@ function LayouttAdmin1() {
             <BellOutlined style={{ fontSize: 20, margin: "0 10px" }} />
             <MailOutlined style={{ fontSize: 20, marginRight: 20 }} />
             <Dropdown overlay={menu} arrow>
-              <Avatar
-                size={44}
-                src={
-                  "https://cdn.nguyenkimmall.com/images/detailed/555/may-anh-cho-nguoi-moi.jpg"
-                }
-              />
+              <Avatar size={44} src={dataus?.image} />
             </Dropdown>
           </div>
         </Header>

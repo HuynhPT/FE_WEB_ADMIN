@@ -1,83 +1,106 @@
-import { Button, Table } from "antd";
+import { Button, Popconfirm, Table } from "antd";
 import React, { useEffect, useState } from "react";
 
 import "../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 import axios from "axios";
+import { mToken } from "../../../../token/TokenLogin";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser, removeUser } from "../../../Redux/UserSlice";
 
 const ScreenListUser = () => {
+  const dispatch = useDispatch();
+  const dataus = useSelector((data) => data.users.value);
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   const [data, setData] = useState();
   useEffect(() => {
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTc4MTMyMTEsImV4cCI6MTY2MDQwNTIxMX0.g8hsX21tAggQf5niesMc3AJ-DQLmnptO2jMvF0LWuCQ";
-
-    axios({
-      url: `http://18.141.199.110:3000/account-user/get-allUsers`,
-      method: "GET",
-      headers: {
-        token: `Bearer ${mToken} `,
-      },
-    }).then(
-      (res) => {
-        setData(res.data.result);
-      },
-      (err) => {
-        console.log(err.response, "?");
-      }
-    );
+    dispatch(getUser());
+    // axios({
+    //   url: `http://18.141.199.110:3000/account-user/get-allUsers`,
+    //   method: "GET",
+    //   headers: {
+    //     token: mToken,
+    //   },
+    // }).then(
+    //   (res) => {
+    //     setData(res.data.result);
+    //   },
+    //   (err) => {
+    //     console.log(err.response, "?");
+    //   }
+    // );
   }, []);
-  console.log(data);
-  const rowSelection = {
-    onChange: (selectedRowKeys, selectedRows) => {
-      setSelectedRowKeys(selectedRows);
+  console.log(dataus);
+
+  const deletee = (id) => {
+    dispatch(
+      removeUser({
+        mIdUser: id,
+      })
+    );
+    message.success({
+      content: "Xoá thành công",
+      style: { color: "green" },
+    });
+  };
+  const columns = [
+    {
+      title: "STT",
+      dataIndex: "_id",
+      render: (_id, data, index) => index + 1,
     },
-  };
-  const hasSelected = selectedRowKeys.length > 0;
+    {
+      title: "Ảnh",
+      dataIndex: "photoUrl",
+      render: (photoUrl) => (
+        <img src={photoUrl} alt="" style={{ width: 80, height: 80 }} />
+      ),
+    },
 
-  const listDataa = () => {
-    if (data !== undefined) {
-      const deletee = (id) => {
-        console.log(id);
-      };
-      const columns = [
-        {
-          title: "STT",
-          dataIndex: "_id",
-          render: (_id, data, index) => index + 1,
-        },
-        {
-          title: "Ảnh",
-          dataIndex: "photoUrl",
-          render: (photoUrl) => (
-            <img src={photoUrl} alt="" style={{ width: 80, height: 80 }} />
-          ),
-        },
+    {
+      title: "Tên",
+      dataIndex: "name",
+    },
+    {
+      title: "SĐT",
+      dataIndex: "phone",
+    },
 
-        {
-          title: "Tên",
-          dataIndex: "name",
-        },
-        {
-          title: "SĐT",
-          dataIndex: "phone",
-        },
+    {
+      title: "Email",
+      dataIndex: "email",
+    },
 
-        {
-          title: "Email",
-          dataIndex: "email",
-        },
-      ];
-      return (
-        <Table
-          columns={columns}
-          dataSource={data}
-          rowKey={(item) => item._id}
-          className="table-list"
-        />
-      );
-    }
-  };
+    {
+      title: "Hoạt động",
+      dataIndex: "_id",
+      render: (_id) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            marginLeft: 10,
+            marginTop: 5,
+          }}
+        >
+          <Popconfirm
+            title="Bạn có chắc chắn muốn xoá không?"
+            onConfirm={() => deletee(_id)}
+            okText="Xoá"
+            cancelText="Huỷ"
+          >
+            <p
+              style={{ width: 50, cursor: "pointer", color: "blue" }}
+              size={24}
+            >
+              Xoá
+            </p>
+          </Popconfirm>
+        </div>
+      ),
+    },
+  ];
 
   return (
     <div className="list-product">
@@ -91,7 +114,7 @@ const ScreenListUser = () => {
           }
         </p>
       </div>
-      <div
+      {/* <div
         className="button-list"
         style={{
           marginBottom: 16,
@@ -107,8 +130,13 @@ const ScreenListUser = () => {
         >
           <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
-      </div>
-      {listDataa()}
+      </div> */}
+      <Table
+        columns={columns}
+        dataSource={dataus}
+        rowKey={(item) => item._id}
+        className="table-list"
+      />
     </div>
   );
 };

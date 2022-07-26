@@ -6,11 +6,14 @@ import { Editor } from "@tinymce/tinymce-react";
 
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { upBanner } from "../../../../Redux/AllBanner";
 function EditBannerMen(props) {
   const { id } = useParams();
   const [nameLinkImage, setNameLinkImage] = useState();
   const [valueText, setValueText] = useState();
   const [dataEdit, setDataEdit] = useState();
+  const dispatch = useDispatch();
   useEffect(() => {
     fetch(
       "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
@@ -25,7 +28,7 @@ function EditBannerMen(props) {
     setNameLinkImage(e.target.files[0].name);
   };
   const onFinish = async (values) => {
-    console.log(values);
+    dispatch(upBanner({}));
   };
   console.log(dataEdit?.title_ads);
 

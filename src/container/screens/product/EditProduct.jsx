@@ -148,12 +148,12 @@ function EditProduct(props) {
       "price",
       valueGiaban == undefined ? dataEdit?.price : Number(valueGiaban)
     );
-    fromdata.append(
-      "quantity_product",
-      valueSoluong == undefined
-        ? dataEdit?.quantity_product
-        : Number(valueSoluong)
-    );
+    // fromdata.append(
+    //   "quantity_product",
+    //   valueSoluong == undefined
+    //     ? dataEdit?.quantity_product
+    //     : Number(valueSoluong)
+    // );
     fromdata.append(
       "material_product",
       valueChatlieu == undefined ? dataEdit?.material_product : valueChatlieu
@@ -221,7 +221,7 @@ function EditProduct(props) {
   return (
     <div className="_Mcontainer_Fro">
       <div className="_Mcontainer_Frompr">
-        <h3 className="_title_addproduct">Thêm sản phẩm</h3>
+        <h3 className="_title_addproduct">Sửa sản phẩm</h3>
         <hr />
         {/* hàng 1 */}
         <div className="_inputrow1From">
@@ -280,7 +280,7 @@ function EditProduct(props) {
         {/* Hàng 3 */}
         <div className="_inputrow4From">
           {/* thể loại */}
-          <div className="_nameInputrow4">
+          <div className="_nameInpu">
             <p className="_text_product">Thể loại*</p>
             <SelectOptionTypeProduct
               options={dataType}
@@ -319,7 +319,7 @@ function EditProduct(props) {
             />
           </div>
           {/* số lượng */}
-          <div className="_nameInputrow4">
+          {/* <div className="_nameInputrow4">
             <p className="_text_product">Số lượng*</p>
             <Input
               placeholder="Số lượng"
@@ -330,10 +330,10 @@ function EditProduct(props) {
                   : valueSoluong
               }
             />
-          </div>
+          </div> */}
         </div>
         {/* Hàng 4 */}
-        <div className="_inputrow5From">
+        <div className="_inputrow5Fromed">
           {/* UP ảnh*/}
           <div className="_nameInputrow">
             <p className="_text_product">Chọn ảnh*</p>
@@ -420,7 +420,7 @@ function EditProduct(props) {
         {/* Hàng 5 */}
         <div className="_inputrow3From">
           {/* mô tả */}
-          <div className="_nameInputrow2">
+          <div className="_nameInputrow2ed">
             <p className="_text_product">Mô tả sản phẩm*</p>
             <TinymceProduct
               onChangeText={(e) => setValueMota(e)}

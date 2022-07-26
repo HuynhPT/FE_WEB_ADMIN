@@ -140,7 +140,7 @@ function FromProduct(props) {
     // fromdata.append("flashSale", valueSale);
     fromdata.append("importPrice", Number(valueDongia));
     fromdata.append("price", Number(valueGiaban));
-    fromdata.append("quantity_product", Number(valueSoluong));
+    // fromdata.append("quantity_product", Number(valueSoluong));
     fromdata.append("material_product", valueChatlieu);
     for (let i = 0; i < nameLinkImage.length; i++) {
       fromdata.append("croppedImage", nameLinkImage[i]);
@@ -299,7 +299,7 @@ function FromProduct(props) {
           {/* Hàng 3 */}
           <div className="_inputrow4From">
             {/* thể loại */}
-            <div className="_nameInputrow4">
+            <div className="_nameInpu">
               <p className="_text_product">Thể loại*</p>
               <Form.Item
                 name="theloai"
@@ -347,7 +347,7 @@ function FromProduct(props) {
               </Form.Item>
             </div>
             {/* số lượng */}
-            <div className="_nameInputrow4">
+            {/* <div className="_nameInputrow4">
               <p className="_text_product">Số lượng*</p>
               <Form.Item
                 name="soluong"
@@ -363,7 +363,7 @@ function FromProduct(props) {
                   value={valueSoluong}
                 />
               </Form.Item>
-            </div>
+            </div> */}
           </div>
         </div>
         {/* Hàng 4 */}

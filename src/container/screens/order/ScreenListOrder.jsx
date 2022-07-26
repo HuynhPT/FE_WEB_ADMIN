@@ -1,4 +1,12 @@
-import { Button, Modal, Popconfirm, Select, Table } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Input,
+  Modal,
+  Popconfirm,
+  Select,
+  Table,
+} from "antd";
 import React, { useEffect, useState } from "react";
 import "../profit/Listproduct.css";
 import { Link } from "react-router-dom";
@@ -286,7 +294,7 @@ const ScreenListOrder = () => {
           </div>
           <div style={{ width: "13%", margin: "0 0 0 5px" }}>
             <Select
-              defaultValue={"old"}
+              defaultValue={"Sắp xếp"}
               style={{
                 width: "100%",
                 backgroundColor: "#D9D9D9",
@@ -299,6 +307,17 @@ const ScreenListOrder = () => {
             </Select>
           </div>
         </div>
+        <AutoComplete
+          className="search_prd"
+          style={{}}
+          //  onSearch={onsearchtype}
+        >
+          <Search
+            type="text"
+            placeholder="Tìm kiếm hoá đơn"
+            // style={{ marginLeft: 30 }}
+          />
+        </AutoComplete>
       </div>
       <Table
         columns={columns}

@@ -2,20 +2,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
 import { getAll } from "../API/ImageAPI";
-import { mToken } from '../../token/TokenLogin'
-export const getBanner = createAsyncThunk(
-  "banners/getBanner",
-  async () => {
-    const { data: banner } = await getAll();
-    console.log(banner);
-    return banner.data;
-  }
-);
+import { mToken } from "../../token/TokenLogin";
+export const getBanner = createAsyncThunk("banners/getBanner", async () => {
+  const { data: banner } = await getAll();
+  console.log(banner);
+  return banner.data;
+});
 
 export const getBannertitle = createAsyncThunk(
   "banners/getBannertitle",
   async (data) => {
-
     let bannners = [];
 
     await axios({
@@ -65,31 +61,28 @@ export const getBannertitle = createAsyncThunk(
 //     return bannners;
 //   }
 // );
-export const delBanner = createAsyncThunk(
-  "banners/delBanner",
-  async (id) => {
-    console.log(data);
-    let banners = [];
- 
-    await axios({
-      url: `http://18.141.199.110:3000/img-first-images/delete-img/${id}`,
-      method: "DELETE",
-      headers: {
-        token: mToken,
-        "content-type": "application/x-www-form-urlencoded",
-      },
-    }).then(
-      async (res) => {
-        const { data: banner } = await getAll();
-        banners = banner.result;
-      },
-      (err) => {
-        console.log(err.response, "?");
-      }
-    );
-    return banners;
-  }
-);
+export const delBanner = createAsyncThunk("banners/delBanner", async (id) => {
+  console.log(data);
+  let banners = [];
+
+  await axios({
+    url: `http://18.141.199.110:3000/img-first-images/delete-img/${id}`,
+    method: "DELETE",
+    headers: {
+      token: mToken,
+      "content-type": "application/x-www-form-urlencoded",
+    },
+  }).then(
+    async (res) => {
+      const { data: banner } = await getAll();
+      banners = banner.result;
+    },
+    (err) => {
+      console.log(err.response, "?");
+    }
+  );
+  return banners;
+});
 export const delallBanner = createAsyncThunk(
   "banners/delallBanner",
   async (data) => {
@@ -116,34 +109,28 @@ export const delallBanner = createAsyncThunk(
     return banners;
   }
 );
-export const upBanner = createAsyncThunk(
-  "banners/upBanner",
-  async (data) => {
-    console.log(data);
-    let banners = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTc1OTM5NzEsImV4cCI6MTY2MDE4NTk3MX0.GcgUDezf7NeUUseSlZ3ma8PWFbLnidQaTqpXy-85mFk";
-
-    await axios({
-      url: `http://18.141.199.110:3000/img-first-images/update-img`,
-      method: "PUT",
-      headers: {
-        token: `Bearer ${mToken} `,
-        "Content-Type": "multipart/form-data",
-      },
-      data: qs.stringify(data),
-    }).then(
-      async (res) => {
-        const { data: banner } = await getAll();
-        banners = res.data.data;
-      },
-      (err) => {
-        console.log(err.response, "?");
-      }
-    );
-    return banners;
-  }
-);
+export const upBanner = createAsyncThunk("banners/upBanner", async (data) => {
+  console.log(data);
+  let banners = [];
+  await axios({
+    url: `http://18.141.199.110:3000/img-first-images/update-img`,
+    method: "PUT",
+    headers: {
+      token: mToken,
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    data: qs.stringify(data),
+  }).then(
+    async (res) => {
+      const { data: banner } = await getAll();
+      banners = banner.data;
+    },
+    (err) => {
+      console.log(err.response, "?");
+    }
+  );
+  return banners;
+});
 export const searchBanner = createAsyncThunk(
   "imgFirstImages/searchBanner",
   async (data) => {
@@ -212,7 +199,6 @@ const bannerSlice = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailed } =
-  bannerSlice.actions;
+export const { loginStart, loginSuccess, loginFailed } = bannerSlice.actions;
 
 export default bannerSlice.reducer;
