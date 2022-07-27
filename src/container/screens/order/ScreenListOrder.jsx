@@ -24,6 +24,7 @@ import { ReloadOutlined } from "@ant-design/icons";
 import SelectFilter from "../../../Components/type/SelectFilter";
 import axios from "axios";
 import { mToken } from "../../../../token/TokenLogin";
+import { LOCALHOST, URL_GET_ALL_USER } from "../../../API/ALLAPI";
 
 const ScreenListOrder = () => {
   const [data, setData] = useState();
@@ -32,7 +33,6 @@ const ScreenListOrder = () => {
 
   const dispatch = useDispatch();
   const billdata = useSelector((data) => data.bills.value);
-
   const { Option } = Select;
   useEffect(() => {
     dispatch(getBillProduct());
@@ -40,7 +40,7 @@ const ScreenListOrder = () => {
 
   useEffect(() => {
     axios({
-      url: "http://18.141.199.110:3000/account-user/get-allUsers",
+      url: `${LOCALHOST}` + `${URL_GET_ALL_USER}`,
       method: "GET",
       headers: {
         token: mToken,
@@ -95,26 +95,89 @@ const ScreenListOrder = () => {
   };
   const columns = [
     {
-      title: "Họ",
-      dataIndex: "firstName",
+      title: "STT",
+      dataIndex: "_id",
+      render: (_id, data, index) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{index + 1}</p>
+        </div>
+      ),
+    },
+    // {
+    //   title: "Họ",
+    //   dataIndex: "firstName",
+    // },
+    {
+      title: "Mã đơn hàng",
+      dataIndex: "billingEncode",
+      render: (billingEncode) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{billingEncode}</p>
+        </div>
+      ),
     },
     {
       title: "Tên",
-      dataIndex: "lastName",
+      dataIndex: "_id",
+      render: (_id, data) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>
+            {data?.firstName} {data?.lastName}
+          </p>
+        </div>
+      ),
     },
     {
       title: "SĐT",
       dataIndex: "numberPhone",
+      render: (numberPhone) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{numberPhone}</p>
+        </div>
+      ),
     },
     {
       title: "Địa chỉ",
       dataIndex: "fullAddress",
+      render: (fullAddress) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+            width: 300,
+          }}
+        >
+          <p>{fullAddress}</p>
+        </div>
+      ),
+      width: 300,
     },
 
-    {
-      title: "Mã code",
-      dataIndex: "codeZip",
-    },
     {
       title: "Trạng thái",
       dataIndex: "status",
@@ -123,79 +186,167 @@ const ScreenListOrder = () => {
           return (
             <div
               style={{
-                border: "1px solid red ",
-                color: "#fff",
-                backgroundColor: "red",
-                fontStyle: "italic",
-                borderRadius: 20,
-                opacity: 0.7,
+                display: "flex",
+                justifyContent: "space-evenly",
               }}
             >
-              Chờ xác nhận
+              <div style={{ width: 150 }}>
+                <p
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: "650",
+                    color: "#000",
+                  }}
+                >
+                  Đang xử lý
+                </p>
+              </div>
+
+              <div
+                style={{
+                  width: 20,
+                  height: 20,
+                  border: "1px solid red ",
+                  backgroundColor: "red",
+                  borderRadius: 3,
+                  opacity: 0.7,
+                }}
+              ></div>
             </div>
           );
         } else if (status.toString() == 1) {
           return (
             <div
               style={{
-                border: "1px solid orange ",
-                color: "#fff",
-                backgroundColor: "orange",
-                fontStyle: "italic",
-                borderRadius: 20,
-                opacity: 0.7,
+                display: "flex",
+                justifyContent: "space-evenly",
               }}
             >
-              Chờ lấy hàng
+              <div style={{ width: 150 }}>
+                <p
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: "650",
+                    color: "#000",
+                  }}
+                >
+                  Đã xử lý
+                </p>
+              </div>
+
+              <div
+                style={{
+                  width: 20,
+                  height: 20,
+                  border: "1px solid  yellow",
+                  backgroundColor: "yellow",
+                  borderRadius: 3,
+                  opacity: 0.7,
+                }}
+              ></div>
             </div>
           );
         } else if (status.toString() == 2) {
           return (
             <div
               style={{
-                border: "1px solid yellow ",
-                color: "#fff",
-                backgroundColor: "yellow",
-                fontStyle: "italic",
-                borderRadius: 20,
-                opacity: 0.7,
+                display: "flex",
+                justifyContent: "space-evenly",
               }}
             >
-              Đang vận chuyển
+              <div style={{ width: 150 }}>
+                <p
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: "650",
+
+                    color: "#000",
+                  }}
+                >
+                  Đã xác nhận
+                </p>
+              </div>
+
+              <div
+                style={{
+                  width: 20,
+                  height: 20,
+                  border: "1px solid yellowgreen ",
+                  backgroundColor: "yellowgreen",
+                  borderRadius: 3,
+                  opacity: 0.7,
+                }}
+              ></div>
             </div>
           );
         } else if (status.toString() == 3) {
           return (
             <div
               style={{
-                border: "1px solid yellowgreen ",
-                color: "#fff",
-                backgroundColor: "yellowgreen",
-                fontStyle: "italic",
-                borderRadius: 20,
-                opacity: 0.7,
+                display: "flex",
+                justifyContent: "space-evenly",
               }}
             >
-              Đang giao
+              <div style={{ width: 150 }}>
+                <p
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: "650",
+
+                    color: "#000",
+                  }}
+                >
+                  Đang vận chuyển
+                </p>
+              </div>
+
+              <div
+                style={{
+                  width: 20,
+                  height: 20,
+                  border: "1px solid greenyellow ",
+                  backgroundColor: "greenyellow",
+                  borderRadius: 3,
+                  opacity: 0.7,
+                }}
+              ></div>
             </div>
           );
         } else {
           return (
             <div
               style={{
-                border: "1px solid green ",
-                color: "#fff",
-                backgroundColor: "green",
-                fontStyle: "italic",
-                borderRadius: 20,
-                opacity: 0.7,
+                display: "flex",
+                justifyContent: "space-evenly",
               }}
             >
-              Hoàn thành
+              <div style={{ width: 150 }}>
+                <p
+                  style={{
+                    fontStyle: "italic",
+                    fontWeight: "650",
+                    color: "#000",
+                  }}
+                >
+                  Đã hoàn thành
+                </p>
+              </div>
+
+              <div
+                style={{
+                  width: 20,
+                  height: 20,
+                  border: "1px solid #00FF00  ",
+                  backgroundColor: "#00FF00 ",
+                  borderRadius: 3,
+                  opacity: 0.7,
+                }}
+              ></div>
             </div>
           );
         }
       },
+      width: 200,
     },
     {
       title: "Hoạt động",
@@ -241,7 +392,7 @@ const ScreenListOrder = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách khách hàng đặt hàng</p>
+        <p className="text_titlespb">Danh sách đơn hàng</p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">

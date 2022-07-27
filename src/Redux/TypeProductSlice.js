@@ -1,8 +1,16 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
-import { delAll, getAll } from "../API/TypeProductAPI";
+import { getAll } from "../API/TypeProductAPI";
 import { mToken } from "../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_DELETE_ALL_OPJECT,
+  URL_POST_OPJECT,
+  URL_REMOVE_ID_OPJECT,
+  URL_SEARCH_OPJECT,
+  URL_UPDATE_ID_OPJECT,
+} from "../API/ALLAPI";
 export const getTypeProduct = createAsyncThunk(
   "typeProduct/getTypeProduct",
   async () => {
@@ -17,7 +25,7 @@ export const dellAllTypeProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/type-product/destroy-type-product",
+      url: `${LOCALHOST}` + `${URL_DELETE_ALL_OPJECT}`,
       method: "DELETE",
       headers: {
         token: mToken,
@@ -41,7 +49,7 @@ export const addTypeProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/type-product/create-type-product",
+      url: `${LOCALHOST}` + `${URL_POST_OPJECT}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -66,7 +74,7 @@ export const delTypeProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: `http://18.141.199.110:3000/api/type-product/delete-type-product/findById`,
+      url: `${LOCALHOST}` + `${URL_REMOVE_ID_OPJECT}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -91,7 +99,7 @@ export const upTypeProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/type-product/edit-type-product/findById",
+      url: `${LOCALHOST}` + `${URL_UPDATE_ID_OPJECT}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -117,7 +125,7 @@ export const searchTypeproduct = createAsyncThunk(
     let categoriss = [];
 
     await axios({
-      url: `http://18.141.199.110:3000/api/type-product/search-type-product`,
+      url: `${LOCALHOST}` + `${URL_SEARCH_OPJECT}`,
       method: "POST",
       headers: {
         token: mToken,

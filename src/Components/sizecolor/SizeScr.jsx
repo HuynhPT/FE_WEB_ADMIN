@@ -90,31 +90,107 @@ const SizeScr = () => {
     {
       title: "STT",
       dataIndex: "_id",
-      render: (_id, data, index) => index + 1,
+      render: (_id, data, index) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{index + 1}</p>
+        </div>
+      ),
     },
     {
       title: "Tên size",
       dataIndex: "titleSize",
+      render: (titleSize) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{titleSize}</p>
+        </div>
+      ),
     },
     {
       title: "Vai",
       dataIndex: "shoulder",
+      render: (shoulder) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{shoulder}</p>
+        </div>
+      ),
     },
     {
       title: "Ngực",
       dataIndex: "bust",
+      render: (bust) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{bust}</p>
+        </div>
+      ),
     },
     {
       title: "Dài Tay",
       dataIndex: "sleeveLength",
+      render: (sleeveLength) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{sleeveLength}</p>
+        </div>
+      ),
     },
     {
       title: "Eo",
       dataIndex: "waist",
+      render: (waist) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{waist}</p>
+        </div>
+      ),
     },
     {
       title: "Chiều cao",
       dataIndex: "length",
+      render: (length) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{length}</p>
+        </div>
+      ),
     },
     {
       title: "Hoạt động",

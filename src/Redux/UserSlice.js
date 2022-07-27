@@ -4,6 +4,11 @@ import axios from "axios";
 import { getColor } from "../API/ColorSize";
 import { mToken } from "../../token/TokenLogin";
 import { getAllUser } from "../API/UserApi";
+import {
+  LOCALHOST,
+  URL_CHANGE_ACC_ADMIN,
+  URL_REMOVE_ID_ACC_ADMIN,
+} from "../API/ALLAPI";
 export const getUser = createAsyncThunk("users/getUser", async () => {
   const { data: user } = await getAllUser();
   console.log(user);
@@ -15,7 +20,7 @@ export const upUser = createAsyncThunk("users/upUser", async (data) => {
   let col = [];
 
   await axios({
-    url: "http://18.141.199.110:3000/account-ad/refresh-password-admin",
+    url: `${LOCALHOST}` + `${URL_CHANGE_ACC_ADMIN}`,
     method: "POST",
     headers: {
       token: mToken,
@@ -41,7 +46,7 @@ export const removeUser = createAsyncThunk("users/removeUser", async (data) => {
   let col = [];
 
   await axios({
-    url: "http://18.141.199.110:3000/account-user/delete-user-ByID",
+    url: `${LOCALHOST}` + `${URL_REMOVE_ID_ACC_ADMIN}`,
     method: "POST",
     headers: {
       token: mToken,

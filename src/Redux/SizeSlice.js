@@ -3,6 +3,13 @@ import qs from "qs";
 import axios from "axios";
 import { getSize } from "../API/ColorSize";
 import { mToken } from "../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_DELETE_ALL_SIZE,
+  URL_POST_SIZE,
+  URL_REMOVE_ID_SIZE,
+  URL_UPDATE_ID_SIZE,
+} from "../API/ALLAPI";
 export const getSizecolor = createAsyncThunk(
   "sizecolor/getSizecolor",
   async () => {
@@ -18,7 +25,7 @@ export const addSizecolor = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/create-size",
+      url: `${LOCALHOST}` + `${URL_POST_SIZE}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -44,7 +51,7 @@ export const delAllSizecolor = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/destroy-size",
+      url: `${LOCALHOST}` + `${URL_DELETE_ALL_SIZE}`,
       method: "DELETE",
       headers: {
         token: mToken,
@@ -70,7 +77,7 @@ export const removeSizecolor = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/destroy-sizeById",
+      url: `${LOCALHOST}` + `${URL_REMOVE_ID_SIZE}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -89,32 +96,6 @@ export const removeSizecolor = createAsyncThunk(
     return col;
   }
 );
-// export const searchColorsize = createAsyncThunk(
-//   "sizecolor/searchColorsize",
-//   async (data) => {
-//     console.log(data);
-//     let col = [];
-
-//     await axios({
-//       url: "http://18.141.199.110:3000/api/size-color/search-color",
-//       method: "POST",
-//       headers: {
-//         token: mToken,
-//         "content-type": "application/x-www-form-urlencoded",
-//       },
-//       data: qs.stringify(data),
-//     }).then(
-//       async (res) => {
-//         const { data: colors } = await getSize();
-//         col = res.data.result;
-//       },
-//       (err) => {
-//         console.log(err.response, "?");
-//       }
-//     );
-//     return col;
-//   }
-// );
 export const upSizecolor = createAsyncThunk(
   "sizecolor/upSizecolor",
   async (data) => {
@@ -122,7 +103,7 @@ export const upSizecolor = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/edit-sizeById",
+      url: `${LOCALHOST}` + `${URL_UPDATE_ID_SIZE}`,
       method: "POST",
       headers: {
         token: mToken,

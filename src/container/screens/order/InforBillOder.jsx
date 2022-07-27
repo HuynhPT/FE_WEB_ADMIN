@@ -4,31 +4,81 @@ import QueryString from "qs";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { mToken } from "../../../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_GET_ALL_BILL,
+  URL_GET_ID_BILL_DETALS,
+} from "../../../API/ALLAPI";
 import "./infro.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getBillProduct, statusBill } from "../../../Redux/BillSlice";
+import { getBill } from "../../../API/BillApi";
 function InforBillOder() {
   const { id } = useParams();
   const [data, setData] = useState();
   const [dataall, setDataAll] = useState();
   const [currentStep, setCurrentStep] = useState();
-  const [curent, setCurrent] = useState(0);
+  const [disabled1, setDisable1] = useState(false);
+  const [disabled2, setDisable2] = useState(false);
+  const [disabled3, setDisable3] = useState(false);
+  const [disabled4, setDisable4] = useState(false);
+  const [disabled, setDisable] = useState(false);
+
+  const [curent, setCurrent] = useState();
   const [isModal, setisModal] = useState(false);
   const { Step } = Steps;
-
+  const dispatch = useDispatch();
+  const databill = useSelector((data) => data.bills.value);
   useEffect(() => {
-    axios({
-      url: "http://18.141.199.110:3000/api/user-bill/get-bill-product",
-      method: "GET",
-      headers: {
-        token: mToken,
-      },
-    }).then((resl) => {
-      const newData = resl.data.bill.find((item) => item._id == id);
-      setData(newData);
-    });
+    dispatch(getBillProduct());
+    const newData = databill.find((item) => item._id == id);
+    setData(newData);
+    // axios({
+    //   url: `${LOCALHOST}` + `${URL_GET_ALL_BILL}`,
+    //   method: "GET",
+    //   headers: {
+    //     token: mToken,
+    //   },
+    // }).then((resl) => {
+    //   const newData = databill.find((item) => item._id == id);
+    //   setData(newData);
+    // });
+    // if (data?.status === 0) {
+    // } else if (data?.status === 1) {
+    //   setDisable1(true);
+    // } else if (data?.status === 2) {
+    //   setDisable2(true);
+    // } else if (data?.status === 3) {
+    //   setDisable3(true);
+    // } else if (data?.status === 4) {
+    //   setDisable4(true);
+    // } else if (data?.status === 5) {
+    //   setDisable5(true);
+    // }
   }, []);
+
+  // useEffect(() => {
+  //   if (data?.status == 0) {
+  //     setDisable(true);
+  //   } else if (data?.status == 1) {
+  //     setDisable(true);
+  //   } else if (data?.status == 2) {
+  //     setDisable(true);
+  //     setDisable1(true);
+  //   } else if (data?.status == 3) {
+  //     setDisable(true);
+  //     setDisable1(true);
+  //     setDisable2(true);
+  //   } else if (data?.status == 4) {
+  //     setDisable(true);
+  //     setDisable1(true);
+  //     setDisable2(true);
+  //     setDisable3(true);
+  //   }
+  // }, []);
   useEffect(() => {
     axios({
-      url: "http://18.141.199.110:3000/api/user-detail-bill/get-detail-bill-product-byid",
+      url: `${LOCALHOST}` + `${URL_GET_ID_BILL_DETALS}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -39,59 +89,91 @@ function InforBillOder() {
       setDataAll(resl.data.billDetails);
     });
   }, []);
+
   const Showmodal = (index) => {
     setCurrentStep(index);
     setisModal(true);
   };
   const handleHuy = () => {
-    if (currentStep === 0) {
-      setCurrent(0);
-      setisModal(false);
-    } else if (currentStep === 1) {
-      setCurrent(0);
-      setisModal(false);
-    } else if (currentStep === 2) {
-      setCurrent(1);
-      setisModal(false);
-    } else if (currentStep === 3) {
-      setCurrent(2);
-      setisModal(false);
-    } else if (currentStep === 4) {
-      setCurrent(3);
-      setisModal(false);
-    } else if (currentStep === 5) {
-      setCurrent(4);
-      setisModal(false);
-    }
+    setisModal(false);
   };
   const handleXacnhan = () => {
-    // setisModal(false);
-
     if (currentStep === 0) {
       setCurrent(0);
       setisModal(false);
+      // setDisable(true);
+      dispatch(
+        statusBill({
+          idBill: id,
+          status: 0,
+        })
+      );
     } else if (currentStep === 1) {
       setCurrent(1);
       setisModal(false);
+      // setDisable(true);
+      dispatch(
+        statusBill({
+          idBill: id,
+          status: 1,
+        })
+      );
     } else if (currentStep === 2) {
       setCurrent(2);
       setisModal(false);
+      // setDisable(true);
+      // setDisable1(true);
+      dispatch(
+        statusBill({
+          idBill: id,
+          status: 2,
+        })
+      );
     } else if (currentStep === 3) {
       setCurrent(3);
       setisModal(false);
+      // setDisable(true);
+      // setDisable1(true);
+      // setDisable2(true);
+      dispatch(
+        statusBill({
+          idBill: id,
+          status: 3,
+        })
+      );
     } else if (currentStep === 4) {
       setCurrent(4);
       setisModal(false);
+      // setDisable(true);
+      // setDisable1(true);
+      // setDisable2(true);
+      // setDisable3(true);
+      dispatch(
+        statusBill({
+          idBill: id,
+          status: 4,
+        })
+      );
     } else if (currentStep === 5) {
       setCurrent(5);
       setisModal(false);
+      // setDisable(true);
+      // setDisable1(true);
+      // setDisable2(true);
+      // setDisable3(true);
+      // setDisable4(true);
+      dispatch(
+        statusBill({
+          idBill: id,
+          status: 5,
+        })
+      );
     }
   };
-  console.log(curent);
-  const onStepsChange = (newCurrentStep) => {
-    console.log("onChange:", newCurrentStep);
-    setCurrentStep(newCurrentStep);
-  };
+  // const onStepsChange = (newCurrentStep) => {
+  //   console.log("onChange:", newCurrentStep);
+  //   setCurrentStep(newCurrentStep);
+  // };
   const dataPrice = [];
   dataall?.map((item) => dataPrice.push(item.price * item.quantity));
   let sum = 0;
@@ -105,7 +187,7 @@ function InforBillOder() {
         <div style={{ paddingTop: 10 }}>
           <p className="_title_m">Trạng thái đơn hàng:</p>
           <Steps
-            current={curent == undefined ? data?.status : curent}
+            current={curent === undefined ? data?.status : curent}
             // onChange={onStepsChange}
             size="small"
             type="default"
@@ -114,31 +196,41 @@ function InforBillOder() {
               title="Đơn hàng"
               description="Đang xử lý"
               onStepClick={Showmodal}
+              disabled={disabled}
             />
             <Step
               title="Đơn hàng"
               description="Đã xử lý"
               onStepClick={Showmodal}
+              disabled={disabled1}
             />
             <Step
               title="Đơn hàng"
               description="Xác nhận"
               onStepClick={Showmodal}
+              disabled={disabled2}
             />
             <Step
               title="Đơn hàng"
               description="Đang vận chuyển"
               onStepClick={Showmodal}
+              disabled={disabled3}
             />
             <Step
               title="Đơn hàng"
-              description="Hoàn thành"
+              description="Hoàn thành "
               onStepClick={Showmodal}
+              disabled={disabled4}
             />
           </Steps>
         </div>
 
-        <Modal title="Cảnh báo !" visible={isModal} footer={null}>
+        <Modal
+          title="Cảnh báo !"
+          visible={isModal}
+          footer={null}
+          closable={false}
+        >
           <p>Bạn có chắc chắn muốn xác nhận đơn hàng này</p>
           <div
             style={{

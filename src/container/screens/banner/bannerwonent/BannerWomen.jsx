@@ -1,25 +1,38 @@
-import { AutoComplete, Button, Image, message, Modal, Popconfirm, Table } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Image,
+  message,
+  Modal,
+  Popconfirm,
+  Table,
+} from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../profit/Listproduct.css";
 import Search from "antd/lib/input/Search";
 import { useDispatch, useSelector } from "react-redux";
-import { delallBanner, delBanner, getBanner, getBannertitle } from "../../../../Redux/AllBanner";
+import {
+  delallBanner,
+  delBanner,
+  getBanner,
+  getBannertitle,
+} from "../../../../Redux/AllBanner";
 import { ReloadOutlined } from "@ant-design/icons";
 
 const BannerWoment = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isModalDelALl, setisModalDelALl] = useState(false);
 
-
   const dispatch = useDispatch();
-  const databanner = useSelector(data => data.banners.value)
-
+  const databanner = useSelector((data) => data.banners.value);
 
   useEffect(() => {
-    dispatch(getBannertitle({
-      title_data: 'Nữ'
-    }))
+    dispatch(
+      getBannertitle({
+        title_data: "Woment",
+      })
+    );
   }, []);
 
   const showmodaldell = () => {
@@ -43,7 +56,7 @@ const BannerWoment = () => {
 
   const deletee = (_id) => {
     console.log(_id);
-    dispatch(delBanner({ id: _id }));
+    dispatch(delBanner({ mIdIMG: _id }));
     alert("Xóa thành công");
   };
   const columns = [
@@ -112,9 +125,6 @@ const BannerWoment = () => {
     },
   ];
 
-
-
-
   return (
     <div className="list-product">
       <div className="titlespb">
@@ -126,7 +136,7 @@ const BannerWoment = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p> */}
-        <Button className="add_text" >
+        <Button className="add_text">
           <Link to="/create_banner_woment" className="text_buttonsss">
             {" +  Thêm mới"}
           </Link>
@@ -145,9 +155,11 @@ const BannerWoment = () => {
               border: "1px solid #D9D9D9 ",
             }}
             onClick={() => {
-              dispatch(getBannertitle({
-                title_data: 'Nữ'
-              }));
+              dispatch(
+                getBannertitle({
+                  title_data: "Nữ",
+                })
+              );
               // setSearchtitle("");
             }}
           >
@@ -173,7 +185,7 @@ const BannerWoment = () => {
           <Search
             // onChange={(e) => setSearchtitle(e.target.value)}
             placeholder="Tìm kiếm theo tên"
-          // value={searchtitle}
+            // value={searchtitle}
           />
         </AutoComplete>
       </div>

@@ -14,6 +14,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import { Link } from "react-router-dom";
+import { LOCALHOST, URL_POST_PRODUCT } from "../../API/ALLAPI";
 function FromProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
 
@@ -155,7 +156,7 @@ function FromProduct(props) {
     }
     fromdata.append("idCategoryProduct", dataValueType);
     axios({
-      url: "http://18.141.199.110:3000/api/product/create-product",
+      url: `${LOCALHOST}` + `${URL_POST_PRODUCT}`,
       method: "POST",
       headers: {
         token: mToken,

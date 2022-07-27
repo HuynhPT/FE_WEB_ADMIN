@@ -1,7 +1,8 @@
 import { mToken } from "../../token/TokenLogin";
-import { axiosClient } from "./LinkUser";
+import { URL_GET_ALL_USER } from "./ALLAPI";
+import { axiosClient } from "./Link";
 export const getAllUser = async () => {
-  const url = "account-user/get-allUsers";
+  const url = `${URL_GET_ALL_USER}`;
   return await axiosClient.get(url, {
     headers: {
       token: mToken,

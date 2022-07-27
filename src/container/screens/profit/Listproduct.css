@@ -1,5 +1,10 @@
 .list-product {
-  overflow: scroll;
+  /* overflow: scroll; */
+}
+.ant-table-tbody {
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
 }
 .ant-table table {
   width: 100% !important;
@@ -34,7 +39,6 @@
   color: black;
   line-height: 29px;
   font-family: "Open Sans";
-
 }
 .text_spb {
   display: flex;

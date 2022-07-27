@@ -30,6 +30,7 @@ import {
   searchProduct,
   StatusProduct,
 } from "../../../Redux/ProductSlice";
+import { LOCALHOST, URL_GET_ALL_TYPE } from "../../../API/ALLAPI";
 const ScreenListProduct = () => {
   const { Option } = Select;
 
@@ -46,9 +47,7 @@ const ScreenListProduct = () => {
     setisModalDelALl(true);
   };
   useEffect(() => {
-    fetch(
-      "http://18.141.199.110:3000/api/category-product/get-category-product"
-    )
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_TYPE}`)
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];

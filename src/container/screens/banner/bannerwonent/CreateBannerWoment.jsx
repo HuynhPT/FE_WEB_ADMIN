@@ -5,6 +5,11 @@ import { Editor } from "@tinymce/tinymce-react";
 import axios from "axios";
 import { mToken } from "../../../../../token/TokenLogin";
 import SelectFilter from "../../../../Components/type/SelectFilter";
+import {
+  LOCALHOST,
+  URL_GET_ALL_OPJECT,
+  URL_POST_IMG,
+} from "../../../../API/ALLAPI";
 function CreateBannerWoment() {
   const [nameLinkImage, setNameLinkImage] = useState();
   const [nameImage, setNameImage] = useState();
@@ -28,7 +33,7 @@ function CreateBannerWoment() {
     formData.append("title_data", values.title_data);
 
     axios({
-      url: "http://18.141.199.110:3000/img-first-images/creact-img",
+      url: `${LOCALHOST}` + `${URL_POST_IMG}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -52,7 +57,7 @@ function CreateBannerWoment() {
   };
 
   useEffect(() => {
-    fetch("http://18.141.199.110:3000/api/type-product/get-type-product")
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_OPJECT}`)
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
@@ -64,9 +69,8 @@ function CreateBannerWoment() {
   }, []);
 
   const handleChange = (values) => {
-    console.log(values)
+    console.log(values);
     setDataLable(values);
-   
   };
   return (
     <div className="_Container_banner_name">
@@ -110,13 +114,7 @@ function CreateBannerWoment() {
             },
           ]}
         >
-          <SelectFilter
-            options={data}
-            onChange={handleChange}
-            value={dataLable}
-          />
-
-
+          <Input style={{ borderRadius: 3 }} />
         </Form.Item>
         {/* Thông tin chi tiết */}
         <Form.Item
@@ -212,7 +210,6 @@ function CreateBannerWoment() {
             span: 16,
           }}
         >
-
           <Button
             type="primary"
             htmlType="reset"

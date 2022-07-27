@@ -1,9 +1,12 @@
 import { mToken } from "../../token/TokenLogin";
-import { axiosClient } from "./LinkPD";
-
+import {
+  URL_GET_ALL_BILL,
+  URL_GET_NEW_DAY_BILL,
+  URL_GET_OLD_DAY_BILL,
+} from "./ALLAPI";
+import { axiosClient } from "./Link";
 export const getBill = async () => {
-  const url = "/user-bill/get-bill-product";
-
+  const url = `${URL_GET_ALL_BILL}`;
   return await axiosClient.get(url, {
     headers: {
       token: mToken,
@@ -11,7 +14,7 @@ export const getBill = async () => {
   });
 };
 export const getBillNew = async () => {
-  const url = "/user-bill/get-bill-product/high";
+  const url = `${URL_GET_NEW_DAY_BILL}`;
 
   return await axiosClient.get(url, {
     headers: {
@@ -20,7 +23,7 @@ export const getBillNew = async () => {
   });
 };
 export const getBillOld = async () => {
-  const url = "/user-bill/get-bill-product/short";
+  const url = `${URL_GET_OLD_DAY_BILL}`;
 
   return await axiosClient.get(url, {
     headers: {

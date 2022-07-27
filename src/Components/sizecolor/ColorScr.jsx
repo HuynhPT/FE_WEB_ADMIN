@@ -64,15 +64,47 @@ const ColorScr = () => {
     {
       title: "STT",
       dataIndex: "_id",
-      render: (_id, data, index) => index + 1,
+      render: (_id, data, index) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{index + 1}</p>
+        </div>
+      ),
     },
     {
       title: "Tên màu",
       dataIndex: "titleColors",
+      render: (titleColors) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{titleColors}</p>
+        </div>
+      ),
     },
     {
       title: "Mã màu",
       dataIndex: "colorCode",
+      render: (colorCode) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{colorCode}</p>
+        </div>
+      ),
     },
     {
       title: "Hoạt động",

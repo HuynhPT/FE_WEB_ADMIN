@@ -3,6 +3,15 @@ import qs from "qs";
 import axios from "axios";
 import { getAll } from "../API/OpjectProductApi";
 import { mToken } from "../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_DELETE_ALL_TYPE,
+  URL_GET_ID_OPJECT_TYPE,
+  URL_POST_TYPE,
+  URL_REMOVE_ID_TYPE,
+  URL_SEARCH_TYPE,
+  URL_UPDATE_ID_TYPE,
+} from "../API/ALLAPI";
 export const getOpjectCategori = createAsyncThunk(
   "opjectcategori/getOpjectCategori",
   async () => {
@@ -15,7 +24,7 @@ export const addopjectCategori = createAsyncThunk(
   async (data) => {
     let categoriss = [];
     await axios({
-      url: "http://18.141.199.110:3000/api/category-product/create-category-product",
+      url: `${LOCALHOST}` + `${URL_POST_TYPE}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -40,7 +49,7 @@ export const delopjectCategori = createAsyncThunk(
     let newCategoris = [];
 
     await axios({
-      url: `http://18.141.199.110:3000/api/category-product/delete-category-product/findById`,
+      url: `${LOCALHOST}` + `${URL_REMOVE_ID_TYPE}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -65,7 +74,7 @@ export const delallopjectCategori = createAsyncThunk(
     let newCategoris = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/category-product/destroy-category-product",
+      url: `${LOCALHOST}` + `${URL_DELETE_ALL_TYPE}`,
       method: "DELETE",
       headers: {
         token: mToken,
@@ -89,7 +98,7 @@ export const upopjectCategori = createAsyncThunk(
     let categoriss = [];
 
     await axios({
-      url: `http://18.141.199.110:3000/api/category-product/edit-category-product/findById`,
+      url: `${LOCALHOST}` + `${URL_UPDATE_ID_TYPE}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -113,7 +122,7 @@ export const searchopjectCategori = createAsyncThunk(
   async (data) => {
     let categoriss = [];
     await axios({
-      url: `http://18.141.199.110:3000/api/category-product/search-category-product`,
+      url: `${LOCALHOST}` + `${URL_SEARCH_TYPE}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -138,7 +147,7 @@ export const getListIdopjectCategori = createAsyncThunk(
   async (data) => {
     let categoriss = [];
     await axios({
-      url: `http://18.141.199.110:3000/api/category-product/get-category-product/findById`,
+      url: `${LOCALHOST}` + `${URL_GET_ID_OPJECT_TYPE}`,
       method: "POST",
       headers: {
         token: mToken,

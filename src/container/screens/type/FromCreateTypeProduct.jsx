@@ -5,6 +5,11 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import SelectMenWoment from "../../../Components/products/SelectMenWomen";
 import { mToken } from "../../../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_GET_ALL_OPJECT,
+  URL_POST_TYPE,
+} from "../../../API/ALLAPI";
 function FromCreateTypeProduct(props) {
   // khai báo state
   const [nameLinkImage, setNameLinkImage] = useState("");
@@ -22,7 +27,7 @@ function FromCreateTypeProduct(props) {
   };
 
   useEffect(() => {
-    fetch("http://18.141.199.110:3000/api/type-product/get-type-product")
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_OPJECT}`)
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
@@ -47,7 +52,7 @@ function FromCreateTypeProduct(props) {
     formData.append("idTypeProduct", dataLable);
 
     axios({
-      url: "http://18.141.199.110:3000/api/category-product/create-category-product",
+      url: `${LOCALHOST}` + `${URL_POST_TYPE}`,
       method: "POST",
       headers: {
         token: mToken,

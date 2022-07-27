@@ -4,11 +4,12 @@ import { loginStart, loginSuccess, loginFailed } from "./AuthSlice";
 import { CheckCircleTwoTone, PlusOutlined } from "@ant-design/icons";
 
 import { message } from "antd";
+import { LOCALHOST, URL_LOGIN_ACC_ADMIN } from "../API/ALLAPI";
 
 export const loginUser = async (user, dispacth, navigation) => {
   dispacth(loginStart());
   return axios
-    .post("http://18.141.199.110:3000/account-ad/login-admin", user)
+    .post(`${LOCALHOST}` + `${URL_LOGIN_ACC_ADMIN}`, user)
     .then((reponse) => {
       if (reponse.data.token) {
         localStorage.setItem("Token", JSON.stringify(reponse.data.token));

@@ -75,7 +75,7 @@ function LayouttAdmin1() {
     }
   });
   const dataus = user.user;
-  // console.log(localStorage.getItem("login"));
+  // console.log(process);
   const xacnhan = () => {
     if (
       passold == undefined ||
@@ -323,7 +323,7 @@ function LayouttAdmin1() {
     //   [getItem("Option 4", "4"), getItem("Option 6", "13")]
     // ),
     getItem(
-      ["Khách hàng đặt hàng", <NavLink to="khachHang_DatHang" />],
+      ["Danh sách đặt hàng", <NavLink to="khachHang_DatHang" />],
       "sub5",
       <img style={{ width: "10%" }} src={image5} alt="" />
     ),

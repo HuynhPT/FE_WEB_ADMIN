@@ -4,6 +4,14 @@ import axios from "axios";
 import { getColor } from "../API/ColorSize";
 import { mToken } from "../../token/TokenLogin";
 import { message } from "antd";
+import {
+  LOCALHOST,
+  URL_DELETE_ALL_COLOR,
+  URL_POST_COLOR,
+  URL_REMOVE_ID_COLOR,
+  URL_SEARCH_COLOR,
+  URL_UPDATE_ID_COLOR,
+} from "../API/ALLAPI";
 export const getColorsize = createAsyncThunk(
   "colorsize/getColorsize",
   async () => {
@@ -19,7 +27,7 @@ export const addColorsize = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/create-color",
+      url: `${LOCALHOST}` + `${URL_POST_COLOR}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -58,7 +66,7 @@ export const delAllColorsize = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/destroy-color",
+      url: `${LOCALHOST}` + `${URL_DELETE_ALL_COLOR}`,
       method: "DELETE",
       headers: {
         token: mToken,
@@ -84,7 +92,7 @@ export const removeColorsize = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/destroy-colorById",
+      url: `${LOCALHOST}` + `${URL_REMOVE_ID_COLOR}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -110,7 +118,7 @@ export const searchColorsize = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/search-color",
+      url: LOCALHOST + URL_SEARCH_COLOR,
       method: "POST",
       headers: {
         token: mToken,
@@ -136,7 +144,7 @@ export const upColorsize = createAsyncThunk(
     let col = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/size-color/edit-colorById",
+      url: `${LOCALHOST}` + `${URL_UPDATE_ID_COLOR}`,
       method: "POST",
       headers: {
         token: mToken,

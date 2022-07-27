@@ -12,6 +12,11 @@ import { Link, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { borderRadius } from "@mui/system";
 import { mToken } from "../../../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_GET_ALL_PRODUCT,
+  URL_UPDATE_ID_PRODUCT,
+} from "../../../API/ALLAPI";
 function EditProduct(props) {
   //khai báo state
   const [nameLinkImage, setNameLinkImage] = useState([]);
@@ -48,7 +53,7 @@ function EditProduct(props) {
   const { id } = useParams();
   const [dataEdit, setDataEdit] = useState();
   useEffect(() => {
-    fetch("http://18.141.199.110:3000/api/product/get-product")
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_PRODUCT}`)
       .then((response) => response.json())
       .then((data) => {
         const newData = data.result.find((item) => item._id == id);
@@ -190,7 +195,7 @@ function EditProduct(props) {
     );
     fromdata.append("mIdProduct", dataEdit._id);
     await axios({
-      url: "http://18.141.199.110:3000/api/product/update-product-ById",
+      url: `${LOCALHOST}` + `${URL_UPDATE_ID_PRODUCT}`,
       method: "POST",
       headers: {
         token: mToken,

@@ -1,5 +1,6 @@
 import { Select } from "antd";
 import React, { useEffect, useState } from "react";
+import { LOCALHOST, URL_GET_ALL_OPJECT } from "../../API/ALLAPI";
 const { Option } = Select;
 
 const onChange = (value) => {
@@ -13,9 +14,7 @@ const onSearch = (label) => {
 const SelectOptionOpject = (props) => {
   const [dataOp, setDataOp] = useState();
   useEffect(() => {
-    fetch(
-      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/type-product/get-type-product"
-    )
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_OPJECT}`)
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
@@ -36,7 +35,7 @@ const SelectOptionOpject = (props) => {
         option.children.toLowerCase().includes(input.toLowerCase())
       }
       options={dataOp}
-      style={{width:'100%'}}
+      style={{ width: "100%" }}
     ></Select>
   );
 };

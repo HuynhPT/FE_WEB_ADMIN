@@ -1,6 +1,7 @@
 import { Form, Image } from "antd";
 import React, { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import { LOCALHOST, URL_GET_ALL_PRODUCT } from "../../../API/ALLAPI";
 import CarouselBanner from "../../../Components/products/CarouselBanner";
 
 const InforProduct = () => {
@@ -8,7 +9,7 @@ const InforProduct = () => {
   const [dataInfor, setDataInfor] = useState();
   const [image, setImage] = useState();
   useEffect(() => {
-    fetch("http://18.141.199.110:3000/api/product/get-product")
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_PRODUCT}`)
       .then((res) => res.json())
       .then((data) => {
         const newData = data.result.find((item) => item._id == id);

@@ -4,15 +4,14 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Link } from "react-router-dom";
 import "./Listproduct.css";
 import Search from "antd/lib/input/Search";
+import { LOCALHOST, URL_GET_ALL_IMG } from "../../../API/ALLAPI";
 
 const ScreenListProductProfit = () => {
   const [selectedRowKeys, setSelectedRowKeys] = useState([]);
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch(
-      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
-    )
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_IMG}`)
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);
@@ -76,7 +75,13 @@ const ScreenListProductProfit = () => {
           title: "Hoạt động",
           dataIndex: "_id",
           render: (_id) => (
-            <div style={{ display: "flex", flexDirection: "row",justifyContent:"center" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
               {/* <Link to="/shop/thongKe_loiNhuan">
                 <EditOutlined style={{ width: 50 }} size={24} />
               </Link> */}
@@ -86,7 +91,7 @@ const ScreenListProductProfit = () => {
                   marginTop: 5,
                   color: "blue",
                   cursor: "pointer",
-                  textAlign:'center'
+                  textAlign: "center",
                 }}
                 size={24}
               >

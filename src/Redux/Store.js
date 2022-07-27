@@ -5,7 +5,7 @@ import typeProductSlice from "./TypeProductSlice";
 import ojectCategoriSlice from "./OjectCategoriSlice";
 import colorSlice from "./ColorSlice";
 import sizeSlice from "./SizeSlice";
-import billSlice from "./BillSlice";
+import billslice from "./BillSlice";
 import postSlice from "./PostSlice";
 
 import bannerSlice from "./AllBanner";
@@ -22,6 +22,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import userSlice from "./UserSlice";
+import StatisticalSlice from "./StatisticalSlice";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -34,10 +35,11 @@ const rootReducer = combineReducers({
   categoris: ojectCategoriSlice,
   colorsize: colorSlice,
   sizecolor: sizeSlice,
-  bills: billSlice,
+  bills: billslice,
   posts: postSlice,
   banners: bannerSlice,
   users: userSlice,
+  statiscal: StatisticalSlice,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

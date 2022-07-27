@@ -1,6 +1,7 @@
 import { Carousel } from "antd";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { LOCALHOST, URL_GET_ALL_IMG } from "../../API/ALLAPI";
 const contentStyle = {
   height: "160px",
   color: "#fff",
@@ -12,7 +13,7 @@ const contentStyle = {
 const CarouselBanner = () => {
   const [state, setstate] = useState();
   useEffect(() => {
-    fetch("http://18.141.199.110:3000/img-first-images/get-img")
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_IMG}`)
       .then((res) => res.json())
       .then((state) => {
         const newData = state.data.map((item) => item.image_ads);
@@ -22,7 +23,14 @@ const CarouselBanner = () => {
 
   return (
     state !== undefined && (
-      <div style={{ width: "100%" , background:'#fff', paddingLeft:200 , paddingRight:200}}>
+      <div
+        style={{
+          width: "100%",
+          background: "#fff",
+          paddingLeft: 200,
+          paddingRight: 200,
+        }}
+      >
         <Carousel autoplay autoplaySpeed={2000} style={contentStyle}>
           <div>
             <img src={state[1]} alt="" style={{ width: "100%", height: 150 }} />

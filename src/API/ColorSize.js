@@ -1,14 +1,19 @@
-import { axiosClient } from "./LinkPD";
+import {
+  URL_GET_ALL_COLOR,
+  URL_GET_ALL_SIZE,
+  URL_GET_ALL_TYPE,
+} from "./ALLAPI";
+import { axiosClient } from "./Link";
 
 export const getSize = async () => {
-  const url = "/size-color/get-size";
+  const url = `${URL_GET_ALL_SIZE}`;
   return await axiosClient.get(url);
 };
 export const getColor = async () => {
-  const url = "/size-color/get-color";
+  const url = `${URL_GET_ALL_COLOR}`;
   return await axiosClient.get(url);
 };
 export const getTheloai = async () => {
-  const url = "/category-product/get-category-product";
+  const url = `${URL_GET_ALL_TYPE}`;
   return await axiosClient.get(url);
 };

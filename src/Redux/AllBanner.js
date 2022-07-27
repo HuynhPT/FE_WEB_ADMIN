@@ -3,6 +3,13 @@ import qs from "qs";
 import axios from "axios";
 import { getAll } from "../API/ImageAPI";
 import { mToken } from "../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_DELETE_ALL_IMG,
+  URL_GET_IMG_TITLE,
+  URL_REMOVE_ID_IMG,
+  URL_UPDATE_IMG,
+} from "../API/ALLAPI";
 export const getBanner = createAsyncThunk("banners/getBanner", async () => {
   const { data: banner } = await getAll();
   console.log(banner);
@@ -15,7 +22,7 @@ export const getBannertitle = createAsyncThunk(
     let bannners = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/img-first-images/get-img/title/data",
+      url: `${LOCALHOST}` + `${URL_GET_IMG_TITLE}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -35,38 +42,12 @@ export const getBannertitle = createAsyncThunk(
   }
 );
 
-// export const addBanner = createAsyncThunk(
-//   "imgFirstImages/addBanner",
-//   async (data) => {
-//     console.log(data);
-//     let bannners = [];
-
-//     await axios({
-//       url: "http://18.141.199.110:3000/img-first-images/creact-img",
-//       method: "POST",
-//       headers: {
-//         token: mToken,
-//         "content-type": "application/x-www-form-urlencoded",
-//       },
-//       data: qs.stringify(data),
-//     }).then(
-//       async (res) => {
-//         const { data: banner } = await getColor();
-//         bannners = banner.result;
-//       },
-//       (err) => {
-//         console.log(err.response, "?");
-//       }
-//     );
-//     return bannners;
-//   }
-// );
 export const delBanner = createAsyncThunk("banners/delBanner", async (id) => {
   console.log(data);
   let banners = [];
 
   await axios({
-    url: `http://18.141.199.110:3000/img-first-images/delete-img/${id}`,
+    url: `${LOCALHOST}` + `${URL_REMOVE_ID_IMG}`,
     method: "DELETE",
     headers: {
       token: mToken,
@@ -90,7 +71,7 @@ export const delallBanner = createAsyncThunk(
     let banners = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/img-first-images/delete-img-all",
+      url: `${LOCALHOST}` + `${URL_DELETE_ALL_IMG}`,
       method: "DELETE",
       headers: {
         token: mToken,
@@ -113,7 +94,7 @@ export const upBanner = createAsyncThunk("banners/upBanner", async (data) => {
   console.log(data);
   let banners = [];
   await axios({
-    url: `http://18.141.199.110:3000/img-first-images/update-img`,
+    url: `${LOCALHOST}` + `${URL_UPDATE_IMG}`,
     method: "PUT",
     headers: {
       token: mToken,
@@ -136,14 +117,12 @@ export const searchBanner = createAsyncThunk(
   async (data) => {
     console.log(data);
     let banners = [];
-    const mToken =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYzU5NmUwMzgyYzMyY2M1MTIzNTkzMiIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTc1OTM5NzEsImV4cCI6MTY2MDE4NTk3MX0.GcgUDezf7NeUUseSlZ3ma8PWFbLnidQaTqpXy-85mFk";
 
     await axios({
-      url: `http://18.141.199.110:3000/img-first-images/get-img/title/data`,
+      url: `${LOCALHOST}` + `${URL_GET_IMG_TITLE}`,
       method: "POST",
       headers: {
-        token: `Bearer ${mToken} `,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       data: qs.stringify(data),

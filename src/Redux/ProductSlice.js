@@ -3,6 +3,14 @@ import qs from "qs";
 import axios from "axios";
 import { getAll, getHight, getLow, getNew, getOld } from "../API/ProductAPI";
 import { mToken } from "../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_CHANGE_STATUS_PRODUCT,
+  URL_DELETE_ALL_PRODUCT,
+  URL_GET_ID_TYPE_PRODUCT,
+  URL_REMOVE_ID_PRODUCT,
+  URL_SEARCH_TITLE_PRODUCT,
+} from "../API/ALLAPI";
 export const getProduct = createAsyncThunk("product/getProduct", async () => {
   const { data: products } = await getAll();
   return products.result;
@@ -47,7 +55,7 @@ export const filterProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/product/get-product/ByID",
+      url: `${LOCALHOST}` + `${URL_GET_ID_TYPE_PRODUCT}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -74,7 +82,7 @@ export const delAllProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/product/delete-product",
+      url: `${LOCALHOST}` + `${URL_DELETE_ALL_PRODUCT}`,
       method: "DELETE",
       headers: {
         token: mToken,
@@ -101,7 +109,7 @@ export const delProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/product/delete-product-ById",
+      url: `${LOCALHOST}` + `${URL_REMOVE_ID_PRODUCT}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -128,7 +136,7 @@ export const searchProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/product/search-product-title",
+      url: `${LOCALHOST}` + `${URL_SEARCH_TITLE_PRODUCT}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -155,7 +163,7 @@ export const StatusProduct = createAsyncThunk(
     let products = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/product/change-product/ByID",
+      url: `${LOCALHOST}` + `${URL_CHANGE_STATUS_PRODUCT}`,
       method: "POST",
       headers: {
         token: mToken,

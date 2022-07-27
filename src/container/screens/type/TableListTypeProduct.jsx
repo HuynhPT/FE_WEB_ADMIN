@@ -28,6 +28,7 @@ import {
 import SelectMenWomen from "../../../Components/products/SelectMenWomen";
 import SelectOptionTypeProduct from "../../../Components/products/SelectOptionTypeProduct";
 import SelectFilter from "../../../Components/type/SelectFilter";
+import { LOCALHOST, URL_GET_ALL_OPJECT } from "../../../API/ALLAPI";
 const TableObjectProduct = () => {
   const { Search } = Input;
   // khai báo state
@@ -38,7 +39,7 @@ const TableObjectProduct = () => {
 
   // lấy type selecte
   useEffect(() => {
-    fetch("http://18.141.199.110:3000/api/type-product/get-type-product")
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_OPJECT}`)
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
@@ -106,7 +107,17 @@ const TableObjectProduct = () => {
     {
       title: "STT",
       dataIndex: "_id",
-      render: (_id, data, index) => index + 1,
+      render: (_id, data, index) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{index + 1}</p>
+        </div>
+      ),
     },
     {
       title: "Ảnh",
@@ -118,6 +129,17 @@ const TableObjectProduct = () => {
     {
       title: "Tên thể loại",
       dataIndex: "titleCategoryProduct",
+      render: (titleCategoryProduct) => (
+        <div
+          style={{
+            justifyContent: "center",
+            textAlign: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>{titleCategoryProduct}</p>
+        </div>
+      ),
     },
 
     {
@@ -128,7 +150,6 @@ const TableObjectProduct = () => {
           style={{
             display: "flex",
             justifyContent: "space-evenly",
-            marginTop: 20,
           }}
         >
           <Link to={`/edit_list_type/${_id}`}>

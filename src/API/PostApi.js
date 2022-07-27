@@ -1,8 +1,9 @@
 import { mToken } from "../../token/TokenLogin";
-import { axiosClient } from "./LinkPD";
+import { URL_GET_ALL_SOCIETY } from "./ALLAPI";
+import { axiosClient } from "./Link";
 
 export const getPostAll = async () => {
-  const url = "/user-spaper/get-post";
+  const url = `${URL_GET_ALL_SOCIETY}`;
 
   return await axiosClient.get(url, {
     headers: {

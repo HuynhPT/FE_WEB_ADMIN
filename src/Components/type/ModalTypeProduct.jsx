@@ -3,6 +3,8 @@ import axios from "axios";
 import QueryString from "qs";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { mToken } from "../../../token/TokenLogin";
+import { LOCALHOST, URL_POST_OPJECT } from "../../API/ALLAPI";
 
 const ModalTypeProduct = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -15,10 +17,10 @@ const ModalTypeProduct = () => {
     const formData = new FormData();
     formData.append("titleTypeProduct", values.titleTypeProduct);
     axios({
-      url: "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/api/type-product/create-type-product",
+      url: `${LOCALHOST}` + `${URL_POST_OPJECT}`,
       method: "POST",
       headers: {
-        token: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyYmVhMDkwOTk5MDNlMTYzOWU0NzA1NSIsImFkbWluIjp0cnVlLCJpYXQiOjE2NTY5NDU2NjcsImV4cCI6MTY1OTUzNzY2N30.fqXBpRDQCYzpR3VPlXpEWScuJWpv9Ckvssmy7xvQyMM`,
+        token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
       // mColor: QueryString.stringify(formData),

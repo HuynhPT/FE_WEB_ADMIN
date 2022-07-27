@@ -4,9 +4,16 @@ import axios from "axios";
 import { mToken } from "../../token/TokenLogin";
 import { getBill, getBillNew, getBillOld } from "../API/BillApi";
 import { message } from "antd";
+import {
+  LOCALHOST,
+  URL_ADMIN_REMOVE_BILL,
+  URL_CHANGE_STATUS_BILL,
+  URL_CHANGE_STATUS_PRODUCT,
+  URL_DELETE_ALL_BILL,
+  URL_GET_ID_USER_BILL,
+} from "../API/ALLAPI";
 export const getBillProduct = createAsyncThunk(
   "bills/getBillProduct",
-
   async () => {
     const { data: billoder } = await getBill();
     console.log(billoder);
@@ -35,7 +42,7 @@ export const FilterIdus = createAsyncThunk("bills/FilterIdus", async (data) => {
   let billdata = [];
 
   await axios({
-    url: "http://18.141.199.110:3000/api/user-bill/bill-product-byid-user",
+    url: `${LOCALHOST}` + `${URL_GET_ID_USER_BILL}`,
     method: "POST",
     headers: {
       token: mToken,
@@ -58,7 +65,7 @@ export const delAllBill = createAsyncThunk("bills/delAllBill", async (data) => {
   let billdata = [];
 
   await axios({
-    url: "http://18.141.199.110:3000/api/user-bill/bill-product-delete-all",
+    url: `${LOCALHOST}` + `${URL_DELETE_ALL_BILL}`,
     method: "DELETE",
     headers: {
       token: mToken,
@@ -84,7 +91,7 @@ export const removeBillOder = createAsyncThunk(
     let billdata = [];
 
     await axios({
-      url: "http://18.141.199.110:3000/api/user-bill/delete-bill",
+      url: `${LOCALHOST}` + `${URL_ADMIN_REMOVE_BILL}`,
       method: "POST",
       headers: {
         token: mToken,
@@ -104,58 +111,31 @@ export const removeBillOder = createAsyncThunk(
     return billdata;
   }
 );
-// // export const searchColorsize = createAsyncThunk(
-// //   "sizecolor/searchColorsize",
-// //   async (data) => {
-// //     console.log(data);
-// //     let col = [];
+export const statusBill = createAsyncThunk("bills/statusBill", async (data) => {
+  console.log(data);
+  let col = [];
 
-// //     await axios({
-// //       url: "http://18.141.199.110:3000/api/size-color/search-color",
-// //       method: "POST",
-// //       headers: {
-// //         token: mToken,
-// //         "content-type": "application/x-www-form-urlencoded",
-// //       },
-// //       data: qs.stringify(data),
-// //     }).then(
-// //       async (res) => {
-// //         const { data: colors } = await getSize();
-// //         col = res.data.result;
-// //       },
-// //       (err) => {
-// //         console.log(err.response, "?");
-// //       }
-// //     );
-// //     return col;
-// //   }
-// // );
-// export const upSizecolor = createAsyncThunk(
-//   "sizecolor/upSizecolor",
-//   async (data) => {
-//     console.log(data);
-//     let col = [];
+  await axios({
+    url: `${LOCALHOST}` + `${URL_CHANGE_STATUS_BILL}`,
+    method: "POST",
+    headers: {
+      token: mToken,
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    data: qs.stringify(data),
+  }).then(
+    async (res) => {
+      const { data: billoder } = await getBill();
+      col = billoder.bill;
+    },
+    (err) => {
+      console.log(err.response, "?");
+    }
+  );
+  console.log(col);
+  return col;
+});
 
-//     await axios({
-//       url: "http://18.141.199.110:3000/api/size-color/edit-sizeById",
-//       method: "POST",
-//       headers: {
-//         token: mToken,
-//         "content-type": "application/x-www-form-urlencoded",
-//       },
-//       data: qs.stringify(data),
-//     }).then(
-//       async (res) => {
-//         const { data: sizes } = await getSize();
-//         col = sizes.result;
-//       },
-//       (err) => {
-//         console.log(err.response, "?");
-//       }
-//     );
-//     return col;
-//   }
-// );
 const billslice = createSlice({
   name: "auth",
   initialState: {
@@ -193,16 +173,11 @@ const billslice = createSlice({
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });
-    // // builder.addCase(searchColorsize.fulfilled, (state, action) => {
-    // //   console.log(action.payload);
-    // //   state.value = action.payload;
-    // //   // action is inferred correctly here if using TS
-    // // });
-    // builder.addCase(upSizecolor.fulfilled, (state, action) => {
-    //   console.log(action.payload);
-    //   state.value = action.payload;
-    //   // action is inferred correctly here if using TS
-    // });
+    builder.addCase(statusBill.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
   },
 });
 

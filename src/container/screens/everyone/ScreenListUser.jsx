@@ -15,20 +15,6 @@ const ScreenListUser = () => {
   const [data, setData] = useState();
   useEffect(() => {
     dispatch(getUser());
-    // axios({
-    //   url: `http://18.141.199.110:3000/account-user/get-allUsers`,
-    //   method: "GET",
-    //   headers: {
-    //     token: mToken,
-    //   },
-    // }).then(
-    //   (res) => {
-    //     setData(res.data.result);
-    //   },
-    //   (err) => {
-    //     console.log(err.response, "?");
-    //   }
-    // );
   }, []);
   console.log(dataus);
 
@@ -53,7 +39,7 @@ const ScreenListUser = () => {
       title: "Ảnh",
       dataIndex: "photoUrl",
       render: (photoUrl) => (
-        <img src={photoUrl} alt="" style={{ width: 80, height: 80 }} />
+        <img src={photoUrl} alt="" style={{ width: 60, height: 60 }} />
       ),
     },
 

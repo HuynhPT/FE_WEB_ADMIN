@@ -18,6 +18,11 @@ import {
 } from "../../../Redux/TypeProductSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { ReloadOutlined, SearchOutlined } from "@ant-design/icons";
+import {
+  LOCALHOST,
+  URL_GET_ALL_IMG,
+  URL_GET_ALL_OPJECT,
+} from "../../../API/ALLAPI";
 const { Search } = Input;
 const TableObjectProduct = () => {
   // Khai báo state
@@ -35,7 +40,7 @@ const TableObjectProduct = () => {
     // get dữ liệu
     dispatch(getTypeProduct());
   }, []);
-
+  // console.log(`${LOCALHOST}` + `${URL_GET_ALL_OPJECT}`, "api chuoi");
   // Thực hiện tìm kiếm
   const onsearchtype = (value) => {
     setTimeout(() => {
@@ -112,11 +117,32 @@ const TableObjectProduct = () => {
         {
           title: "STT",
           dataIndex: "_id",
-          render: (_id, data, index) => index + 1,
+          render: (_id, data, index) => (
+            <div
+              style={{
+                justifyContent: "center",
+                textAlign: "center",
+                alignItems: "center",
+              }}
+            >
+              <p>{index + 1}</p>
+            </div>
+          ),
         },
         {
           title: "Đối tượng",
           dataIndex: "titleTypeProduct",
+          render: (titleTypeProduct) => (
+            <div
+              style={{
+                justifyContent: "center",
+                textAlign: "center",
+                alignItems: "center",
+              }}
+            >
+              <p>{titleTypeProduct}</p>
+            </div>
+          ),
         },
         {
           title: "Hoạt động",
@@ -127,7 +153,6 @@ const TableObjectProduct = () => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                marginTop: 20,
               }}
             >
               <p

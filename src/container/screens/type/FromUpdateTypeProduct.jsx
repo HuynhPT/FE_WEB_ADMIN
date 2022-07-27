@@ -8,6 +8,13 @@ import { useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { upopjectCategori } from "../../../Redux/OjectCategoriSlice";
 import { mToken } from "../../../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_GET_ALL_OPJECT,
+  URL_GET_ALL_TYPE,
+  URL_GET_ID_OPJECT_TYPE,
+  URL_UPDATE_ID_TYPE,
+} from "../../../API/ALLAPI";
 // truyền prammas
 
 function FromUpdateTypeProduct(props) {
@@ -16,9 +23,7 @@ function FromUpdateTypeProduct(props) {
   const [dataEdit, setDataEdit] = useState();
   const [nameImage, setNameImage] = useState();
   useEffect(() => {
-    fetch(
-      "http://18.141.199.110:3000/api/category-product/get-category-product"
-    )
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_TYPE}`)
       .then((res) => res.json())
       .then((data) => {
         const newData = data.data.find((item) => item._id == id);
@@ -35,7 +40,7 @@ function FromUpdateTypeProduct(props) {
     "checked = ", setDataLable(checkedValues.target.value);
   };
   useEffect(() => {
-    fetch("http://18.141.199.110:3000/api/type-product/get-type-product")
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_OPJECT}`)
       .then((res) => res.json())
       .then((dataOp) => {
         const otpn = [];
@@ -72,7 +77,7 @@ function FromUpdateTypeProduct(props) {
     );
     formData.append("idCategory", dataEdit._id);
     await axios({
-      url: `http://18.141.199.110:3000/api/category-product/edit-category-product/findById`,
+      url: `${LOCALHOST}` + `${URL_UPDATE_ID_TYPE}`,
       method: "POST",
       headers: {
         token: mToken,

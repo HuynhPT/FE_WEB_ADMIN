@@ -6,15 +6,14 @@ import { Editor } from "@tinymce/tinymce-react";
 
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { LOCALHOST, URL_GET_ALL_IMG } from "../../../../API/ALLAPI";
 function EditBannerHome(props) {
   const { id } = useParams();
   const [nameLinkImage, setNameLinkImage] = useState();
   const [valueText, setValueText] = useState();
   const [dataEdit, setDataEdit] = useState();
   useEffect(() => {
-    fetch(
-      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
-    )
+    fetch(`${LOCALHOST}` + `${URL_GET_ALL_IMG}`)
       .then((response) => response.json())
       .then((data) => {
         const newData = data.data.find((item) => item._id == id);
