@@ -68,7 +68,7 @@ const ScreenOverview = () => {
       <div className={styles.container_item}>
         <div>
           <p className={styles.text_content}>
-            {"Chào " + dataus?.userName + ", Buổi sáng tốt lành"}
+            {"Chào " + dataus?.userName + ", Ngày mới tốt lành"}
           </p>
           {/* <p className={styles.title_content}>
             {

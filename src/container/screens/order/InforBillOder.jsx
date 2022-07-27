@@ -33,49 +33,8 @@ function InforBillOder() {
     dispatch(getBillProduct());
     const newData = databill.find((item) => item._id == id);
     setData(newData);
-    // axios({
-    //   url: `${LOCALHOST}` + `${URL_GET_ALL_BILL}`,
-    //   method: "GET",
-    //   headers: {
-    //     token: mToken,
-    //   },
-    // }).then((resl) => {
-    //   const newData = databill.find((item) => item._id == id);
-    //   setData(newData);
-    // });
-    // if (data?.status === 0) {
-    // } else if (data?.status === 1) {
-    //   setDisable1(true);
-    // } else if (data?.status === 2) {
-    //   setDisable2(true);
-    // } else if (data?.status === 3) {
-    //   setDisable3(true);
-    // } else if (data?.status === 4) {
-    //   setDisable4(true);
-    // } else if (data?.status === 5) {
-    //   setDisable5(true);
-    // }
   }, []);
-
-  // useEffect(() => {
-  //   if (data?.status == 0) {
-  //     setDisable(true);
-  //   } else if (data?.status == 1) {
-  //     setDisable(true);
-  //   } else if (data?.status == 2) {
-  //     setDisable(true);
-  //     setDisable1(true);
-  //   } else if (data?.status == 3) {
-  //     setDisable(true);
-  //     setDisable1(true);
-  //     setDisable2(true);
-  //   } else if (data?.status == 4) {
-  //     setDisable(true);
-  //     setDisable1(true);
-  //     setDisable2(true);
-  //     setDisable3(true);
-  //   }
-  // }, []);
+  console.log(data?.status, "data");
   useEffect(() => {
     axios({
       url: `${LOCALHOST}` + `${URL_GET_ID_BILL_DETALS}`,
@@ -101,7 +60,7 @@ function InforBillOder() {
     if (currentStep === 0) {
       setCurrent(0);
       setisModal(false);
-      // setDisable(true);
+      setDisable(true);
       dispatch(
         statusBill({
           idBill: id,
@@ -111,7 +70,7 @@ function InforBillOder() {
     } else if (currentStep === 1) {
       setCurrent(1);
       setisModal(false);
-      // setDisable(true);
+      setDisable(true);
       dispatch(
         statusBill({
           idBill: id,
@@ -121,8 +80,7 @@ function InforBillOder() {
     } else if (currentStep === 2) {
       setCurrent(2);
       setisModal(false);
-      // setDisable(true);
-      // setDisable1(true);
+      setDisable1(true);
       dispatch(
         statusBill({
           idBill: id,
@@ -132,9 +90,8 @@ function InforBillOder() {
     } else if (currentStep === 3) {
       setCurrent(3);
       setisModal(false);
-      // setDisable(true);
-      // setDisable1(true);
-      // setDisable2(true);
+
+      setDisable2(true);
       dispatch(
         statusBill({
           idBill: id,
@@ -144,10 +101,10 @@ function InforBillOder() {
     } else if (currentStep === 4) {
       setCurrent(4);
       setisModal(false);
-      // setDisable(true);
-      // setDisable1(true);
-      // setDisable2(true);
-      // setDisable3(true);
+
+      setDisable3(true);
+      setDisable4(true);
+
       dispatch(
         statusBill({
           idBill: id,
@@ -157,11 +114,7 @@ function InforBillOder() {
     } else if (currentStep === 5) {
       setCurrent(5);
       setisModal(false);
-      // setDisable(true);
-      // setDisable1(true);
-      // setDisable2(true);
-      // setDisable3(true);
-      // setDisable4(true);
+      setDisable4(true);
       dispatch(
         statusBill({
           idBill: id,
@@ -170,10 +123,6 @@ function InforBillOder() {
       );
     }
   };
-  // const onStepsChange = (newCurrentStep) => {
-  //   console.log("onChange:", newCurrentStep);
-  //   setCurrentStep(newCurrentStep);
-  // };
   const dataPrice = [];
   dataall?.map((item) => dataPrice.push(item.price * item.quantity));
   let sum = 0;
