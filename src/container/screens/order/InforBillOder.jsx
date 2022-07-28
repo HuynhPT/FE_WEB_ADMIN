@@ -1,7 +1,7 @@
 import { Modal, Steps } from "antd";
 import axios from "axios";
 import QueryString from "qs";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { mToken } from "../../../../token/TokenLogin";
 import {
@@ -15,7 +15,10 @@ import { getBillProduct, statusBill } from "../../../Redux/BillSlice";
 import { getBill } from "../../../API/BillApi";
 function InforBillOder() {
   const { id } = useParams();
-  const [data, setData] = useState();
+
+  const dispatch = useDispatch();
+  const databill = useSelector((data) => data.bills.value);
+  const [data, setData] = useState(databill);
   const [dataall, setDataAll] = useState();
   const [currentStep, setCurrentStep] = useState();
   const [disabled1, setDisable1] = useState(false);
@@ -27,14 +30,16 @@ function InforBillOder() {
   const [curent, setCurrent] = useState();
   const [isModal, setisModal] = useState(false);
   const { Step } = Steps;
-  const dispatch = useDispatch();
-  const databill = useSelector((data) => data.bills.value);
+
   useEffect(() => {
     dispatch(getBillProduct());
     const newData = databill.find((item) => item._id == id);
     setData(newData);
+    if (data?.status === 0) {
+      setDisable(true);
+    } else if (data?.status === 1) {
+    }
   }, []);
-  console.log(data?.status, "data");
   useEffect(() => {
     axios({
       url: `${LOCALHOST}` + `${URL_GET_ID_BILL_DETALS}`,
@@ -80,6 +85,7 @@ function InforBillOder() {
     } else if (currentStep === 2) {
       setCurrent(2);
       setisModal(false);
+      setDisable(true);
       setDisable1(true);
       dispatch(
         statusBill({
@@ -91,6 +97,8 @@ function InforBillOder() {
       setCurrent(3);
       setisModal(false);
 
+      setDisable(true);
+      setDisable1(true);
       setDisable2(true);
       dispatch(
         statusBill({
@@ -102,9 +110,10 @@ function InforBillOder() {
       setCurrent(4);
       setisModal(false);
 
+      setDisable(true);
+      setDisable1(true);
+      setDisable2(true);
       setDisable3(true);
-      setDisable4(true);
-
       dispatch(
         statusBill({
           idBill: id,
@@ -114,6 +123,11 @@ function InforBillOder() {
     } else if (currentStep === 5) {
       setCurrent(5);
       setisModal(false);
+
+      setDisable(true);
+      setDisable1(true);
+      setDisable2(true);
+      setDisable3(true);
       setDisable4(true);
       dispatch(
         statusBill({
@@ -143,33 +157,33 @@ function InforBillOder() {
           >
             <Step
               title="Đơn hàng"
-              description="Đang xử lý"
+              description="Chờ xác nhận"
               onStepClick={Showmodal}
               disabled={disabled}
             />
             <Step
               title="Đơn hàng"
-              description="Đã xử lý"
+              description="Đang xử lý"
               onStepClick={Showmodal}
               disabled={disabled1}
             />
-            <Step
+            {/* <Step
               title="Đơn hàng"
               description="Xác nhận"
+              onStepClick={Showmodal}
+              disabled={disabled2}
+            /> */}
+            <Step
+              title="Đơn hàng"
+              description="Đang vận chuyển"
               onStepClick={Showmodal}
               disabled={disabled2}
             />
             <Step
               title="Đơn hàng"
-              description="Đang vận chuyển"
-              onStepClick={Showmodal}
-              disabled={disabled3}
-            />
-            <Step
-              title="Đơn hàng"
               description="Hoàn thành "
               onStepClick={Showmodal}
-              disabled={disabled4}
+              disabled={disabled3}
             />
           </Steps>
         </div>
