@@ -11,6 +11,7 @@ import {
   URL_CHANGE_STATUS_PRODUCT,
   URL_DELETE_ALL_BILL,
   URL_GET_ID_USER_BILL,
+  URL_SEARCH_ENCODE_BILL,
 } from "../API/ALLAPI";
 export const getBillProduct = createAsyncThunk(
   "bills/getBillProduct",
@@ -135,7 +136,29 @@ export const statusBill = createAsyncThunk("bills/statusBill", async (data) => {
   console.log(col);
   return col;
 });
+export const searchBill = createAsyncThunk("bills/searchBill", async (data) => {
+  console.log(data);
+  let col = [];
 
+  await axios({
+    url: `${LOCALHOST}` + `${URL_SEARCH_ENCODE_BILL}`,
+    method: "POST",
+    headers: {
+      token: mToken,
+      "content-type": "application/x-www-form-urlencoded",
+    },
+    data: qs.stringify(data),
+  }).then(
+    async (res) => {
+      const { data: billoder } = await getBill();
+      col = res.data.bill;
+    },
+    (err) => {
+      console.log(err.response, "?");
+    }
+  );
+  return col;
+});
 const billslice = createSlice({
   name: "auth",
   initialState: {
@@ -174,6 +197,11 @@ const billslice = createSlice({
       // action is inferred correctly here if using TS
     });
     builder.addCase(statusBill.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(searchBill.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS

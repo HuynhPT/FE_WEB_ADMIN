@@ -19,6 +19,7 @@ import {
   getBillOderOld,
   getBillProduct,
   removeBillOder,
+  searchBill,
 } from "../../../Redux/BillSlice";
 import { ReloadOutlined } from "@ant-design/icons";
 import SelectFilter from "../../../Components/type/SelectFilter";
@@ -29,7 +30,7 @@ import { LOCALHOST, URL_GET_ALL_USER } from "../../../API/ALLAPI";
 const ScreenListOrder = () => {
   const [data, setData] = useState();
   const [isModalDelALl, setisModalDelALl] = useState();
-  const [dataLable, setDataLable] = useState("Lọc theo người dùng");
+  const [dataLable, setDataLable] = useState("Danh sách theo người dùng");
 
   const dispatch = useDispatch();
   const billdata = useSelector((data) => data.bills.value);
@@ -62,11 +63,19 @@ const ScreenListOrder = () => {
     }
   };
   const handleChange = (values) => {
-    console.log(values);
     setDataLable(values);
     dispatch(FilterIdus({ idUser: values }));
   };
-
+  const onsearchtype = (value) => {
+    setTimeout(() => {
+      dispatch(
+        searchBill({
+          idUser: dataLable,
+          billingEncode: value,
+        })
+      );
+    }, 1000);
+  };
   const showmodaldell = () => {
     setisModalDelALl(true);
   };
@@ -198,7 +207,7 @@ const ScreenListOrder = () => {
                     color: "#000",
                   }}
                 >
-                  Đang xử lý
+                  Chờ xác nhận
                 </p>
               </div>
 
@@ -230,7 +239,7 @@ const ScreenListOrder = () => {
                     color: "#000",
                   }}
                 >
-                  Đã xử lý
+                  Đang xử lý
                 </p>
               </div>
 
@@ -247,39 +256,6 @@ const ScreenListOrder = () => {
             </div>
           );
         } else if (status.toString() == 2) {
-          return (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-evenly",
-              }}
-            >
-              <div style={{ width: 150 }}>
-                <p
-                  style={{
-                    fontStyle: "italic",
-                    fontWeight: "650",
-
-                    color: "#000",
-                  }}
-                >
-                  Đã xác nhận
-                </p>
-              </div>
-
-              <div
-                style={{
-                  width: 20,
-                  height: 20,
-                  border: "1px solid yellowgreen ",
-                  backgroundColor: "yellowgreen",
-                  borderRadius: 3,
-                  opacity: 0.7,
-                }}
-              ></div>
-            </div>
-          );
-        } else if (status.toString() == 3) {
           return (
             <div
               style={{
@@ -458,17 +434,13 @@ const ScreenListOrder = () => {
             </Select>
           </div>
         </div>
-        <AutoComplete
-          className="search_prd"
-          style={{}}
-          //  onSearch={onsearchtype}
-        >
+        {/* <AutoComplete className="search_prd" style={{}} onSearch={onsearchtype}>
           <Search
             type="text"
-            placeholder="Tìm kiếm hoá đơn"
+            placeholder="#Code"
             // style={{ marginLeft: 30 }}
           />
-        </AutoComplete>
+        </AutoComplete> */}
       </div>
       <Table
         columns={columns}

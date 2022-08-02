@@ -7,20 +7,43 @@ import styles from "./stylesrow.module.css";
 import CardChart from "../../../Components/overview/CardChart";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllsel } from "../../../Redux/StatisticalSlice";
-import { getAllimport, getAllsum } from "../../../API/StatisticalApi";
+import {
+  getAllCon,
+  getAllHet,
+  getAllimport,
+  getAllloinhuan,
+  getAllnewImport,
+  getAllsum,
+} from "../../../API/StatisticalApi";
+import CardStatid from "../../../Components/statils/CardStatid";
 
 const ScreenOverview = () => {
   const [dataImport, setDataImport] = useState();
   const [dataSum, setDataSum] = useState();
+  const [dataloinhuan, setDataloinhuan] = useState();
+  const [dataus, setData] = useState(null);
+
+  const [conhang, setConhang] = useState();
+  const [hethang, setHethang] = useState();
+  const [moinhap, setMoinhap] = useState();
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
-  const dataus = user.user;
   const data = useSelector((data) => data.statiscal.value);
   useEffect(() => {
     dispatch(getAllsel());
   }, []);
-
+  useEffect(() => {
+    try {
+      if (!user) {
+        navigation("/");
+      } else {
+        setData(user.user);
+      }
+    } catch (error) {
+      console.log("err");
+    }
+  }, []);
   useEffect(() => {
     const getDataImport = async () => {
       const { data: dataImports } = await getAllimport();
@@ -35,10 +58,19 @@ const ScreenOverview = () => {
     };
     getDataSUM();
   }, []);
+  useEffect(() => {
+    const getData = async () => {
+      const { data: dataSUM } = await getAllloinhuan();
+
+      setDataloinhuan(dataSUM.totalPrice);
+    };
+    getData();
+  }, []);
   //tổng giá trị mặc định
   const price = (1000000000)
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  const prices = (100000).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
   const quantity = (100000)
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
@@ -47,7 +79,8 @@ const ScreenOverview = () => {
     ?.map((item) => item?.count)
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  const phantramsel = parseFloat(priceSel) / parseFloat(price);
+
+  const phantramsel = parseFloat(priceSel) / parseFloat(prices);
 
   // tổng tiền nhập
   const priceImport = dataImport
@@ -55,14 +88,47 @@ const ScreenOverview = () => {
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
   const phantramimport = parseFloat(priceImport) / parseFloat(price);
-
   //tổng số lượng bán ra
   const sumSP = dataSum
     ?.map((item) => item?.count)
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  const phantramquantity = parseFloat(sumSP) / parseFloat(quantity);
+  //lợi nhuận
 
+  const sumloinhuan = dataloinhuan
+    ?.toString()
+    .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  const phantramloinhuan = parseFloat(sumloinhuan) / parseFloat(price);
+  useEffect(() => {
+    const getDataCOn = async () => {
+      const { data: dataImports } = await getAllCon();
+      setConhang(dataImports.totalItems);
+    };
+    getDataCOn();
+  }, []);
+  useEffect(() => {
+    const getDataHet = async () => {
+      const { data: dataImports } = await getAllHet();
+      setHethang(dataImports.totalItems);
+    };
+    getDataHet();
+  }, []);
+  useEffect(() => {
+    const getDataHet = async () => {
+      const { data: dataImports } = await getAllnewImport();
+      setMoinhap(dataImports.totalItems);
+    };
+    getDataHet();
+  }, []);
+  const datas = [
+    { type: "Sản phẩm còn ", value: conhang },
+    { type: "Sản phẩm hết ", value: hethang },
+  ];
+  const nhapxuat = [
+    { type: "Sản phẩm bán ", value: parseInt(sumSP) },
+
+    { type: "Sản phẩm nhập ", value: moinhap },
+  ];
   return (
     <div className={styles.mContainer_ovew}>
       <div className={styles.container_item}>
@@ -80,10 +146,10 @@ const ScreenOverview = () => {
           <div className={styles.row}>
             <Row
               img_ic={img_tds}
-              title={"Tổng doanh thu bán"}
-              number={priceSel + " vnđ"}
+              title={"Tổng lợi nhuận"}
+              number={sumloinhuan + " vnđ"}
               color={"#87CEEB"}
-              percent={phantramsel}
+              percent={phantramloinhuan}
             />
           </div>
           <div className={styles.row}>
@@ -98,20 +164,20 @@ const ScreenOverview = () => {
           <div>
             <Row
               img_ic={img_spbc}
-              title={"Tổng sản phẩm bán"}
-              number={sumSP + " chiếc"}
+              title={"Tổng doanh thu bán"}
+              number={priceSel + " vnđ"}
               color={"#DDA0DD"}
-              percent={phantramquantity}
+              percent={phantramsel}
             />
           </div>
         </div>
       </div>
       <div className={styles.chartov}>
         <div>
-          <CardChart title={"Tổng quát"} className={styles.charts} />
+          <CardStatid title={"Biểu đồ thống kê sản phẩm"} datas={datas} />
         </div>
         <div>
-          <CardChart title={"Doanh thu so Chi phí"} />
+          <CardStatid title={"Biểu đồ thống kê nhập xuất"} datas={nhapxuat} />
         </div>
       </div>
     </div>

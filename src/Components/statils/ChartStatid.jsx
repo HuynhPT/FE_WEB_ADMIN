@@ -21,14 +21,14 @@ function ChartStatid(props) {
     theme: {
       styleSheet: {
         brandColor: "#87CEEB99",
-        paletteQualitative10: ["#87CEEB99", "#FF69B499"],
+        paletteQualitative10: ["#87CEEB99", "#FF69B499", "#99FF99"],
       },
     },
   };
   return (
     <Pie
       {...piePlot}
-      style={{ width: 350, height: 350, margin: "-60px 70px" }}
+      style={{ width: 370, height: 350, margin: "-60px 70px" }}
     />
   );
 }

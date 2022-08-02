@@ -58,6 +58,8 @@ export const Logout = () => {
 console.log("Đăng xuất", Logout);
 function LayouttAdmin1() {
   const [state, setState] = useState(false);
+  const [dataus, setData] = useState(null);
+
   const [ishow, setIshow] = useState(false);
 
   const [passold, setPassold] = useState();
@@ -67,14 +69,21 @@ function LayouttAdmin1() {
   const onClick = () => {};
 
   const user = useSelector((state) => state.auth.login.currentUser);
+
   const dispatch = useDispatch();
   const navigation = useNavigate();
+
   useEffect(() => {
-    if (!user) {
-      navigation("/");
+    try {
+      if (!user) {
+        navigation("/");
+      } else {
+        setData(user.user);
+      }
+    } catch (error) {
+      console.log("err");
     }
-  });
-  const dataus = user.user;
+  }, []);
   // console.log(process);
   const xacnhan = () => {
     if (
