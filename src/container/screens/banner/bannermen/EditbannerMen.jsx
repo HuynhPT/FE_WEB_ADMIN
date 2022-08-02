@@ -24,14 +24,71 @@ function EditBannerMen(props) {
       });
   }, []);
   const upImage = (e) => {
-    setNameLinkImage(e.target.files[0].name);
+    setNameLinkImage(e.target.files);
+    setNameImage(e.target.files[0].name);
   };
   const onFinish = async (values) => {
-    dispatch(upBanner({}));
+    console.log(values);
+    const formData = new FormData();
+    formData.append(
+      "title_ads",
+      values.title_ads == undefined ? dataEdit.title_ads : values.title_ads
+    );
+    formData.append(
+      "croppedImage",
+      nameLinkImage[0] == undefined ? dataEdit. imgbanner : nameLinkImage[0]
+    );
+    formData.append(
+      "description_ads",
+      values.description_ads == undefined ? dataEdit.description_ads : values.description_ads
+    );
+    formData.append(
+      "title_data",
+      values.title_data == undefined ? dataEdit.title_data : values.title_data
+    );
+    formData.append(
+      "idIMG",
+      dataEdit._id
+    );
+    await axios({
+      uurl: `${LOCALHOST}` + `${URL_UPDATE_IMG}`,
+      method: "POST",
+      headers: {
+        token: mToken,
+        "Content-Type": "multipart/form-data",
+      },
+      data: formData,
+    }).then(
+      async (res) => {
+        res.data.code === 200
+          ? message.success({
+              content: "Sửa thành công",
+              className: "custom-class",
+              style: {
+                color: "#52c41a",
+              },
+              icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+              duration: 2,
+            })
+          : message.error({
+              content: "Sửa thất bại",
+              className: "custom-class",
+              style: {
+                color: "red",
+              },
+              icon: () => <CheckCircleTwoTone twoToneColor="red" />,
+              duration: 2,
+            });
+      },
+      (err) => {
+        console.log(err.response, "?");
+      }
+    )
   };
-  console.log(dataEdit?.title_ads);
+ 
 
   return (
+    dataEdit !== undefined && (
     <div className="_Container_banner_name">
       <h3 className="_titile_add_wonent">Sửa banner nam</h3>
       {dataEdit !== undefined && (
@@ -54,30 +111,18 @@ function EditBannerMen(props) {
           <Form.Item
             label="Sửa tên"
             name="title_ads"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng nhập tên !",
-              },
-            ]}
           >
             <Input
               type="text"
               style={{ borderRadius: 3 }}
               placeholder="dasad"
-              defaultValue={dataEdit?.title_ads}
+              defaultValue={`${dataEdit?.title_ads}`}
             />
           </Form.Item>
           {/* Đối tượng */}
           <Form.Item
             label="Sửa đối tượng"
             name="title_data"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng nhập đối tượng !",
-              },
-            ]}
           >
             <Input
               style={{ borderRadius: 3 }}
@@ -88,12 +133,6 @@ function EditBannerMen(props) {
           <Form.Item
             label="Sửa thông tin chi tiết"
             name="description_ads"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng nhập thông tin chi tiết",
-              },
-            ]}
           >
             <Editor
               apiKey="your-api-key"
@@ -237,6 +276,7 @@ function EditBannerMen(props) {
         </Form>
       )}
     </div>
+    )
   );
 }
 

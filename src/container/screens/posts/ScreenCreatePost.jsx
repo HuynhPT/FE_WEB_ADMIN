@@ -23,23 +23,7 @@ const ScreenCreatePost = () => (
         <h3 className={styles._title_avatr}>Dân chơi xóm</h3>
       </div>
       <div className={styles._select_team}>
-        <Select
-              
-          labelInValue
-          defaultValue={{
-            value: 'public',
-            label: 'Công Khai',
-          }}
-          style={{
-            width: 153,
-          }}
-          onChange={handleChange}
 
-        >
-          <Option value="public">Công Khai</Option>
-          <Option value="private">Chỉ Mình Tôi</Option>
-          <Option value="friend">Bạn Bè</Option>
-        </Select>
       </div>
       <hr className={styles._divider_1} />
     </div>

@@ -42,28 +42,34 @@ export const getBannertitle = createAsyncThunk(
   }
 );
 
-export const delBanner = createAsyncThunk("banners/delBanner", async (id) => {
-  console.log(data);
-  let banners = [];
+export const delBanner = createAsyncThunk(
+  "banners/delBanner",
+  async (id) => {
+    let banners = [];
+    await axios({
+      url: `${LOCALHOST}` + `${URL_REMOVE_ID_IMG}`,
+      method: "POST",
+      headers: {
+        token: mToken,
+        "content-type": "application/x-www-form-urlencoded",
+      },
+      data : qs.stringify(id)
+    }).then(
+      async (res) => {
+        
+        const { data: banner } = await getAll();
+        console.log(banner.data,'aaa');
+        banners = banner.data;
 
-  await axios({
-    url: `${LOCALHOST}` + `${URL_REMOVE_ID_IMG}`,
-    method: "DELETE",
-    headers: {
-      token: mToken,
-      "content-type": "application/x-www-form-urlencoded",
-    },
-  }).then(
-    async (res) => {
-      const { data: banner } = await getAll();
-      banners = banner.result;
-    },
-    (err) => {
-      console.log(err.response, "?");
-    }
-  );
-  return banners;
-});
+      },
+
+      (err) => {
+        console.log(err.response, "?");
+      }
+    );
+    return banners;
+
+  });
 export const delallBanner = createAsyncThunk(
   "banners/delallBanner",
   async (data) => {
@@ -72,7 +78,7 @@ export const delallBanner = createAsyncThunk(
 
     await axios({
       url: `${LOCALHOST}` + `${URL_DELETE_ALL_IMG}`,
-      method: "DELETE",
+      method: "POST",
       headers: {
         token: mToken,
         "content-type": "application/x-www-form-urlencoded",
