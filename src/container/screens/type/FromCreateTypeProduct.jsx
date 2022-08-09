@@ -71,7 +71,7 @@ function FromCreateTypeProduct(props) {
       console.log("Mời nhập đối tượng");
     }
     message.success({
-      content: "Thêm thể loại thành công",
+      content: "Thêm loại SP thành công",
       className: "custom-class",
       style: {
         color: "#52c41a",
@@ -83,7 +83,14 @@ function FromCreateTypeProduct(props) {
 
   return (
     <div style={{ overflow: "none" }}>
-      <h3 className="_titile_add_wonent">Thêm thể loại sản phẩm</h3>
+      <h3
+        className="_titile_add_wonent"
+        style={{
+          marginLeft: -13,
+        }}
+      >
+        Thêm loại sản phẩm
+      </h3>
       <Form
         style={{ margin: "0 20px" }}
         name="basic"
@@ -107,72 +114,123 @@ function FromCreateTypeProduct(props) {
           }}
         >
           <div style={{ width: "70%" }}>
+            <p
+              style={{
+                color: "#000000",
+                fontSize: 16,
+                fontWeight: "700",
+                fontFamily: "Open Sans",
+              }}
+            >
+              Tên loại SP *
+            </p>
             {/* tên */}
             <Form.Item
-              label="Tên"
               name="titleCategoryProduct"
               rules={[
                 {
                   required: true,
                   message: "Vui lòng nhập tên !",
                 },
+                {
+                  min: 3,
+                  message: "Nhập ít nhất 3 ký tự",
+                },
               ]}
             >
               <Input style={{ borderRadius: 3 }} defaultValue={valueText} />
             </Form.Item>
             {/* Đối tượng */}
+            <p
+              style={{
+                color: "#000000",
+                fontSize: 16,
+                fontWeight: "700",
+                fontFamily: "Open Sans",
+              }}
+            >
+              Chọn thể loại SP *
+            </p>
             <Form.Item
-              label=" Đối tượng"
               name="idTypeProduct"
-              style={{ display: "flex" }}
+              // style={{ display: "flex"}}
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng chọn thể loại SP!",
+                },
+              ]}
             >
               <SelectMenWoment dataOP={dataOp} onChange={handleChange} />
             </Form.Item>
           </div>
           <div style={{ width: "50%" }}>
             {/* thêm ảnh */}
-            <Form.Item
-              label="Chọn ảnh"
-              name="croppedImage"
-              style={{ marginLeft: 20 }}
+            <p
+              style={{
+                color: "#000000",
+                fontSize: 16,
+                fontWeight: "700",
+                fontFamily: "Open Sans",
+              }}
             >
-              {nameImage !== undefined && (
-                <div style={{ display: "flex" }}>
-                  <span style={{ margin: 5 }}>{nameImage}</span>
-                  <br />
-                  <Button
-                    onClick={() => setNameImage()}
-                    style={{ margin: 5, marginBottom: 10 }}
-                  >
-                    Huỷ
-                  </Button>
-                </div>
-              )}
-              <br />
-              <label htmlFor="images">
-                <div
+              Chọn ảnh loại SP *
+            </p>
+
+            {nameImage !== undefined && (
+              <div style={{ display: "flex" }}>
+                <span style={{ margin: 5 }}>{nameImage}</span>
+                <br />
+                <Button
+                  onClick={() => setNameImage()}
+                  style={{ margin: 5, marginBottom: 10 }}
+                >
+                  Huỷ
+                </Button>
+              </div>
+            )}
+            <br />
+            <label htmlFor="images" name="croppedImage">
+              <div
+                name="croppedImage"
+                style={{
+                  border: "1px solid #d9d9d9",
+                  marginTop: -25,
+                  textAlign: "center",
+                  borderRadius: 3,
+                  width: "100%",
+                  height: 35,
+                }}
+              >
+                <p
+                  name="croppedImage"
                   style={{
-                    border: "1px solid #d9d9d9",
-                    marginTop: -25,
-                    textAlign: "center",
-                    borderRadius: 3,
-                    width: "40%",
-                    height: 40,
+                    marginTop: 5,
                   }}
                 >
-                  <p
-                    style={{
-                      marginTop: 10,
-                    }}
-                  >
-                    Chọn ảnh
-                  </p>
-                </div>
-              </label>
+                  Chọn ảnh
+                </p>
+              </div>
+            </label>
+            <Form.Item
+              name="croppedImage"
+              rules={[
+                {
+                  required: true,
+                  message: "Vui lòng chọn ảnh!",
+                },
+              ]}
+              style={{ marginTop: -30 }}
+            >
               <input
                 id="images"
                 type="file"
-                style={{ display: "none", width: 200 }}
+                name="croppedImage"
+                style={{
+                  display: "none",
+                  width: 145,
+                  // backgroundColor: "red",
+                }}
                 onChange={(e) => upImage(e)}
               />
             </Form.Item>

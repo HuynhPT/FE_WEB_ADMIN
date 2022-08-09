@@ -226,7 +226,6 @@ function FromProduct(props) {
     setDataValueColor(null);
     setDataValuetype(null);
   };
-  const dataNo = [];
   return (
     <Form onFinish={onHandleChnageSubmit}>
       <div className="_Mcontainer_Fro">
@@ -238,6 +237,7 @@ function FromProduct(props) {
           {/* <DatalistInput
             placeholder="Chocolate"
             label="Select ice cream flavor"
+            onChange={(e) => console.log(e.target.value)}
             onSelect={(item) => console.log(item.value)}
             items={[
               { id: "Chocolate", value: "Chocolate" },
@@ -257,7 +257,7 @@ function FromProduct(props) {
           <div className="_inputrow1From">
             {/* tênSP */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Tên sản phẩm*</p>
+              <p className="_text_product">Tên sản phẩm *</p>
               <Form.Item
                 name="titleTypeProduct"
                 rules={[
@@ -277,7 +277,7 @@ function FromProduct(props) {
             </div>
             {/* nhãn hiệu */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Thương hiệu*</p>
+              <p className="_text_product">Thương hiệu *</p>
               <Form.Item
                 name="nhanhieu"
                 rules={[
@@ -300,7 +300,7 @@ function FromProduct(props) {
           <div className="_inputrow1From">
             {/* mã số */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Mã số*</p>
+              <p className="_text_product">Mã số *</p>
               <Form.Item
                 name="maso"
                 rules={[
@@ -324,7 +324,7 @@ function FromProduct(props) {
             </div>
             {/* chất liệu */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Chất liệu*</p>
+              <p className="_text_product">Chất liệu *</p>
               <Form.Item
                 name="chatlieu"
                 rules={[
@@ -348,7 +348,7 @@ function FromProduct(props) {
           <div className="_inputrow4From">
             {/* thể loại */}
             <div className="_nameInpu">
-              <p className="_text_product">Thể loại*</p>
+              <p className="_text_product">Thể loại *</p>
               <Form.Item
                 name="theloai"
                 rules={[{ required: true, message: "Vui lòng chọn thể loại!" }]}
@@ -364,7 +364,7 @@ function FromProduct(props) {
             </div>
             {/* Chọn size*/}
             <div className="_nameInputrow4">
-              <p className="_text_product">Size*</p>
+              <p className="_text_product">Size *</p>
               <Form.Item
                 name="Size"
                 rules={[{ required: true, message: "Mời chọn size!" }]}
@@ -380,7 +380,7 @@ function FromProduct(props) {
             </div>
             {/* Chọn màu */}
             <div className="_nameInputrow4">
-              <p className="_text_product">Màu*</p>
+              <p className="_text_product">Màu *</p>
               <Form.Item
                 name="color"
                 rules={[{ required: true, message: "Vui lòng chọn màu!" }]}
@@ -418,7 +418,7 @@ function FromProduct(props) {
         <div className="_inputrow5From">
           {/* UP ảnh*/}
           <div className="_nameInputrow">
-            <p className="_text_product">Chọn ảnh*</p>
+            <p className="_text_product">Chọn ảnh *</p>
             {nameImage.length == 0 ? (
               <span>{nameImage}</span>
             ) : (
@@ -468,6 +468,7 @@ function FromProduct(props) {
             <Form.Item
               name="image"
               rules={[{ required: true, message: "Vui lòng chọn ảnh!" }]}
+              style={{ marginTop: -25 }}
             >
               <input
                 name="image"
@@ -480,7 +481,7 @@ function FromProduct(props) {
           </div>
           {/* Đơn giá */}
           <div className="_nameInputrow4">
-            <p className="_text_product">Đơn giá*</p>
+            <p className="_text_product">Đơn giá *</p>
             <Form.Item
               name="dongia"
               rules={[
@@ -499,7 +500,7 @@ function FromProduct(props) {
 
           {/* giá bán */}
           <div className="_nameInputrow4">
-            <p className="_text_product">Giá bán*</p>
+            <p className="_text_product">Giá bán *</p>
             <Form.Item
               name="giaban"
               rules={[
@@ -519,7 +520,7 @@ function FromProduct(props) {
 
         {/* mô tả */}
         <div className="_nameInputrow2">
-          <p className="_text_product">Mô tả sản phẩm*</p>
+          <p className="_text_product">Mô tả sản phẩm</p>
           <Form.Item>
             <div style={{ display: "inline" }}>
               <Editor

@@ -7,83 +7,95 @@ import { addTypeProduct } from "../../../Redux/TypeProductSlice";
 import { useForm } from "react-hook-form";
 import Validate from "../../../Components/auth/Validate";
 const FromObjectProduct = () => {
-  const [edtex, setedtex] = useState({ titleTypeProduct: "" });
+  const [edtex, setedtex] = useState();
 
   const dispatch = useDispatch();
-
-  const onFinish = async (data) => {
-    dispatch(addTypeProduct(edtex));
-    message.success({
-      content: "Thêm thành công",
-      className: "custom-class",
-      style: {
-        color: "#52c41a",
-      },
-      icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
-      duration: 2,
-    });
+  const onFinish = () => {
+    if (edtex !== "") {
+      dispatch(addTypeProduct({ titleTypeProduct: edtex }));
+      message.success({
+        content: "Thêm thành công",
+        className: "custom-class",
+        style: {
+          color: "#52c41a",
+        },
+        icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+        duration: 2,
+      });
+      setedtex();
+    } else {
+      message.error({
+        content: "Thêm thất bại",
+        className: "custom-class",
+        style: {
+          color: "red",
+        },
+        icon: () => <CheckCircleTwoTone twoToneColor="red" />,
+        duration: 2,
+      });
+    }
   };
-  const handleChange = (event) => {
-    setedtex({
-      ...edtex,
-      [event.target.name]: event.target.value,
-    });
-    console.log(edtex);
-  };
 
+  // const handleChange = (event) => {
+  //   setedtex({
+  //     ...edtex,
+  //     [event.target.name]: event.target.value,
+  //   });
+  //   console.log(edtex);
+  // };
   return (
     <div>
-      <h3 style={{ fontSize: "24px", marginTop: 30, marginLeft: 30 }}>
+      <h3
+        style={{
+          fontSize: "24px",
+          marginTop: 30,
+          marginLeft: 30,
+          fontFamily: "Open Sans",
+          color: "#000000",
+        }}
+      >
         Danh sách thể loại sản phẩm
       </h3>
 
-      <p style={{ fontSize: "14px", marginTop: 20, marginLeft: 30 }}>
-        Thêm thể loại sản phẩm
+      <p
+        style={{
+          color: "#000000",
+          fontSize: "18px",
+          marginTop: 20,
+          marginLeft: 30,
+          fontWeight: "700",
+          fontFamily: "Open Sans",
+        }}
+      >
+        Thêm thể loại sản phẩm *
       </p>
 
       <Form
         style={{
           display: "flex",
           justifyContent: "space-between",
-          margin: 30,
+          margin: "-10px 25px 25px 30px",
         }}
-        onFinish={onFinish}
       >
-        <div
-          style={{
-            width: "100%",
-            height: "48px",
-          }}
-        >
-          <Form.Item
+        <Form.Item name="titleTypeProduct" style={{ width: "100%" }}>
+          <Input
+            value={edtex == undefined ? "" : edtex}
+            onChange={(e) => setedtex(e.target.value)}
             name="titleTypeProduct"
-            rules={[
-              {
-                required: true,
-                message: "Vui lòng nhập đối tượng!",
-              },
-              {
-                min: 2,
-                message: "Nhập tối thiểu 2 ký tự!",
-              },
-            ]}
-          >
-            <Input
-              value={edtex.titleTypeProduct}
-              onChange={handleChange}
-              name="titleTypeProduct"
-              style={{
-                width: "100%",
-                height: "48px",
-              }}
-              placeholder="Nhập : Nam, Nữ,........"
-            />
-          </Form.Item>
-        </div>
+            style={{
+              width: "100%",
+              height: "48px",
+              border: String(edtex).length <= 0 && "1px solid red",
+            }}
+            placeholder="Nhập : Nam, Nữ,........"
+          />
+          {String(edtex).length <= 0 && (
+            <span style={{ color: "red" }}>Nhập tối thiểu 2 ký tự!</span>
+          )}
+        </Form.Item>
 
         <Button
-          type="primary"
-          htmlType="submit"
+          onClick={() => onFinish()}
           style={{
             width: "30%",
             height: "48px",

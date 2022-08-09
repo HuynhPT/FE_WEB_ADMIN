@@ -331,9 +331,18 @@ const SizeScr = () => {
                   fontFamily: "Open Sans",
                 }}
               >
-                Tên size
+                Tên size *
               </p>
-              <Form.Item name="titleSize" style={{ width: "100%" }}>
+              <Form.Item
+                name="titleSize"
+                style={{ width: "100%" }}
+                rules={[
+                  {
+                    required: true,
+                    message: "Vui lòng nhập tên size",
+                  },
+                ]}
+              >
                 <Input placeholder="Thêm size" style={{ borderRadius: 3 }} />
               </Form.Item>
             </div>
