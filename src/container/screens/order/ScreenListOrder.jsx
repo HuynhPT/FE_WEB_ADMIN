@@ -18,6 +18,10 @@ import {
   getBillOderNew,
   getBillOderOld,
   getBillProduct,
+  get_bill_status_0,
+  get_bill_status_1,
+  get_bill_status_2,
+  get_bill_status_3,
   removeBillOder,
   searchBill,
 } from "../../../Redux/BillSlice";
@@ -60,6 +64,17 @@ const ScreenListOrder = () => {
       dispatch(getBillOderNew());
     } else {
       dispatch(getBillOderOld());
+    }
+  };
+  const handleChangestatus = (value) => {
+    if (value == "0") {
+      dispatch(get_bill_status_0());
+    } else if (value == "1") {
+      dispatch(get_bill_status_1());
+    } else if (value == "2") {
+      dispatch(get_bill_status_2());
+    } else {
+      dispatch(get_bill_status_3());
     }
   };
   const handleChange = (values) => {
@@ -433,7 +448,24 @@ const ScreenListOrder = () => {
               <Option value="old">Cũ nhất theo ngày</Option>
             </Select>
           </div>
+          <div style={{ width: "13%", margin: "0 0 0 5px" }}>
+            <Select
+              defaultValue={"Danh sách trạng thái"}
+              style={{
+                width: "100%",
+                backgroundColor: "#D9D9D9",
+                border: "1px solid #D9D9D9 ",
+              }}
+              onChange={handleChangestatus}
+            >
+              <Option value="0">Chờ xác nhận</Option>
+              <Option value="1">Đang xử lý</Option>
+              <Option value="2">Đang vận chuyển</Option>
+              <Option value="3">Hoàn thành</Option>
+            </Select>
+          </div>
         </div>
+
         {/* <AutoComplete className="search_prd" style={{}} onSearch={onsearchtype}>
           <Search
             type="text"
@@ -443,6 +475,7 @@ const ScreenListOrder = () => {
         </AutoComplete> */}
       </div>
       <Table
+        id="tb_table"
         columns={columns}
         dataSource={billdata}
         rowKey={(item) => item._id}

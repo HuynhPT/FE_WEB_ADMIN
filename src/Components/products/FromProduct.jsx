@@ -1,5 +1,5 @@
 import { Button, Form, Input, message, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import "./FromProduct.css";
 import SelectMenWomen from "./SelectMenWomen";
 import SelectOptionColor from "./SelectOptionColor";
@@ -13,7 +13,9 @@ import { mToken } from "../../../token/TokenLogin";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
-import { Link } from "react-router-dom";
+import { DatalistInput } from "react-datalist-input";
+import "react-datalist-input/dist/styles.css";
+
 import { LOCALHOST, URL_POST_PRODUCT } from "../../API/ALLAPI";
 function FromProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
@@ -66,7 +68,32 @@ function FromProduct(props) {
     setDataValueColor(null);
     setDataValuetype(null);
   };
+  // data input name
 
+  // const options = [
+  //   { name: "Chocolate" },
+  //   { name: "Coconut" },
+  //   { name: "Mint" },
+  //   { name: "Strawberry" },
+  //   { name: "Vanilla" },
+  // ];
+  // const onSelect = useCallback((selectedItem) => {
+  //   console.log("selectedItem", selectedItem);
+  //   setValueTenSP(selectedItem);
+  // }, []);
+  // const items = useMemo(
+  //   () =>
+  //     options.map((option) => ({
+  //       // required: id and value
+  //       id: option.name,
+  //       value: option.name,
+  //       // optional: label, node
+  //       // label: option.name, // use a custom label instead of the value
+  //       // node: option.name, // use a custom ReactNode to display the option
+  //       ...option, // pass along any other properties to access in your onSelect callback
+  //     })),
+  //   []
+  // );
   // lấy ảnh
   const upImage = (e) => {
     const namePhoto = document.getElementById("images").files[0].name;
@@ -206,7 +233,27 @@ function FromProduct(props) {
         <div className="_Mcontainer_Frompr">
           <h3 className="_title_addproduct">Thêm sản phẩm</h3>
           <hr />
+
           {/* hàng 1 */}
+          {/* <DatalistInput
+            placeholder="Chocolate"
+            label="Select ice cream flavor"
+            onSelect={(item) => console.log(item.value)}
+            items={[
+              { id: "Chocolate", value: "Chocolate" },
+              { id: "Coconut", value: "Coconut" },
+              { id: "Mint", value: "Mint" },
+              { id: "Strawberry", value: "Strawberry" },
+              { id: "Vanilla", value: "Vanilla" },
+            ]}
+          /> */}
+          {/* <DatalistInput
+            label="Select your favorite flavor"
+            placeholder="Chocolate"
+            items={items}
+            onSelect={onSelect}
+          /> */}
+
           <div className="_inputrow1From">
             {/* tênSP */}
             <div className="_nameInputrow1">

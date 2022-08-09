@@ -2,7 +2,15 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import qs from "qs";
 import axios from "axios";
 import { mToken } from "../../token/TokenLogin";
-import { getBill, getBillNew, getBillOld } from "../API/BillApi";
+import {
+  getBill,
+  getBillNew,
+  getBillOld,
+  get_sum_bill_status_0,
+  get_sum_bill_status_1,
+  get_sum_bill_status_2,
+  get_sum_bill_status_3,
+} from "../API/BillApi";
 import { message } from "antd";
 import {
   LOCALHOST,
@@ -26,6 +34,42 @@ export const getBillOderNew = createAsyncThunk(
 
   async () => {
     const { data: billoder } = await getBillNew();
+    console.log(billoder);
+    return billoder.result;
+  }
+);
+export const get_bill_status_0 = createAsyncThunk(
+  "bills/get_bill_status_0",
+
+  async () => {
+    const { data: billoder } = await get_sum_bill_status_0();
+    console.log(billoder);
+    return billoder.result;
+  }
+);
+export const get_bill_status_1 = createAsyncThunk(
+  "bills/get_bill_status_1",
+
+  async () => {
+    const { data: billoder } = await get_sum_bill_status_1();
+    console.log(billoder);
+    return billoder.result;
+  }
+);
+export const get_bill_status_2 = createAsyncThunk(
+  "bills/get_bill_status_2",
+
+  async () => {
+    const { data: billoder } = await get_sum_bill_status_2();
+    console.log(billoder);
+    return billoder.result;
+  }
+);
+export const get_bill_status_3 = createAsyncThunk(
+  "bills/get_bill_status_3",
+
+  async () => {
+    const { data: billoder } = await get_sum_bill_status_3();
     console.log(billoder);
     return billoder.result;
   }
@@ -202,6 +246,27 @@ const billslice = createSlice({
       // action is inferred correctly here if using TS
     });
     builder.addCase(searchBill.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+
+    builder.addCase(get_bill_status_0.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(get_bill_status_1.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(get_bill_status_2.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.value = action.payload;
+      // action is inferred correctly here if using TS
+    });
+    builder.addCase(get_bill_status_3.fulfilled, (state, action) => {
       console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS

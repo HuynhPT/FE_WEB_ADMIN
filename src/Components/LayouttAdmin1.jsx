@@ -409,7 +409,7 @@ function LayouttAdmin1() {
     // ),
   ];
   return (
-    <Layout style={{ height: "200vh" }}>
+    <Layout style={{ height: "100vh" }}>
       <Sider trigger={true} collapsible collapsed={state}>
         <div className={styles.logo}>
           {state == false && (
@@ -450,26 +450,13 @@ function LayouttAdmin1() {
       </Sider>
       <Layout
         className="site-layout"
-        style={{ height: "200vh", overflow: "hidden" }}
+        style={{ height: "100vh", overflow: "scroll" }}
       >
         <Header className={styles.site_layout_background}>
-          <div className="left">
-            {/* <Input
-              size="middle"
-              placeholder="Tìm kiếm"
-              prefix={<SearchOutlined />}
-            /> */}
-          </div>
+          <div className="left"></div>
           <div className="right">
-            {/* <Button
-              type="primary"
-              style={{ background: "#fff", color: "black" }}
-              icon={<PlusOutlined />}
-            >
-              Thêm mới
-            </Button> */}
-            <BellOutlined style={{ fontSize: 20, margin: "0 10px" }} />
-            <MailOutlined style={{ fontSize: 20, marginRight: 20 }} />
+            {/* <BellOutlined style={{ fontSize: 20, margin: "0 10px" }} />
+            <MailOutlined style={{ fontSize: 20, marginRight: 20 }} /> */}
             <Dropdown overlay={menu} arrow>
               <Avatar size={44} src={dataus?.image} />
             </Dropdown>
