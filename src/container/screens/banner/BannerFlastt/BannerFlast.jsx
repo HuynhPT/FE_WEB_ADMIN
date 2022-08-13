@@ -55,7 +55,13 @@ const BannerFlast = () => {
   };
 
   const deletee = (_id) => {
+    console.log(_id);
     dispatch(delBanner({ mIdIMG: _id }));
+    dispatch(
+      getBannertitle({
+        title_data: "Flash",
+      })
+    );
     message.success({
       content: "Xoá thành công",
       className: "custom-class",

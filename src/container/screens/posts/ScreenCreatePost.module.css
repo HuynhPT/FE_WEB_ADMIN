@@ -28,7 +28,7 @@
 }
 
 ._divider_1 {
-    margin: 100px 20px;
+    margin: 80px 20px;
 }
 
 ._content_body {
@@ -104,4 +104,13 @@
     font-size: 16px !important;
     line-height: 29px !important;
     color: #000000;
+}
+
+._avatar_1_1 {
+    width: 66px !important;
+    height: 66px !important;
+    line-height: 66px !important;
+    border-radius: 50% !important ;
+    object-fit: cover !important;
+    background-color: #ccc;
 }

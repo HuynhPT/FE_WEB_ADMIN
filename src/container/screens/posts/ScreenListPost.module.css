@@ -8,6 +8,7 @@
 .all {
   width: auto;
   height: auto;
+  overflow: scroll;
 }
 
 ._avatar_top {
@@ -68,12 +69,17 @@
 .body_title1 {
   margin-left: 40px;
   margin-right: 90px;
+  margin-top: 50px !important;
   font-family: "Open Sans" !important;
   font-style: normal !important;
   font-weight: 400 !important;
   font-size: 18px !important;
   line-height: 29px !important;
   color: #000000;
+
+}
+.body_title12{
+  margin-left: 120%;
 }
 
 .body_title2 {
@@ -98,4 +104,8 @@
 }
 .hrone1 {
   background-color: #ffffff;
+}
+._suaxoa{
+  margin-left:280%;
+  margin-top: -75px !important;
 }

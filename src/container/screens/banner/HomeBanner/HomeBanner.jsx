@@ -62,6 +62,7 @@ const BannerHomee = () => {
         title_data: "Home",
       })
     );
+    history.back()
     message.success({
       content: "Xoá thành công",
       className: "custom-class",

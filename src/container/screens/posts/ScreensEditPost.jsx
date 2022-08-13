@@ -1,16 +1,19 @@
 import { Avatar, List, Select, Button, Divider, Row, Image, Form } from 'antd';
 import React, { useEffect, useState } from 'react';
 import styles from "./ScreenCreatePost.module.css";
+import anhone from '../../../Common/Image/anhone.png'
 import { Editor } from "@tinymce/tinymce-react";
+import hoidap from '../../../Common/Image/hoidap.png'
+import TinymceProduct from '../../../Components/products/TinymceProduct';
 import { useDispatch, useSelector } from 'react-redux';
-import { URL_POST_SOCIETY,LOCALHOST } from '../../../API/ALLAPI';
+import { URL_POST_SOCIETY } from '../../../API/ALLAPI';
 import axios from 'axios';
 import { mToken } from '../../../../token/TokenLogin';
 const handleChange = (value) => {
   console.log(value);
 };
 
-const ScreenCreatePost = () => {
+const ScreensSua = () => {
   const [nameLinkImage, setNameLinkImage] = useState();
   const [nameImage, setNameImage] = useState();
   const [valueText, setValueText] = useState();
@@ -26,7 +29,7 @@ const ScreenCreatePost = () => {
   const onFinish = async (value) => {
     const formData = new FormData();
     formData.append("croppedImage", nameLinkImage[0]);
-    formData.append("content", valueText);
+    formData.append("content", value.content);
 
     axios({
       url: `${LOCALHOST}` + `${URL_POST_SOCIETY}`,
@@ -61,7 +64,7 @@ const ScreenCreatePost = () => {
   console.log(dataus)
   return (
     <div className={styles._container_all}>
-      <Form onFinish={onFinish}>
+      <Form>
         <div >
           <div className={styles._avatar_1}>
 
@@ -84,7 +87,7 @@ const ScreenCreatePost = () => {
             apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
             onEditorChange={(newText) => setValueText(newText)}
             value={valueText}
-            // initialValue="<p>This is the initial content of the editor.</p>"
+            
             init={{
               height: 300,
               menubar: false,
@@ -119,14 +122,7 @@ const ScreenCreatePost = () => {
           />
         </Form.Item>
         <div className={styles._row_body}>
-          {/* <Row>
-          <Row className={styles._row_1}> */}
-          {/* <div className={styles._image_1}>
-              <img src={anhone} alt="" />
-            </div>
-            <div className={styles._title_1}>
-              Ảnh/Video
-            </div> */}
+
           <Form.Item label="Chọn ảnh" name="croppedImage">
             {nameImage !== undefined && (
               <div style={{ display: "flex" }}>
@@ -164,17 +160,7 @@ const ScreenCreatePost = () => {
               onChange={(e) => upImage(e)}
             />
           </Form.Item>
-          {/* </Row> */}
-          {/* <Row className={styles._row_1}>
-            <div className={styles._image_2}>
-              <img src={hoidap} alt="" />
 
-            </div>
-            <div className={styles._title_2}>
-              Hỏi Đáp
-            </div>
-          </Row> */}
-          {/* </Row> */}
         </div>
 
         <div className={styles._divider_3}>
@@ -189,7 +175,7 @@ const ScreenCreatePost = () => {
             <p
               className={styles._text_btn}
             >
-              Đăng
+              Sửa
             </p>
           </Button>
         </Form.Item>
@@ -198,4 +184,4 @@ const ScreenCreatePost = () => {
   )
 }
 
-export default ScreenCreatePost;
+export default ScreensSua;

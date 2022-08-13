@@ -10,7 +10,8 @@ import {
   URL_REMOVE_ID_IMG,
   URL_UPDATE_IMG,
 } from "../API/ALLAPI";
-export const getBanner = createAsyncThunk("banners/getBanner", async () => {
+export const getBanner = createAsyncThunk("banners/getBanner",
+ async () => {
   const { data: banner } = await getAll();
   console.log(banner);
   return banner.data;
