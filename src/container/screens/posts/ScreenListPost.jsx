@@ -31,6 +31,7 @@ const menu = (
       {
         key: '1',
         label: 'Sửa',
+
       },
       {
         key: '2',
@@ -40,6 +41,7 @@ const menu = (
     ]}
   />
 );
+
 const ScreenListPost = () => {
   const user = useSelector((state) => state.auth.login.currentUser);
   const dispatch = useDispatch();
@@ -64,57 +66,61 @@ const ScreenListPost = () => {
   }, []);
   console.log(dataus)
   return select?.map((item) => (
-    <div className={styles.all}>
-      <div className={styles._container_top2}>
-        <div>
-          <div className={styles._avatar_1}>
-            <div
-              style={{
-                width: 66,
-                height: 66,
-                borderRadius: 50,
-                background: "#DCDFE8",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src={item?.userAvatar}
-                alt=""
-                style={{ width: 66, height: 66, borderRadius: 50 }}
-              />
+    <List>
+      <div className={styles.all}>
+        <div className={styles._container_top2}>
+          <List.Item>
+          <div>
+            <div className={styles._avatar_1}>
+              <div
+                style={{
+                  width: 66,
+                  height: 66,
+                  borderRadius: 50,
+                  background: "#DCDFE8",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src={item?.userAvatar}
+                  alt=""
+                  style={{ width: 66, height: 66, borderRadius: 50 }}
+                />
+              </div>
+
+              <h3 className={styles._title_avatr}>{item?.userName}</h3>
             </div>
 
-            <h3 className={styles._title_avatr}>{item?.userName}</h3>
+
+            <div className={styles._suaxoa}>
+
+              <Dropdown overlay={menu}>
+                <Typography.Link>
+                  <Space>
+
+                    <EllipsisOutlined />
+                  </Space>
+                </Typography.Link>
+              </Dropdown>
+
+
+            </div>
+            <div className={styles.body_title1}>{item?.content}</div>
+
+            <div className={styles.body_title12} >
+              <Image
+                src={item?.imagePost == undefined ? "error" : item?.imagePost}
+                alt=""
+                style={{ width: 200, height: 200, padding: 20 }}
+                fallback={falesback}
+              />
+            </div>
           </div>
-
-          <div className={styles._suaxoa}>
-
-            <Dropdown overlay={menu}>
-              <Typography.Link>
-                <Space>
-
-                  <EllipsisOutlined />
-                </Space>
-              </Typography.Link>
-            </Dropdown>
-
-
-          </div>
-
-          <div className={styles.body_title1}>{item?.content}</div>
-
-          <div className={styles.body_title12} >
-            <Image
-              src={item?.imagePost == undefined ? "error" : item?.imagePost}
-              alt=""
-              style={{ width: 200, height: 200, padding: 20 }}
-              fallback={falesback}
-            />
-          </div>
+          </List.Item>
         </div>
       </div>
-    </div>
+    </List>
   ));
 };
 export default ScreenListPost;
