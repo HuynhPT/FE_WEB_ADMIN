@@ -8,7 +8,7 @@
 .all {
   width: auto;
   height: auto;
-  overflow: scroll;
+  /* overflow: scroll; */
 }
 
 ._avatar_top {

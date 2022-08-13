@@ -86,7 +86,6 @@ const BannerHomee = () => {
   const deletee = (_id) => {
     console.log(_id);
     dispatch(delBanner({ mIdIMG: _id }));
-    history.back()
     message.success({
       content: "Xoá thành công",
       className: "custom-class",
