@@ -1,5 +1,5 @@
 import { Button, Form, Input, message, Modal } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo, useCallback } from "react";
 import "./FromProduct.css";
 import SelectMenWomen from "./SelectMenWomen";
 import SelectOptionColor from "./SelectOptionColor";
@@ -13,7 +13,9 @@ import { mToken } from "../../../token/TokenLogin";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
-import { Link } from "react-router-dom";
+import { DatalistInput } from "react-datalist-input";
+import "react-datalist-input/dist/styles.css";
+
 import { LOCALHOST, URL_POST_PRODUCT } from "../../API/ALLAPI";
 function FromProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
@@ -66,7 +68,32 @@ function FromProduct(props) {
     setDataValueColor(null);
     setDataValuetype(null);
   };
+  // data input name
 
+  // const options = [
+  //   { name: "Chocolate" },
+  //   { name: "Coconut" },
+  //   { name: "Mint" },
+  //   { name: "Strawberry" },
+  //   { name: "Vanilla" },
+  // ];
+  // const onSelect = useCallback((selectedItem) => {
+  //   console.log("selectedItem", selectedItem);
+  //   setValueTenSP(selectedItem);
+  // }, []);
+  // const items = useMemo(
+  //   () =>
+  //     options.map((option) => ({
+  //       // required: id and value
+  //       id: option.name,
+  //       value: option.name,
+  //       // optional: label, node
+  //       // label: option.name, // use a custom label instead of the value
+  //       // node: option.name, // use a custom ReactNode to display the option
+  //       ...option, // pass along any other properties to access in your onSelect callback
+  //     })),
+  //   []
+  // );
   // lấy ảnh
   const upImage = (e) => {
     const namePhoto = document.getElementById("images").files[0].name;
@@ -199,18 +226,38 @@ function FromProduct(props) {
     setDataValueColor(null);
     setDataValuetype(null);
   };
-  const dataNo = [];
   return (
     <Form onFinish={onHandleChnageSubmit}>
       <div className="_Mcontainer_Fro">
         <div className="_Mcontainer_Frompr">
           <h3 className="_title_addproduct">Thêm sản phẩm</h3>
           <hr />
+
           {/* hàng 1 */}
+          {/* <DatalistInput
+            placeholder="Chocolate"
+            label="Select ice cream flavor"
+            onChange={(e) => console.log(e.target.value)}
+            onSelect={(item) => console.log(item.value)}
+            items={[
+              { id: "Chocolate", value: "Chocolate" },
+              { id: "Coconut", value: "Coconut" },
+              { id: "Mint", value: "Mint" },
+              { id: "Strawberry", value: "Strawberry" },
+              { id: "Vanilla", value: "Vanilla" },
+            ]}
+          /> */}
+          {/* <DatalistInput
+            label="Select your favorite flavor"
+            placeholder="Chocolate"
+            items={items}
+            onSelect={onSelect}
+          /> */}
+
           <div className="_inputrow1From">
             {/* tênSP */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Tên sản phẩm*</p>
+              <p className="_text_product">Tên sản phẩm *</p>
               <Form.Item
                 name="titleTypeProduct"
                 rules={[
@@ -230,7 +277,7 @@ function FromProduct(props) {
             </div>
             {/* nhãn hiệu */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Thương hiệu*</p>
+              <p className="_text_product">Thương hiệu *</p>
               <Form.Item
                 name="nhanhieu"
                 rules={[
@@ -253,7 +300,7 @@ function FromProduct(props) {
           <div className="_inputrow1From">
             {/* mã số */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Mã số*</p>
+              <p className="_text_product">Mã số *</p>
               <Form.Item
                 name="maso"
                 rules={[
@@ -277,7 +324,7 @@ function FromProduct(props) {
             </div>
             {/* chất liệu */}
             <div className="_nameInputrow1">
-              <p className="_text_product">Chất liệu*</p>
+              <p className="_text_product">Chất liệu *</p>
               <Form.Item
                 name="chatlieu"
                 rules={[
@@ -301,7 +348,7 @@ function FromProduct(props) {
           <div className="_inputrow4From">
             {/* thể loại */}
             <div className="_nameInpu">
-              <p className="_text_product">Thể loại*</p>
+              <p className="_text_product">Thể loại *</p>
               <Form.Item
                 name="theloai"
                 rules={[{ required: true, message: "Vui lòng chọn thể loại!" }]}
@@ -317,7 +364,7 @@ function FromProduct(props) {
             </div>
             {/* Chọn size*/}
             <div className="_nameInputrow4">
-              <p className="_text_product">Size*</p>
+              <p className="_text_product">Size *</p>
               <Form.Item
                 name="Size"
                 rules={[{ required: true, message: "Mời chọn size!" }]}
@@ -333,7 +380,7 @@ function FromProduct(props) {
             </div>
             {/* Chọn màu */}
             <div className="_nameInputrow4">
-              <p className="_text_product">Màu*</p>
+              <p className="_text_product">Màu *</p>
               <Form.Item
                 name="color"
                 rules={[{ required: true, message: "Vui lòng chọn màu!" }]}
@@ -371,7 +418,7 @@ function FromProduct(props) {
         <div className="_inputrow5From">
           {/* UP ảnh*/}
           <div className="_nameInputrow">
-            <p className="_text_product">Chọn ảnh*</p>
+            <p className="_text_product">Chọn ảnh *</p>
             {nameImage.length == 0 ? (
               <span>{nameImage}</span>
             ) : (
@@ -421,6 +468,7 @@ function FromProduct(props) {
             <Form.Item
               name="image"
               rules={[{ required: true, message: "Vui lòng chọn ảnh!" }]}
+              style={{ marginTop: -25 }}
             >
               <input
                 name="image"
@@ -433,7 +481,7 @@ function FromProduct(props) {
           </div>
           {/* Đơn giá */}
           <div className="_nameInputrow4">
-            <p className="_text_product">Đơn giá*</p>
+            <p className="_text_product">Đơn giá *</p>
             <Form.Item
               name="dongia"
               rules={[
@@ -452,7 +500,7 @@ function FromProduct(props) {
 
           {/* giá bán */}
           <div className="_nameInputrow4">
-            <p className="_text_product">Giá bán*</p>
+            <p className="_text_product">Giá bán *</p>
             <Form.Item
               name="giaban"
               rules={[
@@ -472,7 +520,7 @@ function FromProduct(props) {
 
         {/* mô tả */}
         <div className="_nameInputrow2">
-          <p className="_text_product">Mô tả sản phẩm*</p>
+          <p className="_text_product">Mô tả sản phẩm</p>
           <Form.Item>
             <div style={{ display: "inline" }}>
               <Editor

@@ -1,6 +1,5 @@
 import React from "react";
 import { Form, Input, Button, Checkbox } from "antd";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import img_login from "../../../Common/image/img_login.png";
 import FormLogin from "../../../components/auth/FormLogin";
 import "./ScreenLogin.css";

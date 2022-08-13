@@ -223,9 +223,22 @@ const ColorScr = () => {
               fontFamily: "Open Sans",
             }}
           >
-            Tên màu
+            Tên màu *
           </p>
-          <Form.Item name="titleColors" style={{ width: "100%" }}>
+          <Form.Item
+            name="titleColors"
+            style={{ width: "100%" }}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng nhập tên màu!",
+              },
+              {
+                min: 3,
+                message: "Nhập tối thiểu 3 ký tự!",
+              },
+            ]}
+          >
             <Input placeholder="Thêm màu" style={{ borderRadius: 3 }} />
           </Form.Item>
         </div>
@@ -238,9 +251,18 @@ const ColorScr = () => {
               fontFamily: "Open Sans",
             }}
           >
-            Mã màu
+            Mã màu *
           </p>
-          <Form.Item name="colorCode" style={{ width: "100%" }}>
+          <Form.Item
+            name="colorCode"
+            style={{ width: "100%" }}
+            rules={[
+              {
+                required: true,
+                message: "Vui lòng chọn màu!",
+              },
+            ]}
+          >
             <Input
               placeholder="Thêm mã màu"
               style={{ borderRadius: 3 }}

@@ -109,6 +109,7 @@ export const upBanner = createAsyncThunk("banners/upBanner", async (data) => {
     },
     data: qs.stringify(data),
   }).then(
+    //d
     async (res) => {
       const { data: banner } = await getAll();
       banners = banner.data;
