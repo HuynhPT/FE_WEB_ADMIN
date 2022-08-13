@@ -57,7 +57,20 @@ const BannerFlast = () => {
   const deletee = (_id) => {
     console.log(_id);
     dispatch(delBanner({ mIdIMG: _id }));
-    alert("Xóa thành công");
+    dispatch(
+      getBannertitle({
+        title_data: "Flash",
+      })
+    );
+    message.success({
+      content: "Xoá thành công",
+      className: "custom-class",
+      style: {
+        color: "#52c41a",
+      },
+      icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+      duration: 2,
+    });
   };
   const columns = [
     {
@@ -136,21 +149,17 @@ const BannerFlast = () => {
             " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p> */}
-        <Button className="add_text">
-          <Link to="/create_banner_flast" className="text_buttonsss">
-            {" +  Thêm mới"}
-          </Link>
-        </Button>
+        
         {/* <Button href="/create_banner_men" className="add_text">
           <p className="_text_banner">+ Thêm mới</p>
         </Button> */}
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             type="primary"
             style={{
-              margin: "0 0 0 30px",
+              margin: "15px 0 0 30px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
@@ -169,7 +178,7 @@ const BannerFlast = () => {
           <Button
             type="primary"
             style={{
-              margin: "0 10px",
+              margin: "15px 10px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
@@ -178,7 +187,12 @@ const BannerFlast = () => {
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button>
         </div>
-        <AutoComplete
+        <Button className="add_text">
+          <Link to="/create_banner_flast" className="text_buttonsss">
+            {" +  Thêm mới"}
+          </Link>
+        </Button>
+        {/* <AutoComplete
           // onSearch={onsearchtype}
           style={{ width: "21%", marginRight: 30 }}
         >
@@ -187,7 +201,7 @@ const BannerFlast = () => {
             placeholder="Tìm kiếm theo tên"
             // value={searchtitle}
           />
-        </AutoComplete>
+        </AutoComplete> */}
       </div>
       <Table
         columns={columns}

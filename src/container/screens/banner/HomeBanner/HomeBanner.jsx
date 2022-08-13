@@ -25,7 +25,7 @@ const BannerHomee = () => {
   const [isModalDelALl, setisModalDelALl] = useState(false);
 
   const dispatch = useDispatch();
-  const databanner = useSelector((data) => data.banners.value);
+  const banners = useSelector((data) => data.banners.value);
 
   useEffect(() => {
     dispatch(
@@ -57,8 +57,23 @@ const BannerHomee = () => {
   const deletee = (_id) => {
     console.log(_id);
     dispatch(delBanner({ mIdIMG: _id }));
-    alert("Xóa thành công");
+    dispatch(
+      getBannertitle({
+        title_data: "Home",
+      })
+    );
+    history.back()
+    message.success({
+      content: "Xoá thành công",
+      className: "custom-class",
+      style: {
+        color: "#52c41a",
+      },
+      icon: () => <CheckCircleTwoTone twoToneColor="#52c41a" />,
+      duration: 2,
+    });
   };
+
   const columns = [
     {
       title: "STT",
@@ -131,26 +146,13 @@ const BannerHomee = () => {
         <p className="text_titlespb">Danh sách banner home</p>
       </div>
       <div className="text_spb">
-        {/* <p className="texttitlespb">
-          {
-            " Danh sách sản phẩm đã bán được quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
-          }
-        </p> */}
-        <Button className="add_text">
-          <Link to="/create_banner_home" className="text_buttonsss">
-            {" +  Thêm mới"}
-          </Link>
-        </Button>
-        {/* <Button href="/create_banner_men" className="add_text">
-          <p className="_text_banner">+ Thêm mới</p>
-        </Button> */}
       </div>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Button
             type="primary"
             style={{
-              margin: "0 0 0 30px",
+              margin: "15px 0 0 30px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
@@ -160,7 +162,6 @@ const BannerHomee = () => {
                   title_data: "Home",
                 })
               );
-              // setSearchtitle("");
             }}
           >
             <ReloadOutlined />
@@ -169,7 +170,7 @@ const BannerHomee = () => {
           <Button
             type="primary"
             style={{
-              margin: "0 10px",
+              margin: "15px 10px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
@@ -177,21 +178,17 @@ const BannerHomee = () => {
           >
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button>
+
         </div>
-        <AutoComplete
-          // onSearch={onsearchtype}
-          style={{ width: "21%", marginRight: 30 }}
-        >
-          <Search
-            // onChange={(e) => setSearchtitle(e.target.value)}
-            placeholder="Tìm kiếm theo tên"
-            // value={searchtitle}
-          />
-        </AutoComplete>
+        <Button className="add_text">
+          <Link to="/create_banner_home" className="text_buttonsss">
+            {" +  Thêm mới"}
+          </Link>
+        </Button>
       </div>
       <Table
         columns={columns}
-        dataSource={databanner}
+        dataSource={banners}
         rowKey={(item) => item._id}
         className="table-list"
       />
