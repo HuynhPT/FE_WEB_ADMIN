@@ -359,31 +359,31 @@ function LayouttAdmin1() {
     // ]
     // ),
     getItem(
-      "Banner quảng cáo",
+      ["Banner quảng cáo",<NavLink to="banner_home" />],
       "sub11",
       <img style={{ width: "10%" }} src={imageads} alt="" />,
-      [
-        getItem(
-          ["Banner trang chủ", <NavLink to="banner_home" />],
-          "122",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Banner Nam", <NavLink to="banner_men" />],
-          "177",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Banner Nữ", <NavLink to="banner_women" />],
-          "178",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Splash", <NavLink to="banner_splash" />],
-          "179",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-      ]
+      // [
+      //   getItem(
+      //     ["Banner trang chủ", <NavLink to="banner_home" />],
+      //     "122",
+      //     <img style={{ width: "10%" }} src={imager10} alt="" />
+      //   ),
+      //   getItem(
+      //     ["Banner Nam", <NavLink to="banner_men" />],
+      //     "177",
+      //     <img style={{ width: "10%" }} src={imager10} alt="" />
+      //   ),
+      //   getItem(
+      //     ["Banner Nữ", <NavLink to="banner_women" />],
+      //     "178",
+      //     <img style={{ width: "10%" }} src={imager10} alt="" />
+      //   ),
+      //   getItem(
+      //     ["Splash", <NavLink to="banner_splash" />],
+      //     "179",
+      //     <img style={{ width: "10%" }} src={imager10} alt="" />
+      //   ),
+      // ]
     ),
     // getItem(
     //   ["Thông tin cá nhân", <NavLink to="thongTin_shop" />],

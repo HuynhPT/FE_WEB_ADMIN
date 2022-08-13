@@ -5,6 +5,7 @@ import {
   message,
   Modal,
   Popconfirm,
+  Select,
   Table,
 } from "antd";
 import React, { useEffect, useState } from "react";
@@ -26,13 +27,41 @@ const BannerHomee = () => {
 
   const dispatch = useDispatch();
   const banners = useSelector((data) => data.banners.value);
+  const { Option } = Select;
+
+
+  const handleChange = (value) => {
+    if (value == "home") {
+      dispatch(
+        getBannertitle({
+          title_data: "Home",
+        })
+      );    } else if (value == "men") {
+        dispatch(
+          getBannertitle({
+            title_data: "Man",
+          })
+        );
+    } else if (value == "woment") {
+      dispatch(
+        getBannertitle({
+          title_data: "Woment",
+        })
+      );    } else {
+        dispatch(
+          getBannertitle({
+            title_data: "Flash",
+          })
+        );    }
+  };
 
   useEffect(() => {
-    dispatch(
-      getBannertitle({
-        title_data: "Home",
-      })
-    );
+    dispatch(getBanner())
+    // dispatch(
+    //   getBannertitle({
+    //     title_data: "Home",
+    //   })
+    // );
   }, []);
 
   const showmodaldell = () => {
@@ -57,11 +86,6 @@ const BannerHomee = () => {
   const deletee = (_id) => {
     console.log(_id);
     dispatch(delBanner({ mIdIMG: _id }));
-    dispatch(
-      getBannertitle({
-        title_data: "Home",
-      })
-    );
     history.back()
     message.success({
       content: "Xoá thành công",
@@ -147,8 +171,12 @@ const BannerHomee = () => {
       </div>
       <div className="text_spb">
       </div>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+      <div   style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+        }}>
+        <div style={{ display: "flex",  width: "35%" }}>
           <Button
             type="primary"
             style={{
@@ -157,11 +185,7 @@ const BannerHomee = () => {
               border: "1px solid #D9D9D9 ",
             }}
             onClick={() => {
-              dispatch(
-                getBannertitle({
-                  title_data: "Home",
-                })
-              );
+              dispatch(getBanner())
             }}
           >
             <ReloadOutlined />
@@ -178,7 +202,23 @@ const BannerHomee = () => {
           >
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button>
-
+          <div style={{ width: "35%"}}>
+            <Select
+              defaultValue={"Banner"}
+              style={{
+              margin: "15px 0 0 0",
+                width: "100%",
+                backgroundColor: "#D9D9D9",
+                border: "1px solid #D9D9D9 ",
+              }}
+              onChange={handleChange}
+            >
+              <Option value="home">Banner Home</Option>
+              <Option value="men">Banner Nam</Option>
+              <Option value="woment">Banner Nữ</Option>
+              <Option value="splash">Banner Splash</Option>
+            </Select>
+          </div>
         </div>
         <Button className="add_text">
           <Link to="/create_banner_home" className="text_buttonsss">
