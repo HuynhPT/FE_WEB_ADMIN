@@ -83,17 +83,17 @@ const ScreenListPost = () => {
                 }}
               >
                 <img
-                  src={item?.userAvatar}
+                  src={dataus?.image}
                   alt=""
                   style={{ width: 66, height: 66, borderRadius: 50 }}
                 />
               </div>
 
-              <h3 className={styles._title_avatr}>{item?.userName}</h3>
+              <h3 className={styles._title_avatr}>{dataus?.userName}</h3>
             </div>
 
 
-            <div className={styles._suaxoa}>
+            {/* <div className={styles._suaxoa}>
 
               <Dropdown overlay={menu}>
                 <Typography.Link>
@@ -105,8 +105,12 @@ const ScreenListPost = () => {
               </Dropdown>
 
 
-            </div>
-            <div className={styles.body_title1}>{item?.content}</div>
+            </div> */}
+            <div className={styles.body_title1}
+            dangerouslySetInnerHTML={{
+              __html:item?.content
+            }}
+            ></div>
 
             <div className={styles.body_title12} >
               <Image
