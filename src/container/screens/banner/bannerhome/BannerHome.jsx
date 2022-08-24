@@ -10,18 +10,16 @@ const BannerHome = () => {
   // const [loading, setLoading] = useState(false);
   const [data, setData] = useState();
   useEffect(() => {
-    fetch("https://huynhpt.github.io/home.json")
+    fetch(
+      "http://ec2-18-141-199-110.ap-southeast-1.compute.amazonaws.com:3000/img-first-images/get-img"
+    )
       .then((response) => response.json())
-      .then((data) => setData(data));
+      .then((data) => {
+        const newData = data.data.filter((item) => item.title_data);
+        setData(newData);
+      });
   }, []);
-  // const start = () => {
-  //   setLoading(true); // ajax request after empty completing
 
-  //   setTimeout(() => {
-  //     setSelectedRowKeys([]);
-  //     setLoading(false);
-  //   }, 1000);
-  // };
 
   const rowSelection = {
     onChange: (selectedRowKeys, selectedRows) => {
@@ -54,6 +52,13 @@ const BannerHome = () => {
         {
           title: "Chi tiết",
           dataIndex: "description_ads",
+          render: (description_ads) => (
+            <div
+              dangerouslySetInnerHTML={{
+                __html: description_ads,
+              }}
+            ></div>
+          ),
         },
 
         {

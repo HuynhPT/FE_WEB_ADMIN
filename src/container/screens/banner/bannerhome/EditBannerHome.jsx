@@ -1,6 +1,6 @@
 import { Button, Input } from "antd";
 import React, { useState } from "react";
-import "./AddBannerHome.css";
+import "./EditBannerHome.css";
 function EditBannerHome(props) {
     const [nameLinkImage, setNameLinkImage] = useState([]);
     const upImage = (e) => {

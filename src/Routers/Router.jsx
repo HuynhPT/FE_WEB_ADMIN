@@ -46,8 +46,8 @@ import ScreenEditBanner from "../container/screens/banner/BannerFlast/ScreenEdit
 
 //banner home
 import BannerHome from "../container/screens/banner/bannerhome/BannerHome";
-import ScreenEditBannerHome from "../container/screens/banner/BannerHome/ScreensEditBannerHome";
-import ScreenAddBannerHome from "../container/screens/banner/BannerHome/ScreensAddBannerHome";
+import ScreenEditBannerHome from "../container/screens/banner/BannerHome/EditBannerHome";
+import ScreenAddBannerHome from "../container/screens/banner/BannerHome/CreateBannerHome";
 //banner men
 import BannerMen from "../container/screens/banner/bannermen/BannerMen";
 import CreactBannerMen from "../container/screens/banner/bannermen/CreateBannerMen";

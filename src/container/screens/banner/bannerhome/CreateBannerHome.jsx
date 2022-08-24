@@ -30,7 +30,6 @@ function CreateBannerHome()  {
           <div className="_createbanner_home_detail">
           <p>Thông tin chi tiết *</p>
             <div className="_createbanner_home_detail_inside">
-              
              <TynimceProduct /> 
             </div>
           </div>

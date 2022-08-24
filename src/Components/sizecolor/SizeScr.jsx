@@ -36,7 +36,7 @@ const SizeScr = () => {
   };
   return (
     <Form
-      style={{ display: "flex", margin: 100, justifyContent: "space-evenly" }}
+      style={{ display: "flex", margin: 100, justifyContent: "space-between" }}
       name="basic"
       labelCol={{
         span: 8,
@@ -54,7 +54,7 @@ const SizeScr = () => {
       <Form.Item name="titleSize" style={{ width: "100%" }}>
         <Input
           placeholder="Thêm size"
-          style={{ borderRadius: 3, width: "100%" }}
+          style={{ borderRadius: 3}}
         />
       </Form.Item>
 
