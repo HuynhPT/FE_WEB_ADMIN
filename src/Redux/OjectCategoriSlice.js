@@ -197,12 +197,10 @@ const OjectCategoriSlice = createSlice({
     });
     builder.addCase(searchopjectCategori.fulfilled, (state, action) => {
       state.value = action.payload;
-      console.log(action.payload, "ảo");
       // action is inferred correctly here if using TS
     });
     builder.addCase(getListIdopjectCategori.fulfilled, (state, action) => {
       state.value = action.payload;
-      console.log(action.payload, "ảo");
       // action is inferred correctly here if using TS
     });
   },

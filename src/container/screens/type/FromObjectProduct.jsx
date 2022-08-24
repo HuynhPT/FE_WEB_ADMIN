@@ -95,6 +95,7 @@ const FromObjectProduct = () => {
         </Form.Item>
 
         <Button
+        disabled={true}
           onClick={() => onFinish()}
           style={{
             width: "30%",

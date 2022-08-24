@@ -148,7 +148,10 @@ function InforBillOder() {
       <div className="_cntai">
         <p className="_textHeader_m">Thông tin chi tiết hoá đơn</p>
         <div style={{ paddingTop: 10 }}>
-          <p className="_title_m">Trạng thái đơn hàng:</p>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <p className="_title_m">Trạng thái đơn hàng:</p>
+            <p className="_title_m">Ngày: {data?.createdAt?.slice(0, -14)}</p>
+          </div>
           <Steps
             current={curent === undefined ? data?.status : curent}
             // onChange={onStepsChange}
@@ -167,12 +170,7 @@ function InforBillOder() {
               onStepClick={Showmodal}
               disabled={disabled1}
             />
-            {/* <Step
-              title="Đơn hàng"
-              description="Xác nhận"
-              onStepClick={Showmodal}
-              disabled={disabled2}
-            /> */}
+
             <Step
               title="Đơn hàng"
               description="Đang vận chuyển"
@@ -230,31 +228,30 @@ function InforBillOder() {
           </div>
         </Modal>
         <hr />
-        <div style={{}}>
-          <p className="_title_m">Thông tin khách hàng</p>
+        <div style={{ display: "flex" }}>
+          <p className="_title_m">Thông tin khách hàng:</p>
           <p className="_title_c">
             {data?.firstName} {data?.lastName}
           </p>
           <p className="_title_c">{data?.numberPhone}</p>
-          <div className="_all_d">
-            <p className="_title_c">{data?.fullAddress},</p>
+          {/* <div className="_all_d"> */}
+          <p className="_title_c">{data?.fullAddress},</p>
 
-            <p className="_title_c">{data?.commune},</p>
+          <p className="_title_c">{data?.commune},</p>
 
-            <p className="_title_c">{data?.district},</p>
+          <p className="_title_c">{data?.district},</p>
 
-            <p className="_title_c">{data?.cityProvince}</p>
-          </div>
-          <p className="_title_c">{data?.codeZip}</p>
-          <hr />
+          <p className="_title_c">{data?.cityProvince},</p>
+          {/* </div> */}
+          <p className="_title_c">Mã bưu điện: {data?.codeZip}</p>
         </div>
-
-        <div>
-          <p className="_title_m">Hình thức thanh toán</p>
+        <div style={{ display: "flex" }}>
+          <p className="_title_m">Hình thức thanh toán:</p>
           <p className="_title_c">{data?.payment}</p>
-          <hr />
         </div>
-        <p className="_title_m">Thông tin đơn hàng</p>
+        <hr />
+
+        <p className="_title_m">Thông tin sản phẩm đơn hàng</p>
 
         {/* thông tin đơn hàng */}
         {dataall?.map((item) => {
@@ -265,20 +262,32 @@ function InforBillOder() {
                   <img
                     src={item?.imageProduct}
                     alt=""
-                    style={{ width: 50, height: 70 }}
+                    style={{ width: 30, height: 45 }}
                   />
 
-                  <div style={{ marginTop: 15, width: 300 }}>
-                    <p className="_title_l">{item?.titleProduct}</p>
-                    <p className="_title_l">{item?.sizeProduct}</p>
-                    <p className="_title_l">{item?.colorProduct}</p>
+                  <div style={{ marginTop: 15, width: 500 }}>
+                    <p className="_title_l"> Mã sản phẩm: {item?.code}</p>
+                    <p className="_title_l">
+                      Tên sản phẩm: {item?.titleProduct}
+                    </p>
                   </div>
                 </div>
 
-                <div style={{ textAlign: "center" }}>
-                  <p className="_title_l"> {item?.code}</p>
-
-                  <p className="_title_l">{item?.trademark}</p>
+                <div style={{ textAlign: "left" }}>
+                  <div style={{ display: "flex", paddingTop: -20 }}>
+                    <p className="_title_l">Size: {item?.sizeProduct}</p>
+                    <p className="_title_l">Màu: </p>
+                    <p
+                      style={{
+                        width: 15,
+                        height: 15,
+                        marginTop: 5,
+                        marginLeft: 10,
+                        background: item?.colorProduct,
+                      }}
+                    ></p>
+                  </div>
+                  <p className="_title_l">Thương hiệu: {item?.trademark}</p>
                 </div>
 
                 <div
@@ -295,13 +304,15 @@ function InforBillOder() {
                   </p>
                 </div>
               </div>
+              {/* <hr style={{ width: "70%", paddingBottom: 10 }} /> */}
             </>
           );
         })}
         <hr />
+
         <div className="_all_m">
           <p className=" _title_m">Thành tiền :</p>
-          <span className="_title_l">
+          <span className="_title_ls">
             {sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}
             vnđ
           </span>

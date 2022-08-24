@@ -53,7 +53,7 @@ function CreateBannerHomee() {
     );
     console.log(values);
     alert("Thêm thành công");
-    history.back();
+    // history.back();
   };
 
   useEffect(() => {
@@ -120,12 +120,12 @@ function CreateBannerHomee() {
         <Form.Item
           label="Thông tin chi tiết"
           name="description_ads"
-          rules={[
-            {
-              required: true,
-              message: "Vui lòng nhập thông tin chi tiết",
-            },
-          ]}
+          // rules={[
+          //   {
+          //     required: true,
+          //     message: "Vui lòng nhập thông tin chi tiết",
+          //   },
+          // ]}
         >
           <Editor
             apiKey="f5r9v2m5jorsgp469noiiqpd10fc7xhmn3th5897ghxcpank"
@@ -229,7 +229,7 @@ function CreateBannerHomee() {
                 marginTop: -2,
               }}
             >
-              Quay lại
+              Đặt lại
             </p>
           </Button>
           <Button

@@ -95,11 +95,11 @@ const FormLogin = (props) => {
           />
         </Form.Item>
 
-        <div style={{ marginTop: 15 }}>
+        {/* <div style={{ marginTop: 15 }}>
           <p className="login-form-forgot" href="/shop_quen_mat_khau">
             Quên mật khẩu
           </p>
-        </div>
+        </div> */}
 
         <Form.Item style={{ marginTop: 15 }}>
           <Button

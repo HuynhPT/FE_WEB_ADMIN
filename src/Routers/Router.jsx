@@ -66,6 +66,9 @@ import EditBannerWonent from "../container/screens/banner/bannerwonent/EditBanne
 
 import InforProduct from "../container/screens/product/InforProduct";
 import InforBillOder from "../container/screens/order/InforBillOder";
+import ScreenNotificationList from "../container/screens/notification/ScreenNotificationList";
+import PushNotifications from "../container/screens/notification/PushNotifications";
+
 const Router = () => {
   return (
     <BrowserRouter>
@@ -118,6 +121,9 @@ const Router = () => {
           <Route path="banner_men" element={<BannerMen />} />
           <Route path="banner_women" element={<BannerWomen />} />
           <Route path="banner_splash" element={<BannerFlast />} />
+          <Route path="notification_screen" element={<ScreenNotificationList />} />
+          <Route path="push_notification_screen" element={<PushNotifications />} />
+
         </Route>
         {/* banner men */}
         <Route path="/create_banner_men" element={<CreactBannerMen />} />

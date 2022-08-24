@@ -1,4 +1,19 @@
-export const LOCALHOST = "http://18.141.199.110:3000/";
+export const LOCALHOST = "http://52.141.50.48:3000/";
+
+// thông báo
+//lấy tất cả token
+export const URL_GET_TOKEN_ALL = "api/user-send-token/get-token-notification";
+// push thông báo
+export const URL_PUSH_NOTIFICATION = "https://fcm.googleapis.com/fcm/send";
+// lấy danh sách thông báo
+export const URL_GET_ALL_NOTIFICATION =
+  "api/user-data-notification/get-data-notification";
+//Xóa thông báo
+export const URL_REMOVE_NOTIFICATION =
+  "api/user-data-notification//delete-data-notification";
+// Lưu thông báo
+export const URL_SAVE_NOTIFICATION =
+  "api/user-data-notification/create-data-notification";
 
 //API BANNER
 //sửa banner
@@ -145,7 +160,11 @@ export const URL_ADMIN_REMOVE_BILL = "api/user-bill/delete-bill";
 export const URL_CHANGE_STATUS_BILL = "api/user-bill/edit-status";
 // tìm kiếm hoá đơn theo encode
 export const URL_SEARCH_ENCODE_BILL = "api/user-bill/search-BillByIdUser";
-
+// tìm kiếm hóa đơn theo sđt
+export const URL_SEARCH_BILL_PHONE =
+  "api/user-bill/user-get-bill-by-number-phone";
+// tìm hóa đơn theo ngày tháng
+export const URL_SEARCH_BILL_DATE = "api/user-bill/user-get-bill-by-time";
 //DETALS
 // thêm chi tiết hoá đơn
 export const URL_POST_DETALS = "api/user-detail-bill/add-detail-bill-product";

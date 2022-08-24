@@ -156,6 +156,7 @@ const TableObjectProduct = () => {
               }}
             >
               <p
+                disabled={true}
                 style={{ width: 50, cursor: "pointer", color: "blue" }}
                 size={24}
                 onClick={() => showModal(data)}
@@ -164,6 +165,7 @@ const TableObjectProduct = () => {
               </p>
 
               <Popconfirm
+                disabled={true}
                 title="Bạn có chắc chắn muốn xoá không?"
                 onConfirm={() => deletee(_id)}
                 okText="Xoá"

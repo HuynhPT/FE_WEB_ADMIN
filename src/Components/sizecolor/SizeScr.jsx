@@ -341,6 +341,10 @@ const SizeScr = () => {
                     required: true,
                     message: "Vui lòng nhập tên size",
                   },
+                  {
+                    pattern: /^[A-Za-z0-9]*$/,
+                    message: "Nhập số hoặc chữ",
+                  },
                 ]}
               >
                 <Input placeholder="Thêm size" style={{ borderRadius: 3 }} />
@@ -357,7 +361,17 @@ const SizeScr = () => {
               >
                 Kích thước vai
               </p>
-              <Form.Item name="shoulder" style={{ width: "100%" }}>
+              <Form.Item
+                name="shoulder"
+                style={{ width: "100%" }}
+                rules={[
+                
+                  {
+                    pattern: /^[0-9][A-Za-z]*$/,
+                    message: "Chỉ nhập chữ",
+                  },
+                ]}
+              >
                 <Input
                   placeholder="Thêm kích thước"
                   style={{ borderRadius: 3 }}

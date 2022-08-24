@@ -325,12 +325,6 @@ function LayouttAdmin1() {
       ]
     ),
 
-    // getItem(
-    //   "Bán Hàng",
-    //   "sub4",
-    //   <img style={{ width: "10%" }} src={Checkout} alt="" />,
-    //   [getItem("Option 4", "4"), getItem("Option 6", "13")]
-    // ),
     getItem(
       ["Danh sách đặt hàng", <NavLink to="khachHang_DatHang" />],
       "sub5",
@@ -341,70 +335,44 @@ function LayouttAdmin1() {
       "sub7",
       <img style={{ width: "10%" }} src={image7} alt="" />
     ),
-    // getItem(
-    //   "Thống kê",
-    //   "sub6",
-    //   <img style={{ width: "10%" }} src={image6} alt="" />,
-    //   [
-    // getItem(
-    //   ["Sản phẩm đã bán", <NavLink to="sanPham_DaBan" />],
-    //   "6",
-    //   <img style={{ width: "10%" }} src={imager10} alt="" />
-    // ),
-    // getItem(
-    //   ["Thống kê", <NavLink to="thongKe_loiNhuan" />],
-    //   "15",
-    //   <img style={{ width: "10%" }} src={image6} alt="" />
-    // ),
-    // ]
-    // ),
     getItem(
-      ["Banner quảng cáo",<NavLink to="banner_home" />],
-      "sub11",
-      <img style={{ width: "10%" }} src={imageads} alt="" />,
-      // [
-      //   getItem(
-      //     ["Banner trang chủ", <NavLink to="banner_home" />],
-      //     "122",
-      //     <img style={{ width: "10%" }} src={imager10} alt="" />
-      //   ),
-      //   getItem(
-      //     ["Banner Nam", <NavLink to="banner_men" />],
-      //     "177",
-      //     <img style={{ width: "10%" }} src={imager10} alt="" />
-      //   ),
-      //   getItem(
-      //     ["Banner Nữ", <NavLink to="banner_women" />],
-      //     "178",
-      //     <img style={{ width: "10%" }} src={imager10} alt="" />
-      //   ),
-      //   getItem(
-      //     ["Splash", <NavLink to="banner_splash" />],
-      //     "179",
-      //     <img style={{ width: "10%" }} src={imager10} alt="" />
-      //   ),
-      // ]
+      "Thông báo",
+      "sub9",
+      <img style={{ width: "10%" }} src={image9} alt="" />,
+      [
+        getItem(
+          ["Push thông báo", <NavLink to="push_notification_screen" />],
+          "89",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Danh sách thông báo", <NavLink to="notification_screen" />],
+          "8",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+      ]
     ),
-    // getItem(
-    //   ["Thông tin cá nhân", <NavLink to="thongTin_shop" />],
-    //   "sub9",
-    //   <img style={{ width: "10%" }} src={image9} alt="" />
-    // ),
+    getItem(
+      ["Banner quảng cáo", <NavLink to="banner_home" />],
+      "sub11",
+      <img style={{ width: "10%" }} src={imageads} alt="" />
+    ),
+
     getItem(
       "Mạng xã hội",
       "sub8",
       <img style={{ width: "10%" }} src={image8} alt="" />,
       [
-    getItem(
-      ["Đăng bài viết", <NavLink to="themBai_Viet" />],
-      "8",
-      <img style={{ width: "10%" }} src={imager10} alt="" />
-    ),
-    getItem(
-      ["Bài viết của tôi", <NavLink to="danhSach_baiViet" />],
-      "17",
-      <img style={{ width: "10%" }} src={imager10} alt="" />
-    ),
+        getItem(
+          ["Đăng bài viết", <NavLink to="themBai_Viet" />],
+          "8",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
+        getItem(
+          ["Bài viết của tôi", <NavLink to="danhSach_baiViet" />],
+          "17",
+          <img style={{ width: "10%" }} src={imager10} alt="" />
+        ),
       ]
     ),
   ];

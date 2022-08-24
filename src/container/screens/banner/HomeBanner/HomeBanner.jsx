@@ -31,12 +31,12 @@ const BannerHomee = () => {
 
 
   const handleChange = (value) => {
-    if (value == "home") {
+    if (value == "shop") {
       dispatch(
         getBannertitle({
           title_data: "Home",
         })
-      );    } else if (value == "men") {
+      );    } else if (value == "man") {
         dispatch(
           getBannertitle({
             title_data: "Man",
@@ -45,7 +45,7 @@ const BannerHomee = () => {
     } else if (value == "woment") {
       dispatch(
         getBannertitle({
-          title_data: "Woment",
+          title_data: "Women",
         })
       );    } else {
         dispatch(
@@ -212,8 +212,8 @@ const BannerHomee = () => {
               }}
               onChange={handleChange}
             >
-              <Option value="home">Banner Home</Option>
-              <Option value="men">Banner Nam</Option>
+              <Option value="shop">Banner Home</Option>
+              <Option value="man">Banner Nam</Option>
               <Option value="woment">Banner Nữ</Option>
               <Option value="splash">Banner Splash</Option>
             </Select>

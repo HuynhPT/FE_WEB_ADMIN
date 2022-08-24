@@ -23,6 +23,7 @@ import {
 import storage from "redux-persist/lib/storage";
 import userSlice from "./UserSlice";
 import StatisticalSlice from "./StatisticalSlice";
+import NotificationSlice from "./NotificationSlice";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
   banners: bannerSlice,
   users: userSlice,
   statiscal: StatisticalSlice,
+  notification:NotificationSlice
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

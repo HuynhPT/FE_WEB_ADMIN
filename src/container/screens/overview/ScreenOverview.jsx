@@ -16,6 +16,7 @@ import {
   getAllsum,
 } from "../../../API/StatisticalApi";
 import CardStatid from "../../../Components/statils/CardStatid";
+import DateSelect from "../../../Components/overview/DateSelect";
 
 const ScreenOverview = () => {
   const [dataImport, setDataImport] = useState();
@@ -131,16 +132,17 @@ const ScreenOverview = () => {
   ];
   return (
     <div className={styles.mContainer_ovew}>
+        
       <div className={styles.container_item}>
+   
+
         <div>
           <p className={styles.text_content}>
             {"Chào " + dataus?.userName + ", Ngày mới tốt lành"}
           </p>
-          {/* <p className={styles.title_content}>
-            {
-              "Trang tổng quan của bạn cung cấp cho bạn các quan  điểm  về hiệu\n suất chính hoặc quy trình kinh doanh."
-            }
-          </p> */}
+          {/* <div style={{ alignItems:'center', justifyContent:'center'}}>
+          <DateSelect />
+        </div> */}
         </div>
         <div className={styles.row_container}>
           <div className={styles.row}>

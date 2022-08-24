@@ -1,6 +1,7 @@
 import {
   AutoComplete,
   Button,
+  DatePicker,
   Input,
   Modal,
   Popconfirm,
@@ -23,18 +24,24 @@ import {
   get_bill_status_2,
   get_bill_status_3,
   removeBillOder,
-  searchBill,
+  searchBillDate,
+  searchBillPhone,
 } from "../../../Redux/BillSlice";
 import { ReloadOutlined } from "@ant-design/icons";
 import SelectFilter from "../../../Components/type/SelectFilter";
 import axios from "axios";
 import { mToken } from "../../../../token/TokenLogin";
 import { LOCALHOST, URL_GET_ALL_USER } from "../../../API/ALLAPI";
+import DateSelect from "../../../Components/overview/DateSelect";
+// import DatePicker from "react-datepicker";
 
+// import "react-datepicker/dist/react-datepicker.css";
 const ScreenListOrder = () => {
   const [data, setData] = useState();
   const [isModalDelALl, setisModalDelALl] = useState();
-  const [dataLable, setDataLable] = useState("Danh sách theo người dùng");
+  const [dataLable, setDataLable] = useState("Đơn hàng theo người dùng");
+
+  const [startDate, setStartDate] = useState();
 
   const dispatch = useDispatch();
   const billdata = useSelector((data) => data.bills.value);
@@ -84,9 +91,8 @@ const ScreenListOrder = () => {
   const onsearchtype = (value) => {
     setTimeout(() => {
       dispatch(
-        searchBill({
-          idUser: dataLable,
-          billingEncode: value,
+        searchBillPhone({
+          mNumberPhone: value,
         })
       );
     }, 1000);
@@ -108,6 +114,25 @@ const ScreenListOrder = () => {
   };
   const handleHuy = () => {
     setisModalDelALl(false);
+  };
+  const onChange = (dates, dateStrings) => {
+    if (dates) {
+      console.log("From: ", dates[0], ", to: ", dates[1]);
+      console.log("From: ", dateStrings[0], ", to: ", dateStrings[1]);
+      dispatch(
+        searchBillDate({
+          mStartTime: dateStrings[0].slice(0),
+          mEndTime: dateStrings[1].slice(0),
+        })
+      );
+    } else {
+      console.log("Clear");
+      dispatch(getBillProduct());
+    }
+  };
+
+  const onOk = (value) => {
+    console.log("onOk: ", value);
   };
 
   const deletee = (id) => {
@@ -340,6 +365,11 @@ const ScreenListOrder = () => {
       width: 200,
     },
     {
+      title: "Thời gian đặt",
+      dataIndex: "createdAt",
+      render: (createdAt) => <p>{createdAt.slice(0, -14)}</p>,
+    },
+    {
       title: "Hoạt động",
       dataIndex: "_id",
       render: (_id) => (
@@ -391,9 +421,6 @@ const ScreenListOrder = () => {
             " Danh sách quyết định hiệu quả việc trình bày sản phẩm và cung cấp không gian \n để liệt kê các sản phẩm và dịch vụ của bạn theo cách hấp dẫn nhất."
           }
         </p>
-        {/* <Button href="/shop/them_sanPham" className="add_text">
-          <p className="text_buttonsss">{" +  Thêm mới"}</p>
-        </Button> */}
       </div>
       <div
         style={{
@@ -427,30 +454,17 @@ const ScreenListOrder = () => {
           >
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button>
-          <div style={{ margin: "0 0 0 5px", width: "14%" }}>
+          <div style={{ margin: "0 0 0 5px", width: "20%" }}>
             <SelectFilter
               options={data}
               onChange={handleChange}
               value={dataLable}
             />
           </div>
-          <div style={{ width: "13%", margin: "0 0 0 5px" }}>
+
+          <div style={{ width: "20%", margin: "0 0 0 5px" }}>
             <Select
-              defaultValue={"Sắp xếp"}
-              style={{
-                width: "100%",
-                backgroundColor: "#D9D9D9",
-                border: "1px solid #D9D9D9 ",
-              }}
-              onChange={handleChangefilter}
-            >
-              <Option value="new">Mới nhất theo ngày</Option>
-              <Option value="old">Cũ nhất theo ngày</Option>
-            </Select>
-          </div>
-          <div style={{ width: "13%", margin: "0 0 0 5px" }}>
-            <Select
-              defaultValue={"Danh sách trạng thái"}
+              defaultValue={"Đơn hàng theo trạng thái"}
               style={{
                 width: "100%",
                 backgroundColor: "#D9D9D9",
@@ -464,15 +478,44 @@ const ScreenListOrder = () => {
               <Option value="3">Hoàn thành</Option>
             </Select>
           </div>
+          <div style={{ width: "20%", margin: "0 0 0 5px" }}>
+            <Select
+              defaultValue={"old"}
+              style={{
+                width: "100%",
+                backgroundColor: "#D9D9D9",
+                border: "1px solid #D9D9D9 ",
+              }}
+              onChange={handleChangefilter}
+            >
+              <Option value="new">Mới nhất theo ngày</Option>
+              <Option value="old">Cũ nhất theo ngày</Option>
+            </Select>
+          </div>
         </div>
-
-        {/* <AutoComplete className="search_prd" style={{}} onSearch={onsearchtype}>
+        {/* <DatePicker
+          placeholder="Chọn ngày"
+          onChange={onChange}
+          onOk={onOk}
+          style={{ marginRight: 10 }}
+          showToday={false}
+        /> */}
+        <div style={{ width: "27%", margin: "0 10px 0 0" }}>
+          <DateSelect onChange={onChange} />
+        </div>
+        <AutoComplete
+          className="search_prd"
+          style={{
+            width: "23%",
+          }}
+          onSearch={onsearchtype}
+        >
           <Search
             type="text"
-            placeholder="#Code"
+            placeholder="Tìm theo số điện thoại"
             // style={{ marginLeft: 30 }}
           />
-        </AutoComplete> */}
+        </AutoComplete>
       </div>
       <Table
         id="tb_table"
@@ -481,6 +524,7 @@ const ScreenListOrder = () => {
         rowKey={(item) => item._id}
         className="table-list"
       />
+
       <Modal title="Cảnh báo !" visible={isModalDelALl} footer={null}>
         <p>Bạn có chắc chắn muốn xoá hay không?</p>
         <div

@@ -150,14 +150,11 @@ const ScreenListProduct = () => {
       render: (imageProduct) => {
         return <Image src={imageProduct[0]} alt="" style={{ width: 50 }} />;
       },
-      // imageProduct.map((item) => {
-      //   return <Image src={item[0]} alt="" style={{ width: 50 }} />;
-      // }),
     },
     {
       title: "Tên",
       dataIndex: "titleProduct",
-      width: 200,
+      width: 180,
     },
 
     {

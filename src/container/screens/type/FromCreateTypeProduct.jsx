@@ -220,7 +220,7 @@ function FromCreateTypeProduct(props) {
                   message: "Vui lòng chọn ảnh!",
                 },
               ]}
-              style={{ marginTop: -30 }}
+              // style={{ marginTop: -30 }}
             >
               <input
                 id="images"
@@ -228,7 +228,7 @@ function FromCreateTypeProduct(props) {
                 name="croppedImage"
                 style={{
                   display: "none",
-                  width: 145,
+                  width: '100%',
                   // backgroundColor: "red",
                 }}
                 onChange={(e) => upImage(e)}

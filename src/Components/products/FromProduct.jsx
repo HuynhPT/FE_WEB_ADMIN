@@ -11,11 +11,12 @@ import { getColor, getSize, getTheloai } from "../../API/ColorSize";
 import { addAll } from "../../API/ProductAPI";
 import { mToken } from "../../../token/TokenLogin";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
-import { DatalistInput } from "react-datalist-input";
-import "react-datalist-input/dist/styles.css";
-
+import {
+  getOpjectCategori,
+  searchopjectCategori,
+} from "../../Redux/OjectCategoriSlice";
 import { LOCALHOST, URL_POST_PRODUCT } from "../../API/ALLAPI";
 function FromProduct(props) {
   const [nameLinkImage, setNameLinkImage] = useState([]);
@@ -49,7 +50,7 @@ function FromProduct(props) {
   const [dataType, setDatatype] = useState();
   const [dataValueType, setDataValuetype] = useState();
   const dispatch = useDispatch();
-
+  const typleProduct = useSelector((data) => data.categoris.value);
   const handleResert = () => {
     setNameLinkImage([]);
     setNameImage([]);
@@ -68,32 +69,6 @@ function FromProduct(props) {
     setDataValueColor(null);
     setDataValuetype(null);
   };
-  // data input name
-
-  // const options = [
-  //   { name: "Chocolate" },
-  //   { name: "Coconut" },
-  //   { name: "Mint" },
-  //   { name: "Strawberry" },
-  //   { name: "Vanilla" },
-  // ];
-  // const onSelect = useCallback((selectedItem) => {
-  //   console.log("selectedItem", selectedItem);
-  //   setValueTenSP(selectedItem);
-  // }, []);
-  // const items = useMemo(
-  //   () =>
-  //     options.map((option) => ({
-  //       // required: id and value
-  //       id: option.name,
-  //       value: option.name,
-  //       // optional: label, node
-  //       // label: option.name, // use a custom label instead of the value
-  //       // node: option.name, // use a custom ReactNode to display the option
-  //       ...option, // pass along any other properties to access in your onSelect callback
-  //     })),
-  //   []
-  // );
   // lấy ảnh
   const upImage = (e) => {
     const namePhoto = document.getElementById("images").files[0].name;
@@ -144,21 +119,31 @@ function FromProduct(props) {
   const handleChangeColor = (value) => {
     setDataValueColor(value);
   };
+  useEffect(() => {
+    dispatch(getOpjectCategori());
+  }, []);
   // datatheloai
   useEffect(() => {
-    const listcolor = async () => {
-      const { data: dataType } = await getTheloai();
-      const dataNewtype = [];
-      dataType.data.map((item) => {
-        dataNewtype.push({ value: item._id, label: item.titleCategoryProduct });
-      });
-      setDatatype(dataNewtype);
-    };
-    listcolor();
+    const dataNewtype = [];
+    typleProduct.map((item) => {
+      dataNewtype.push({ value: item._id, label: item.titleCategoryProduct });
+    });
+    setDatatype(dataNewtype);
   }, []);
-  const handleChangetype = (value) => {
+  const handleChangetype = (value,label) => {
+    console.log(label)
     setDataValuetype(value);
   };
+  // const OnSearch = (value) => {
+  //   setTimeout(() => {
+  //     dispatch(searchopjectCategori({ titleCategoryProduct: value }));
+  //     const dataNewtype = [];
+  //     typleProduct.map((item) => {
+  //       dataNewtype.push({ value: item._id, label: item.titleCategoryProduct });
+  //     });
+  //     setDatatype(dataNewtype);
+  //   }, 1000);
+  // };
   const onHandleChnageSubmit = async () => {
     const fromdata = new FormData();
     fromdata.append("titleProduct", valueTensp);
@@ -232,27 +217,6 @@ function FromProduct(props) {
         <div className="_Mcontainer_Frompr">
           <h3 className="_title_addproduct">Thêm sản phẩm</h3>
           <hr />
-
-          {/* hàng 1 */}
-          {/* <DatalistInput
-            placeholder="Chocolate"
-            label="Select ice cream flavor"
-            onChange={(e) => console.log(e.target.value)}
-            onSelect={(item) => console.log(item.value)}
-            items={[
-              { id: "Chocolate", value: "Chocolate" },
-              { id: "Coconut", value: "Coconut" },
-              { id: "Mint", value: "Mint" },
-              { id: "Strawberry", value: "Strawberry" },
-              { id: "Vanilla", value: "Vanilla" },
-            ]}
-          /> */}
-          {/* <DatalistInput
-            label="Select your favorite flavor"
-            placeholder="Chocolate"
-            items={items}
-            onSelect={onSelect}
-          /> */}
 
           <div className="_inputrow1From">
             {/* tênSP */}
@@ -394,24 +358,6 @@ function FromProduct(props) {
                 />
               </Form.Item>
             </div>
-            {/* số lượng */}
-            {/* <div className="_nameInputrow4">
-              <p className="_text_product">Số lượng*</p>
-              <Form.Item
-                name="soluong"
-                rules={[
-                  { required: true, message: "Vui lòng nhập số lượng!" },
-                  { pattern: /^[0-9]*$/, message: "Số lượng yêu cầu nhập số!" },
-                ]}
-              >
-                <Input
-                  name="soluong"
-                  placeholder="Số lượng"
-                  onChange={(e) => setValueSoluong(e.target.value)}
-                  value={valueSoluong}
-                />
-              </Form.Item>
-            </div> */}
           </div>
         </div>
         {/* Hàng 4 */}
@@ -468,13 +414,13 @@ function FromProduct(props) {
             <Form.Item
               name="image"
               rules={[{ required: true, message: "Vui lòng chọn ảnh!" }]}
-              style={{ marginTop: -25 }}
+              // style={{ marginTop: -25 }}
             >
               <input
                 name="image"
                 id="images"
                 type="file"
-                style={{ display: "none", width: "70%" }}
+                style={{ display: "none", width: "100%" }}
                 onChange={(e) => upImage(e)}
               />
             </Form.Item>
