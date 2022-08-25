@@ -132,7 +132,7 @@ function EditProduct(props) {
   const onHandleChnageSubmit = async () => {
     const fromdata = new FormData();
     fromdata.append(
-      "titleproduct",
+      "title_product",
       valueTensp == undefined ? dataEdit?.title_product : valueTensp
     );
     fromdata.append(
@@ -144,7 +144,6 @@ function EditProduct(props) {
       valueMota == undefined ? dataEdit?.descriptionProduct : valueMota
     );
     fromdata.append("code", valueMaso == undefined ? dataEdit.code : valueMaso);
-    // fromdata.append("flashSale", valueSale);
     fromdata.append(
       "importPrice",
       valueDongia == undefined ? dataEdit?.importPrice : Number(valueDongia)
@@ -153,12 +152,6 @@ function EditProduct(props) {
       "price",
       valueGiaban == undefined ? dataEdit?.price : Number(valueGiaban)
     );
-    // fromdata.append(
-    //   "quantity_product",
-    //   valueSoluong == undefined
-    //     ? dataEdit?.quantity_product
-    //     : Number(valueSoluong)
-    // );
     fromdata.append(
       "material_product",
       valueChatlieu == undefined ? dataEdit?.material_product : valueChatlieu

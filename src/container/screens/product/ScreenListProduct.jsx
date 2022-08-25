@@ -326,7 +326,7 @@ const ScreenListProduct = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb">Danh sách sản phẩm </p>
+        <p className="text_titlespb" style={{fontFamily:'initial'}}>Danh sách sản phẩm </p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">

@@ -24,6 +24,16 @@ import storage from "redux-persist/lib/storage";
 import userSlice from "./UserSlice";
 import StatisticalSlice from "./StatisticalSlice";
 import NotificationSlice from "./NotificationSlice";
+import importPriceSlice from "./importPriceSlice";
+import exportPriceSlice from "./exportPriceSlice";
+import tongDonhang from "./tongDonhang";
+import tongDonhangdagiao from "./tongDonhangdagiao";
+import tongDonhangdanggiao from "./tongDonhangdanggiao";
+import tongDonhangdangxuLy from "./tongDonhangdangxuLy";
+import tongDonhangchoxacnhan from "./tongDonhangchoxacnhan";
+import sanphamConhang from "./sanphamConhang";
+import sanphamHethang from "./sanphamHethang";
+import sanphamNhap from "./sanphamNhap";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -41,7 +51,17 @@ const rootReducer = combineReducers({
   banners: bannerSlice,
   users: userSlice,
   statiscal: StatisticalSlice,
-  notification:NotificationSlice
+  notification: NotificationSlice,
+  importPrice: importPriceSlice,
+  exportPrice: exportPriceSlice,
+  allbill: tongDonhang,
+  allbillcomplete: tongDonhangdagiao,
+  danggiao: tongDonhangdanggiao,
+  dangxuly: tongDonhangdangxuLy,
+  choxacnhan: tongDonhangchoxacnhan,
+  conhang: sanphamConhang,
+  hethang: sanphamHethang,
+  tongnhapsanpham: sanphamNhap,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

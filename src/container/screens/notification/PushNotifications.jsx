@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, Select } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mAUTHORIZATION } from "../../../../token/TokenLogin";
@@ -10,11 +10,14 @@ import {
 import axios from "axios";
 
 export default function PushNotifications() {
+  const { Option } = Select;
   const dispatch = useDispatch();
   const tokenData = useSelector((data) => data.notification.value);
   const onFinish = (values) => {
     var data = JSON.stringify({
-      data: {},
+      data: {
+        type: "nameScreen",
+      },
       notification: {
         title: values.title,
         body: values.body,
@@ -57,26 +60,103 @@ export default function PushNotifications() {
   //     tokenData.map((item) => item?.tokenPush),
   //     "tokennotifice"
   //   );
+  const onChange = (value) => {
+    console.log(`selected ${value}`);
+  };
+
   return (
     <Form
       name="nest-messages"
       onFinish={onFinish}
       style={{ margin: "50px 50px 0 50px" }}
     >
-      <a>Tiêu đề thông báo</a>
-      <Form.Item name="title">
+          <div
+        style={{
+          textAlign: "center",
+          marginTop: 20,
+          fontSize: 30,
+          fontFamily: "initial",
+        }}
+      >
+        Tạo thông báo
+      </div>
+      <div style={{ marginBottom: 10 }}>
+        <a style={{ color: "black", fontSize: 16 }}>Màn hình thông báo</a>
+      </div>
+      <Form.Item name="select" 
+      
+      rules={[
+        {
+          required: true,
+          message: "Vui lòng chọn",
+        },
+      ]}
+      >
+        <Select
+          showSearch
+          placeholder="Chọn màn hình muốn thông báo"
+          onChange={onChange}
+          style={{ backgroundColor: "#ffffff" }}
+        >
+          <Option value="homeScreen">Màn hình Trang chủ</Option>
+          <Option value="notificationScreen">Màn hình Thông báo</Option>
+          <Option value="cartScreen">Màn hình Giỏ hàng</Option>
+        </Select>
+      </Form.Item>
+      <div style={{ marginBottom: 10 }}>
+        <a style={{ color: "black", fontSize: 16 }}>Tiêu đề thông báo</a>
+      </div>
+      <Form.Item
+        name="title"
+        rules={[
+          {
+            required: true,
+            message: "Vui lòng nhập thông tin",
+          },
+        ]}
+      >
         <Input />
       </Form.Item>
-      <a>Nội dung thông báo</a>
-      <Form.Item name="body">
+      <div style={{ marginBottom: 10 }}>
+        <a style={{ color: "black", fontSize: 16 }}>Nội dung thông báo</a>
+      </div>
+      <Form.Item
+        name="body"
+        rules={[
+          {
+            required: true,
+            message: "Vui lòng nhập thông tin",
+          },
+        ]}
+      >
         <Input.TextArea />
       </Form.Item>
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          đặt lại
+      <Form.Item style={{ textAlign: "center" }}>
+        <Button
+          type="primary"
+          htmlType="reset"
+          style={{
+            width: "20%",
+            marginRight: 16,
+            backgroundColor: "#DCDFE8",
+            borderColor: "#DCDFE8",
+            color: "#000",
+          }}
+        >
+          Đặt lại
         </Button>
-        <Button type="primary" htmlType="submit">
-          Submit
+        <Button
+          type="primary"
+          htmlType="submit"
+          style={{
+            width: "20%",
+            marginRight: 16,
+            backgroundColor: "#87CEEB99",
+            borderColor: "#87CEEB99",
+            color: "#000",
+          }}
+        >
+          Thông báo
         </Button>
       </Form.Item>
     </Form>

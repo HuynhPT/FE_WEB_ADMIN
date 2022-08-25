@@ -79,13 +79,12 @@ export const delallBanner = createAsyncThunk(
 
     await axios({
       url: `${LOCALHOST}` + `${URL_DELETE_ALL_IMG}`,
-      method: "POST",
+      method: "delete",
       headers: {
         token: mToken,
         "content-type": "application/x-www-form-urlencoded",
       },
-      data: qs.stringify(data),
-    }).then(
+        }).then(
       async (res) => {
         const { data: banner } = await getAll();
         banners = banner.data;

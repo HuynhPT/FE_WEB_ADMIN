@@ -1,4 +1,5 @@
 export const LOCALHOST = "http://52.141.50.48:3000/";
+// export const LOCALHOST = "http://18.141.199.110:3000/";
 
 // thông báo
 //lấy tất cả token
@@ -125,13 +126,13 @@ export const URL_GET_ID_TYPE_PRODUCT = "api/product/get-product/ByID";
 // thay đổi trạng thái sản phẩm
 export const URL_CHANGE_STATUS_PRODUCT = "api/product/change-product/ByID";
 // lấy danh sách mới nhất ngày
-export const URL_GET_NEW_DAY_PRODUCT = "api/product/get-product-date-high";
+export const URL_GET_NEW_DAY_PRODUCT = "api/product/get-product-date-high-web";
 // lấy danh sách cũ nhất ngày
-export const URL_GET_OLD_DAY_PRODUCT = "api/product/get-product-date-low";
+export const URL_GET_OLD_DAY_PRODUCT = "api/product/get-product-date-low-web";
 // lấy danh sách giá cao nhất
-export const URL_GET_PRICE_HIGHT_PRODUCT = "api/product/get-product-price-high";
+export const URL_GET_PRICE_HIGHT_PRODUCT = "api/product/get-product-price-high-web";
 // lấy danh sách giá thấp nhất
-export const URL_GET_PRICE_LOW_PRODUCT = "api/product/get-product-price-low";
+export const URL_GET_PRICE_LOW_PRODUCT = "api/product/get-product-price-low-web";
 // tìm kiếm sản phẩm theo tên
 export const URL_SEARCH_TITLE_PRODUCT = "api/product/search-product-title";
 // tìm kiếm sản phẩm theo size
@@ -215,7 +216,7 @@ export const URL_ALL_BILL_STATISTICAL =
   "api/admin-statistical/sum-bill-product";
 //đơn hàng đã giao
 export const URL_COMPLETE_VALE = "api/admin-statistical/sum-bill-status_3";
-//đơn hàng đang giao
+//đơn hàng đang vận chuyển
 export const URL_WAIT_COMPLETE_VALE = "api/admin-statistical/sum-bill-status_2";
 // đơn hàng đang xử lý
 export const URL_DOING_VALE = "api/admin-statistical/sum-bill-status_1";

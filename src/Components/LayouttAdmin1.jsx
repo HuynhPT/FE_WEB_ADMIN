@@ -347,7 +347,7 @@ function LayouttAdmin1() {
         ),
         getItem(
           ["Danh sách thông báo", <NavLink to="notification_screen" />],
-          "8",
+          "844",
           <img style={{ width: "10%" }} src={imager10} alt="" />
         ),
       ]
@@ -358,23 +358,23 @@ function LayouttAdmin1() {
       <img style={{ width: "10%" }} src={imageads} alt="" />
     ),
 
-    getItem(
-      "Mạng xã hội",
-      "sub8",
-      <img style={{ width: "10%" }} src={image8} alt="" />,
-      [
-        getItem(
-          ["Đăng bài viết", <NavLink to="themBai_Viet" />],
-          "8",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-        getItem(
-          ["Bài viết của tôi", <NavLink to="danhSach_baiViet" />],
-          "17",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
-        ),
-      ]
-    ),
+    // getItem(
+    //   "Mạng xã hội",
+    //   "sub8",
+    //   <img style={{ width: "10%" }} src={image8} alt="" />,
+    //   [
+    //     getItem(
+    //       ["Đăng bài viết", <NavLink to="themBai_Viet" />],
+    //       "8",
+    //       <img style={{ width: "10%" }} src={imager10} alt="" />
+    //     ),
+    //     getItem(
+    //       ["Bài viết của tôi", <NavLink to="danhSach_baiViet" />],
+    //       "17",
+    //       <img style={{ width: "10%" }} src={imager10} alt="" />
+    //     ),
+    //   ]
+    // ),
   ];
   return (
     <Layout style={{ height: "100vh" }}>

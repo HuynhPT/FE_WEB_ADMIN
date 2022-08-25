@@ -22,10 +22,12 @@ export default function ScreenNotificationList() {
     {
       title: "Tiêu đề thông báo",
       dataIndex: "title",
+      width:500
     },
     {
       title: "Nội dung thông báo",
       dataIndex: "body",
+      width:500
     },
     {
       title: "Hoạt động",
@@ -57,14 +59,22 @@ export default function ScreenNotificationList() {
   ];
   return (
     <div>
-      <div style={{ textAlign: "center" }}>Danh sách thông báo</div>
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: 30,
+          fontSize: 30,
+          fontFamily: "initial",
+        }}
+      >
+        Danh sách thông báo
+      </div>
       <div style={{ margin: "20px 0 0 20px" }}>
         <Table
           style={{ width: "100%" }}
           dataSource={dataNotification}
           columns={columns}
         />
-        ;
       </div>
     </div>
   );

@@ -1,22 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Column } from "@ant-design/charts";
 
-const Chart = () => {
-  const [dataPro, setDataPro] = useState();
-  useEffect(() => {
-    fetch("https://huynhpt.github.io/testchart.json")
-      .then((data) => data.json())
-      .then((data) => {
-        setDataPro(data);
-      });
-  }, []);
+const Chart = (props) => {
   const list = () => {
-    if (dataPro !== undefined) {
+    if (props.data !== undefined) {
       const config = {
-        data: dataPro,
+        data: props?.data,
         isGroup: true,
-        xField: "month",
-        yField: "dats",
+        xField: "name",
+        yField: "number",
         seriesField: "name",
         // khoảng cách giữa các cột trong một nhóm
         dodgePadding: 2,
@@ -36,7 +28,7 @@ const Chart = () => {
           ],
         },
       };
-      return <Column {...config} style={{ width: "100%", height: 200 }} />;
+      return <Column {...config} style={{ width: "100%" }} />;
     }
   };
 
