@@ -19,7 +19,7 @@ import {
 } from "@ant-design/icons";
 import { Content, Header } from "antd/lib/layout/layout";
 import "../Common/Styles/LayoutAdmin.css";
-import img_logo from "../Common/image/Logo.png";
+import img_logo from "../Common/image/img_fass.png";
 import img_2 from "../Common/image/image2.png";
 import img_4 from "../Common/image/imag4.png";
 import img_vec from "../Common/image/Vector.png";
