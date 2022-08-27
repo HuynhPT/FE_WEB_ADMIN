@@ -1,6 +1,6 @@
 import React from "react";
 import img_login from "../../../Common/Image/img_login.png";
-import FormLogin from "../../../Components/auth/FormLogin";
+import FormLogin from "../../../Components/auth/FormLogin"
 import "./ScreenLogin.css";
 function ScreenLogin() {
   return (
