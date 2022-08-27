@@ -9,7 +9,7 @@ export const gettongsanphamNhap = createAsyncThunk(
     return getexport.totalItems;
   }
 );
-const sanphamNhap = createSlice({
+const SPnhapHang = createSlice({
   name: "auth",
   initialState: {
     value: [],
@@ -24,6 +24,6 @@ const sanphamNhap = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailed } = sanphamNhap.actions;
+export const { loginStart, loginSuccess, loginFailed } = SPnhapHang.actions;
 
-export default sanphamNhap.reducer;
+export default SPnhapHang.reducer;
