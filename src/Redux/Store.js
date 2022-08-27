@@ -32,7 +32,7 @@ import tongDonhangdanggiao from "./tongDonhangdanggiao";
 import tongDonhangdangxuLy from "./tongDonhangdangxuLy";
 import tongDonhangchoxacnhan from "./tongDonhangchoxacnhan";
 import TongsanPhambanduoc from "./TongsanPhambanduoc";
-import sanphamConhang from "./SanphamConhang";
+import SanphamConhang from "./SanphamConhang";
 import sanphamNhap from "./SanphamNhap";
 import sanphamHethang from "./SanphamHethang";
 import tongloiNhuan from "./TongloiNhuan";
@@ -62,7 +62,7 @@ const rootReducer = combineReducers({
   dangxuly: tongDonhangdangxuLy,
   choxacnhan: tongDonhangchoxacnhan,
   tongSP: TongsanPhambanduoc,
-  conhang: sanphamConhang,
+  conhang: SanphamConhang,
   hethang: sanphamHethang,
   tongnhapsanpham: sanphamNhap,
   loinhuan:tongloiNhuan
