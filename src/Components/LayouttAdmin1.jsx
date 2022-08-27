@@ -29,7 +29,7 @@ import img_9 from "../Common/Image/ime9.png";
 import img_10 from "../Common/Image/imager10.png";
 import img_ads from "../Common/Image/imageads.png";
 
-import styles from "../Common/styles/Layout.module.css";
+import styles from "../Common/Styles/Layout.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { upUser } from "../Redux/UserSlice";
 const { Sider } = Layout;
