@@ -14,33 +14,23 @@ import {
 } from "antd";
 import {
   MenuOutlined,
-  SearchOutlined,
-  PlusOutlined,
-  BellOutlined,
-  MailOutlined,
   LogoutOutlined,
-  UserSwitchOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
 import { Content, Header } from "antd/lib/layout/layout";
-import "../Common/Styles/Layout.css";
-import logo from "../Common//image/Logo.png";
-import image2 from "../Common/image/image2.png";
-import image4 from "../Common/image/image4.png";
-import Vector from "../Common/image/Vector.png";
-import image5 from "../Common/image/image5.png";
-import image6 from "../Common/image/image6.png";
-import image7 from "../Common/image/image7.png";
-import image8 from "../Common/image/image8.png";
-import image9 from "../Common/image/image9.png";
-import imager10 from "../Common/image/imager10.png";
-import imagecos from "../Common/image/imagecos.png";
-import imageads from "../Common/image/imageads.png";
+import "../Common/Styles/LayoutAdmin.css";
+import img_logo from "../Common//image/Logo.png";
+import img_2 from "../Common/image/image2.png";
+import img_4 from "../Common/image/image4.png";
+import img_vec from "../Common/image/Vector.png";
+import img_5 from "../Common/image/image5.png";
+import img_7 from "../Common/image/image7.png";
+import img_9 from "../Common/image/image9.png";
+import img_10 from "../Common/image/imager10.png";
+import img_ads from "../Common/image/imageads.png";
 
-import Checkout from "../Common/image/Checkout.png";
 import styles from "../Common/styles/Layout.module.css";
 import { NavLink, Outlet } from "react-router-dom";
-import { upBanner } from "../Redux/AllBanner";
 import { upUser } from "../Redux/UserSlice";
 const { Sider } = Layout;
 function getItem(label, key, icon, children, type) {
@@ -277,50 +267,50 @@ function LayouttAdmin1() {
     getItem(
       ["Tổng Quan", <NavLink to="tong_quan" />],
       "1",
-      <img style={{ width: "10%" }} src={image2} alt="" />
+      <img style={{ width: "10%" }} src={img_2} alt="" />
     ),
     getItem(
       "Thể Loại",
       "sub3",
-      <img style={{ width: "10%" }} src={Vector} alt="" />,
+      <img style={{ width: "10%" }} src={img_vec} alt="" />,
       [
         getItem(
           ["Thể loại SP", <NavLink to="doiTuong_SuDung" />],
           "3",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
         ,
         getItem(
           ["Thêm loại SP", <NavLink to="them_LoaiSanPham" />],
           "12",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
         getItem(
           ["Danh sách loại SP", <NavLink to="danhSach_LoaiSanPham" />],
           "333",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
       ]
     ),
     getItem(
       "Sản Phẩm",
       "sub2",
-      <img style={{ width: "10%" }} src={image4} alt="" />,
+      <img style={{ width: "10%" }} src={img_4} alt="" />,
       [
         getItem(
           ["Thuộc tính sản phẩm", <NavLink to="mau_size" />],
           "sub10",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
         getItem(
           ["Thêm sản phẩm", <NavLink to="them_sanPham" />],
           "11",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
         getItem(
           ["Danh sách sản phẩm", <NavLink to="danhSach_sanPham" />],
           "2",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
       ]
     ),
@@ -328,34 +318,34 @@ function LayouttAdmin1() {
     getItem(
       ["Danh sách đặt hàng", <NavLink to="khachHang_DatHang" />],
       "sub5",
-      <img style={{ width: "10%" }} src={image5} alt="" />
+      <img style={{ width: "10%" }} src={img_5} alt="" />
     ),
     getItem(
       ["Người dùng", <NavLink to="danhSach_NguoiDung" />],
       "sub7",
-      <img style={{ width: "10%" }} src={image7} alt="" />
+      <img style={{ width: "10%" }} src={img_7} alt="" />
     ),
     getItem(
       "Thông báo",
       "sub9",
-      <img style={{ width: "10%" }} src={image9} alt="" />,
+      <img style={{ width: "10%" }} src={img_9} alt="" />,
       [
         getItem(
           ["Push thông báo", <NavLink to="push_notification_screen" />],
           "89",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
         getItem(
           ["Danh sách thông báo", <NavLink to="notification_screen" />],
           "844",
-          <img style={{ width: "10%" }} src={imager10} alt="" />
+          <img style={{ width: "10%" }} src={img_10} alt="" />
         ),
       ]
     ),
     getItem(
       ["Banner quảng cáo", <NavLink to="banner_home" />],
       "sub11",
-      <img style={{ width: "10%" }} src={imageads} alt="" />
+      <img style={{ width: "10%" }} src={img_ads} alt="" />
     ),
 
     // getItem(
@@ -384,7 +374,7 @@ function LayouttAdmin1() {
             <div className="logo" style={{ width: "50%" }}>
               <img
                 style={{ width: "100%", height: "100%" }}
-                src={logo}
+                src={img_logo}
                 alt=""
               />
             </div>
