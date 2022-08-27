@@ -1,4 +1,4 @@
-import { Button, Form, Input, Select } from "antd";
+import { Button, Form, Input, message, Select } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mAUTHORIZATION } from "../../../../token/TokenLogin";
@@ -11,8 +11,17 @@ import axios from "axios";
 
 export default function PushNotifications() {
   const { Option } = Select;
+
+  const [nameLinkImage, setNameLinkImage] = React.useState([]);
+  const [nameImage, setNameImage] = React.useState();
   const dispatch = useDispatch();
   const tokenData = useSelector((data) => data.notification.value);
+
+  const upImage = (e) => {
+    setNameLinkImage(e.target.files);
+    setNameImage(e.target.files[0].name);
+  };
+
   const onFinish = (values) => {
     var data = JSON.stringify({
       data: {
@@ -23,8 +32,9 @@ export default function PushNotifications() {
         body: values.body,
       },
       //   registration_ids: tokenData.map((item) => item?.tokenPush),
+
       registration_ids: [
-        "cAh2Doe9SuipudjDm-ivF3:APA91bEuKy_NTfX7pMblW8iYn9NnU4cLcJb2C2XWgqw11FiRjjW29NM893pz12V9K628KXRu5T06lpbEQgGBiKgB0ZFowr9v5WVAmQsuPqrZOemRSUz1mZPU9J7jQR0jdIUDXYglikhf",
+        "cMi-INJHTaiTIZvuzVB2j-:APA91bHa6E-gEhmppUFiVZKfR2rTsnmDNYrA2yG5So_aABzNa6MFnhZEhhGhSf6WwEk9ZiOvEveJxzLeBnPX-vh0Na8w3Yx_-lAITI0N3eTaQGAyn--uTSm_aOAggwHSvVGsIxXZwA6U",
       ],
     });
     var config = {
@@ -47,6 +57,7 @@ export default function PushNotifications() {
               body: values.body,
             })
           );
+          message.success("Bạn đã thông báo cho khách hàng thành công");
         }
       })
       .catch(function (error) {
@@ -70,7 +81,7 @@ export default function PushNotifications() {
       onFinish={onFinish}
       style={{ margin: "50px 50px 0 50px" }}
     >
-          <div
+      <div
         style={{
           textAlign: "center",
           marginTop: 20,
@@ -81,19 +92,18 @@ export default function PushNotifications() {
         Tạo thông báo
       </div>
       <div style={{ marginBottom: 10 }}>
-        <a style={{ color: "black", fontSize: 16 }}>Màn hình thông báo</a>
+        <a style={{ color: "black", fontSize: 16 }}>Màn hình thông báo*</a>
       </div>
-      <Form.Item name="select" 
-      
-      rules={[
-        {
-          required: true,
-          message: "Vui lòng chọn",
-        },
-      ]}
+      <Form.Item
+        name="select"
+        rules={[
+          {
+            required: true,
+            message: "Vui lòng chọn",
+          },
+        ]}
       >
         <Select
-          showSearch
           placeholder="Chọn màn hình muốn thông báo"
           onChange={onChange}
           style={{ backgroundColor: "#ffffff" }}
@@ -104,7 +114,7 @@ export default function PushNotifications() {
         </Select>
       </Form.Item>
       <div style={{ marginBottom: 10 }}>
-        <a style={{ color: "black", fontSize: 16 }}>Tiêu đề thông báo</a>
+        <a style={{ color: "black", fontSize: 16 }}>Tiêu đề thông báo*</a>
       </div>
       <Form.Item
         name="title"
@@ -115,10 +125,10 @@ export default function PushNotifications() {
           },
         ]}
       >
-        <Input />
+        <Input placeholder="Nhập tiêu đề muốn thông báo" />
       </Form.Item>
       <div style={{ marginBottom: 10 }}>
-        <a style={{ color: "black", fontSize: 16 }}>Nội dung thông báo</a>
+        <a style={{ color: "black", fontSize: 16 }}>Nội dung thông báo*</a>
       </div>
       <Form.Item
         name="body"
@@ -129,7 +139,69 @@ export default function PushNotifications() {
           },
         ]}
       >
-        <Input.TextArea />
+        <Input.TextArea placeholder="Nhập nội dung muốn thông báo" />
+      </Form.Item>
+      <div style={{ marginBottom: 10 }}>
+        <a style={{ color: "black", fontSize: 16 }}>Chọn ảnh thông báo</a>
+      </div>
+
+      {nameImage !== undefined && (
+        <div style={{ display: "flex" }}>
+          <span style={{ margin: 5 }}>{nameImage}</span>
+          <br />
+          <Button
+            onClick={() => setNameImage()}
+            style={{ margin: 5, marginBottom: 10 }}
+          >
+            Huỷ
+          </Button>
+        </div>
+      )}
+      <br />
+      <label htmlFor="images" name="croppedImage">
+        <div
+          name="croppedImage"
+          style={{
+            border: "1px solid #d9d9d9",
+            marginTop: -25,
+            textAlign: "center",
+            borderRadius: 3,
+            width: "100%",
+            height: 35,
+            backgroundColor:'#ffffff'
+          }}
+        >
+          <p
+            name="croppedImage"
+            style={{
+              marginTop: 5,
+            }}
+          >
+            Chọn ảnh
+          </p>
+        </div>
+      </label>
+      <Form.Item
+        name="croppedImage"
+        // rules={[
+        //   {
+        //     required: true,
+        //     message: "Vui lòng chọn ảnh!",
+        //   },
+        // ]}
+        // style={{ marginTop: -30 }}
+      >
+        <input
+          id="images"
+          type="file"
+          name="croppedImage"
+          style={{
+            display: "none",
+            width: "100%",
+            // backgroundColor: "red",
+          }}
+          onChange={(e) => upImage(e)}
+        />
       </Form.Item>
       <Form.Item style={{ textAlign: "center" }}>
         <Button

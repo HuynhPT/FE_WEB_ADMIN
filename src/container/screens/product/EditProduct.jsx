@@ -132,8 +132,8 @@ function EditProduct(props) {
   const onHandleChnageSubmit = async () => {
     const fromdata = new FormData();
     fromdata.append(
-      "title_product",
-      valueTensp == undefined ? dataEdit?.title_product : valueTensp
+      "titleProduct",
+      valueTensp == undefined ? dataEdit?.titleProduct : valueTensp
     );
     fromdata.append(
       "trademark",

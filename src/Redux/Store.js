@@ -31,9 +31,11 @@ import tongDonhangdagiao from "./tongDonhangdagiao";
 import tongDonhangdanggiao from "./tongDonhangdanggiao";
 import tongDonhangdangxuLy from "./tongDonhangdangxuLy";
 import tongDonhangchoxacnhan from "./tongDonhangchoxacnhan";
-import sanphamConhang from "./sanphamConhang";
-import sanphamHethang from "./sanphamHethang";
-import sanphamNhap from "./sanphamNhap";
+import TongsanPhambanduoc from "./TongsanPhambanduoc";
+import sanphamConhang from "./SanphamConhang";
+import sanphamNhap from "./SanphamNhap";
+import sanphamHethang from "./SanphamHethang";
+import tongloiNhuan from "./TongloiNhuan";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -59,9 +61,11 @@ const rootReducer = combineReducers({
   danggiao: tongDonhangdanggiao,
   dangxuly: tongDonhangdangxuLy,
   choxacnhan: tongDonhangchoxacnhan,
+  tongSP: TongsanPhambanduoc,
   conhang: sanphamConhang,
   hethang: sanphamHethang,
   tongnhapsanpham: sanphamNhap,
+  loinhuan:tongloiNhuan
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

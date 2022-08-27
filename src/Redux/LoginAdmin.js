@@ -17,6 +17,7 @@ export const loginUser = async (user, dispacth, navigation) => {
       }
       dispacth(loginSuccess(reponse.data));
       navigation("/shop/tong_quan");
+      
       message.success({
         content: "Đăng nhập thành công!",
 

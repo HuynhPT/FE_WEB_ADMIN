@@ -517,13 +517,14 @@ const ScreenListOrder = () => {
           />
         </AutoComplete>
       </div>
-      <Table
-        id="tb_table"
-        columns={columns}
-        dataSource={billdata}
-        rowKey={(item) => item._id}
-        className="table-list"
-      />
+
+      <div style={{ margin: "20px 30px 0 20px" }}>
+        <Table
+          style={{ width: "100%" }}
+          dataSource={billdata}
+          columns={columns}
+        />
+      </div>
 
       <Modal title="Cảnh báo !" visible={isModalDelALl} footer={null}>
         <p>Bạn có chắc chắn muốn xoá hay không?</p>

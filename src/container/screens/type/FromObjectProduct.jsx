@@ -76,6 +76,7 @@ const FromObjectProduct = () => {
           justifyContent: "space-between",
           margin: "-10px 25px 25px 30px",
         }}
+        disabled={true}
       >
         <Form.Item name="titleTypeProduct" style={{ width: "100%" }}>
           <Input

@@ -15,8 +15,11 @@ import { gettongDonhangdagiao } from "../../../Redux/tongDonhangdagiao";
 import { gettongDonhangdanggiao } from "../../../Redux/tongDonhangdanggiao";
 import { gettongDonhangdangxuLy } from "../../../Redux/tongDonhangdangxuLy";
 import { gettongDonhangchoxacnhan } from "../../../Redux/tongDonhangchoxacnhan";
-import { getsanphamConhang } from "../../../Redux/sanphamConhang";
-import { getsanphamHethang } from "../../../Redux/sanphamHethang";
+import { getsanphamConhang } from "../../../Redux/SanphamConhang";
+import { getsanphamHethang } from "../../../Redux/SanphamHethang";
+import { getTongsanPhambanduoc } from "../../../Redux/TongsanPhambanduoc";
+import { gettongsanphamNhap } from "../../../Redux/SanphamNhap";
+import { getTongloiNhuan } from "../../../Redux/TongloiNhuan";
 
 const ScreenOverview = () => {
   // const [dataSum, setDataSum] = useState();
@@ -26,19 +29,20 @@ const ScreenOverview = () => {
   const price = (100000000)
     .toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  const prices = (100000).toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.login.currentUser);
   const importsPrice = useSelector((data) => data.importPrice.value);
   const exportPrices = useSelector((data) => data.exportPrice.value);
-  const sanphamnhap = useSelector((data) => data.tongnhapsanpham.value);
   const dataallbill = useSelector((data) => data.allbill.value);
   const billComplete = useSelector((data) => data.allbillcomplete.value);
   const vanchuyen = useSelector((data) => data.danggiao.value);
   const xulyly = useSelector((data) => data.dangxuly.value);
   const choxacnhannhan = useSelector((data) => data.choxacnhan.value);
-  const sanphamcon = useSelector((data) => data.conhang.value);
-  const sanphamhet = useSelector((data) => data.hethang.value);
+  const sanphambanduoc = useSelector((data) => data.tongSP.value);
+  const tongLN = useSelector((data) => data.loinhuan.value);
+  const Tspnhap = useSelector((data) => data.tongnhapsanpham.value);
+  const TsPcon = useSelector((data) => data.conhang.value);
+  const hethang = useSelector((data) => data.hethang.value);
 
   useEffect(() => {
     try {
@@ -50,8 +54,6 @@ const ScreenOverview = () => {
 
         dispatch(getimportPriceSlice());
 
-        // dispatch(gettongDonhang());
-
         dispatch(gettongDonhangdagiao());
 
         dispatch(gettongDonhangdanggiao());
@@ -60,30 +62,23 @@ const ScreenOverview = () => {
 
         dispatch(gettongDonhangchoxacnhan());
 
-        // dispatch(getsanphamConhang());
+        dispatch(getTongsanPhambanduoc());
 
-        // dispatch(getsanphamHethang());
+        dispatch(gettongDonhang());
+
+        dispatch(gettongsanphamNhap());
+
+        dispatch(getsanphamConhang());
+
+        dispatch(getsanphamHethang());
+
+        dispatch(getTongloiNhuan());
       }
     } catch (error) {
       console.log("err");
     }
   }, []);
-  // console.log(sanphamhet, 'het');
-  // console.log(sanphamnhap ,'nhap')
-  // useEffect(() => {
-  //   const getDataSUM = async () => {
-  //     const { data: dataSUM } = await getAllsum();
-  //     setDataSum(dataSUM.result);
-  //   };
-  //   getDataSUM();
-  // }, []);
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const { data: dataSUM } = await getAllloinhuan();
-  //     setDataloinhuan(dataSUM.totalPrice);
-  //   };
-  //   getData();
-  // }, []);
+  console.log(tongLN, "spban");
 
   //tổng tiền bán được
   const priceSel = exportPrices
@@ -98,26 +93,21 @@ const ScreenOverview = () => {
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
   const phantramimport = (parseInt(priceImport) / parseInt(price)) * 100;
 
-  // console.log(importProductss, "slnhap");
-
-  //tổng số lượng bán ra
-  // const sumSP = dataSum
-  //   ?.map((item) => item?.count)
-  //   .toString()
-  //   .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  //lợi nhuận
-  const sumloinhuan = dataloinhuan
+  const sumloinhuan = tongLN
     ?.toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  const phantramloinhuan = parseFloat(sumloinhuan) / parseFloat(price);
+  const phantramloinhuan = parseInt(sumloinhuan) / parseInt(price)*100;
 
   const datas = [
-    { type: "Sản phẩm còn ", value: 3333 },
-    { type: "Sản phẩm hết ", value: 3333 },
+    { type: "Sản phẩm còn ", value: parseInt(TsPcon) },
+    { type: "Sản phẩm hết ", value: parseInt(hethang) },
   ];
   const nhapxuat = [
-    { type: "Sản phẩm bán ", value: 11111},
-    { type: "Sản phẩm nhập ", value: 222 },
+    {
+      type: "Sản phẩm bán ",
+      value: parseInt(sanphambanduoc?.map((item) => item?.count)),
+    },
+    { type: "Sản phẩm nhập ", value: parseInt(Tspnhap) },
   ];
   const datadon = [
     { number: dataallbill, name: "Tổng hóa đơn" },
@@ -142,7 +132,7 @@ const ScreenOverview = () => {
             <Row
               img_ic={img_tds}
               title={"Tổng lợi nhuận"}
-              number={sumloinhuan + " vnđ"}
+              number={tongLN < 0 ? 0 + " vnđ" : sumloinhuan + " vnđ"}
               color={"#87CEEB"}
               percent={phantramloinhuan}
             />

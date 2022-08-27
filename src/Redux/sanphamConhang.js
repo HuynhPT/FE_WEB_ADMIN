@@ -9,7 +9,7 @@ export const getsanphamConhang = createAsyncThunk(
   async () => {
     const { data: getexport } = await getAllConhang();
     console.log(getexport);
-    return getexport.result;
+    return getexport.totalItems;
   }
 );
 const sanphamConhang = createSlice({

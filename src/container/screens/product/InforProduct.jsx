@@ -75,7 +75,7 @@ const InforProduct = () => {
                 fontStyle: "italic",
               }}
             >
-              {dataInfor?.title_product}
+              {dataInfor?.titleProduct}
             </p>
           </div>
           <div

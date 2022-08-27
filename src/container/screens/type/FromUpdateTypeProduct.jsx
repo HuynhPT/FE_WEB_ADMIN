@@ -168,7 +168,6 @@ function FromUpdateTypeProduct(props) {
                 <Form.Item
                   label=" Đối tượng"
                   name="idTypeProduct"
-                  style={{ display: "flex" }}
                 >
                   <SelectMenWoment
                     dataOP={dataOp}
