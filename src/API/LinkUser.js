@@ -6,5 +6,6 @@ export const axiosClient = axios.create({
   headers: {
     Authorization: mToken,
     "Content-Type": "application/x-www-form-urlencoded",
+    referrerPolicy: "unsafe_url",
   },
 });
