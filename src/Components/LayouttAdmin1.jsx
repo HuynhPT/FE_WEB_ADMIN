@@ -20,14 +20,14 @@ import {
 import { Content, Header } from "antd/lib/layout/layout";
 import "../Common/Styles/LayoutAdmin.css";
 import img_logo from "../Common/Image/fas.png";
-import img_2 from "../Common/image/image2.png";
-import img_4 from "../Common/image/imag4.png";
-import img_vec from "../Common/image/Vector.png";
-import img_5 from "../Common/image/image5s.png";
-import img_7 from "../Common/image/imagew7.png";
-import img_9 from "../Common/image/ime9.png";
-import img_10 from "../Common/image/imager10.png";
-import img_ads from "../Common/image/imageads.png";
+import img_2 from "../Common/Image/image2.png";
+import img_4 from "../Common/Image/imag4.png";
+import img_vec from "../Common/Image/Vector.png";
+import img_5 from "../Common/Image/image5s.png";
+import img_7 from "../Common/Image/imagew7.png";
+import img_9 from "../Common/Image/ime9.png";
+import img_10 from "../Common/Image/imager10.png";
+import img_ads from "../Common/Image/imageads.png";
 
 import styles from "../Common/styles/Layout.module.css";
 import { NavLink, Outlet } from "react-router-dom";
