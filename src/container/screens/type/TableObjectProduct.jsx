@@ -155,14 +155,15 @@ const TableObjectProduct = () => {
                 alignItems: "center",
               }}
             >
-              <p
-                disabled={true}
-                style={{ width: 50, cursor: "pointer", color: "blue" }}
-                size={24}
-                onClick={() => showModal(data)}
-              >
-                Sửa
-              </p>
+              <Popconfirm disabled={true} >
+                <p
+                  style={{ width: 50, cursor: "pointer", color: "blue" }}
+                  size={24}
+                  // onClick={() => showModal(data)}
+                >
+                  Sửa
+                </p>
+              </Popconfirm>
 
               <Popconfirm
                 disabled={true}
