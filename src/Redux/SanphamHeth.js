@@ -1,13 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import qs from "qs";
-import axios from "axios";
-import { mToken } from "../../token/TokenLogin";
-import { getPostAll } from "../API/PostApi";
+
 import {
-  getAllConhang,
   getAllHethang,
-  getAllimport,
-  getAllSELl,
+
 } from "../API/StatisticalApi";
 export const getsanphamHethang = createAsyncThunk(
   "hethang/getsanphamHethang",
@@ -17,7 +12,7 @@ export const getsanphamHethang = createAsyncThunk(
     return getexport.totalItems;
   }
 );
-const sanphamHethang = createSlice({
+const sanphaHethang = createSlice({
   name: "auth",
   initialState: {
     value: [],
@@ -32,6 +27,6 @@ const sanphamHethang = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailed } = sanphamHethang.actions;
+export const { loginStart, loginSuccess, loginFailed } = sanphaHethang.actions;
 
-export default sanphamHethang.reducer;
+export default sanphaHethang.reducer;
