@@ -20,10 +20,6 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
-import SPConhang from "./SanphamConhang";
-import SPnhapHang from "./SanphamNhap";
-import sanphamHethang from "./SanphamHethang";
-import tongloiNhuan from "./TongloiNhuan";
 import storage from "redux-persist/lib/storage";
 import userSlice from "./UserSlice";
 import StatisticalSlice from "./StatisticalSlice";
@@ -36,7 +32,10 @@ import tongDonhangdanggiao from "./tongDonhangdanggiao";
 import tongDonhangdangxuLy from "./tongDonhangdangxuLy";
 import tongDonhangchoxacnhan from "./tongDonhangchoxacnhan";
 import TongsanPhambanduoc from "./TongsanPhambanduoc";
-
+import SPConhang from "./SanphamConhang";
+import SPnhapHang from "./SanphamNhap";
+import sanphamHethang from "./SanphamHethang";
+import tongloiNhuan from "./TongloiNhuan";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -66,7 +65,7 @@ const rootReducer = combineReducers({
   conhang: SPConhang,
   hethang: sanphamHethang,
   tongnhapsanpham: SPnhapHang,
-  loinhuan: tongloiNhuan,
+  loinhuan:tongloiNhuan
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
