@@ -17,9 +17,9 @@ import { gettongDonhangdangxuLy } from "../../../Redux/tongDonhangdangxuLy";
 import { gettongDonhangchoxacnhan } from "../../../Redux/tongDonhangchoxacnhan";
 import { getsanphamHethang } from "../../../Redux/SanphamHethang";
 import { getTongsanPhambanduoc } from "../../../Redux/TongsanPhambanduoc";
-import { gettongsanphamNhap } from "../../../Redux/SanphamNhap";
 import { getTongloiNhuan } from "../../../Redux/TongloiNhuan";
 import { getsanphamConhang } from "../../../Redux/SanpConhang";
+import { gettongsanphamNhap } from "../../../Redux/SanphamNhapHang";
 
 const ScreenOverview = () => {
   // const [dataSum, setDataSum] = useState();

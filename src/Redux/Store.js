@@ -33,9 +33,9 @@ import tongDonhangdangxuLy from "./tongDonhangdangxuLy";
 import tongDonhangchoxacnhan from "./tongDonhangchoxacnhan";
 import TongsanPhambanduoc from "./TongsanPhambanduoc";
 import SPConhang from "./SanpConhang";
-import SPnhapHang from "./SanphamNhap";
 import sanphamHethang from "./SanphamHethang";
 import tongloiNhuan from "./TongloiNhuan";
+import SPnhapHang from "./SanphamNhapHang";
 const persistConfig = {
   key: "root",
   version: 1,
