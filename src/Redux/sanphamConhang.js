@@ -1,9 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import qs from "qs";
-import axios from "axios";
-import { mToken } from "../../token/TokenLogin";
-import { getPostAll } from "../API/PostApi";
-import { getAllConhang, getAllimport, getAllSELl } from "../API/StatisticalApi";
+import { getAllConhang} from "../API/StatisticalApi";
 export const getsanphamConhang = createAsyncThunk(
   "conhang/getsanphamConhang",
   async () => {
