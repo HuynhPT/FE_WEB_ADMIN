@@ -32,8 +32,9 @@ import tongDonhangdanggiao from "./tongDonhangdanggiao";
 import tongDonhangdangxuLy from "./tongDonhangdangxuLy";
 import tongDonhangchoxacnhan from "./tongDonhangchoxacnhan";
 import TongsanPhambanduoc from "./TongsanPhambanduoc";
-import SPnhapHang from "./SanphamNhap";
+
 import SPConhang from './SanphamConhang';
+import SPnhapHang from "./SanphamNhap";
 import sanphamHethang from "./SanphamHethang";
 import tongloiNhuan from "./TongloiNhuan";
 const persistConfig = {
