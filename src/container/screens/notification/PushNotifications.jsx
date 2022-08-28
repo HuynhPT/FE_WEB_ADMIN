@@ -137,9 +137,9 @@ export default function PushNotifications() {
           onChange={onChange}
           style={{ backgroundColor: "#ffffff" }}
         >
-          <Option value="homeScreen">Màn hình Trang chủ</Option>
-          <Option value="notificationScreen">Màn hình Thông báo</Option>
-          <Option value="cartScreen">Màn hình Giỏ hàng</Option>
+          <Option value="AppContainer">Màn hình Trang chủ</Option>
+          <Option value="ScreenNotification">Màn hình Thông báo</Option>
+          <Option value="ScreenOrder">Màn hình Giỏ hàng</Option>
         </Select>
       </Form.Item>
       <div style={{ marginBottom: 10 }}>

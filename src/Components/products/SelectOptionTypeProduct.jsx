@@ -4,7 +4,7 @@ const SelectOptionTypeProduct = (props) => {
   return (
     <Select
       placeholder={props.placeholder}
-      showSearch
+      // showSearch
       style={{
         width: "100%",
       }}

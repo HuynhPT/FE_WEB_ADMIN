@@ -144,44 +144,44 @@ const TableObjectProduct = () => {
             </div>
           ),
         },
-        {
-          title: "Hoạt động",
-          dataIndex: "_id",
-          render: (_id, data) => (
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Popconfirm disabled={true} >
-                <p
-                  style={{ width: 50, cursor: "pointer", color: "blue" }}
-                  size={24}
-                  // onClick={() => showModal(data)}
-                >
-                  Sửa
-                </p>
-              </Popconfirm>
+        // {
+        //   title: "Hoạt động",
+        //   dataIndex: "_id",
+        //   render: (_id, data) => (
+        //     <div
+        //       style={{
+        //         display: "flex",
+        //         justifyContent: "center",
+        //         alignItems: "center",
+        //       }}
+        //     >
+        //       <Popconfirm disabled={true} >
+        //         <p
+        //           style={{ width: 50, cursor: "pointer", color: "blue" }}
+        //           size={24}
+        //           // onClick={() => showModal(data)}
+        //         >
+        //           Sửa
+        //         </p>
+        //       </Popconfirm>
 
-              <Popconfirm
-                disabled={true}
-                title="Bạn có chắc chắn muốn xoá không?"
-                onConfirm={() => deletee(_id)}
-                okText="Xoá"
-                cancelText="Huỷ"
-              >
-                <p
-                  style={{ width: 50, cursor: "pointer", color: "blue" }}
-                  size={24}
-                >
-                  Xoá
-                </p>
-              </Popconfirm>
-            </div>
-          ),
-        },
+        //       <Popconfirm
+        //         disabled={true}
+        //         title="Bạn có chắc chắn muốn xoá không?"
+        //         onConfirm={() => deletee(_id)}
+        //         okText="Xoá"
+        //         cancelText="Huỷ"
+        //       >
+        //         <p
+        //           style={{ width: 50, cursor: "pointer", color: "blue" }}
+        //           size={24}
+        //         >
+        //           Xoá
+        //         </p>
+        //       </Popconfirm>
+        //     </div>
+        //   ),
+        // },
       ];
       return (
         <>

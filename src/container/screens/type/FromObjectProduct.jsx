@@ -57,7 +57,7 @@ const FromObjectProduct = () => {
         Danh sách thể loại sản phẩm
       </h3>
 
-      <p
+      {/* <p
         style={{
           color: "#000000",
           fontSize: "18px",
@@ -68,8 +68,8 @@ const FromObjectProduct = () => {
         }}
       >
         Thêm thể loại sản phẩm *
-      </p>
-
+      </p> */}
+{/* 
       <Form
         style={{
           display: "flex",
@@ -113,7 +113,7 @@ const FromObjectProduct = () => {
           <PlusOutlined />
           <p style={{ color: "black", margin: 4 }}>Thêm</p>
         </Button>
-      </Form>
+      </Form> */}
       <TableObjectProduct />
     </div>
   );

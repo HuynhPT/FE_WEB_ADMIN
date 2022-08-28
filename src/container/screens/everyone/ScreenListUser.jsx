@@ -1,4 +1,4 @@
-import { Button, Popconfirm, Table } from "antd";
+import { Avatar, Button, Popconfirm, Table } from "antd";
 import React, { useEffect, useState } from "react";
 
 import "../profit/Listproduct.css";
@@ -39,7 +39,17 @@ const ScreenListUser = () => {
       title: "Ảnh",
       dataIndex: "photoUrl",
       render: (photoUrl) => (
-        <img src={photoUrl} alt="" style={{ width: 60, height: 60 }} />
+        <Avatar
+          src={photoUrl}
+          size={{
+            xs: 24,
+            sm: 32,
+            md: 40,
+            lg: 64,
+            xl: 66,
+            xxl: 70,
+          }}
+        />
       ),
     },
 
