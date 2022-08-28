@@ -20,14 +20,20 @@ export default function ScreenNotificationList() {
   };
   const columns = [
     {
+      title: "Ảnh thông báo",
+      dataIndex: "urlPhoto",
+      render: (urlPhoto) => <img src={urlPhoto} style={{width:300}} />,
+    },
+    {
       title: "Tiêu đề thông báo",
       dataIndex: "title",
-      width:500
+      width: 300,
     },
+
     {
       title: "Nội dung thông báo",
       dataIndex: "body",
-      width:500
+      width: 500,
     },
     {
       title: "Hoạt động",

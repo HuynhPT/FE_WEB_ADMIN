@@ -1,4 +1,4 @@
-import { Button, Checkbox, Form, Input } from "antd";
+import { Button, Checkbox, Form, Input, Select } from "antd";
 import React, { useState, useEffect } from "react";
 import "../bannerwonent/CreateBannerWoment.css";
 import { Editor } from "@tinymce/tinymce-react";
@@ -10,12 +10,14 @@ import {
   URL_GET_ALL_OPJECT,
   URL_POST_IMG,
 } from "../../../../API/ALLAPI";
+import { Link } from "react-router-dom";
 function CreateBannerHomee() {
   const [nameLinkImage, setNameLinkImage] = useState();
   const [nameImage, setNameImage] = useState();
   const [valueText, setValueText] = useState();
   const [data, setData] = useState();
   const [dataLable, setDataLable] = useState();
+  const { Option } = Select;
 
   const upImage = (e) => {
     setNameLinkImage(e.target.files);
@@ -30,7 +32,7 @@ function CreateBannerHomee() {
     formData.append("croppedImage", nameLinkImage[0]);
     formData.append("title_ads", values.title_ads);
     formData.append("description_ads", valueText);
-    formData.append("title_data", values.title_data);
+    formData.append("title_data", dataLable);
 
     axios({
       url: `${LOCALHOST}` + `${URL_POST_IMG}`,
@@ -53,7 +55,6 @@ function CreateBannerHomee() {
     );
     console.log(values);
     alert("Thêm thành công");
-    // history.back();
   };
 
   useEffect(() => {
@@ -69,7 +70,6 @@ function CreateBannerHomee() {
   }, []);
 
   const handleChange = (values) => {
-    console.log(values);
     setDataLable(values);
   };
   return (
@@ -78,12 +78,6 @@ function CreateBannerHomee() {
       <Form
         style={{ margin: "0 20px" }}
         name="basic"
-        labelCol={{
-          span: 4,
-        }}
-        wrapperCol={{
-          span: 20,
-        }}
         initialValues={{
           remember: true,
         }}
@@ -91,8 +85,11 @@ function CreateBannerHomee() {
         autoComplete="off"
       >
         {/* tên */}
+        <div style={{ marginBottom: 10 }}>
+          <a style={{ color: "black", fontSize: 16 }}>Tên banner*</a>
+        </div>
         <Form.Item
-          label="Tên"
+          // label="Tên"
           name="title_ads"
           rules={[
             {
@@ -104,8 +101,11 @@ function CreateBannerHomee() {
           <Input style={{ borderRadius: 3 }} />
         </Form.Item>
         {/* Đối tượng */}
+        <div style={{ marginBottom: 10 }}>
+          <a style={{ color: "black", fontSize: 16 }}>Thể loại*</a>
+        </div>
         <Form.Item
-          label="Đối tượng"
+          // label="Đối tượng"
           name="title_data"
           rules={[
             {
@@ -114,11 +114,25 @@ function CreateBannerHomee() {
             },
           ]}
         >
-          <Input style={{ borderRadius: 3 }} />
+          <Select
+            defaultValue={"Banner"}
+            style={{
+              width: "100%",
+              backgroundColor: "#ffffff",
+            }}
+            onChange={handleChange}
+          >
+            <Option value="Home">Banner Home</Option>
+            <Option value="Man">Banner Nam</Option>
+            <Option value="Women">Banner Nữ</Option>
+          </Select>
         </Form.Item>
         {/* Thông tin chi tiết */}
+        <div style={{ marginBottom: 10 }}>
+          <a style={{ color: "black", fontSize: 16 }}>Thông tin banner*</a>
+        </div>
         <Form.Item
-          label="Thông tin chi tiết"
+          // label="Thông tin chi tiết"
           name="description_ads"
           // rules={[
           //   {
@@ -166,36 +180,40 @@ function CreateBannerHomee() {
           />
         </Form.Item>
         {/* thêm ảnh */}
-        <Form.Item label="Chọn ảnh" name="croppedImage">
-          {nameImage !== undefined && (
-            <div style={{ display: "flex" }}>
-              <span style={{ margin: 5 }}>{nameImage}</span>
-              <br />
-              <Button onClick={() => setNameImage()} style={{ margin: 5 }}>
-                Huỷ
-              </Button>
-            </div>
-          )}
-          <br />
-          <label htmlFor="images">
-            <div
+        <div style={{ marginBottom: 10 }}>
+          <a style={{ color: "black", fontSize: 16 }}>Chọn ảnh banner*</a>
+        </div>
+
+        {nameImage !== undefined && (
+          <div style={{ display: "flex" }}>
+            <span style={{ margin: 5 }}>{nameImage}</span>
+            <br />
+            <Button onClick={() => setNameImage()} style={{ margin: 5 }}>
+              Huỷ
+            </Button>
+          </div>
+        )}
+        <br />
+        <label htmlFor="images">
+          <div
+            style={{
+              border: "1px solid #d9d9d9",
+              marginTop: -20,
+              textAlign: "center",
+              borderRadius: 3,
+              width: "100%",
+            }}
+          >
+            <p
               style={{
-                border: "1px solid #d9d9d9",
-                marginTop: -20,
-                textAlign: "center",
-                borderRadius: 3,
-                width: "40%",
+                marginTop: 10,
               }}
             >
-              <p
-                style={{
-                  marginTop: 10,
-                }}
-              >
-                Chọn ảnh
-              </p>
-            </div>
-          </label>
+              Chọn ảnh
+            </p>
+          </div>
+        </label>
+        <Form.Item name="croppedImage">
           <input
             id="images"
             type="file"
@@ -210,28 +228,31 @@ function CreateBannerHomee() {
             span: 16,
           }}
         >
-          <Button
-            type="primary"
-            htmlType="reset"
-            style={{
-              margin: 20,
-              width: 120,
-              backgroundColor: "#DCDFE8",
-              borderColor: "#DCDFE8",
-              textAlign: "center",
-            }}
-          >
-            <p
+          <Link to={'/shop/banner_home'}>
+            <Button
+              type="primary"
+              htmlType="reset"
               style={{
-                fontSize: 16,
-                fontWeight: "400",
-                color: "#000000",
-                marginTop: -2,
+                margin: 20,
+                width: 120,
+                backgroundColor: "#DCDFE8",
+                borderColor: "#DCDFE8",
+                textAlign: "center",
               }}
             >
-              Đặt lại
-            </p>
-          </Button>
+              <p
+                style={{
+                  fontSize: 16,
+                  fontWeight: "400",
+                  color: "#000000",
+                  marginTop: -2,
+                }}
+              >
+                Quay lại
+              </p>
+            </Button>
+          </Link>
+
           <Button
             type="primary"
             htmlType="submit"

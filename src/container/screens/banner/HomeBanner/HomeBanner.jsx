@@ -29,39 +29,30 @@ const BannerHomee = () => {
   const banners = useSelector((data) => data.banners.value);
   const { Option } = Select;
 
-
   const handleChange = (value) => {
     if (value == "shop") {
       dispatch(
         getBannertitle({
           title_data: "Home",
         })
-      );    } else if (value == "man") {
-        dispatch(
-          getBannertitle({
-            title_data: "Man",
-          })
-        );
+      );
+    } else if (value == "man") {
+      dispatch(
+        getBannertitle({
+          title_data: "Man",
+        })
+      );
     } else if (value == "woment") {
       dispatch(
         getBannertitle({
           title_data: "Women",
         })
-      );    } else {
-        dispatch(
-          getBannertitle({
-            title_data: "Flash",
-          })
-        );    }
+      );
+    }
   };
 
   useEffect(() => {
-    dispatch(getBanner())
-    // dispatch(
-    //   getBannertitle({
-    //     title_data: "Home",
-    //   })
-    // );
+    dispatch(getBanner());
   }, []);
 
   const showmodaldell = () => {
@@ -168,14 +159,15 @@ const BannerHomee = () => {
       <div className="titlespb">
         <p className="text_titlespb">Danh sách banner home</p>
       </div>
-      <div className="text_spb">
-      </div>
-      <div   style={{
+      <div className="text_spb"></div>
+      <div
+        style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-        }}>
-        <div style={{ display: "flex",  width: "35%" }}>
+        }}
+      >
+        <div style={{ display: "flex", width: "35%" }}>
           <Button
             type="primary"
             style={{
@@ -184,7 +176,7 @@ const BannerHomee = () => {
               border: "1px solid #D9D9D9 ",
             }}
             onClick={() => {
-              dispatch(getBanner())
+              dispatch(getBanner());
             }}
           >
             <ReloadOutlined />
@@ -201,11 +193,11 @@ const BannerHomee = () => {
           >
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button>
-          <div style={{ width: "35%"}}>
+          <div style={{ width: "35%" }}>
             <Select
               defaultValue={"Banner"}
               style={{
-              margin: "15px 0 0 0",
+                margin: "15px 0 0 0",
                 width: "100%",
                 backgroundColor: "#D9D9D9",
                 border: "1px solid #D9D9D9 ",
@@ -215,7 +207,6 @@ const BannerHomee = () => {
               <Option value="shop">Banner Home</Option>
               <Option value="man">Banner Nam</Option>
               <Option value="woment">Banner Nữ</Option>
-              <Option value="splash">Banner Splash</Option>
             </Select>
           </div>
         </div>

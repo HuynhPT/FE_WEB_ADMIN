@@ -143,6 +143,8 @@ function InforBillOder() {
   for (let i = 0; i < dataPrice?.length; i++) {
     sum += dataPrice[i];
   }
+  let shipCode= data?.transportFee
+  let tongTien= parseInt(sum)+parseInt(shipCode)
   return (
     <div className="_allcontai">
       <div className="_cntai">
@@ -309,11 +311,17 @@ function InforBillOder() {
           );
         })}
         <hr />
-
+        <div className="_all_m">
+          <p className=" _title_m">Phí ship :</p>
+          <span className="_title_lss">
+            {shipCode?.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}
+            vnđ
+          </span>
+        </div>
         <div className="_all_m">
           <p className=" _title_m">Thành tiền :</p>
           <span className="_title_ls">
-            {sum.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}
+            {tongTien.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.")}
             vnđ
           </span>
         </div>
