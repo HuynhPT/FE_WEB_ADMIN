@@ -177,24 +177,9 @@ const SizeScr = () => {
 
   const handleOk = () => {
     const titleSize = document.getElementById("titleSize").value;
-    const shoulder = document.getElementById("shoulder").value;
-
-    const bust = document.getElementById("bust").value;
-    const sleeveLength = document.getElementById("sleeveLength").value;
-
-    const waist = document.getElementById("waist").value;
-    const length = document.getElementById("length").value;
     dispash(
       upSizecolor({
         titleSize: titleSize,
-        shoulder: shoulder,
-
-        bust: bust,
-        sleeveLength: sleeveLength,
-
-        waist: waist,
-        length: length,
-
         mIdSize: dataEdit._id,
       })
     );
@@ -376,7 +361,7 @@ const SizeScr = () => {
               style={{ width: "90%" }}
             />
           </div>
-          <div style={{ width: "100%" }}>
+          {/* <div style={{ width: "100%" }}>
             <p>Kích thước vai</p>
             <input
               onChange={(e) => setValueV(e.target.value)}
@@ -440,7 +425,7 @@ const SizeScr = () => {
               value={valueC == undefined ? dataEdit?.length : valueC}
               style={{ width: "90%" }}
             />
-          </div>
+          </div> */}
         </div>
       </Modal>
 

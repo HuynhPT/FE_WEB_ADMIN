@@ -1,8 +1,12 @@
 import { Button, Form, Input, message, Select } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { mAUTHORIZATION } from "../../../../token/TokenLogin";
-import { URL_PUSH_NOTIFICATION } from "../../../API/ALLAPI";
+import { mAUTHORIZATION, mToken } from "../../../../token/TokenLogin";
+import {
+  LOCALHOST,
+  URL_PUSH_NOTIFICATION,
+  URL_SAVE_NOTIFICATION,
+} from "../../../API/ALLAPI";
 import {
   getTokenNotifications,
   saveNotifices,
@@ -14,6 +18,7 @@ export default function PushNotifications() {
 
   const [nameLinkImage, setNameLinkImage] = React.useState([]);
   const [nameImage, setNameImage] = React.useState();
+  const [selectScreen, setSelectScreen] = React.useState();
   const dispatch = useDispatch();
   const tokenData = useSelector((data) => data.notification.value);
 
@@ -21,21 +26,23 @@ export default function PushNotifications() {
     setNameLinkImage(e.target.files);
     setNameImage(e.target.files[0].name);
   };
-
+  const onChange = (value) => {
+    setSelectScreen(value);
+  };
   const onFinish = (values) => {
     var data = JSON.stringify({
       data: {
-        type: "nameScreen",
+        type: selectScreen,
       },
       notification: {
         title: values.title,
         body: values.body,
       },
-      //   registration_ids: tokenData.map((item) => item?.tokenPush),
+      registration_ids: tokenData.map((item) => item?.tokenPush),
 
-      registration_ids: [
-        "cMi-INJHTaiTIZvuzVB2j-:APA91bHa6E-gEhmppUFiVZKfR2rTsnmDNYrA2yG5So_aABzNa6MFnhZEhhGhSf6WwEk9ZiOvEveJxzLeBnPX-vh0Na8w3Yx_-lAITI0N3eTaQGAyn--uTSm_aOAggwHSvVGsIxXZwA6U",
-      ],
+      // registration_ids: [
+      //   "cMi-INJHTaiTIZvuzVB2j-:APA91bHa6E-gEhmppUFiVZKfR2rTsnmDNYrA2yG5So_aABzNa6MFnhZEhhGhSf6WwEk9ZiOvEveJxzLeBnPX-vh0Na8w3Yx_-lAITI0N3eTaQGAyn--uTSm_aOAggwHSvVGsIxXZwA6U",
+      // ],
     });
     var config = {
       method: "post",
@@ -51,13 +58,41 @@ export default function PushNotifications() {
       .then(function (response) {
         // console.log(response);
         if (response.data.success !== 0) {
-          dispatch(
-            saveNotifices({
-              title: values.title,
-              body: values.body,
-            })
+          message.error({
+            content: "Bạn đã thông báo cho người dùng thành công",
+            style: { color: "green" },
+          });
+          const fromdata = new FormData();
+          fromdata.append("title", values.title);
+          fromdata.append("body", values.body);
+          fromdata.append("croppedImage", nameLinkImage[0]);
+          axios({
+            url: `${LOCALHOST}` + `${URL_SAVE_NOTIFICATION}`,
+            method: "POST",
+            headers: {
+              token: mToken,
+              "Content-Type": "multipart/form-data",
+            },
+            data: fromdata,
+          }).then(
+            (res) => {
+              if (res.data.code === 200) {
+                message.success({
+                  content: "Lưu thông báo thành công",
+                  style: { color: "green" },
+                });
+              } else {
+                message.error({
+                  content: "Lưu thông báo thất bại",
+                  style: { color: "red" },
+                });
+              }
+              console.log(res);
+            },
+            (err) => {
+              console.log(err.response);
+            }
           );
-          message.success("Bạn đã thông báo cho khách hàng thành công");
         }
       })
       .catch(function (error) {
@@ -67,14 +102,8 @@ export default function PushNotifications() {
   useEffect(() => {
     dispatch(getTokenNotifications());
   }, []);
-  //   console.log(
-  //     tokenData.map((item) => item?.tokenPush),
-  //     "tokennotifice"
-  //   );
-  const onChange = (value) => {
-    console.log(`selected ${value}`);
-  };
 
+  console.log(nameLinkImage, 'img')
   return (
     <Form
       name="nest-messages"
@@ -168,7 +197,7 @@ export default function PushNotifications() {
             borderRadius: 3,
             width: "100%",
             height: 35,
-            backgroundColor:'#ffffff'
+            backgroundColor: "#ffffff",
           }}
         >
           <p
@@ -181,29 +210,20 @@ export default function PushNotifications() {
           </p>
         </div>
       </label>
-      <Form.Item
+
+      <input
+        id="images"
+        type="file"
         name="croppedImage"
-        // rules={[
-        //   {
-        //     required: true,
-        //     message: "Vui lòng chọn ảnh!",
-        //   },
-        // ]}
-        // style={{ marginTop: -30 }}
-      >
-        <input
-          id="images"
-          type="file"
-          name="croppedImage"
-          style={{
-            display: "none",
-            width: "100%",
-            // backgroundColor: "red",
-          }}
-          onChange={(e) => upImage(e)}
-        />
-      </Form.Item>
-      <Form.Item style={{ textAlign: "center" }}>
+        style={{
+          display: "none",
+          width: "100%",
+          // backgroundColor: "red",
+        }}
+        onChange={(e) => upImage(e)}
+      />
+
+      <Form.Item style={{ textAlign: "center", marginTop:20 }}>
         <Button
           type="primary"
           htmlType="reset"
