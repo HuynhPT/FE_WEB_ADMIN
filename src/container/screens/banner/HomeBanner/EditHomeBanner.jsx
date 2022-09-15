@@ -157,7 +157,7 @@ function EditBannerHome(props) {
                   <span style={{ margin: 10 }}>
                     {nameImage !== undefined
                       ? nameImage
-                      : dataEdit.image_ads}
+                      : (<img src={dataEdit.image_ads} style={{width:50}}/>)}
                   </span>
                   <br />
                   <Button

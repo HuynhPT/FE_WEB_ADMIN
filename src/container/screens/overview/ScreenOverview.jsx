@@ -79,7 +79,7 @@ const ScreenOverview = () => {
       console.log("err");
     }
   }, []);
-  console.log(tongLN, "spban");
+  console.log(TsPcon, "spban");
 
   //tổng tiền bán được
   const priceSel = exportPrices
