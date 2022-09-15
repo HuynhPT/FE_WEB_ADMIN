@@ -39,8 +39,8 @@ function InforBillOder() {
       setDisable(true);
     } else if (data?.status === 1) {
     }
-  }, []);
-  useEffect(() => {
+
+
     axios({
       url: `${LOCALHOST}` + `${URL_GET_ID_BILL_DETALS}`,
       method: "POST",
@@ -52,7 +52,10 @@ function InforBillOder() {
     }).then((resl) => {
       setDataAll(resl.data.billDetails);
     });
+
+
   }, []);
+
 
   const Showmodal = (index) => {
     setCurrentStep(index);
@@ -286,6 +289,7 @@ function InforBillOder() {
                         marginTop: 5,
                         marginLeft: 10,
                         background: item?.colorProduct,
+                        border:'1px solid black'
                       }}
                     ></p>
                   </div>

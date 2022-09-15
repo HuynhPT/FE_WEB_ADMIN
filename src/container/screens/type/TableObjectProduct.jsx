@@ -97,7 +97,9 @@ const TableObjectProduct = () => {
     setDataEdit();
     setIsModalVisible(false);
   };
-
+const handleExport=()=>{
+console.log(typeproduct, 'ex')
+}
   // bảng thông tin
   const listDataa = () => {
     if (typeproduct !== undefined) {
@@ -215,7 +217,7 @@ const TableObjectProduct = () => {
             <ReloadOutlined />
           </Button>
 
-          <Button
+          {/* <Button disabled={true}
             type="primary"
             style={{
               margin: "0 10px",
@@ -225,6 +227,17 @@ const TableObjectProduct = () => {
             onClick={showmodaldell}
           >
             <p style={{ color: "#000" }}>Xoá tất cả</p>
+          </Button> */}
+          <Button
+            type="primary"
+            style={{
+              margin: "0 10px",
+              backgroundColor: "#D9D9D9",
+              border: "1px solid #D9D9D9 ",
+            }}
+            onClick={handleExport}
+          >
+            <p style={{ color: "#000" }}>Export excel</p>
           </Button>
         </div>
         <AutoComplete

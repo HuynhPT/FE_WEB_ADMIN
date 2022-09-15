@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Avatar,
   Button,
@@ -371,13 +371,16 @@ function LayouttAdmin1() {
       <Sider trigger={true} collapsible collapsed={state}>
         <div className={styles.logo}>
           {state == false && (
-            <div className="logo" style={{ width: "50%" }}>
+            // <div className="logo" style={{ width: "50%" }} >
+              <NavLink className="logo" to="tong_quan" style={{ width: "100%" }} >
               <img
                 style={{ width: "100%", height: "100%" }}
                 src={img_logo}
                 alt=""
               />
-            </div>
+              </NavLink>
+              
+            // </div>
           )}
 
           <MenuOutlined

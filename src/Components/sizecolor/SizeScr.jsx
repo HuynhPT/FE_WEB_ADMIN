@@ -184,7 +184,7 @@ const SizeScr = () => {
       })
     );
     message.success({
-      content: "Sửa đối tượng thành công",
+      content: "Sửa thành công",
       className: "custom-class",
       style: {
         color: "#52c41a",

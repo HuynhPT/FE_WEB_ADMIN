@@ -28,7 +28,9 @@ const Chart = (props) => {
           ],
         },
       };
-      return <Column {...config} style={{ width: "100%" }} />;
+      return (
+        <Column {...config} style={{ width: "100%", fontFamily: "initial" }} />
+      );
     }
   };
 

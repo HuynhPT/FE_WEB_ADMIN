@@ -174,7 +174,7 @@ const ColorScr = () => {
       })
     );
     message.success({
-      content: "Sửa đối tượng thành công",
+      content: "Sửa thành công",
       className: "custom-class",
       style: {
         color: "#52c41a",
@@ -285,6 +285,7 @@ const ColorScr = () => {
                 fontWeight: "700",
                 fontFamily: "Open Sans",
                 borderRadius: 3,
+                textAlign: "center",
               }}
             >
               Thêm màu

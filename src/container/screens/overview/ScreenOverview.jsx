@@ -53,27 +53,28 @@ const ScreenOverview = () => {
         dispatch(getexportPriceSlice());
 
         dispatch(getimportPriceSlice());
-
+  
         dispatch(gettongDonhangdagiao());
-
+  
         dispatch(gettongDonhangdanggiao());
-
+  
         dispatch(gettongDonhangdangxuLy());
-
+  
         dispatch(gettongDonhangchoxacnhan());
-
+  
         dispatch(getTongsanPhambanduoc());
-
+  
         dispatch(gettongDonhang());
-
+  
         dispatch(gettongsanphamNhap());
-
+  
         dispatch(getsanphamConhang());
-
+  
         dispatch(getsanphamHethang());
-
+  
         dispatch(getTongloiNhuan());
       }
+     
     } catch (error) {
       console.log("err");
     }
@@ -96,7 +97,7 @@ const ScreenOverview = () => {
   const sumloinhuan = tongLN
     ?.toString()
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
-  const phantramloinhuan = parseInt(sumloinhuan) / parseInt(price)*100;
+  const phantramloinhuan = (parseInt(sumloinhuan) / parseInt(price)) * 100;
 
   const datas = [
     { type: "Sản phẩm còn ", value: parseInt(TsPcon) },
@@ -131,8 +132,8 @@ const ScreenOverview = () => {
           <div className={styles.row}>
             <Row
               img_ic={img_tds}
-              title={"Tổng lợi nhuận"}
-              number={tongLN < 0 ? 0 + " vnđ" : sumloinhuan + " vnđ"}
+              title={"Lợi nhuận"}
+              number={tongLN <= 0 ? 0 + " vnđ" : sumloinhuan + " vnđ"}
               color={"#87CEEB"}
               percent={phantramloinhuan}
             />
@@ -140,7 +141,7 @@ const ScreenOverview = () => {
           <div className={styles.row}>
             <Row
               img_ic={img_tcp}
-              title={"Tổng chi phí nhập"}
+              title={"Chi phí nhập"}
               number={
                 importsPrice.length === 0 ? 0 + " vnđ" : priceImport + " vnđ"
               }
@@ -151,7 +152,7 @@ const ScreenOverview = () => {
           <div>
             <Row
               img_ic={img_spbc}
-              title={"Tổng doanh thu bán"}
+              title={"Doanh thu bán"}
               number={
                 exportPrices.length === 0 ? 0 + " vnđ" : priceSel + " vnđ"
               }

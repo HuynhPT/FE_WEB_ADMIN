@@ -165,10 +165,7 @@ function FromUpdateTypeProduct(props) {
                   />
                 </Form.Item>
                 {/* Đối tượng */}
-                <Form.Item
-                  label=" Đối tượng"
-                  name="idTypeProduct"
-                >
+                <Form.Item label=" Đối tượng" name="idTypeProduct">
                   <SelectMenWoment
                     dataOP={dataOp}
                     onChange={handleChange}
@@ -187,9 +184,11 @@ function FromUpdateTypeProduct(props) {
                   {(nameImage !== undefined || dataEdit.categoryImgProduct) && (
                     <div style={{ display: "flex" }}>
                       <span style={{ margin: 10 }}>
-                        {nameImage !== undefined
-                          ? nameImage
-                          : dataEdit.categoryImgProduct}
+                        {nameImage !== undefined ? (
+                          nameImage
+                        ) : (
+                          <img src={dataEdit.categoryImgProduct} style={{width:40, height:40}}  />
+                        )}
                       </span>
                       <br />
                       <Button

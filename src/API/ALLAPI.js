@@ -1,5 +1,5 @@
-export const LOCALHOST = "http://52.141.50.48:3000/";
-// export const LOCALHOST = "http://18.141.199.110:3000/";
+// export const LOCALHOST = "http://52.141.50.48:3000/";
+export const LOCALHOST = "http://18.141.199.110:3000/";
 
 // thông báo
 //lấy tất cả token

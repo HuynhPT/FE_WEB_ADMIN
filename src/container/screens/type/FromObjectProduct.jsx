@@ -4,8 +4,6 @@ import TableObjectProduct from "./TableObjectProduct";
 import { CheckCircleTwoTone, PlusOutlined } from "@ant-design/icons";
 import { useDispatch } from "react-redux";
 import { addTypeProduct } from "../../../Redux/TypeProductSlice";
-import { useForm } from "react-hook-form";
-import Validate from "../../../Components/auth/Validate";
 const FromObjectProduct = () => {
   const [edtex, setedtex] = useState();
 
@@ -69,7 +67,7 @@ const FromObjectProduct = () => {
       >
         Thêm thể loại sản phẩm *
       </p> */}
-{/* 
+      {/* 
       <Form
         style={{
           display: "flex",
@@ -114,7 +112,7 @@ const FromObjectProduct = () => {
           <p style={{ color: "black", margin: 4 }}>Thêm</p>
         </Button>
       </Form> */}
-      <TableObjectProduct />
+    <TableObjectProduct />
     </div>
   );
 };
