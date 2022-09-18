@@ -33,6 +33,7 @@ import axios from "axios";
 import { mToken } from "../../../../token/TokenLogin";
 import { LOCALHOST, URL_GET_ALL_USER } from "../../../API/ALLAPI";
 import DateSelect from "../../../Components/overview/DateSelect";
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 // import DatePicker from "react-datepicker";
 
 // import "react-datepicker/dist/react-datepicker.css";
@@ -519,6 +520,53 @@ const ScreenListOrder = () => {
       </div>
 
       <div style={{ margin: "20px 30px 0 20px" }}>
+        <div
+          style={{ width: "100%", position: "absolute", top: 240, left: 890 }}
+        >
+          <section className="py-4 container">
+            <div className="row justify-content-center">
+              <table
+                className="table table-striped"
+                id="Export_xlsx"
+                hidden={true}
+              >
+                <thead>
+                  <tr>
+                    <td>STT</td>
+                    <td>Mã đơn hàng</td>
+                    <td>Họ khách hàng</td>
+                    <td>Tên khách hàng</td>
+                    <td>Số điện thoại khách hàng</td>
+                    <td>Địa chỉ khách hàng</td>
+                    <td>Thời gian đặt hàng</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {billdata.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.code}</td>
+                        <td>{item.billingEncode}</td>
+                        <td>{item.firstName}</td>
+                        <td>{item.lastName}</td>
+                        <td>{item.numberPhone}</td>
+                        <td>{item.fullAddress}</td>
+                        <td>{item.createdAt}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              <ReactHtmlTableToExcel
+                table="Export_xlsx"
+                filename="Danh sách đơn hàng"
+                sheet="Sheet"
+                buttonText="Xuất excel"
+              />
+            </div>
+          </section>
+        </div>
         <Table
           style={{ width: "100%" }}
           dataSource={billdata}

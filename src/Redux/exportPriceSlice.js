@@ -4,7 +4,6 @@ export const getexportPriceSlice = createAsyncThunk(
   "exportPrice/getexportPriceSlice",
   async () => {
     const { data: getexport } = await getAllSELl();
-    console.log(getexport);
     return getexport.result;
   }
 );
@@ -16,7 +15,6 @@ const exportPriceSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getexportPriceSlice.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });

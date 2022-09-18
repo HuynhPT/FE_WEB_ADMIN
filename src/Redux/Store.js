@@ -32,10 +32,10 @@ import tongDonhangdanggiao from "./tongDonhangdanggiao";
 import tongDonhangdangxuLy from "./tongDonhangdangxuLy";
 import tongDonhangchoxacnhan from "./tongDonhangchoxacnhan";
 import TongsanPhambanduoc from "./TongsanPhambanduoc";
-import SPConhang from "./SanpConhang";
 import sanphaHethang from "./SanphamHeth";
 import tongloiNhuan from "./TongloiNhuan";
 import SPnhapHang from "./SanphamNhapHang";
+import sanpConhang from "./SanpConhang";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -62,8 +62,8 @@ const rootReducer = combineReducers({
   dangxuly: tongDonhangdangxuLy,
   choxacnhan: tongDonhangchoxacnhan,
   tongSP: TongsanPhambanduoc,
-  conhang: SPConhang,
   hethang: sanphaHethang,
+  conhang: sanpConhang,
   tongnhapsanpham: SPnhapHang,
   loinhuan:tongloiNhuan
 });

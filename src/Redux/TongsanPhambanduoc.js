@@ -15,7 +15,6 @@ export const getTongsanPhambanduoc = createAsyncThunk(
   "tongSP/getTongsanPhambanduoc",
   async () => {
     const { data: sizes } = await getAllsum();
-    console.log(sizes);
     return sizes.result;
   }
 );
@@ -28,7 +27,6 @@ const TongsanPhambanduoc = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getTongsanPhambanduoc.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });

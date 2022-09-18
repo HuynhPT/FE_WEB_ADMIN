@@ -17,12 +17,8 @@ import {
   upTypeProduct,
 } from "../../../Redux/TypeProductSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { ReloadOutlined, SearchOutlined } from "@ant-design/icons";
-import {
-  LOCALHOST,
-  URL_GET_ALL_IMG,
-  URL_GET_ALL_OPJECT,
-} from "../../../API/ALLAPI";
+import { ReloadOutlined } from "@ant-design/icons";
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 const { Search } = Input;
 const TableObjectProduct = () => {
   // Khai báo state
@@ -31,6 +27,7 @@ const TableObjectProduct = () => {
   const [dataEdit, setDataEdit] = useState();
   const [value, setValue] = useState();
   const [searchtitle, setSearchtitle] = useState("");
+  const [check, setCheck] = useState(1);
   // tham chiếu redux
   const dispatch = useDispatch();
   const typeproduct = useSelector((data) => data.typeproduct.value);
@@ -97,9 +94,9 @@ const TableObjectProduct = () => {
     setDataEdit();
     setIsModalVisible(false);
   };
-const handleExport=()=>{
-console.log(typeproduct, 'ex')
-}
+  const handleExport = () => {
+    // console.log(typeproduct, "ex");
+  };
   // bảng thông tin
   const listDataa = () => {
     if (typeproduct !== undefined) {
@@ -228,17 +225,6 @@ console.log(typeproduct, 'ex')
           >
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button> */}
-          <Button
-            type="primary"
-            style={{
-              margin: "0 10px",
-              backgroundColor: "#D9D9D9",
-              border: "1px solid #D9D9D9 ",
-            }}
-            onClick={handleExport}
-          >
-            <p style={{ color: "#000" }}>Export excel</p>
-          </Button>
         </div>
         <AutoComplete
           onSearch={onsearchtype}
@@ -251,8 +237,42 @@ console.log(typeproduct, 'ex')
           />
         </AutoComplete>
       </div>
-
+      <div style={{ width: "100%", position: "absolute", top: 145, left: 300 }}>
+        <section className="py-4 container">
+          <div className="row justify-content-center">
+            <table
+              className="table table-striped"
+              id="Export_xlsx"
+              hidden={true}
+            >
+              <thead>
+                <tr>
+                  <td>STT</td>
+                  <td>Tên thể loại sản phẩm</td>
+                </tr>
+              </thead>
+              <tbody>
+                {typeproduct.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.titleTypeProduct}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <ReactHtmlTableToExcel
+              table="Export_xlsx"
+              filename="Danh sách thể loại sản phẩm"
+              sheet="Sheet"
+              buttonText="Xuất excel"
+            />
+          </div>
+        </section>
+      </div>
       {listDataa()}
+
       <Modal
         title="Sửa đối tượng sử dụng"
         visible={isModalVisible}

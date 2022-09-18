@@ -1,5 +1,6 @@
 import { Popconfirm, Table } from "antd";
 import React, { useEffect } from "react";
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getNotifications,
@@ -74,6 +75,42 @@ export default function ScreenNotificationList() {
         }}
       >
         Danh sách thông báo
+      </div>
+      <div style={{ width: "100%", position: "absolute", top: 120, left: 213 }}>
+        <section className="py-4 container">
+          <div className="row justify-content-center">
+            <table
+              className="table table-striped"
+              id="Export_xlsx"
+              hidden={true}
+            >
+              <thead>
+                <tr>
+                  <td>STT</td>
+                  <td>Tiêu đề thông báo</td>
+                  <td>Nội dung thông báo</td>
+                </tr>
+              </thead>
+              <tbody>
+                {dataNotification.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.title}</td>
+                      <td>{item.body}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <ReactHtmlTableToExcel
+              table="Export_xlsx"
+              filename="Danh sách thông báo"
+              sheet="Sheet"
+              buttonText="Xuất excel"
+            />
+          </div>
+        </section>
       </div>
       <div style={{ margin: "20px 0 0 20px" }}>
         <Table

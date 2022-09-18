@@ -17,14 +17,15 @@ import { gettongDonhangdangxuLy } from "../../../Redux/tongDonhangdangxuLy";
 import { gettongDonhangchoxacnhan } from "../../../Redux/tongDonhangchoxacnhan";
 import { getTongsanPhambanduoc } from "../../../Redux/TongsanPhambanduoc";
 import { getTongloiNhuan } from "../../../Redux/TongloiNhuan";
-import { getsanphamConhang } from "../../../Redux/SanpConhang";
 import { gettongsanphamNhap } from "../../../Redux/SanphamNhapHang";
 import { getsanphamHethang } from "../../../Redux/SanphamHeth";
+import { getsanphamConhang } from "../../../Redux/SanpConhang";
+import { mToken } from "../../../../token/TokenLogin";
+import { getProduct } from "../../../Redux/ProductSlice";
 
 const ScreenOverview = () => {
   // const [dataSum, setDataSum] = useState();
-  const [dataloinhuan, setDataloinhuan] = useState();
-  const [dataus, setData] = useState(null);
+  const [data, setData] = useState(null);
   //tổng giá trị mặc định
   const price = (100000000)
     .toString()
@@ -50,37 +51,41 @@ const ScreenOverview = () => {
         navigation("/");
       } else {
         setData(user.user);
-        dispatch(getexportPriceSlice());
-
-        dispatch(getimportPriceSlice());
-  
-        dispatch(gettongDonhangdagiao());
-  
-        dispatch(gettongDonhangdanggiao());
-  
-        dispatch(gettongDonhangdangxuLy());
-  
-        dispatch(gettongDonhangchoxacnhan());
-  
-        dispatch(getTongsanPhambanduoc());
-  
-        dispatch(gettongDonhang());
-  
-        dispatch(gettongsanphamNhap());
-  
-        dispatch(getsanphamConhang());
-  
-        dispatch(getsanphamHethang());
-  
-        dispatch(getTongloiNhuan());
       }
-     
     } catch (error) {
       console.log("err");
     }
-  }, []);
-  console.log(TsPcon, "spban");
 
+    dispatch(getexportPriceSlice());
+
+    dispatch(getimportPriceSlice());
+
+    dispatch(gettongDonhangdagiao());
+
+    dispatch(gettongDonhangdanggiao());
+
+    dispatch(gettongDonhangdangxuLy());
+
+    dispatch(gettongDonhangchoxacnhan());
+
+    dispatch(getTongsanPhambanduoc());
+
+    dispatch(gettongDonhang());
+
+    dispatch(getsanphamHethang());
+
+    dispatch(getsanphamConhang());
+
+    dispatch(gettongsanphamNhap());
+
+    dispatch(getTongloiNhuan());
+  }, []);
+  const dataProduct = useSelector((data) => data.product.value);
+  useEffect(() => {
+    dispatch(getProduct());
+  }, []);
+  // console.log(dataProduct.length);
+  console.log(TsPcon);
   //tổng tiền bán được
   const priceSel = exportPrices
     ?.map((item) => item?.count)
@@ -100,13 +105,16 @@ const ScreenOverview = () => {
   const phantramloinhuan = (parseInt(sumloinhuan) / parseInt(price)) * 100;
 
   const datas = [
-    { type: "Sản phẩm còn ", value: parseInt(TsPcon) },
-    { type: "Sản phẩm hết ", value: parseInt(hethang) },
+    { type: "Sản phẩm còn ", value: TsPcon === null ? 0 : parseInt(TsPcon) },
+    { type: "Sản phẩm hết ", value: hethang === null ? 0 : parseInt(hethang) },
   ];
   const nhapxuat = [
     {
       type: "Sản phẩm bán ",
-      value: parseInt(sanphambanduoc?.map((item) => item?.count)),
+      value:
+        (sanphambanduoc?.map((item) => item?.count)).length === 0
+          ? 0
+          : parseInt(sanphambanduoc?.map((item) => item?.count)),
     },
     { type: "Sản phẩm nhập ", value: parseInt(Tspnhap) },
   ];
@@ -122,7 +130,7 @@ const ScreenOverview = () => {
       <div className={styles.container_item}>
         <div>
           <p className={styles.text_content}>
-            {"Chào " + dataus?.userName + ", Ngày mới tốt lành"}
+            {"Chào " + data?.userName + ", Ngày mới tốt lành"}
           </p>
           {/* <div style={{ alignItems:'center', justifyContent:'center'}}>
           <DateSelect />
@@ -135,7 +143,7 @@ const ScreenOverview = () => {
               title={"Lợi nhuận"}
               number={tongLN <= 0 ? 0 + " vnđ" : sumloinhuan + " vnđ"}
               color={"#87CEEB"}
-              percent={phantramloinhuan}
+              percent={parseInt(phantramloinhuan)}
             />
           </div>
           <div className={styles.row}>
@@ -146,7 +154,7 @@ const ScreenOverview = () => {
                 importsPrice.length === 0 ? 0 + " vnđ" : priceImport + " vnđ"
               }
               color={"#FF69B4"}
-              percent={phantramimport}
+              percent={parseInt(phantramimport)}
             />
           </div>
           <div>
@@ -157,7 +165,7 @@ const ScreenOverview = () => {
                 exportPrices.length === 0 ? 0 + " vnđ" : priceSel + " vnđ"
               }
               color={"#DDA0DD"}
-              percent={phantramsel}
+              percent={parseInt(phantramsel)}
             />
           </div>
         </div>

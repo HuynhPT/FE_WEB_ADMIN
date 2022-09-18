@@ -49,7 +49,7 @@ export const getAllsum = () => {
   });
 };
 
-export const getAllConhang = () => {
+export const getConhang = () => {
   const url = `${URL_STOCKING_PRODUCT}`;
   return axiosClient.get(url, {
     headers: {

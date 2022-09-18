@@ -8,7 +8,6 @@ export const getsanphamHethang = createAsyncThunk(
   "hethang/getsanphamHethang",
   async () => {
     const { data: getexport } = await getAllHethang();
-    console.log(getexport);
     return getexport.totalItems;
   }
 );
@@ -20,7 +19,6 @@ const sanphaHethang = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getsanphamHethang.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });

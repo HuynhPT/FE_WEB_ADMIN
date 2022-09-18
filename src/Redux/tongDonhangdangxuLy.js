@@ -4,7 +4,6 @@ export const gettongDonhangdangxuLy = createAsyncThunk(
   "dangxuly/gettongDonhangdangxuLy",
   async () => {
     const { data: getexport } = await getAllbillxuLy();
-    console.log(getexport);
     return getexport.totalItems;
   }
 );
@@ -16,7 +15,6 @@ const tongDonhangdangxuLy = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(gettongDonhangdangxuLy.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.value = action.payload;
       // action is inferred correctly here if using TS
     });

@@ -18,6 +18,8 @@ import { getAll } from "../../../API/ProductAPI";
 import { ReloadOutlined } from "@ant-design/icons";
 import SelectFilter from "../../../Components/type/SelectFilter";
 import { useDispatch, useSelector } from "react-redux";
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
+
 import {
   delAllProduct,
   delProduct,
@@ -326,7 +328,9 @@ const ScreenListProduct = () => {
   return (
     <div className="list-product">
       <div className="titlespb">
-        <p className="text_titlespb" style={{fontFamily:'initial'}}>Danh sách sản phẩm </p>
+        <p className="text_titlespb" style={{ fontFamily: "initial" }}>
+          Danh sách sản phẩm{" "}
+        </p>
       </div>
       <div className="text_spb">
         <p className="texttitlespb">
@@ -400,6 +404,52 @@ const ScreenListProduct = () => {
             // style={{ marginLeft: 30 }}
           />
         </AutoComplete>
+      </div>
+      <div style={{ width: "100%", position: "absolute", top: 240, left:650 }}>
+        <section className="py-4 container">
+          <div className="row justify-content-center">
+            <table
+              className="table table-striped"
+              id="Export_xlsx"
+              hidden={true}
+            >
+              <thead>
+                <tr>
+                  <td>STT</td>
+                  <td>Mã sản phẩm</td>
+                  <td>Ảnh sản phẩm</td>
+                  <td>Tên sản phẩm</td>
+                  <td>Size sản phẩm</td>
+                  <td>Màu sản phẩm</td>
+                  <td>Đơn giá sản phẩm</td>
+                  <td>Giá bán sản phẩm</td>
+                </tr>
+              </thead>
+              <tbody>
+                {dataProduct.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.code}</td>
+                      <td>{item.imageProduct}</td>
+                      <td>{item.titleProduct}</td>
+                      <td>{item.size_product}</td>
+                      <td>{item.color_product}</td>
+                      <td>{item.importPrice}</td>
+                      <td>{item.price}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <ReactHtmlTableToExcel
+              table="Export_xlsx"
+              filename="Danh sách sản phẩm"
+              sheet="Sheet"
+              buttonText="Xuất excel"
+            />
+          </div>
+        </section>
       </div>
       <Table
         // scroll={{ x: 1000 }}

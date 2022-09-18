@@ -181,7 +181,7 @@ const InforProduct = () => {
                     marginRight: 5,
                     borderRadius: 3,
                     height: 30,
-                    width: 40,
+                    width: 60,
                     textAlign: "center",
                     marginTop: -10,
                   }}

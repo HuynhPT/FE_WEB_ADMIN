@@ -1,14 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getAllConhang} from "../API/StatisticalApi";
+
+import { getConhang } from "../API/StatisticalApi";
 export const getsanphamConhang = createAsyncThunk(
   "conhang/getsanphamConhang",
   async () => {
-    const { data: getexport } = await getAllConhang();
-    console.log(getexport);
+    const { data: getexport } = await getConhang();
     return getexport.totalItems;
   }
 );
-const SPConhang = createSlice({
+const sanphaConhang = createSlice({
   name: "auth",
   initialState: {
     value: [],
@@ -23,6 +23,6 @@ const SPConhang = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailed } = SPConhang.actions;
+export const { loginStart, loginSuccess, loginFailed } = sanphaConhang.actions;
 
-export default SPConhang.reducer;
+export default sanphaConhang.reducer;

@@ -7,6 +7,7 @@ import axios from "axios";
 import { mToken } from "../../../../token/TokenLogin";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser, removeUser } from "../../../Redux/UserSlice";
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 
 const ScreenListUser = () => {
   const dispatch = useDispatch();
@@ -127,12 +128,52 @@ const ScreenListUser = () => {
           <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
       </div> */}
-      <Table
-        columns={columns}
-        dataSource={dataus}
-        rowKey={(item) => item._id}
-        className="table-list"
-      />
+      <div style={{ width: "100%", position: "absolute", top: 220, left: 223 }}>
+        <section className="py-4 container">
+          <div className="row justify-content-center">
+            <table
+              className="table table-striped"
+              id="Export_xlsx"
+              hidden={true}
+            >
+              <thead>
+                <tr>
+                  <td>STT</td>
+                  <td>Tên khách hàng</td>
+                  <td>Số điện thoại khách hàng</td>
+                  <td>Email khách hàng</td>
+                </tr>
+              </thead>
+              <tbody>
+                {dataus.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.name}</td>
+                      <td>{item.phone}</td>
+                      <td>{item.email}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <ReactHtmlTableToExcel
+              table="Export_xlsx"
+              filename="Danh sách khách hàng"
+              sheet="Sheet"
+              buttonText="Xuất excel"
+            />
+          </div>
+        </section>
+      </div>
+      <div style={{ marginTop: 20 }}>
+        <Table
+          columns={columns}
+          dataSource={dataus}
+          rowKey={(item) => item._id}
+          className="table-list"
+        />
+      </div>
     </div>
   );
 };

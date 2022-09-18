@@ -29,6 +29,7 @@ import SelectMenWomen from "../../../Components/products/SelectMenWomen";
 import SelectOptionTypeProduct from "../../../Components/products/SelectOptionTypeProduct";
 import SelectFilter from "../../../Components/type/SelectFilter";
 import { LOCALHOST, URL_GET_ALL_OPJECT } from "../../../API/ALLAPI";
+import ReactHtmlTableToExcel from "react-html-table-to-excel";
 const TableObjectProduct = () => {
   const { Search } = Input;
   // khai báo state
@@ -173,7 +174,7 @@ const TableObjectProduct = () => {
       ),
     },
   ];
-
+console.log(ListOpject)
   return (
     <>
       {/* chức năng */}
@@ -227,6 +228,42 @@ const TableObjectProduct = () => {
             value={searchLable}
           />
         </AutoComplete>
+      </div>
+      <div style={{ width: "100%", position: "absolute", top: 221, left: 488 }}>
+        <section className="py-4 container">
+          <div className="row justify-content-center">
+            <table
+              className="table table-striped"
+              id="Export_xlsx"
+              hidden={true}
+            >
+              <thead>
+                <tr>
+                  <td>STT</td>
+                  <td>Ảnh loại sản phẩm</td>
+                  <td>Tên loại sản phẩm</td>
+                </tr>
+              </thead>
+              <tbody>
+                {ListOpject.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.categoryImgProduct}</td>
+                      <td>{item.titleCategoryProduct}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <ReactHtmlTableToExcel
+              table="Export_xlsx"
+              filename="Danh sách loại sản phẩm"
+              sheet="Sheet"
+              buttonText="Xuất excel"
+            />
+          </div>
+        </section>
       </div>
       <Table
         columns={columns}
