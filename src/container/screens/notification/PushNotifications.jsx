@@ -137,9 +137,9 @@ export default function PushNotifications() {
           onChange={onChange}
           style={{ backgroundColor: "#ffffff" }}
         >
-          <Option value="AppContainer">Màn hình Trang chủ</Option>
-          <Option value="ScreenNotification">Màn hình Thông báo</Option>
-          <Option value="ScreenOrder">Màn hình Giỏ hàng</Option>
+          <Option value="ScreensHome">Màn hình Trang chủ</Option>
+          <Option value="ScreensProduct">Màn hình Sản phẩm</Option>
+          <Option value="ScreenCart">Màn hình Giỏ hàng</Option>
         </Select>
       </Form.Item>
       <div style={{ marginBottom: 10 }}>
@@ -171,7 +171,7 @@ export default function PushNotifications() {
         <Input.TextArea placeholder="Nhập nội dung muốn thông báo" />
       </Form.Item>
       <div style={{ marginBottom: 10 }}>
-        <a style={{ color: "black", fontSize: 16 }}>Chọn ảnh thông báo</a>
+        <a style={{ color: "black", fontSize: 16 }}>Chọn ảnh thông báo( nếu có )</a>
       </div>
 
       {nameImage !== undefined && (

@@ -1,8 +1,8 @@
-import { Modal, Steps } from "antd";
+import { Button, Modal, Steps } from "antd";
 import axios from "axios";
 import QueryString from "qs";
 import React, { useEffect, useLayoutEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { mToken } from "../../../../token/TokenLogin";
 import {
   LOCALHOST,
@@ -40,7 +40,6 @@ function InforBillOder() {
     } else if (data?.status === 1) {
     }
 
-
     axios({
       url: `${LOCALHOST}` + `${URL_GET_ID_BILL_DETALS}`,
       method: "POST",
@@ -52,10 +51,7 @@ function InforBillOder() {
     }).then((resl) => {
       setDataAll(resl.data.billDetails);
     });
-
-
   }, []);
-
 
   const Showmodal = (index) => {
     setCurrentStep(index);
@@ -146,8 +142,8 @@ function InforBillOder() {
   for (let i = 0; i < dataPrice?.length; i++) {
     sum += dataPrice[i];
   }
-  let shipCode= data?.transportFee
-  let tongTien= parseInt(sum)+parseInt(shipCode)
+  let shipCode = data?.transportFee;
+  let tongTien = parseInt(sum) + parseInt(shipCode);
   return (
     <div className="_allcontai">
       <div className="_cntai">
@@ -289,7 +285,7 @@ function InforBillOder() {
                         marginTop: 5,
                         marginLeft: 10,
                         background: item?.colorProduct,
-                        border:'1px solid black'
+                        border: "1px solid black",
                       }}
                     ></p>
                   </div>
@@ -330,6 +326,15 @@ function InforBillOder() {
           </span>
         </div>
       </div>
+      <Link to={"/shop/khachHang_DatHang"} style={{display:'flex' , justifyContent:'flex-end'}} >
+        <Button
+        style={{
+          margin: "0 30px 0 0",
+          backgroundColor: "#D9D9D9",
+          border: "1px solid #D9D9D9 ",
+        }}
+        >Xong</Button>
+      </Link>
     </div>
   );
 }

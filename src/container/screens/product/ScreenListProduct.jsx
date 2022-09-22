@@ -38,7 +38,7 @@ const ScreenListProduct = () => {
 
   const [isModalDelALl, setisModalDelALl] = useState();
   const [data, setData] = useState();
-  const [dataLable, setDataLable] = useState("Lọc");
+  const [dataLable, setDataLable] = useState("Lọc theo loại sản phẩm");
   const [switchs, setSwitchs] = useState();
   const dispatch = useDispatch();
   const dataProduct = useSelector((data) => data.product.value);
@@ -347,11 +347,57 @@ const ScreenListProduct = () => {
           justifyContent: "space-between",
         }}
       >
+          <div style={{margin:'0 0 0 20px'}}>
+        <section className="py-4 container">
+          <div className="row justify-content-center">
+            <table
+              className="table table-striped"
+              id="Export_xlsx"
+              hidden={true}
+            >
+              <thead>
+                <tr>
+                  <td>STT</td>
+                  <td>Mã sản phẩm</td>
+                  <td>Ảnh sản phẩm</td>
+                  <td>Tên sản phẩm</td>
+                  <td>Size sản phẩm</td>
+                  <td>Màu sản phẩm</td>
+                  <td>Đơn giá sản phẩm</td>
+                  <td>Giá bán sản phẩm</td>
+                </tr>
+              </thead>
+              <tbody>
+                {dataProduct.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.code}</td>
+                      <td>{item.imageProduct}</td>
+                      <td>{item.titleProduct}</td>
+                      <td>{item.size_product}</td>
+                      <td>{item.color_product}</td>
+                      <td>{item.importPrice}</td>
+                      <td>{item.price}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <ReactHtmlTableToExcel
+              table="Export_xlsx"
+              filename="Danh sách sản phẩm"
+              sheet="Sheet"
+              buttonText="Xuất excel"
+            />
+          </div>
+        </section>
+      </div>
         <div style={{ display: "flex", width: "35%" }}>
           <Button
             type="primary"
             style={{
-              margin: "0 0 0 30px",
+              margin: "0 0 0 -250px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
@@ -405,52 +451,7 @@ const ScreenListProduct = () => {
           />
         </AutoComplete>
       </div>
-      <div style={{ width: "100%", position: "absolute", top: 240, left:650 }}>
-        <section className="py-4 container">
-          <div className="row justify-content-center">
-            <table
-              className="table table-striped"
-              id="Export_xlsx"
-              hidden={true}
-            >
-              <thead>
-                <tr>
-                  <td>STT</td>
-                  <td>Mã sản phẩm</td>
-                  <td>Ảnh sản phẩm</td>
-                  <td>Tên sản phẩm</td>
-                  <td>Size sản phẩm</td>
-                  <td>Màu sản phẩm</td>
-                  <td>Đơn giá sản phẩm</td>
-                  <td>Giá bán sản phẩm</td>
-                </tr>
-              </thead>
-              <tbody>
-                {dataProduct.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.code}</td>
-                      <td>{item.imageProduct}</td>
-                      <td>{item.titleProduct}</td>
-                      <td>{item.size_product}</td>
-                      <td>{item.color_product}</td>
-                      <td>{item.importPrice}</td>
-                      <td>{item.price}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <ReactHtmlTableToExcel
-              table="Export_xlsx"
-              filename="Danh sách sản phẩm"
-              sheet="Sheet"
-              buttonText="Xuất excel"
-            />
-          </div>
-        </section>
-      </div>
+    
       <Table
         // scroll={{ x: 1000 }}
         columns={columns}

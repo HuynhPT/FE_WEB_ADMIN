@@ -429,17 +429,63 @@ const ScreenListOrder = () => {
           width: "100%",
         }}
       >
+          <div
+          style={{width:'20%', margin:'0 0 0 10px'}}
+        >
+          <section className="py-4 container">
+            <div className="row justify-content-center">
+              <table
+                className="table table-striped"
+                id="Export_xlsx"
+                hidden={true}
+              >
+                <thead>
+                  <tr>
+                    <td>STT</td>
+                    <td>Mã đơn hàng</td>
+                    <td>Họ khách hàng</td>
+                    <td>Tên khách hàng</td>
+                    <td>Số điện thoại khách hàng</td>
+                    <td>Địa chỉ khách hàng</td>
+                    <td>Thời gian đặt hàng</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {billdata.map((item, index) => {
+                    return (
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{item.code}</td>
+                        <td>{item.billingEncode}</td>
+                        <td>{item.firstName}</td>
+                        <td>{item.lastName}</td>
+                        <td>{item.numberPhone}</td>
+                        <td>{item.fullAddress}</td>
+                        <td>{item.createdAt}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+              <ReactHtmlTableToExcel
+                table="Export_xlsx"
+                filename="Danh sách đơn hàng"
+                sheet="Sheet"
+                buttonText="Xuất excel"
+              />
+            </div>
+          </section>
+        </div>
         <div style={{ display: "flex", width: "100%" }}>
           <Button
             type="primary"
             style={{
-              margin: "0 0 0 30px",
+              margin: "0 0 0 -50px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
             onClick={() => {
               dispatch(getBillProduct());
-              // setSearchtitle("");
             }}
           >
             <ReloadOutlined />
@@ -519,54 +565,8 @@ const ScreenListOrder = () => {
         </AutoComplete>
       </div>
 
-      <div style={{ margin: "20px 30px 0 20px" }}>
-        <div
-          style={{ width: "100%", position: "absolute", top: 240, left: 890 }}
-        >
-          <section className="py-4 container">
-            <div className="row justify-content-center">
-              <table
-                className="table table-striped"
-                id="Export_xlsx"
-                hidden={true}
-              >
-                <thead>
-                  <tr>
-                    <td>STT</td>
-                    <td>Mã đơn hàng</td>
-                    <td>Họ khách hàng</td>
-                    <td>Tên khách hàng</td>
-                    <td>Số điện thoại khách hàng</td>
-                    <td>Địa chỉ khách hàng</td>
-                    <td>Thời gian đặt hàng</td>
-                  </tr>
-                </thead>
-                <tbody>
-                  {billdata.map((item, index) => {
-                    return (
-                      <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td>{item.code}</td>
-                        <td>{item.billingEncode}</td>
-                        <td>{item.firstName}</td>
-                        <td>{item.lastName}</td>
-                        <td>{item.numberPhone}</td>
-                        <td>{item.fullAddress}</td>
-                        <td>{item.createdAt}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              <ReactHtmlTableToExcel
-                table="Export_xlsx"
-                filename="Danh sách đơn hàng"
-                sheet="Sheet"
-                buttonText="Xuất excel"
-              />
-            </div>
-          </section>
-        </div>
+      <div style={{ margin: "5px 30px 0 20px" }}>
+      
         <Table
           style={{ width: "100%" }}
           dataSource={billdata}

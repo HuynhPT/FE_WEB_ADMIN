@@ -1,8 +1,5 @@
 import {
-  Space,
   Table,
-  Radio,
-  Divider,
   Input,
   Image,
   Button,
@@ -12,8 +9,6 @@ import {
 } from "antd";
 import { useEffect, useState } from "react";
 import {
-  EditOutlined,
-  DeleteOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,8 +20,6 @@ import {
   getOpjectCategori,
   searchopjectCategori,
 } from "../../../Redux/OjectCategoriSlice";
-import SelectMenWomen from "../../../Components/products/SelectMenWomen";
-import SelectOptionTypeProduct from "../../../Components/products/SelectOptionTypeProduct";
 import SelectFilter from "../../../Components/type/SelectFilter";
 import { LOCALHOST, URL_GET_ALL_OPJECT } from "../../../API/ALLAPI";
 import ReactHtmlTableToExcel from "react-html-table-to-excel";
@@ -35,7 +28,7 @@ const TableObjectProduct = () => {
   // khai báo state
   const [isModalDelALl, setisModalDelALl] = useState(false);
   const [data, setData] = useState();
-  const [dataLable, setDataLable] = useState("Lọc");
+  const [dataLable, setDataLable] = useState("Lọc theo TLSP");
   const [searchLable, setSearchLable] = useState("");
 
   // lấy type selecte
@@ -179,19 +172,55 @@ console.log(ListOpject)
     <>
       {/* chức năng */}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div style={{ display: "flex" }}>
+      <div style={{margin:'0 0 0 -10px'}}>
+        <section className="py-4 container">
+          <div className="row justify-content-center">
+            <table
+              className="table table-striped"
+              id="Export_xlsx"
+              hidden={true}
+            >
+              <thead>
+                <tr>
+                  <td>STT</td>
+                  <td>Ảnh loại sản phẩm</td>
+                  <td>Tên loại sản phẩm</td>
+                </tr>
+              </thead>
+              <tbody>
+                {ListOpject.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>{item.categoryImgProduct}</td>
+                      <td>{item.titleCategoryProduct}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <ReactHtmlTableToExcel
+              table="Export_xlsx"
+              filename="Danh sách loại sản phẩm"
+              sheet="Sheet"
+              buttonText="Xuất excel"
+            />
+          </div>
+        </section>
+      </div>
+        <div style={{ display: "flex", width:'30%' }}>
           {/* load lại */}
           <Button
             type="primary"
             style={{
-              margin: "0 5px 0 0",
+              margin: "0 5px 0 -200px",
               backgroundColor: "#D9D9D9",
               border: "1px solid #D9D9D9 ",
             }}
             onClick={() => {
               dispatch(getOpjectCategori());
               setSearchLable("");
-              setDataLable("Lọc");
+              setDataLable("Lọc theo TLSP");
             }}
           >
             <ReloadOutlined />
@@ -229,42 +258,7 @@ console.log(ListOpject)
           />
         </AutoComplete>
       </div>
-      <div style={{ width: "100%", position: "absolute", top: 221, left: 488 }}>
-        <section className="py-4 container">
-          <div className="row justify-content-center">
-            <table
-              className="table table-striped"
-              id="Export_xlsx"
-              hidden={true}
-            >
-              <thead>
-                <tr>
-                  <td>STT</td>
-                  <td>Ảnh loại sản phẩm</td>
-                  <td>Tên loại sản phẩm</td>
-                </tr>
-              </thead>
-              <tbody>
-                {ListOpject.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.categoryImgProduct}</td>
-                      <td>{item.titleCategoryProduct}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <ReactHtmlTableToExcel
-              table="Export_xlsx"
-              filename="Danh sách loại sản phẩm"
-              sheet="Sheet"
-              buttonText="Xuất excel"
-            />
-          </div>
-        </section>
-      </div>
+      
       <Table
         columns={columns}
         rowKey={(item) => item._id}

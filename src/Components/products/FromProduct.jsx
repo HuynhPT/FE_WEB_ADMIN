@@ -466,7 +466,7 @@ function FromProduct(props) {
 
         {/* mô tả */}
         <div className="_nameInputrow2">
-          <p className="_text_product">Mô tả sản phẩm</p>
+          <p className="_text_product">{"Mô tả sản phẩm( nếu có )"}</p>
           <Form.Item>
             <div style={{ display: "inline" }}>
               <Editor
