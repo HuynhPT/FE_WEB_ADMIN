@@ -486,6 +486,7 @@ const ScreenListOrder = () => {
             }}
             onClick={() => {
               dispatch(getBillProduct());
+              setDataLable("Đơn hàng theo người dùng")
             }}
           >
             <ReloadOutlined />
