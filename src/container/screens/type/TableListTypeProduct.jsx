@@ -8,9 +8,7 @@ import {
   AutoComplete,
 } from "antd";
 import { useEffect, useState } from "react";
-import {
-  ReloadOutlined,
-} from "@ant-design/icons";
+import { ReloadOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
@@ -47,7 +45,9 @@ const TableObjectProduct = () => {
   // tham chiếu
   const dispatch = useDispatch();
   const ListOpject = useSelector((data) => data.categoris.value);
-
+  useEffect(() => {
+    dispatch(getOpjectCategori());
+  }, []);
   // lấy danh sách theo id
   const handleChange = (values) => {
     setDataLable(values);
@@ -56,7 +56,15 @@ const TableObjectProduct = () => {
   // tìm kiếm
   const onSearch = (value) => {
     setTimeout(() => {
-      dispatch(searchopjectCategori({ titleCategoryProduct: value }));
+      try {
+        if (value !== "") {
+          dispatch(searchopjectCategori({ titleCategoryProduct: value }));
+        } else {
+          dispatch(getOpjectCategori());
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }, 1000);
   };
 
@@ -81,9 +89,6 @@ const TableObjectProduct = () => {
   };
 
   // get dữ liệu
-  useEffect(() => {
-    dispatch(getOpjectCategori());
-  }, []);
 
   const deletee = (data) => {
     dispatch(delopjectCategori({ idCategoryProduct: data }));
@@ -167,48 +172,49 @@ const TableObjectProduct = () => {
       ),
     },
   ];
-console.log(ListOpject)
   return (
     <>
       {/* chức năng */}
       <div style={{ display: "flex", justifyContent: "space-between" }}>
-      <div style={{margin:'0 0 0 -10px'}}>
-        <section className="py-4 container">
-          <div className="row justify-content-center">
-            <table
-              className="table table-striped"
-              id="Export_xlsx"
-              hidden={true}
-            >
-              <thead>
-                <tr>
-                  <td>STT</td>
-                  <td>Ảnh loại sản phẩm</td>
-                  <td>Tên loại sản phẩm</td>
-                </tr>
-              </thead>
-              <tbody>
-                {ListOpject.map((item, index) => {
-                  return (
-                    <tr key={index}>
-                      <td>{index + 1}</td>
-                      <td>{item.categoryImgProduct}</td>
-                      <td>{item.titleCategoryProduct}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            <ReactHtmlTableToExcel
-              table="Export_xlsx"
-              filename="Danh sách loại sản phẩm"
-              sheet="Sheet"
-              buttonText="Xuất excel"
-            />
-          </div>
-        </section>
-      </div>
-        <div style={{ display: "flex", width:'30%' }}>
+        <div style={{ margin: "0 0 0 -10px" }}>
+          <section className="py-4 container">
+            <div className="row justify-content-center">
+              <table
+                className="table table-striped"
+                id="Export_xlsx"
+                hidden={true}
+              >
+                <thead>
+                  <tr>
+                    <td>STT</td>
+                    <td>Ảnh loại sản phẩm</td>
+                    <td>Tên loại sản phẩm</td>
+                  </tr>
+                </thead>
+                {ListOpject !== undefined ? (
+                  <tbody>
+                    {ListOpject.map((item, index) => {
+                      return (
+                        <tr key={index}>
+                          <td>{index + 1}</td>
+                          <td>{item.categoryImgProduct}</td>
+                          <td>{item.titleCategoryProduct}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                ) : null}
+              </table>
+              <ReactHtmlTableToExcel
+                table="Export_xlsx"
+                filename="Danh sách loại sản phẩm"
+                sheet="Sheet"
+                buttonText="Xuất excel"
+              />
+            </div>
+          </section>
+        </div>
+        <div style={{ display: "flex", width: "30%" }}>
           {/* load lại */}
           <Button
             type="primary"
@@ -258,7 +264,7 @@ console.log(ListOpject)
           />
         </AutoComplete>
       </div>
-      
+
       <Table
         columns={columns}
         rowKey={(item) => item._id}

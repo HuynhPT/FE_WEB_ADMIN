@@ -226,7 +226,7 @@ const TableObjectProduct = () => {
             <p style={{ color: "#000" }}>Xoá tất cả</p>
           </Button> */}
         </div>
-        <AutoComplete
+        {/* <AutoComplete
           onSearch={onsearchtype}
           style={{ width: "21%", marginRight: 30 }}
         >
@@ -235,7 +235,7 @@ const TableObjectProduct = () => {
             placeholder="Tìm kiếm theo tên"
             value={searchtitle}
           />
-        </AutoComplete>
+        </AutoComplete> */}
       </div>
       <div style={{ width: "100%", position: "absolute", top: 145, left: 300 }}>
         <section className="py-4 container">

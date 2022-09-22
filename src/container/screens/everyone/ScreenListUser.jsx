@@ -128,7 +128,7 @@ const ScreenListUser = () => {
           <p style={{ color: "#000" }}>Xoá tất cả</p>
         </Button>
       </div> */}
-      <div style={{ width: "100%", position: "absolute", top: 220, left: 223 }}>
+      <div style={{ width: "100%", margin:'0 0 0 20px' }}>
         <section className="py-4 container">
           <div className="row justify-content-center">
             <table
